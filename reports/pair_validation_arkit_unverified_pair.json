@@ -1,0 +1,213 @@
+{
+  "scene_id": "arkit_unverified_pair",
+  "before_recording_id": "47333462",
+  "after_recording_id": "41069050",
+  "source_dataset": "ARKitScenes",
+  "split": "not specified",
+  "source_url": "https://github.com/apple/ARKitScenes",
+  "data_origin": "REAL",
+  "shared_environment_relationship_verified": false,
+  "relationship_evidence": "reports/dataset_inventory.json",
+  "relationship_sha256": "55a67e218e0a6428b54bb321619acfaa3251b6c91625164157dd4f21d44b5c1f",
+  "relationship_limitation": "Official metadata or human capture provenance is required; a declaration is not independent physical verification",
+  "camera_geometry_availability": {
+    "before": {
+      "camera": false,
+      "poses": true,
+      "depth_dir": false
+    },
+    "after": {
+      "camera": false,
+      "poses": true,
+      "depth_dir": false
+    }
+  },
+  "videos_decodable": true,
+  "video_probe": [
+    {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "mpeg4",
+          "codec_long_name": "MPEG-4 part 2",
+          "profile": "Simple Profile",
+          "codec_type": "video",
+          "codec_tag_string": "mp4v",
+          "codec_tag": "0x7634706d",
+          "width": 256,
+          "height": 192,
+          "coded_width": 256,
+          "coded_height": 192,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 0,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "4:3",
+          "pix_fmt": "yuv420p",
+          "level": 1,
+          "chroma_location": "left",
+          "refs": 1,
+          "quarter_sample": "false",
+          "divx_packed": "false",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 24576,
+          "duration": "1.600000",
+          "bit_rate": "1968390",
+          "nb_frames": "48",
+          "extradata_size": 47,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/processed/47333462_synchronized/rgb.mp4",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "1.600000",
+        "size": "394763",
+        "bit_rate": "1973815",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2mp41",
+          "encoder": "Lavf59.27.100"
+        }
+      }
+    },
+    {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "mpeg4",
+          "codec_long_name": "MPEG-4 part 2",
+          "profile": "Simple Profile",
+          "codec_type": "video",
+          "codec_tag_string": "mp4v",
+          "codec_tag": "0x7634706d",
+          "width": 256,
+          "height": 192,
+          "coded_width": 256,
+          "coded_height": 192,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 0,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "4:3",
+          "pix_fmt": "yuv420p",
+          "level": 1,
+          "chroma_location": "left",
+          "refs": 1,
+          "quarter_sample": "false",
+          "divx_packed": "false",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 24576,
+          "duration": "1.600000",
+          "bit_rate": "1353775",
+          "nb_frames": "48",
+          "extradata_size": 47,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/processed/41069050/rgb.mp4",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "1.600000",
+        "size": "271840",
+        "bit_rate": "1359200",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2mp41",
+          "encoder": "Lavf59.27.100"
+        }
+      }
+    }
+  ],
+  "input_hashes": [
+    "734f1bf379e86690a6ab57b23229ca3a3f65723db6d56f48989bd425f254446e",
+    "f19c381242d6083dc6f86b9c64cb70822a3297f98357f666ee6e322fbe36670d"
+  ],
+  "static_landmark_overlap": null,
+  "registration_verified": false,
+  "registration_residual": null,
+  "registration_residual_units": "Report reconstruction units; not metres unless source scale is independently verified",
+  "registration_uncertainty": null,
+  "ground_truth_change_available": false,
+  "physical_changes_documented": false,
+  "pair_validity_status": "REJECTED",
+  "warnings": [
+    "Shared registration/static overlap not verified on matching inference output",
+    "Independent reviewed real change annotations are unavailable",
+    "Physical changes are not documented"
+  ]
+}

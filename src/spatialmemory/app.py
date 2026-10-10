@@ -10,6 +10,7 @@ import numpy as np
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from typing import Literal
 from .contracts import Config
+from .inputs import Annotations
 from fastapi.responses import HTMLResponse, FileResponse
 from .pipeline import run
 
@@ -33,6 +34,21 @@ def home():
 @app.get("/health")
 def health():
     return {"status": "ok", "capabilities": neural_capabilities()}
+
+
+@app.get("/annotate", response_class=HTMLResponse)
+def annotation_workspace():
+    return (Path(__file__).parent / "annotation.html").read_text()
+
+
+@app.post("/annotations/validate")
+def validate_annotations(annotations: "Annotations"):
+    return {
+        "status": "valid",
+        "annotations": annotations.model_dump(mode="json"),
+        "benchmark_ready": False,
+        "note": "Schema validation only. Verified scene relationship, independent provenance and registered matching inference output are still required for a benchmark.",
+    }
 
 
 def neural_capabilities():

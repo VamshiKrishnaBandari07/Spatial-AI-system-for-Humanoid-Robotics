@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-10",
+  "status": "complete",
+  "dataset": "ARKitScenes",
+  "recording_id": "47333462",
+  "input_modality": "RGB-only reconstruction with retained optional source poses/timestamps; native depth not fused",
+  "input_design": "Same verified real recording supplied twice as an inference/loader control, not a genuine two-visit change pair",
+  "synthetic": false,
+  "independent_change_ground_truth": false,
+  "runtime_seconds": 171.7371152370033,
+  "process_wall_seconds": 173.14940181999555,
+  "peak_child_process_rss_mib": 9961.12109375,
+  "memory_method": "Fresh wrapper process resource.getrusage(RUSAGE_CHILDREN).ru_maxrss; maximum individual child RSS, not aggregate process-tree or GPU memory",
+  "event_counts": {
+    "UNKNOWN": 1
+  },
+  "estimated_semantic_labels": [
+    "electronic device"
+  ],
+  "registration": {
+    "valid": true,
+    "scale": 1.0000000000000002,
+    "rotation": [
+      [
+        1.0,
+        6.43824241260208e-17,
+        8.241127690055172e-19
+      ],
+      [
+        5.545334326975743e-17,
+        0.9999999999999997,
+        2.7233032345172796e-18
+      ],
+      [
+        -1.838929959108963e-18,
+        7.445036066823393e-18,
+        1.0
+      ]
+    ],
+    "translation": [
+      -1.5178830414797062e-18,
+      -1.734723475976807e-18,
+      -2.220446049250313e-16
+    ],
+    "inliers": 761,
+    "correspondences": 761,
+    "rmse": 2.408232536179028e-17,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed",
+    "heldout_count": 152,
+    "heldout_inliers": 152,
+    "heldout_rmse": 8.925998302820927e-17,
+    "foreground_matches_excluded": 608
+  },
+  "points": {
+    "before": 1348,
+    "after": 1348
+  },
+  "world_arrays_finite": true,
+  "evidence_images": 4,
+  "fresh_inference": true,
+  "geometry_reused": false,
+  "source_report_sha256": "c8ab2c9f1c6ca6b32c5e5db0fd1244b0c0207ba58dfcb81d9b5d39e4c9f837df",
+  "manifest_sha256": "a0f9930d9852da17cd8b2cf7f8e0ef70bedd980df53663e9b0c9991831f2a2d3",
+  "config_sha256": "e4eae0ee9b1f7006918ea50536780485d71ce66e86b2d23e08c3e5e67f2b1705",
+  "source_report": "/workspace/spatialmemory-real-recording-control-20261010/report.json",
+  "accuracy": null,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "interpretation": "Real-recording functional control only. Estimated labels are not independently verified. Identity-fit residual on identical inputs is not independent scene registration accuracy.",
+  "unknown_reason": "Only one distinct object view per visit; configured min_object_views=2. No decision threshold was relaxed.",
+  "posterior_probability": null,
+  "confidence_calibrated": false
+}

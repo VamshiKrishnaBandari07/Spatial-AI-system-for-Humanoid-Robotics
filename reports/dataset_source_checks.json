@@ -1,0 +1,180 @@
+[
+  {
+    "candidate": "3RScan",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/3RScan/master/README.md",
+    "final_url": "https://raw.githubusercontent.com/WaldJohannaU/3RScan/master/README.md",
+    "http_status": 200,
+    "bytes": 4932,
+    "sha256": "9eb4c2897a34e1fe46029f1095258795bcdffb660062641214c265d65242f3c7",
+    "evidence": "data/datasets/recovery_sources/3RScan.txt"
+  },
+  {
+    "candidate": "RIO10",
+    "url": "https://raw.githubusercontent.com/3DVision/RIO10/master/README.md",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "candidate": "RIO10_site",
+    "url": "https://3dvision.github.io/RIO10/",
+    "status": "unavailable",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "candidate": "ChangeSim",
+    "url": "https://raw.githubusercontent.com/SAMMiCA/ChangeSim/master/README.md",
+    "final_url": "https://raw.githubusercontent.com/SAMMiCA/ChangeSim/master/README.md",
+    "http_status": 200,
+    "bytes": 4132,
+    "sha256": "fa5a1712261ec8ef91f053ee081dcabe9ed239bc72bbeaaa956bfbdfb3f0206c",
+    "evidence": "data/datasets/recovery_sources/ChangeSim.txt"
+  },
+  {
+    "candidate": "3RScan_site",
+    "url": "https://waldjohannau.github.io/RIO/",
+    "final_url": "https://waldjohannau.github.io/RIO/",
+    "http_status": 200,
+    "bytes": 4530,
+    "sha256": "ba5272e2cf0de5161fb9ac2848cd1e1f24f4eb3a8be19ffeb9f683ebefd436e1",
+    "evidence": "data/datasets/recovery_sources/3RScan_site.txt"
+  },
+  {
+    "candidate": "Langer_change_dataset",
+    "url": "https://www.ipb.uni-bonn.de/data/3d-change-detection/",
+    "status": "unavailable",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "candidate": "RIO10_Wald",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/RIO10/master/README.md",
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/WaldJohannaU/RIO10/master/README.md",
+    "bytes": 7679,
+    "sha256": "1105d6b2d9f9caa7a90a9de68346f55abaa3d5cb6e6d324e6335dd0eca31dcdd",
+    "evidence": "data/datasets/recovery_sources/RIO10_Wald.txt"
+  },
+  {
+    "candidate": "RIO10_Wald_main",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/RIO10/main/README.md",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "candidate": "Bonn_change",
+    "url": "https://raw.githubusercontent.com/PRBonn/3DChangeDetection/master/README.md",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "candidate": "ReScan",
+    "url": "https://raw.githubusercontent.com/nianticlabs/rescan/main/README.md",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "candidate": "GitHub_search_RIO",
+    "url": "https://api.github.com/search/repositories?q=RIO10",
+    "status": "unavailable",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "candidate": "GitHub_search_indoor_change",
+    "url": "https://api.github.com/search/repositories?q=indoor+change+detection+dataset&per_page=8",
+    "status": "unavailable",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "candidate": "github_search_changes",
+    "url": "https://github.com/search?q=indoor+change+detection+dataset&type=repositories",
+    "http_status": 200,
+    "bytes": 211373,
+    "sha256": "60b94903bc27a63def3ed14ffd9e45fc1d6fe22258a6bd3840fcf2f9334eac5f",
+    "evidence": "data/datasets/recovery_sources/github_search_changes.txt"
+  },
+  {
+    "candidate": "RIO10_metadata",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/RIO10/master/data/metadata.json",
+    "http_status": 200,
+    "bytes": 1735,
+    "sha256": "a6a6649f3523294717853092418ae98705b760b23ab58e0b4c8106cd3f4bf47c",
+    "evidence": "data/datasets/recovery_sources/RIO10_metadata.txt"
+  },
+  {
+    "candidate": "RIO10_license",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/RIO10/master/LICENSE",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "candidate": "RIO10_setup",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/RIO10/master/setup.sh",
+    "http_status": 200,
+    "bytes": 673,
+    "sha256": "0cbfcaa2eb0d9ec820307871209b231cbb2432edb8ec9bc3b6ca9c4cd4cbe378",
+    "evidence": "data/datasets/recovery_sources/RIO10_setup.txt"
+  },
+  {
+    "candidate": "3RScan_metadata",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/3RScan/master/3RScan.json",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "candidate": "3RScan_FAQ",
+    "url": "https://raw.githubusercontent.com/WaldJohannaU/3RScan/master/FAQ.md",
+    "http_status": 200,
+    "bytes": 17898,
+    "sha256": "f862cf11b084b152269837055ee3ba279d3bdd117cce2f00efae64660c4955f3",
+    "evidence": "data/datasets/recovery_sources/3RScan_FAQ.txt"
+  },
+  {
+    "candidate": "ETHZ_change",
+    "url": "https://raw.githubusercontent.com/ethz-asl/change_detection_ds/master/README.md",
+    "http_status": 200,
+    "bytes": 2750,
+    "sha256": "bb9fe590a161387252f303782e9334796fc66740135f9f7b72eba02740b03a91",
+    "evidence": "data/datasets/recovery_sources/ETHZ_change.txt"
+  },
+  {
+    "candidate": "ETHZ_license",
+    "url": "https://raw.githubusercontent.com/ethz-asl/change_detection_ds/master/LICENSE",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "candidate": "Langer_official",
+    "url": "https://www.acin.tuwien.ac.at/en/vision-for-robotics/software-tools/object-change-detection-dataset-of-indoor-environments/",
+    "status": "unavailable",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "candidate": "Mallscape_official",
+    "url": "https://europe.naverlabs.com/blog/making-maps-evergreen/",
+    "status": "unavailable",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "candidate": "RIO10_official",
+    "url": "https://waldjohannau.github.io/RIO10/",
+    "http_status": 200,
+    "bytes": 4200,
+    "sha256": "94452af77b6aa6d1e7977fb52d40492aa30a33d4b602668861a96ff61b9644a0",
+    "evidence": "data/datasets/recovery_sources/RIO10_official.txt"
+  },
+  {
+    "candidate": "ETHZ_download_index",
+    "url": "https://robotics.ethz.ch/~asl-datasets/icra_2017_change_detection/",
+    "status": "checked",
+    "result": "network access denied"
+  },
+  {
+    "candidate": "NUST_CLC_official_README",
+    "url": "https://raw.githubusercontent.com/sarankhaliq2326/NUST-CLC/main/README.md",
+    "http_status": 200,
+    "bytes": 5355,
+    "sha256": "0d99f1b22b118ea5809621469be5911367034c95c6aacc1f0f0c7df4fbf18a5c",
+    "evidence": "data/datasets/recovery_sources/NUST_CLC.txt",
+    "selected_for_benchmark": false,
+    "reason": "Loop-closure sequences, not verified object-change ground truth or data licence"
+  }
+]

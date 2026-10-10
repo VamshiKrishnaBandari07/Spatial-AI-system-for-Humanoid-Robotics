@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Annotation workspace · SpatialMemory-X Ultra</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, sans-serif;
+        background: #0c1914;
+        color: #e6efea;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0 auto;
+        padding: 24px;
+        max-width: 1200px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      p {
+        color: #adc1b5;
+        line-height: 1.6;
+      }
+      a {
+        color: #87dfba;
+      }
+      section {
+        padding: 22px;
+        background: #16291f;
+        border: 1px solid #2c4637;
+        border-radius: 12px;
+        margin: 18px 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+      label {
+        display: block;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        font: inherit;
+        border: 1px solid #41604c;
+        border-radius: 6px;
+        padding: 10px;
+        background: #20382a;
+        color: inherit;
+        max-width: 100%;
+      }
+      input,
+      select,
+      textarea {
+        display: block;
+        width: 100%;
+        margin-top: 6px;
+      }
+      button {
+        cursor: pointer;
+        margin: 8px 8px 8px 0;
+      }
+      button.primary {
+        background: #86dfb9;
+        color: #102319;
+        font-weight: 600;
+      }
+      video {
+        width: 100%;
+        max-height: 300px;
+        background: #07100b;
+        margin-top: 12px;
+      }
+      #status {
+        padding: 12px 0;
+        overflow-wrap: anywhere;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+      @media (max-width: 650px) {
+        body {
+          padding: 14px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/">← Comparison workspace</a>
+    <h1>Ground-truth annotation workspace</h1>
+    <p>
+      Review both visits, associate objects and record the changes you can
+      verify. These annotations are separate from model predictions. Video
+      playback stays in your browser.
+    </p>
+    <section>
+      <h2>Your recordings</h2>
+      <p>
+        Choose recordings from the same physical space. Playback is independent:
+        equal video times do not imply corresponding viewpoints. Navigate to
+        matching views manually.
+      </p>
+      <div class="grid">
+        <div>
+          <label
+            >Before recording<input
+              id="beforeFile"
+              type="file"
+              accept="video/*" /></label
+          ><video id="beforeVideo" controls preload="auto"></video>
+          <p id="beforePlayback" role="status"></p>
+          <label>Before recording ID<input id="beforeId" /></label>
+        </div>
+        <div>
+          <label
+            >After recording<input
+              id="afterFile"
+              type="file"
+              accept="video/*" /></label
+          ><video id="afterVideo" controls preload="auto"></video>
+          <p id="afterPlayback" role="status"></p>
+          <label>After recording ID<input id="afterId" /></label>
+        </div>
+      </div>
+      <div class="grid">
+        <label>Scene ID<input id="sceneId" placeholder="room_01" /></label>
+        <label
+          >Annotation provenance<input
+            id="provenance"
+            placeholder="Capture log or official dataset annotation source"
+        /></label>
+      </div>
+      <label
+        >Data origin<select id="origin">
+          <option value="UNKNOWN">Not yet verified</option>
+          <option value="REAL">Real recordings</option>
+          <option value="SYNTHETIC">Synthetic control</option>
+        </select></label
+      >
+    </section>
+    <section>
+      <h2>Object observations</h2>
+      <label
+        >Load an existing annotation set for review<input
+          id="import"
+          type="file"
+          accept="application/json,.json"
+      /></label>
+      <label
+        >Select an annotation to review<select id="selected">
+          <option value="">New object</option>
+        </select></label
+      >
+      <div class="grid">
+        <label
+          >Persistent object ID<input id="objectId" placeholder="chair_001"
+        /></label>
+        <label>Semantic label<input id="label" placeholder="chair" /></label>
+        <label
+          >Change<select id="change">
+            <option>UNKNOWN</option>
+            <option>ADDED</option>
+            <option>REMOVED</option>
+            <option>MOVED</option>
+            <option>UNCHANGED</option>
+          </select></label
+        >
+        <label
+          >Visibility<select id="visibility">
+            <option>UNKNOWN</option>
+            <option>OBSERVED</option>
+            <option>OCCLUDED</option>
+          </select></label
+        >
+        <label
+          >Before native object ID (optional)<input id="nativeBefore"
+        /></label>
+        <label
+          >After native object ID (optional)<input id="nativeAfter"
+        /></label>
+        <label>Annotator<input id="annotator" /></label>
+        <label>Independent reviewer (optional)<input id="reviewer" /></label>
+      </div>
+      <p>
+        An independent reviewer must inspect the source evidence and be
+        different from the annotator. Entering a reviewer name records your
+        declaration; it does not authenticate a person.
+      </p>
+      <label
+        >Evidence and annotation source<textarea
+          id="source"
+          rows="3"
+          placeholder="What was observed, where, and how the change was verified"
+        ></textarea>
+      </label>
+      <p>
+        Saving captures the current before/after playback times for observations
+        that exist. Leave unavailable 3D geometry out; this interface exports
+        object-category annotations (Level 1).
+      </p>
+      <button id="save" class="primary">Save object annotation</button>
+      <button id="new">New object</button>
+      <button id="remove">Remove selected annotation</button>
+      <ul id="objects"></ul>
+    </section>
+    <section>
+      <h2>Validate and export</h2>
+      <p>
+        Exported JSON is checked against the annotation schema. Schema validity
+        does not establish scene identity, label correctness or benchmark
+        readiness. No model suggestions are loaded here.
+      </p>
+      <button id="export" class="primary">
+        Validate and download annotations
+      </button>
+      <div id="status" role="status" aria-live="polite"></div>
+    </section>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let changes = [],
+        metadata = {},
+        urls = {};
+      const message = (text) => {
+        $("status").textContent = text;
+      };
+      function refresh() {
+        const selected = $("selected").value;
+        $("selected").replaceChildren(new Option("New object", ""));
+        $("objects").replaceChildren();
+        for (const item of changes) {
+          $("selected").add(
+            new Option(
+              `${item.object_id} · ${item.change_type}`,
+              item.object_id,
+            ),
+          );
+          const li = document.createElement("li");
+          li.textContent = `${item.object_id}: ${item.label} · ${item.change_type} · ${item.annotation_quality}`;
+          $("objects").append(li);
+        }
+        $("selected").value = selected;
+      }
+      for (const state of ["before", "after"]) {
+        const video = $(state + "Video");
+        video.addEventListener("error", () => {
+          $(state + "Playback").textContent =
+            "Your browser cannot play this recording. Use an H.264 MP4 preview copy and preserve the original for processing.";
+        });
+        video.addEventListener("loadeddata", () => {
+          $(state + "Playback").textContent = "Ready to review";
+        });
+        $(state + "File").addEventListener("change", () => {
+          if (urls[state]) URL.revokeObjectURL(urls[state]);
+          const file = $(state + "File").files[0];
+          $(state + "Playback").textContent = "";
+          $(state + "Video").removeAttribute("src");
+          if (file) {
+            urls[state] = URL.createObjectURL(file);
+            $(state + "Video").src = urls[state];
+            $(state + "Id").value = file.name;
+          } else $(state + "Video").load();
+        });
+      }
+      function clearObject() {
+        $("selected").value = "";
+        for (const id of [
+          "objectId",
+          "label",
+          "nativeBefore",
+          "nativeAfter",
+          "source",
+          "reviewer",
+        ])
+          $(id).value = "";
+        $("change").value = "UNKNOWN";
+        $("visibility").value = "UNKNOWN";
+      }
+      $("new").onclick = clearObject;
+      $("selected").onchange = () => {
+        const item = changes.find((x) => x.object_id === $("selected").value);
+        if (!item) return clearObject();
+        for (const [id, field] of Object.entries({
+          objectId: "object_id",
+          label: "label",
+          change: "change_type",
+          visibility: "visibility",
+          nativeBefore: "native_object_id_before",
+          nativeAfter: "native_object_id_after",
+          source: "annotation_source",
+          annotator: "annotator",
+          reviewer: "independent_reviewer",
+        }))
+          $(id).value = item[field] || "";
+      };
+      $("save").onclick = () => {
+        const object_id = $("objectId").value.trim(),
+          annotator = $("annotator").value.trim(),
+          reviewer = $("reviewer").value.trim();
+        if (
+          !object_id ||
+          !annotator ||
+          !$("label").value.trim() ||
+          !$("source").value.trim()
+        )
+          return message(
+            "Enter the object ID, label, annotator and source evidence.",
+          );
+        if (reviewer && reviewer.toLowerCase() === annotator.toLowerCase())
+          return message("Independent review requires a different reviewer.");
+        const selected = $("selected").value;
+        if (
+          changes.some(
+            (x) => x.object_id === object_id && x.object_id !== selected,
+          )
+        )
+          return message(
+            "This object ID already exists. Select it to review or use a distinct ID.",
+          );
+        const previous = changes.find((x) => x.object_id === selected);
+        const item = {
+          ...(previous || {}),
+          object_id,
+          label: $("label").value.trim(),
+          change_type: $("change").value,
+          visibility: $("visibility").value,
+          annotation_source: $("source").value.trim(),
+          annotation_quality: reviewer
+            ? "INDEPENDENTLY_REVIEWED"
+            : "SINGLE_REVIEW",
+          generation_method:
+            previous?.generation_method === "model_generated"
+              ? "model_suggestion_verified"
+              : previous?.generation_method || "human",
+          annotator,
+          independent_reviewer: reviewer || null,
+          reviewed_at: reviewer ? new Date().toISOString() : null,
+          native_object_id_before: $("nativeBefore").value.trim() || null,
+          native_object_id_after: $("nativeAfter").value.trim() || null,
+          annotation_level: previous?.annotation_level || 1,
+        };
+        for (const state of ["before", "after"]) {
+          const absent =
+            (state === "before" && item.change_type === "ADDED") ||
+            (state === "after" && item.change_type === "REMOVED");
+          const video = $(state + "Video");
+          if (
+            !previous &&
+            !absent &&
+            video.currentSrc &&
+            $(state + "Id").value.trim()
+          )
+            item[state + "_observation"] = {
+              recording_id: $(state + "Id").value.trim(),
+              timestamp_ns: Math.round(video.currentTime * 1e9),
+              source: item.annotation_source,
+            };
+          else if (absent) item[state + "_observation"] = null;
+        }
+        changes = changes.filter((x) => x.object_id !== selected);
+        changes.push(item);
+        refresh();
+        $("selected").value = object_id;
+        message(
+          "Annotation saved in this page. Export before closing; no server persistence is provided.",
+        );
+      };
+      $("remove").onclick = () => {
+        changes = changes.filter((x) => x.object_id !== $("selected").value);
+        clearObject();
+        refresh();
+      };
+      $("import").onchange = async () => {
+        try {
+          const file = $("import").files[0];
+          if (!file) return;
+          const payload = JSON.parse(await file.text());
+          const response = await fetch("/annotations/validate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(JSON.stringify(data.detail));
+          metadata = data.annotations;
+          changes = metadata.changes;
+          $("sceneId").value = metadata.scene_id;
+          $("provenance").value = metadata.provenance || "";
+          $("origin").value = metadata.data_origin;
+          clearObject();
+          refresh();
+          message(
+            "Imported schema-valid annotations. Review source recordings independently before confirming labels.",
+          );
+        } catch (error) {
+          message(`Import failed: ${error.message}`);
+        }
+      };
+      $("export").onclick = async () => {
+        try {
+          if (
+            !$("sceneId").value.trim() ||
+            !$("provenance").value.trim() ||
+            !changes.length
+          )
+            throw new Error(
+              "Enter scene ID and provenance, then save at least one annotation.",
+            );
+          const payload = {
+            ...metadata,
+            schema_version: "1.0",
+            scene_id: $("sceneId").value.trim(),
+            coordinate_frame: metadata.coordinate_frame || "shared_world",
+            position_unit: metadata.position_unit || "unknown",
+            scale_verified: metadata.scale_verified || false,
+            data_origin: $("origin").value,
+            exhaustive_object_inventory:
+              metadata.exhaustive_object_inventory || false,
+            provenance: $("provenance").value.trim(),
+            changes,
+          };
+          const response = await fetch("/annotations/validate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(JSON.stringify(data.detail));
+          const url = URL.createObjectURL(
+            new Blob([JSON.stringify(data.annotations, null, 2)], {
+              type: "application/json",
+            }),
+          );
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${payload.scene_id}_changes.json`;
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+          message(
+            "Validated annotations exported. Pair validation and benchmark evidence checks are still required.",
+          );
+        } catch (error) {
+          message(`Export failed: ${error.message}`);
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "scene_001",
+  "coordinate_frame": "shared_world",
+  "position_unit": "unknown",
+  "scale_verified": false,
+  "data_origin": "UNKNOWN",
+  "exhaustive_object_inventory": false,
+  "provenance": null,
+  "changes": []
+}

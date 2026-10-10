@@ -1,6 +1,7 @@
 """Canonical input v1.0. Relative paths resolve against an explicit project root."""
 
 import csv, json
+from datetime import datetime
 from pathlib import Path
 from typing import Literal
 import numpy as np
@@ -69,20 +70,125 @@ class Manifest(Strict):
     dataset: dict | None = None
 
 
+class AnnotationObservation(Strict):
+    recording_id: str = Field(min_length=1)
+    frame_id: str | None = None
+    timestamp_ns: int | None = Field(default=None, ge=0)
+    bbox_xyxy: list[float] | None = None
+    mask: str | None = None
+    source: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def box(self):
+        b = self.bbox_xyxy
+        if b is not None and (
+            len(b) != 4
+            or not np.isfinite(b).all()
+            or min(b) < 0
+            or b[2] <= b[0]
+            or b[3] <= b[1]
+        ):
+            raise ValueError(
+                "Bounding box must be finite nonnegative xyxy with positive area"
+            )
+        if (b is not None or self.mask is not None) and self.frame_id is None:
+            raise ValueError("Boxes and masks require a frame identifier")
+        return self
+
+
 class Annotation(Strict):
-    object_id: str
-    label: str
+    object_id: str = Field(min_length=1)
+    label: str = Field(min_length=1)
     change_type: Change
     before_position: list[float] | None = None
     after_position: list[float] | None = None
     visibility: Literal["OBSERVED", "OCCLUDED", "UNKNOWN"] = "UNKNOWN"
-    annotation_source: str
+    annotation_source: str = Field(min_length=1)
+    before_observation: AnnotationObservation | None = None
+    after_observation: AnnotationObservation | None = None
+    annotation_quality: Literal[
+        "UNREVIEWED", "SINGLE_REVIEW", "INDEPENDENTLY_REVIEWED"
+    ] = "UNREVIEWED"
+    generation_method: (
+        Literal[
+            "human",
+            "dataset_native",
+            "model_suggestion_verified",
+            "model_generated",
+            "synthetic",
+        ]
+        | None
+    ) = None
+    annotator: str | None = None
+    independent_reviewer: str | None = None
+    reviewed_at: str | None = None
+    native_object_id_before: str | None = None
+    native_object_id_after: str | None = None
+    annotation_level: Literal[1, 2, 3, 4] = 1
+    before_geometry: str | None = None
+    after_geometry: str | None = None
+    measured_displacement: list[float] | None = None
 
     @model_validator(mode="after")
     def positions(self):
-        for p in [self.before_position, self.after_position]:
+        for p in [
+            self.before_position,
+            self.after_position,
+            self.measured_displacement,
+        ]:
             if p is not None and (len(p) != 3 or not np.isfinite(p).all()):
                 raise ValueError("Positions must be finite 3-vectors")
+        if self.annotation_quality == "INDEPENDENTLY_REVIEWED" and (
+            not self.annotator
+            or not self.independent_reviewer
+            or self.annotator.strip().casefold()
+            == self.independent_reviewer.strip().casefold()
+            or not self.reviewed_at
+        ):
+            raise ValueError(
+                "Independent review requires distinct annotator/reviewer and review timestamp"
+            )
+        if self.annotation_quality == "SINGLE_REVIEW" and not self.annotator:
+            raise ValueError("Reviewed annotations require an annotator")
+        if self.reviewed_at is not None:
+            timestamp = datetime.fromisoformat(self.reviewed_at.replace("Z", "+00:00"))
+            if timestamp.tzinfo is None:
+                raise ValueError("Review timestamp requires a timezone")
+        observations = [
+            o for o in [self.before_observation, self.after_observation] if o
+        ]
+        if self.annotation_level == 2 and not any(
+            o.bbox_xyxy is not None or o.mask for o in observations
+        ):
+            raise ValueError("Level 2 annotations require frame-linked boxes or masks")
+        if (
+            self.annotation_level >= 3
+            and self.before_position is None
+            and self.after_position is None
+        ):
+            raise ValueError("Level 3+ annotations require a measured 3D position")
+        if self.annotation_level == 4 and not (
+            self.before_geometry or self.after_geometry
+        ):
+            raise ValueError("Level 4 annotations require a geometry asset reference")
+        if (
+            self.annotation_level == 4
+            and self.change_type == Change.MOVED
+            and self.measured_displacement is None
+        ):
+            raise ValueError("Level 4 movement requires a measured displacement")
+        if self.change_type == Change.ADDED and (
+            self.before_position is not None or self.before_observation is not None
+        ):
+            raise ValueError(
+                "ADDED annotation cannot include an observed pre-existing object"
+            )
+        if self.change_type == Change.REMOVED and (
+            self.after_position is not None or self.after_observation is not None
+        ):
+            raise ValueError(
+                "REMOVED annotation cannot include an observed surviving object"
+            )
         return self
 
 
@@ -95,6 +201,9 @@ class Annotations(Strict):
     ] = "unknown"
     scale_verified: bool = False
     changes: list[Annotation]
+    data_origin: Literal["REAL", "SYNTHETIC", "UNKNOWN"] = "UNKNOWN"
+    exhaustive_object_inventory: bool = False
+    provenance: str | None = None
 
     @model_validator(mode="after")
     def scale(self):

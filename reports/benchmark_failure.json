@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "error": "Pair validation incomplete: Shared registration/static overlap not verified on matching inference output; Independent reviewed real change annotations are unavailable; Physical changes are not documented",
+  "pair_status": "REJECTED",
+  "metrics_computed": false
+}

@@ -1,0 +1,4802 @@
+{
+  "sequences": [
+    {
+      "dataset": "ARKitScenes",
+      "scene_id": "arkit_visit_467138",
+      "recording_id": "47333462",
+      "source_manifest": "data/datasets/arkitscenes/processed/47333462_synchronized/sequence.json",
+      "source_manifest_sha256": "3790ff8227fc355e4d1f673ba2922f3a4e2532a4b2540dfbb4cd0bfe8c021bc3",
+      "status": "passed",
+      "frames_checked": 48,
+      "frames": [
+        {
+          "timestamp_ns": 57352888000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.811,
+          "K": [
+            [
+              212.811,
+              0.0,
+              126.594
+            ],
+            [
+              0.0,
+              212.811,
+              93.1247
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00019346000044606626
+        },
+        {
+          "timestamp_ns": 57354187000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.811,
+          "K": [
+            [
+              212.811,
+              0.0,
+              126.594
+            ],
+            [
+              0.0,
+              212.811,
+              93.1089
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.000281960004940629
+        },
+        {
+          "timestamp_ns": 57355387000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.811,
+          "K": [
+            [
+              212.811,
+              0.0,
+              126.598
+            ],
+            [
+              0.0,
+              212.811,
+              93.1074
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00020213000243529677
+        },
+        {
+          "timestamp_ns": 57356686000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.811,
+          "K": [
+            [
+              212.811,
+              0.0,
+              126.591
+            ],
+            [
+              0.0,
+              212.811,
+              93.1042
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00027320999652147293
+        },
+        {
+          "timestamp_ns": 57357986000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.730349362740526e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.811,
+          "K": [
+            [
+              212.811,
+              0.0,
+              126.622
+            ],
+            [
+              0.0,
+              212.811,
+              93.0315
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00025128999550361186
+        },
+        {
+          "timestamp_ns": 57359185000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.052,
+          "K": [
+            [
+              213.052,
+              0.0,
+              126.725
+            ],
+            [
+              0.0,
+              213.052,
+              92.8089
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0002642899999045767
+        },
+        {
+          "timestamp_ns": 57360485000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.413,
+          "K": [
+            [
+              213.413,
+              0.0,
+              126.803
+            ],
+            [
+              0.0,
+              213.413,
+              92.7668
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00026013000024249777
+        },
+        {
+          "timestamp_ns": 57361784000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.552713678800501e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.474,
+          "K": [
+            [
+              213.474,
+              0.0,
+              126.802
+            ],
+            [
+              0.0,
+              213.474,
+              92.7677
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00021561999892583117
+        },
+        {
+          "timestamp_ns": 57362984000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.112,
+          "K": [
+            [
+              213.112,
+              0.0,
+              126.741
+            ],
+            [
+              0.0,
+              213.112,
+              92.7915
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00026837999757844955
+        },
+        {
+          "timestamp_ns": 57364283000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.931,
+          "K": [
+            [
+              212.931,
+              0.0,
+              126.653
+            ],
+            [
+              0.0,
+              212.931,
+              92.8876
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00020720999600598589
+        },
+        {
+          "timestamp_ns": 57365583000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.233,
+          "K": [
+            [
+              213.233,
+              0.0,
+              126.694
+            ],
+            [
+              0.0,
+              213.233,
+              92.7714
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00031725000008009374
+        },
+        {
+          "timestamp_ns": 57366782000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.594,
+          "K": [
+            [
+              213.594,
+              0.0,
+              126.831
+            ],
+            [
+              0.0,
+              213.594,
+              92.785
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0001986700008274056
+        },
+        {
+          "timestamp_ns": 57368082000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.197442310920451e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.172,
+          "K": [
+            [
+              213.172,
+              0.0,
+              126.775
+            ],
+            [
+              0.0,
+              213.172,
+              92.7981
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00032625000312691554
+        },
+        {
+          "timestamp_ns": 57369381000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.197442310920451e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.991,
+          "K": [
+            [
+              212.991,
+              0.0,
+              126.699
+            ],
+            [
+              0.0,
+              212.991,
+              92.8424
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00014957999519538134
+        },
+        {
+          "timestamp_ns": 57370581000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.847,
+          "K": [
+            [
+              211.847,
+              0.0,
+              126.666
+            ],
+            [
+              0.0,
+              211.847,
+              92.8621
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00033478999830549583
+        },
+        {
+          "timestamp_ns": 57371880000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.847,
+          "K": [
+            [
+              211.847,
+              0.0,
+              126.59
+            ],
+            [
+              0.0,
+              211.847,
+              92.8581
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0001409600008628331
+        },
+        {
+          "timestamp_ns": 57373180000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.63,
+          "K": [
+            [
+              212.63,
+              0.0,
+              126.639
+            ],
+            [
+              0.0,
+              212.63,
+              92.8145
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003838699994958006
+        },
+        {
+          "timestamp_ns": 57374379000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.907,
+          "K": [
+            [
+              211.907,
+              0.0,
+              126.621
+            ],
+            [
+              0.0,
+              211.907,
+              92.8079
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0001319599978160113
+        },
+        {
+          "timestamp_ns": 57375679000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.967,
+          "K": [
+            [
+              211.967,
+              0.0,
+              126.647
+            ],
+            [
+              0.0,
+              211.967,
+              92.7952
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003926699937437661
+        },
+        {
+          "timestamp_ns": 57376978000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.329,
+          "K": [
+            [
+              212.329,
+              0.0,
+              126.728
+            ],
+            [
+              0.0,
+              212.329,
+              92.7616
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 8.282999624498188e-05
+        },
+        {
+          "timestamp_ns": 57378178000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.57,
+          "K": [
+            [
+              212.57,
+              0.0,
+              126.697
+            ],
+            [
+              0.0,
+              212.57,
+              92.8049
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00040158000047085807
+        },
+        {
+          "timestamp_ns": 57379477000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.329,
+          "K": [
+            [
+              212.329,
+              0.0,
+              126.711
+            ],
+            [
+              0.0,
+              212.329,
+              92.7611
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 7.400000322377309e-05
+        },
+        {
+          "timestamp_ns": 57380777000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.375077994860476e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.027,
+          "K": [
+            [
+              212.027,
+              0.0,
+              126.741
+            ],
+            [
+              0.0,
+              212.027,
+              92.7932
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004508300044108182
+        },
+        {
+          "timestamp_ns": 57381976000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.786,
+          "K": [
+            [
+              211.786,
+              0.0,
+              126.636
+            ],
+            [
+              0.0,
+              211.786,
+              92.8502
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 6.466999911936e-05
+        },
+        {
+          "timestamp_ns": 57383276000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.148,
+          "K": [
+            [
+              212.148,
+              0.0,
+              126.701
+            ],
+            [
+              0.0,
+              212.148,
+              92.7657
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004595399950630963
+        },
+        {
+          "timestamp_ns": 57384475000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.449,
+          "K": [
+            [
+              212.449,
+              0.0,
+              126.734
+            ],
+            [
+              0.0,
+              212.449,
+              92.7766
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 5.6370001402683556e-05
+        },
+        {
+          "timestamp_ns": 57385775000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.389,
+          "K": [
+            [
+              212.389,
+              0.0,
+              126.826
+            ],
+            [
+              0.0,
+              212.389,
+              92.776
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004688800036092289
+        },
+        {
+          "timestamp_ns": 57387074000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.967,
+          "K": [
+            [
+              211.967,
+              0.0,
+              126.693
+            ],
+            [
+              0.0,
+              211.967,
+              92.8013
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 6.880000000819564e-06
+        },
+        {
+          "timestamp_ns": 57388274000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.786,
+          "K": [
+            [
+              211.786,
+              0.0,
+              126.604
+            ],
+            [
+              0.0,
+              211.786,
+              92.8826
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004773699984070845
+        },
+        {
+          "timestamp_ns": 57389590000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.786,
+          "K": [
+            [
+              211.786,
+              0.0,
+              126.643
+            ],
+            [
+              0.0,
+              211.786,
+              92.866
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003427499977988191
+        },
+        {
+          "timestamp_ns": 57390889000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.786,
+          "K": [
+            [
+              211.786,
+              0.0,
+              126.665
+            ],
+            [
+              0.0,
+              211.786,
+              92.8623
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00013220999971963465
+        },
+        {
+          "timestamp_ns": 57392089000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.375077994860476e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.088,
+          "K": [
+            [
+              212.088,
+              0.0,
+              126.673
+            ],
+            [
+              0.0,
+              212.088,
+              92.7727
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003520800019032322
+        },
+        {
+          "timestamp_ns": 57393388000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.63,
+          "K": [
+            [
+              212.63,
+              0.0,
+              126.711
+            ],
+            [
+              0.0,
+              212.63,
+              92.7979
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00012288000289117917
+        },
+        {
+          "timestamp_ns": 57394688000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.509,
+          "K": [
+            [
+              212.509,
+              0.0,
+              126.785
+            ],
+            [
+              0.0,
+              212.509,
+              92.7815
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004018800027552061
+        },
+        {
+          "timestamp_ns": 57395887000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.088,
+          "K": [
+            [
+              212.088,
+              0.0,
+              126.688
+            ],
+            [
+              0.0,
+              212.088,
+              92.7717
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00011316999734845012
+        },
+        {
+          "timestamp_ns": 57397187000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 211.847,
+          "K": [
+            [
+              211.847,
+              0.0,
+              126.631
+            ],
+            [
+              0.0,
+              211.847,
+              92.832
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00041195999801857397
+        },
+        {
+          "timestamp_ns": 57398486000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.69,
+          "K": [
+            [
+              212.69,
+              0.0,
+              126.66
+            ],
+            [
+              0.0,
+              212.69,
+              92.8103
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 6.367000605678186e-05
+        },
+        {
+          "timestamp_ns": 57399686000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.871,
+          "K": [
+            [
+              212.871,
+              0.0,
+              126.724
+            ],
+            [
+              0.0,
+              212.871,
+              92.7717
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004209200051263906
+        },
+        {
+          "timestamp_ns": 57400985000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.052,
+          "K": [
+            [
+              213.052,
+              0.0,
+              126.69
+            ],
+            [
+              0.0,
+              213.052,
+              92.76
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 5.3750001825392246e-05
+        },
+        {
+          "timestamp_ns": 57402285000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.172,
+          "K": [
+            [
+              213.172,
+              0.0,
+              126.748
+            ],
+            [
+              0.0,
+              213.172,
+              92.7771
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00047096000344026834
+        },
+        {
+          "timestamp_ns": 57403484000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.871,
+          "K": [
+            [
+              212.871,
+              0.0,
+              126.74
+            ],
+            [
+              0.0,
+              212.871,
+              92.7726
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 4.4210006308276206e-05
+        },
+        {
+          "timestamp_ns": 57404784000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.63,
+          "K": [
+            [
+              212.63,
+              0.0,
+              126.71
+            ],
+            [
+              0.0,
+              212.63,
+              92.8265
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004812100014532916
+        },
+        {
+          "timestamp_ns": 57406083000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.522,
+          "K": [
+            [
+              215.522,
+              0.0,
+              126.692
+            ],
+            [
+              0.0,
+              215.522,
+              92.8612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 5.919995601288974e-06
+        },
+        {
+          "timestamp_ns": 57407283000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.136,
+          "K": [
+            [
+              214.136,
+              0.0,
+              126.738
+            ],
+            [
+              0.0,
+              214.136,
+              92.8167
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004907100010314025
+        },
+        {
+          "timestamp_ns": 57408582000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.498,
+          "K": [
+            [
+              214.498,
+              0.0,
+              126.735
+            ],
+            [
+              0.0,
+              214.498,
+              92.7638
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 1.604000135557726e-05
+        },
+        {
+          "timestamp_ns": 57409881000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.498,
+          "K": [
+            [
+              214.498,
+              0.0,
+              126.694
+            ],
+            [
+              0.0,
+              214.498,
+              92.763
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00045895999937783927
+        },
+        {
+          "timestamp_ns": 57411081000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.375077994860476e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.956,
+          "K": [
+            [
+              213.956,
+              0.0,
+              126.71
+            ],
+            [
+              0.0,
+              213.956,
+              92.9443
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 2.5749999622348696e-05
+        },
+        {
+          "timestamp_ns": 57412380000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 213.835,
+          "K": [
+            [
+              213.835,
+              0.0,
+              126.567
+            ],
+            [
+              0.0,
+              213.835,
+              93.076
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004488800041144714
+        }
+      ],
+      "variable_intrinsics": true,
+      "timestamp_source": "Native filename/traj seconds; nearest pose <=5ms, intrinsics <=1.1ms",
+      "cross_view_depth_diagnostics": [
+        {
+          "projected_samples": 760,
+          "valid_target_samples": 760,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 760,
+          "median_absolute_depth_residual_metres": 0.0047303937795377116,
+          "p90_absolute_depth_residual_metres": 0.006446786538908756,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 719,
+          "valid_target_samples": 719,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 719,
+          "median_absolute_depth_residual_metres": 0.0006548091094038533,
+          "p90_absolute_depth_residual_metres": 0.001573250104519053,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 768,
+          "valid_target_samples": 768,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 768,
+          "median_absolute_depth_residual_metres": 0.0009435054460969483,
+          "p90_absolute_depth_residual_metres": 0.0019301961252137238,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 566,
+          "valid_target_samples": 566,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 566,
+          "median_absolute_depth_residual_metres": 0.002443961545869011,
+          "p90_absolute_depth_residual_metres": 0.005387146327720027,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 0,
+          "valid_target_samples": 0,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 0,
+          "median_absolute_depth_residual_metres": null,
+          "p90_absolute_depth_residual_metres": null,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 13,
+          "valid_target_samples": 13,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 13,
+          "median_absolute_depth_residual_metres": 0.009077025687086016,
+          "p90_absolute_depth_residual_metres": 0.017849060595625146,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 547,
+          "valid_target_samples": 547,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 547,
+          "median_absolute_depth_residual_metres": 0.014650638808448191,
+          "p90_absolute_depth_residual_metres": 0.019818639612668543,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 190,
+          "valid_target_samples": 190,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 190,
+          "median_absolute_depth_residual_metres": 0.0037554330763305277,
+          "p90_absolute_depth_residual_metres": 0.010570263940593858,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 153,
+          "valid_target_samples": 153,
+          "occluded_samples_excluded": 8,
+          "usable_samples": 145,
+          "median_absolute_depth_residual_metres": 0.007817326966782723,
+          "p90_absolute_depth_residual_metres": 0.02487302766210084,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 71,
+          "valid_target_samples": 71,
+          "occluded_samples_excluded": 2,
+          "usable_samples": 69,
+          "median_absolute_depth_residual_metres": 0.011633191645232799,
+          "p90_absolute_depth_residual_metres": 0.029605730625177847,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 144,
+          "valid_target_samples": 144,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 144,
+          "median_absolute_depth_residual_metres": 0.011435408879978404,
+          "p90_absolute_depth_residual_metres": 0.01795367404206978,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 0,
+          "valid_target_samples": 0,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 0,
+          "median_absolute_depth_residual_metres": null,
+          "p90_absolute_depth_residual_metres": null,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 238,
+          "valid_target_samples": 238,
+          "occluded_samples_excluded": 61,
+          "usable_samples": 177,
+          "median_absolute_depth_residual_metres": 0.028467502916051157,
+          "p90_absolute_depth_residual_metres": 0.09864419918787706,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 644,
+          "valid_target_samples": 644,
+          "occluded_samples_excluded": 129,
+          "usable_samples": 515,
+          "median_absolute_depth_residual_metres": 0.011689027578367428,
+          "p90_absolute_depth_residual_metres": 0.04888424795681316,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 681,
+          "valid_target_samples": 681,
+          "occluded_samples_excluded": 139,
+          "usable_samples": 542,
+          "median_absolute_depth_residual_metres": 0.009544294744495141,
+          "p90_absolute_depth_residual_metres": 0.03213561313116512,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 545,
+          "valid_target_samples": 545,
+          "occluded_samples_excluded": 63,
+          "usable_samples": 482,
+          "median_absolute_depth_residual_metres": 0.0074519241368824485,
+          "p90_absolute_depth_residual_metres": 0.03138891845922969,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 473,
+          "valid_target_samples": 473,
+          "occluded_samples_excluded": 22,
+          "usable_samples": 451,
+          "median_absolute_depth_residual_metres": 0.012748709964759852,
+          "p90_absolute_depth_residual_metres": 0.02802892138075319,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 478,
+          "valid_target_samples": 478,
+          "occluded_samples_excluded": 36,
+          "usable_samples": 442,
+          "median_absolute_depth_residual_metres": 0.009571557125580665,
+          "p90_absolute_depth_residual_metres": 0.02975738719812715,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 110,
+          "valid_target_samples": 110,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 110,
+          "median_absolute_depth_residual_metres": 0.005476478496426518,
+          "p90_absolute_depth_residual_metres": 0.01310614360043341,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 203,
+          "valid_target_samples": 203,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 203,
+          "median_absolute_depth_residual_metres": 0.005975996172470799,
+          "p90_absolute_depth_residual_metres": 0.030213866906123557,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 163,
+          "valid_target_samples": 163,
+          "occluded_samples_excluded": 1,
+          "usable_samples": 162,
+          "median_absolute_depth_residual_metres": 0.015229232290537631,
+          "p90_absolute_depth_residual_metres": 3.6811479261784075,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 149,
+          "valid_target_samples": 149,
+          "occluded_samples_excluded": 79,
+          "usable_samples": 70,
+          "median_absolute_depth_residual_metres": 0.017274808609751613,
+          "p90_absolute_depth_residual_metres": 0.10809601764828954,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 225,
+          "valid_target_samples": 225,
+          "occluded_samples_excluded": 1,
+          "usable_samples": 224,
+          "median_absolute_depth_residual_metres": 0.005095794472059323,
+          "p90_absolute_depth_residual_metres": 0.01424766181303272,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 75,
+          "valid_target_samples": 75,
+          "occluded_samples_excluded": 4,
+          "usable_samples": 71,
+          "median_absolute_depth_residual_metres": 0.01244926932908097,
+          "p90_absolute_depth_residual_metres": 0.023106658671837366,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 159,
+          "valid_target_samples": 159,
+          "occluded_samples_excluded": 70,
+          "usable_samples": 89,
+          "median_absolute_depth_residual_metres": 0.01653731880144793,
+          "p90_absolute_depth_residual_metres": 0.15715875560177112,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 323,
+          "valid_target_samples": 323,
+          "occluded_samples_excluded": 113,
+          "usable_samples": 210,
+          "median_absolute_depth_residual_metres": 0.014802153691346298,
+          "p90_absolute_depth_residual_metres": 0.034486206668180315,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 0,
+          "valid_target_samples": 0,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 0,
+          "median_absolute_depth_residual_metres": null,
+          "p90_absolute_depth_residual_metres": null,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 232,
+          "valid_target_samples": 232,
+          "occluded_samples_excluded": 85,
+          "usable_samples": 147,
+          "median_absolute_depth_residual_metres": 0.19673903706304863,
+          "p90_absolute_depth_residual_metres": 0.5421561472393649,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 680,
+          "valid_target_samples": 680,
+          "occluded_samples_excluded": 479,
+          "usable_samples": 201,
+          "median_absolute_depth_residual_metres": 0.2216795597857335,
+          "p90_absolute_depth_residual_metres": 0.5766710253380933,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 681,
+          "valid_target_samples": 681,
+          "occluded_samples_excluded": 147,
+          "usable_samples": 534,
+          "median_absolute_depth_residual_metres": 0.0073670996723644855,
+          "p90_absolute_depth_residual_metres": 0.03245499619170808,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 155,
+          "valid_target_samples": 155,
+          "occluded_samples_excluded": 25,
+          "usable_samples": 130,
+          "median_absolute_depth_residual_metres": 0.010486563231884904,
+          "p90_absolute_depth_residual_metres": 0.029867300583500952,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 10,
+          "valid_target_samples": 10,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 10,
+          "median_absolute_depth_residual_metres": 0.010981895050039547,
+          "p90_absolute_depth_residual_metres": 0.03558633320882953,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 100,
+          "valid_target_samples": 100,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 100,
+          "median_absolute_depth_residual_metres": 0.003526205704273311,
+          "p90_absolute_depth_residual_metres": 0.01069177235615671,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 32,
+          "valid_target_samples": 32,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 32,
+          "median_absolute_depth_residual_metres": 0.025195253891340808,
+          "p90_absolute_depth_residual_metres": 0.03187508477250525,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 37,
+          "valid_target_samples": 37,
+          "occluded_samples_excluded": 1,
+          "usable_samples": 36,
+          "median_absolute_depth_residual_metres": 0.010423039355858643,
+          "p90_absolute_depth_residual_metres": 0.04630018271677083,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 582,
+          "valid_target_samples": 582,
+          "occluded_samples_excluded": 41,
+          "usable_samples": 541,
+          "median_absolute_depth_residual_metres": 0.009305910194826295,
+          "p90_absolute_depth_residual_metres": 0.016158948777342808,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 250,
+          "valid_target_samples": 250,
+          "occluded_samples_excluded": 11,
+          "usable_samples": 239,
+          "median_absolute_depth_residual_metres": 0.01266682196418567,
+          "p90_absolute_depth_residual_metres": 0.016938791130459045,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 452,
+          "valid_target_samples": 452,
+          "occluded_samples_excluded": 19,
+          "usable_samples": 433,
+          "median_absolute_depth_residual_metres": 0.006770238815574814,
+          "p90_absolute_depth_residual_metres": 0.10270858559452753,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 481,
+          "valid_target_samples": 481,
+          "occluded_samples_excluded": 13,
+          "usable_samples": 468,
+          "median_absolute_depth_residual_metres": 0.010307892465964752,
+          "p90_absolute_depth_residual_metres": 0.01816783868623193,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 130,
+          "valid_target_samples": 130,
+          "occluded_samples_excluded": 3,
+          "usable_samples": 127,
+          "median_absolute_depth_residual_metres": 0.0028652926633606635,
+          "p90_absolute_depth_residual_metres": 0.009985776458380703,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 161,
+          "valid_target_samples": 161,
+          "occluded_samples_excluded": 3,
+          "usable_samples": 158,
+          "median_absolute_depth_residual_metres": 0.007454280968990756,
+          "p90_absolute_depth_residual_metres": 0.041435602334911496,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 303,
+          "valid_target_samples": 303,
+          "occluded_samples_excluded": 38,
+          "usable_samples": 265,
+          "median_absolute_depth_residual_metres": 0.008597964777490974,
+          "p90_absolute_depth_residual_metres": 0.03017796718292502,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 415,
+          "valid_target_samples": 415,
+          "occluded_samples_excluded": 41,
+          "usable_samples": 374,
+          "median_absolute_depth_residual_metres": 0.00980574100465359,
+          "p90_absolute_depth_residual_metres": 0.025679491011721792,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 0,
+          "valid_target_samples": 0,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 0,
+          "median_absolute_depth_residual_metres": null,
+          "p90_absolute_depth_residual_metres": null,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 361,
+          "valid_target_samples": 361,
+          "occluded_samples_excluded": 11,
+          "usable_samples": 350,
+          "median_absolute_depth_residual_metres": 0.010504490985825232,
+          "p90_absolute_depth_residual_metres": 0.025301459492496795,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 0,
+          "valid_target_samples": 0,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 0,
+          "median_absolute_depth_residual_metres": null,
+          "p90_absolute_depth_residual_metres": null,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 214,
+          "valid_target_samples": 214,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 214,
+          "median_absolute_depth_residual_metres": 0.001987563380966062,
+          "p90_absolute_depth_residual_metres": 0.004771417950904955,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        }
+      ],
+      "point_cloud": "data/datasets/recovery_validation/47333462_native_depth_world.ply",
+      "metric_accuracy_evaluated": false,
+      "notes": "Native-depth world cloud is sensor unprojection, not neural output. 7-Scenes nominal depth K is not RGB calibration; no aligned RGB-D accuracy is claimed."
+    },
+    {
+      "dataset": "ARKitScenes",
+      "scene_id": "arkit_visit_381644",
+      "recording_id": "41069050",
+      "source_manifest": "data/datasets/arkitscenes/processed/41069050/sequence.json",
+      "source_manifest_sha256": "452c46ab9c6aa2f461e02ca4f7c5a3a6af8d0bc25ba468af562d254ab425ded8",
+      "status": "passed",
+      "frames_checked": 48,
+      "frames": [
+        {
+          "timestamp_ns": 5045334000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.92,
+          "K": [
+            [
+              214.92,
+              0.0,
+              124.89
+            ],
+            [
+              0.0,
+              214.92,
+              94.6158
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00041832999977486907
+        },
+        {
+          "timestamp_ns": 5046017000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              124.861
+            ],
+            [
+              0.0,
+              214.98,
+              94.5513
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00036608000027626986
+        },
+        {
+          "timestamp_ns": 5046616000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              124.906
+            ],
+            [
+              0.0,
+              214.98,
+              94.4568
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003869600004691165
+        },
+        {
+          "timestamp_ns": 5047316000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.161,
+          "K": [
+            [
+              215.161,
+              0.0,
+              124.951
+            ],
+            [
+              0.0,
+              215.161,
+              94.3524
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 9.916999988490716e-05
+        },
+        {
+          "timestamp_ns": 5047916000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.019806626980426e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.281,
+          "K": [
+            [
+              215.281,
+              0.0,
+              124.979
+            ],
+            [
+              0.0,
+              215.281,
+              94.3197
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00014762000046175672
+        },
+        {
+          "timestamp_ns": 5048616000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.375077994860476e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.462,
+          "K": [
+            [
+              215.462,
+              0.0,
+              124.964
+            ],
+            [
+              0.0,
+              215.462,
+              94.3138
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00043507999998837477
+        },
+        {
+          "timestamp_ns": 5049315000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.582,
+          "K": [
+            [
+              215.582,
+              0.0,
+              124.963
+            ],
+            [
+              0.0,
+              215.582,
+              94.3288
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00027675000001181616
+        },
+        {
+          "timestamp_ns": 5049915000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.643,
+          "K": [
+            [
+              215.643,
+              0.0,
+              124.994
+            ],
+            [
+              0.0,
+              215.643,
+              94.3486
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 2.9879999601689633e-05
+        },
+        {
+          "timestamp_ns": 5050615000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.582,
+          "K": [
+            [
+              215.582,
+              0.0,
+              124.994
+            ],
+            [
+              0.0,
+              215.582,
+              94.3397
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00025795999954425497
+        },
+        {
+          "timestamp_ns": 5051214000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.582,
+          "K": [
+            [
+              215.582,
+              0.0,
+              124.992
+            ],
+            [
+              0.0,
+              215.582,
+              94.3398
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004953300003762706
+        },
+        {
+          "timestamp_ns": 5051914000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.522,
+          "K": [
+            [
+              215.522,
+              0.0,
+              125.022
+            ],
+            [
+              0.0,
+              215.522,
+              94.3198
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00020758000027853996
+        },
+        {
+          "timestamp_ns": 5052614000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.341,
+          "K": [
+            [
+              215.341,
+              0.0,
+              124.995
+            ],
+            [
+              0.0,
+              215.341,
+              94.3156
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 8.086999969236786e-05
+        },
+        {
+          "timestamp_ns": 5053214000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.221,
+          "K": [
+            [
+              215.221,
+              0.0,
+              124.993
+            ],
+            [
+              0.0,
+              215.221,
+              94.3461
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003273700003774138
+        },
+        {
+          "timestamp_ns": 5053913000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.04,
+          "K": [
+            [
+              215.04,
+              0.0,
+              124.961
+            ],
+            [
+              0.0,
+              215.04,
+              94.4296
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00038467000013042707
+        },
+        {
+          "timestamp_ns": 5054513000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              124.925
+            ],
+            [
+              0.0,
+              214.98,
+              94.4721
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00013767000018560793
+        },
+        {
+          "timestamp_ns": 5055213000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              124.857
+            ],
+            [
+              0.0,
+              214.98,
+              94.5507
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00014999999984866008
+        },
+        {
+          "timestamp_ns": 5055913000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              124.922
+            ],
+            [
+              0.0,
+              214.98,
+              94.4809
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004382899996926426
+        },
+        {
+          "timestamp_ns": 5056512000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.161,
+          "K": [
+            [
+              215.161,
+              0.0,
+              124.942
+            ],
+            [
+              0.0,
+              215.161,
+              94.3879
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00031492000016442034
+        },
+        {
+          "timestamp_ns": 5057212000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.341,
+          "K": [
+            [
+              215.341,
+              0.0,
+              124.982
+            ],
+            [
+              0.0,
+              215.341,
+              94.3231
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 2.699999913602369e-05
+        },
+        {
+          "timestamp_ns": 5057812000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 4.263256414560601e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.522,
+          "K": [
+            [
+              215.522,
+              0.0,
+              125.005
+            ],
+            [
+              0.0,
+              215.522,
+              94.3145
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00021966999975120416
+        },
+        {
+          "timestamp_ns": 5058511000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.582,
+          "K": [
+            [
+              215.582,
+              0.0,
+              125.066
+            ],
+            [
+              0.0,
+              215.582,
+              94.3429
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004921199997625081
+        },
+        {
+          "timestamp_ns": 5059211000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.643,
+          "K": [
+            [
+              215.643,
+              0.0,
+              125.045
+            ],
+            [
+              0.0,
+              215.643,
+              94.36
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00020428999960131478
+        },
+        {
+          "timestamp_ns": 5059811000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.522,
+          "K": [
+            [
+              215.522,
+              0.0,
+              125.011
+            ],
+            [
+              0.0,
+              215.522,
+              94.3214
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 4.253999941283837e-05
+        },
+        {
+          "timestamp_ns": 5060511000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.402,
+          "K": [
+            [
+              215.402,
+              0.0,
+              125.003
+            ],
+            [
+              0.0,
+              215.402,
+              94.3145
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003308300001663156
+        },
+        {
+          "timestamp_ns": 5061110000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.462,
+          "K": [
+            [
+              215.462,
+              0.0,
+              125.002
+            ],
+            [
+              0.0,
+              215.462,
+              94.3141
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00042237000070599606
+        },
+        {
+          "timestamp_ns": 5061810000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.522,
+          "K": [
+            [
+              215.522,
+              0.0,
+              125.009
+            ],
+            [
+              0.0,
+              215.522,
+              94.3177
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00013203999969846336
+        },
+        {
+          "timestamp_ns": 5062410000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.341,
+          "K": [
+            [
+              215.341,
+              0.0,
+              124.997
+            ],
+            [
+              0.0,
+              215.341,
+              94.3214
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00011249999988649506
+        },
+        {
+          "timestamp_ns": 5063110000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.221,
+          "K": [
+            [
+              215.221,
+              0.0,
+              125.001
+            ],
+            [
+              0.0,
+              215.221,
+              94.3609
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004007499992439989
+        },
+        {
+          "timestamp_ns": 5063809000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.04,
+          "K": [
+            [
+              215.04,
+              0.0,
+              124.967
+            ],
+            [
+              0.0,
+              215.04,
+              94.43
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.000310919999719772
+        },
+        {
+          "timestamp_ns": 5064409000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              124.968
+            ],
+            [
+              0.0,
+              214.98,
+              94.4528
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 6.417000076908153e-05
+        },
+        {
+          "timestamp_ns": 5065109000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.6415315207705135e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 212.811,
+          "K": [
+            [
+              212.811,
+              0.0,
+              124.96
+            ],
+            [
+              0.0,
+              212.811,
+              94.4437
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00022420999994210433
+        },
+        {
+          "timestamp_ns": 5065709000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.438,
+          "K": [
+            [
+              214.438,
+              0.0,
+              124.97
+            ],
+            [
+              0.0,
+              214.438,
+              94.4588
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00047154000003502006
+        },
+        {
+          "timestamp_ns": 5066408000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.438,
+          "K": [
+            [
+              214.438,
+              0.0,
+              124.95
+            ],
+            [
+              0.0,
+              214.438,
+              94.4706
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00024061999920377275
+        },
+        {
+          "timestamp_ns": 5067108000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.438,
+          "K": [
+            [
+              214.438,
+              0.0,
+              124.972
+            ],
+            [
+              0.0,
+              214.438,
+              94.4207
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 4.766999973071506e-05
+        },
+        {
+          "timestamp_ns": 5067708000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.498,
+          "K": [
+            [
+              214.498,
+              0.0,
+              124.979
+            ],
+            [
+              0.0,
+              214.498,
+              94.3912
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0002948299998024595
+        },
+        {
+          "timestamp_ns": 5068407000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 2.842170943040401e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.618,
+          "K": [
+            [
+              214.618,
+              0.0,
+              124.96
+            ],
+            [
+              0.0,
+              214.618,
+              94.3556
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004170000001977314
+        },
+        {
+          "timestamp_ns": 5069007000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.739,
+          "K": [
+            [
+              214.739,
+              0.0,
+              124.994
+            ],
+            [
+              0.0,
+              214.739,
+              94.3257
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.000169830000231741
+        },
+        {
+          "timestamp_ns": 5069707000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.859,
+          "K": [
+            [
+              214.859,
+              0.0,
+              125.008
+            ],
+            [
+              0.0,
+              214.859,
+              94.3145
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00011842000003525754
+        },
+        {
+          "timestamp_ns": 5070407000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              125.015
+            ],
+            [
+              0.0,
+              214.98,
+              94.3261
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004065000002810848
+        },
+        {
+          "timestamp_ns": 5071006000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 8.526512829121202e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              125.016
+            ],
+            [
+              0.0,
+              214.98,
+              94.3313
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00034637999942788156
+        },
+        {
+          "timestamp_ns": 5071706000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.108624468950438e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 215.04,
+          "K": [
+            [
+              215.04,
+              0.0,
+              125.035
+            ],
+            [
+              0.0,
+              215.04,
+              94.3403
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 5.782999960501911e-05
+        },
+        {
+          "timestamp_ns": 5072306000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.98,
+          "K": [
+            [
+              214.98,
+              0.0,
+              125.037
+            ],
+            [
+              0.0,
+              214.98,
+              94.327
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00018928999998024665
+        },
+        {
+          "timestamp_ns": 5073006000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.92,
+          "K": [
+            [
+              214.92,
+              0.0,
+              125.028
+            ],
+            [
+              0.0,
+              214.92,
+              94.3206
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0004775400002472452
+        },
+        {
+          "timestamp_ns": 5073705000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 3.9599192839360836e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.679,
+          "K": [
+            [
+              214.679,
+              0.0,
+              124.937
+            ],
+            [
+              0.0,
+              214.679,
+              94.327
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00023396000051434385
+        },
+        {
+          "timestamp_ns": 5074305000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.498,
+          "K": [
+            [
+              214.498,
+              0.0,
+              124.916
+            ],
+            [
+              0.0,
+              214.498,
+              94.3959
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 1.3750000107393134e-05
+        },
+        {
+          "timestamp_ns": 5075005000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.438,
+          "K": [
+            [
+              214.438,
+              0.0,
+              124.958
+            ],
+            [
+              0.0,
+              214.438,
+              94.4603
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.0003016299997398164
+        },
+        {
+          "timestamp_ns": 5075604000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.438,
+          "K": [
+            [
+              214.438,
+              0.0,
+              124.973
+            ],
+            [
+              0.0,
+              214.438,
+              94.4687
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00045137999950384255
+        },
+        {
+          "timestamp_ns": 5076304000000,
+          "valid_sample_points": 768,
+          "pixel_roundtrip_max": 5.684341886080802e-14,
+          "invalid_depth_pixels": 0,
+          "fx": 214.377,
+          "K": [
+            [
+              214.377,
+              0.0,
+              124.949
+            ],
+            [
+              0.0,
+              214.377,
+              94.4514
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": true,
+          "rgb_depth_aligned": true,
+          "sync_error_seconds": 0.00016279000010399614
+        }
+      ],
+      "variable_intrinsics": true,
+      "timestamp_source": "Native filename/traj seconds; nearest pose <=5ms, intrinsics <=1.1ms",
+      "cross_view_depth_diagnostics": [
+        {
+          "projected_samples": 765,
+          "valid_target_samples": 765,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 765,
+          "median_absolute_depth_residual_metres": 0.008354834347758855,
+          "p90_absolute_depth_residual_metres": 0.018197499902122983,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 594,
+          "valid_target_samples": 594,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 594,
+          "median_absolute_depth_residual_metres": 0.007020745792505001,
+          "p90_absolute_depth_residual_metres": 0.02301471908274266,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 340,
+          "valid_target_samples": 340,
+          "occluded_samples_excluded": 5,
+          "usable_samples": 335,
+          "median_absolute_depth_residual_metres": 0.008911537409596715,
+          "p90_absolute_depth_residual_metres": 0.020005045182711095,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 472,
+          "valid_target_samples": 472,
+          "occluded_samples_excluded": 2,
+          "usable_samples": 470,
+          "median_absolute_depth_residual_metres": 0.003403885610164248,
+          "p90_absolute_depth_residual_metres": 0.014257462229403266,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 426,
+          "valid_target_samples": 426,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 426,
+          "median_absolute_depth_residual_metres": 0.004697640910465539,
+          "p90_absolute_depth_residual_metres": 0.010743119173629578,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 383,
+          "valid_target_samples": 383,
+          "occluded_samples_excluded": 18,
+          "usable_samples": 365,
+          "median_absolute_depth_residual_metres": 0.01218240184698216,
+          "p90_absolute_depth_residual_metres": 0.024071776908127066,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 437,
+          "valid_target_samples": 437,
+          "occluded_samples_excluded": 28,
+          "usable_samples": 409,
+          "median_absolute_depth_residual_metres": 0.0096380850766562,
+          "p90_absolute_depth_residual_metres": 0.02396076966901521,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 412,
+          "valid_target_samples": 412,
+          "occluded_samples_excluded": 19,
+          "usable_samples": 393,
+          "median_absolute_depth_residual_metres": 0.0057700203487816015,
+          "p90_absolute_depth_residual_metres": 0.01813754279445297,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 423,
+          "valid_target_samples": 423,
+          "occluded_samples_excluded": 4,
+          "usable_samples": 419,
+          "median_absolute_depth_residual_metres": 0.0024230173000319155,
+          "p90_absolute_depth_residual_metres": 0.008291615637465142,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 413,
+          "valid_target_samples": 413,
+          "occluded_samples_excluded": 44,
+          "usable_samples": 369,
+          "median_absolute_depth_residual_metres": 0.016426894348141152,
+          "p90_absolute_depth_residual_metres": 0.038937846544149265,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 295,
+          "valid_target_samples": 295,
+          "occluded_samples_excluded": 26,
+          "usable_samples": 269,
+          "median_absolute_depth_residual_metres": 0.0031591761418587883,
+          "p90_absolute_depth_residual_metres": 0.01909611921870936,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 251,
+          "valid_target_samples": 251,
+          "occluded_samples_excluded": 26,
+          "usable_samples": 225,
+          "median_absolute_depth_residual_metres": 0.0024343781526151576,
+          "p90_absolute_depth_residual_metres": 0.017884862186744885,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 176,
+          "valid_target_samples": 176,
+          "occluded_samples_excluded": 6,
+          "usable_samples": 170,
+          "median_absolute_depth_residual_metres": 0.016788583014217817,
+          "p90_absolute_depth_residual_metres": 0.03926475860888093,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 516,
+          "valid_target_samples": 516,
+          "occluded_samples_excluded": 41,
+          "usable_samples": 475,
+          "median_absolute_depth_residual_metres": 0.01061452165442378,
+          "p90_absolute_depth_residual_metres": 0.029263767065134248,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 361,
+          "valid_target_samples": 361,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 361,
+          "median_absolute_depth_residual_metres": 0.005139967059680117,
+          "p90_absolute_depth_residual_metres": 0.02187445960152079,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 527,
+          "valid_target_samples": 527,
+          "occluded_samples_excluded": 23,
+          "usable_samples": 504,
+          "median_absolute_depth_residual_metres": 0.012973607625387018,
+          "p90_absolute_depth_residual_metres": 0.022566998698636365,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 385,
+          "valid_target_samples": 385,
+          "occluded_samples_excluded": 18,
+          "usable_samples": 367,
+          "median_absolute_depth_residual_metres": 0.013224788045911318,
+          "p90_absolute_depth_residual_metres": 0.04196119617729002,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 271,
+          "valid_target_samples": 271,
+          "occluded_samples_excluded": 7,
+          "usable_samples": 264,
+          "median_absolute_depth_residual_metres": 0.01042818133311263,
+          "p90_absolute_depth_residual_metres": 0.034609524835812484,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 398,
+          "valid_target_samples": 398,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 398,
+          "median_absolute_depth_residual_metres": 0.008728017685537659,
+          "p90_absolute_depth_residual_metres": 0.02790592057779692,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 382,
+          "valid_target_samples": 382,
+          "occluded_samples_excluded": 29,
+          "usable_samples": 353,
+          "median_absolute_depth_residual_metres": 0.008042930534427395,
+          "p90_absolute_depth_residual_metres": 0.03611945118831256,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 413,
+          "valid_target_samples": 413,
+          "occluded_samples_excluded": 28,
+          "usable_samples": 385,
+          "median_absolute_depth_residual_metres": 0.00444368884206825,
+          "p90_absolute_depth_residual_metres": 0.026948253558370563,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 235,
+          "valid_target_samples": 235,
+          "occluded_samples_excluded": 16,
+          "usable_samples": 219,
+          "median_absolute_depth_residual_metres": 0.013715265326686543,
+          "p90_absolute_depth_residual_metres": 0.03611407354505527,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 358,
+          "valid_target_samples": 358,
+          "occluded_samples_excluded": 2,
+          "usable_samples": 356,
+          "median_absolute_depth_residual_metres": 0.010205714002822885,
+          "p90_absolute_depth_residual_metres": 0.02053933156640453,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 634,
+          "valid_target_samples": 634,
+          "occluded_samples_excluded": 6,
+          "usable_samples": 628,
+          "median_absolute_depth_residual_metres": 0.0023907694759373044,
+          "p90_absolute_depth_residual_metres": 0.005235016335998278,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 602,
+          "valid_target_samples": 602,
+          "occluded_samples_excluded": 79,
+          "usable_samples": 523,
+          "median_absolute_depth_residual_metres": 0.0043733825756782085,
+          "p90_absolute_depth_residual_metres": 0.01565522096341959,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 338,
+          "valid_target_samples": 338,
+          "occluded_samples_excluded": 0,
+          "usable_samples": 338,
+          "median_absolute_depth_residual_metres": 0.006491318535531643,
+          "p90_absolute_depth_residual_metres": 0.020654323822977032,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 337,
+          "valid_target_samples": 337,
+          "occluded_samples_excluded": 5,
+          "usable_samples": 332,
+          "median_absolute_depth_residual_metres": 0.0077052181040376255,
+          "p90_absolute_depth_residual_metres": 0.01802265708212697,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 354,
+          "valid_target_samples": 354,
+          "occluded_samples_excluded": 43,
+          "usable_samples": 311,
+          "median_absolute_depth_residual_metres": 0.011895743919213775,
+          "p90_absolute_depth_residual_metres": 0.031111749242730746,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 461,
+          "valid_target_samples": 461,
+          "occluded_samples_excluded": 7,
+          "usable_samples": 454,
+          "median_absolute_depth_residual_metres": 0.010133906101876755,
+          "p90_absolute_depth_residual_metres": 0.029609364911259248,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 367,
+          "valid_target_samples": 367,
+          "occluded_samples_excluded": 3,
+          "usable_samples": 364,
+          "median_absolute_depth_residual_metres": 0.00615465033181839,
+          "p90_absolute_depth_residual_metres": 0.02404137545508744,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 421,
+          "valid_target_samples": 421,
+          "occluded_samples_excluded": 17,
+          "usable_samples": 404,
+          "median_absolute_depth_residual_metres": 0.008337201546194495,
+          "p90_absolute_depth_residual_metres": 0.030491187021258612,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 435,
+          "valid_target_samples": 435,
+          "occluded_samples_excluded": 17,
+          "usable_samples": 418,
+          "median_absolute_depth_residual_metres": 0.0075255494559587355,
+          "p90_absolute_depth_residual_metres": 0.028538439355051737,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 474,
+          "valid_target_samples": 474,
+          "occluded_samples_excluded": 36,
+          "usable_samples": 438,
+          "median_absolute_depth_residual_metres": 0.007718694900313072,
+          "p90_absolute_depth_residual_metres": 0.035751754492944036,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 481,
+          "valid_target_samples": 481,
+          "occluded_samples_excluded": 20,
+          "usable_samples": 461,
+          "median_absolute_depth_residual_metres": 0.0048263986151722005,
+          "p90_absolute_depth_residual_metres": 0.018883983676521332,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 468,
+          "valid_target_samples": 468,
+          "occluded_samples_excluded": 14,
+          "usable_samples": 454,
+          "median_absolute_depth_residual_metres": 0.009228304234472406,
+          "p90_absolute_depth_residual_metres": 0.026361552570051544,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 439,
+          "valid_target_samples": 439,
+          "occluded_samples_excluded": 65,
+          "usable_samples": 374,
+          "median_absolute_depth_residual_metres": 0.003630007510780464,
+          "p90_absolute_depth_residual_metres": 0.016595285910563,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 371,
+          "valid_target_samples": 371,
+          "occluded_samples_excluded": 17,
+          "usable_samples": 354,
+          "median_absolute_depth_residual_metres": 0.00284365057472713,
+          "p90_absolute_depth_residual_metres": 0.015670151648892048,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 458,
+          "valid_target_samples": 458,
+          "occluded_samples_excluded": 16,
+          "usable_samples": 442,
+          "median_absolute_depth_residual_metres": 0.0023332896653538437,
+          "p90_absolute_depth_residual_metres": 0.007840186599174492,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 551,
+          "valid_target_samples": 551,
+          "occluded_samples_excluded": 3,
+          "usable_samples": 548,
+          "median_absolute_depth_residual_metres": 0.007079842767535149,
+          "p90_absolute_depth_residual_metres": 0.015976380178975326,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 450,
+          "valid_target_samples": 450,
+          "occluded_samples_excluded": 9,
+          "usable_samples": 441,
+          "median_absolute_depth_residual_metres": 0.005327917995592402,
+          "p90_absolute_depth_residual_metres": 0.01808988432165859,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 439,
+          "valid_target_samples": 439,
+          "occluded_samples_excluded": 17,
+          "usable_samples": 422,
+          "median_absolute_depth_residual_metres": 0.003416889157719649,
+          "p90_absolute_depth_residual_metres": 0.021038836848720932,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 479,
+          "valid_target_samples": 479,
+          "occluded_samples_excluded": 57,
+          "usable_samples": 422,
+          "median_absolute_depth_residual_metres": 0.0018364850347796224,
+          "p90_absolute_depth_residual_metres": 0.010990928961763171,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 70,
+          "valid_target_samples": 70,
+          "occluded_samples_excluded": 42,
+          "usable_samples": 28,
+          "median_absolute_depth_residual_metres": 0.007242627237848909,
+          "p90_absolute_depth_residual_metres": 0.04535282237951329,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 119,
+          "valid_target_samples": 119,
+          "occluded_samples_excluded": 5,
+          "usable_samples": 114,
+          "median_absolute_depth_residual_metres": 0.00802710123443573,
+          "p90_absolute_depth_residual_metres": 0.10854760517502889,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 281,
+          "valid_target_samples": 281,
+          "occluded_samples_excluded": 4,
+          "usable_samples": 277,
+          "median_absolute_depth_residual_metres": 0.018385906725880252,
+          "p90_absolute_depth_residual_metres": 0.02821629135039023,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 577,
+          "valid_target_samples": 577,
+          "occluded_samples_excluded": 6,
+          "usable_samples": 571,
+          "median_absolute_depth_residual_metres": 0.007781117559606532,
+          "p90_absolute_depth_residual_metres": 0.016771588355842137,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        },
+        {
+          "projected_samples": 681,
+          "valid_target_samples": 681,
+          "occluded_samples_excluded": 17,
+          "usable_samples": 664,
+          "median_absolute_depth_residual_metres": 0.004528559723211423,
+          "p90_absolute_depth_residual_metres": 0.01711743186267106,
+          "interpretation": "Native sensor/pose consistency diagnostic, nearest-pixel samples; not model reconstruction accuracy or calibrated uncertainty"
+        }
+      ],
+      "point_cloud": "data/datasets/recovery_validation/41069050_native_depth_world.ply",
+      "metric_accuracy_evaluated": false,
+      "notes": "Native-depth world cloud is sensor unprojection, not neural output. 7-Scenes nominal depth K is not RGB calibration; no aligned RGB-D accuracy is claimed."
+    },
+    {
+      "dataset": "7-Scenes",
+      "scene_id": "heads",
+      "recording_id": "seq-02",
+      "source_manifest": "data/datasets/seven_scenes/processed/heads_seq02/sequence.json",
+      "source_manifest_sha256": "34c55b916ccccbc64d0c5de5a3e2c651db367432ac3a0a6f772ca6c154206b82",
+      "status": "passed",
+      "frames_checked": 48,
+      "frames": [
+        {
+          "timestamp_ns": 0,
+          "valid_sample_points": 4361,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 27263,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 700000000,
+          "valid_sample_points": 4306,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 29785,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 1433333333,
+          "valid_sample_points": 4479,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 19034,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 2133333333,
+          "valid_sample_points": 4240,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 33542,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 2833333333,
+          "valid_sample_points": 4372,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 25632,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 3533333333,
+          "valid_sample_points": 4408,
+          "pixel_roundtrip_max": 1.2079226507921703e-13,
+          "invalid_depth_pixels": 23620,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 4266666667,
+          "valid_sample_points": 4209,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 36666,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 4966666667,
+          "valid_sample_points": 3566,
+          "pixel_roundtrip_max": 1.1457501614131615e-13,
+          "invalid_depth_pixels": 77580,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 5666666667,
+          "valid_sample_points": 3925,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 53763,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 6366666667,
+          "valid_sample_points": 4143,
+          "pixel_roundtrip_max": 1.2079226507921703e-13,
+          "invalid_depth_pixels": 40568,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 7100000000,
+          "valid_sample_points": 4214,
+          "pixel_roundtrip_max": 1.2079226507921703e-13,
+          "invalid_depth_pixels": 35936,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 7800000000,
+          "valid_sample_points": 4417,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 23729,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 8500000000,
+          "valid_sample_points": 4384,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 24924,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 9200000000,
+          "valid_sample_points": 4275,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 32072,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 9933333333,
+          "valid_sample_points": 3612,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 75146,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 10633333333,
+          "valid_sample_points": 4099,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 43193,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 11333333333,
+          "valid_sample_points": 3895,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 56448,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 12033333333,
+          "valid_sample_points": 3956,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 52470,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 12766666667,
+          "valid_sample_points": 3645,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 72338,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 13466666667,
+          "valid_sample_points": 3456,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 84937,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 14166666667,
+          "valid_sample_points": 3617,
+          "pixel_roundtrip_max": 1.2079226507921703e-13,
+          "invalid_depth_pixels": 74873,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 14866666667,
+          "valid_sample_points": 3450,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 84819,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 15600000000,
+          "valid_sample_points": 3525,
+          "pixel_roundtrip_max": 1.1457501614131615e-13,
+          "invalid_depth_pixels": 80572,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 16300000000,
+          "valid_sample_points": 4021,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 48491,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 17000000000,
+          "valid_sample_points": 3305,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 93641,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 17700000000,
+          "valid_sample_points": 4366,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 26435,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 18433333333,
+          "valid_sample_points": 4702,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 5655,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 19133333333,
+          "valid_sample_points": 4673,
+          "pixel_roundtrip_max": 1.1457501614131615e-13,
+          "invalid_depth_pixels": 7206,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 19833333333,
+          "valid_sample_points": 4652,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 9160,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 20533333333,
+          "valid_sample_points": 4319,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 29705,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 21266666667,
+          "valid_sample_points": 4490,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 19042,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 21966666667,
+          "valid_sample_points": 4499,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 18423,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 22666666667,
+          "valid_sample_points": 4065,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 44964,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 23366666667,
+          "valid_sample_points": 4170,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 38472,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 24100000000,
+          "valid_sample_points": 3684,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 68688,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 24800000000,
+          "valid_sample_points": 4017,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 48440,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 25500000000,
+          "valid_sample_points": 3662,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 69769,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 26200000000,
+          "valid_sample_points": 3457,
+          "pixel_roundtrip_max": 1.2079226507921703e-13,
+          "invalid_depth_pixels": 84271,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 26933333333,
+          "valid_sample_points": 3827,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 60271,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 27633333333,
+          "valid_sample_points": 3735,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 67289,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 28333333333,
+          "valid_sample_points": 3555,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 77944,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 29033333333,
+          "valid_sample_points": 3658,
+          "pixel_roundtrip_max": 1.1723955140041653e-13,
+          "invalid_depth_pixels": 72905,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 29766666667,
+          "valid_sample_points": 3765,
+          "pixel_roundtrip_max": 1.1457501614131615e-13,
+          "invalid_depth_pixels": 66771,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 30466666667,
+          "valid_sample_points": 3770,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 66019,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 31166666667,
+          "valid_sample_points": 4000,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 51004,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 31866666667,
+          "valid_sample_points": 3875,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 58339,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 32600000000,
+          "valid_sample_points": 3896,
+          "pixel_roundtrip_max": 1.1368683772161603e-13,
+          "invalid_depth_pixels": 57257,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        },
+        {
+          "timestamp_ns": 33300000000,
+          "valid_sample_points": 4170,
+          "pixel_roundtrip_max": 1.2079226507921703e-13,
+          "invalid_depth_pixels": 38306,
+          "fx": 585.0,
+          "K": [
+            [
+              585.0,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              585.0,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "rgb_calibration_available": false,
+          "rgb_depth_aligned": false,
+          "sync_error_seconds": 0.0
+        }
+      ],
+      "variable_intrinsics": false,
+      "timestamp_source": "Derived source frame-index / nominal 30Hz; hardware timestamps unavailable",
+      "cross_view_depth_diagnostics": [],
+      "point_cloud": null,
+      "metric_accuracy_evaluated": false,
+      "notes": "Native-depth world cloud is sensor unprojection, not neural output. 7-Scenes nominal depth K is not RGB calibration; no aligned RGB-D accuracy is claimed."
+    }
+  ],
+  "replica": {
+    "path": "data/datasets/replica/raw/apartment_0/textures/27-color-ptex.hdr",
+    "shape": [
+      5616,
+      5616,
+      3
+    ],
+    "finite": true,
+    "status": "appearance asset only",
+    "complete_geometry": false
+  }
+}

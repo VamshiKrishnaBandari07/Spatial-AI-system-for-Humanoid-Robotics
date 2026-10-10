@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "input": "explicit synthetic UI fixture; no real annotations created",
+  "checks": [
+    "both video previews decode",
+    "object-category save",
+    "same-reviewer rejection",
+    "schema validation and JSON download",
+    "annotation import and selection",
+    "deletion",
+    "empty export rejection",
+    "320px layout",
+    "no JavaScript errors"
+  ]
+}

@@ -44,8 +44,16 @@ Official ARKitScenes and 7-Scenes RGB-D subsets are now locally verified; Replic
 
 ## Current regression and publication status (2026-10-10)
 
-Both the development environment and independent clean CPU environment pass all 79 tests. The professional workspace and edge-case browser suites pass. The source repository is published, with recordings and model weights excluded. Historical test counts and runtimes above describe their original runs, not the current total. See [methodology review](docs/METHODOLOGY.md) for current scope.
+At that review, both the development environment and independent clean CPU environment passed all 79 tests. The professional workspace and edge-case browser suites pass. The source repository is published, with recordings and model weights excluded. Historical test counts and runtimes above describe their original runs, not the current total. See [methodology review](docs/METHODOLOGY.md) for current scope.
 
 ## Fresh full-pipeline prediction check (2026-10-10)
 
 Actual CPU inference with the consensus configuration and no geometry reuse completed in 182.9 seconds on one identical synthetic recording pair. It returned two estimated UNCHANGED regions, zero physical-change alarms and 2,102 finite points per recording. Registration passed with 48 inliers and 9/9 held-out inliers. Supporting image files were verified. This is a functional no-change control, not an accuracy benchmark. The reciprocal of this one run is approximately 0.33 pairs/minute, including initialization; sustained throughput and real-world accuracy remain unmeasured. Evidence: [prediction check](docs/prediction_check_20261010.json).
+
+## Dataset recovery validation (2026-10-10)
+
+The updated development and independent clean CPU suites each pass **92 tests**. All 144 prepared native frames and 19,531 archive payloads were revalidated. Annotation import/export, independent-review checks, preview handling and mobile layout pass browser checks. The new `scripts/benchmark_scene.py` rejects the unestablished ARKit visit pairing and computes no supervised metrics.
+
+Fresh full pretrained inference on actual ARKit recording 47333462, supplied twice as a loader control, completed in 171.7 seconds (173.1 seconds including subprocess startup). Peak individual child RSS was 9,961.1 MiB. It reconstructed 1,348 points per state and returned one UNKNOWN region with an unverified electronic-device label; only one distinct object view existed per visit. The alignment gate passed with 761 inliers and 152/152 held-out inliers, but identical-input residuals cannot establish cross-visit accuracy.
+
+See [real-recording control evidence](reports/real_recording_inference_control.json), [quality report](reports/dataset_quality_report.md) and [annotation protocol](docs/annotation_protocol.md). No genuine real changed pair or independent change labels were obtained. Real F1, precision/recall, localization, matching accuracy, uncertainty calibration and ablations remain unrun. The legacy `evaluate` command performs exact-ID label arithmetic; the provenance-gated script is required for a verified real benchmark.

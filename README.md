@@ -6,7 +6,7 @@ Compare two recordings of the same indoor space, inspect their aligned 3D recons
 
 ![SpatialMemory-X Ultra comparison workspace](docs/screenshots/testing-console-desktop.png)
 
-The current release has **79 passing Python tests** and two passing browser verification suites. The screenshots and completed neural smoke runs use synthetic inputs. Real-world detection accuracy and robot deployment readiness require separate evaluation.
+The current release has **92 passing Python tests** and two passing browser verification suites. The screenshots and completed neural smoke runs use synthetic inputs. Real-world detection accuracy and robot deployment readiness require separate evaluation.
 
 ## What runs now
 
@@ -110,3 +110,28 @@ Dataset-only acquisition prepared two official ARKitScenes recordings and one 7-
 ## Comparison workspace
 
 The local UI on port 8000 now includes named comparisons, before/after previews, a guided comparison workflow, keyboard-accessible 3D controls, evidence review, recent comparisons and separate model-report/human-review exports. Reviews and comparison metadata stay in the current browser; they do not change inference results. See [testing workflow and verification](docs/TESTING_UI.md), [desktop preview](docs/screenshots/testing-console-desktop.png), and [mobile preview](docs/screenshots/testing-console-mobile.png).
+
+## Real-data recovery and annotation
+
+The current audit verifies seven retained archives (19,531 CRC-checked payload files), 144 prepared native RGB-D frames and one full neural inference control on real ARKit imagery. The control completed in 171.7 seconds with 9.7 GiB peak individual child RSS and an UNKNOWN object result. It is one recording supplied twice, not a two-visit change benchmark. Real-world accuracy and F1 remain unmeasured.
+
+Open `/annotate` in the local app to review two recordings, associate objects, record uncertain labels, independently review and export schema-validated annotations. This page keeps videos in the browser. Ground-truth annotations are separate from comparison-dashboard assessments and model predictions. See the [annotation protocol](docs/annotation_protocol.md).
+
+```bash
+python scripts/audit_datasets.py --data-root data/datasets --output reports
+python scripts/benchmark_scene.py \
+  --manifest data/manifests/SCENE.json \
+  --pair-evidence data/annotations/SCENE/pair_evidence.json \
+  --annotations data/annotations/SCENE/changes.json \
+  --report results/SCENE/report.json \
+  --identity-mapping data/annotations/SCENE/identity_mapping.json \
+  --project-root . --output reports/SCENE
+```
+
+These benchmark paths are placeholders for verified data, not included recordings or labels. The evaluator rejects unverified relationships, source/input hash mismatches, unreviewed or model-generated ground truth, and unreliable registration. Missing metrics remain unavailable; unannotated detections and UNKNOWN decisions stay visible. For actual memory measurements, use `scripts/profile_inference.py` and pass its matching `--resource-profile` to the benchmark.
+
+[Dataset audit](reports/dataset_audit.md) · [capability matrix](reports/dataset_capability_matrix.csv) · [dataset selection](reports/dataset_selection.md) · [quality report](reports/dataset_quality_report.md) · [completion status](reports/completion_status.json). 3RScan/RIO10 require official approval. Other candidate hosts remain blocked by runtime policy; licences and small-pair availability must be verified before acquisition. No genuine annotated real change pair has been obtained, so the ten benchmark completion conditions remain unsatisfied.
+
+## Dataset access preparation
+
+See [official access steps and smartphone templates](docs/DATASET_ACCESS.md) for the remaining real-data requirements. Prepared empty directories are placeholders. TUM RGB-D acquisition is blocked by the current network policy; the required domain addition is saved for environment review and publication.

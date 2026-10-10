@@ -1,0 +1,88 @@
+[
+  {
+    "path": "data/datasets/arkitscenes/raw/Training/47333462/lowres_depth.zip",
+    "bytes": 88437780,
+    "sha256": "594ca34250a4d7b3d0fd75d97b9af32a2772e60f76578735936a69f899806525",
+    "members_crc_verified": 3610,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://docs-assets.developer.apple.com/ml-research/datasets/arkitscenes/v1/raw/Training/47333462/lowres_depth.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/arkitscenes/raw/Training/47333462/lowres_depth.zip.download.json"
+  },
+  {
+    "path": "data/datasets/arkitscenes/raw/Training/47333462/lowres_wide.zip",
+    "bytes": 268393149,
+    "sha256": "c9c51569821a88b3b57f992040dae1993d5fe30d9dbf898faeda693c4f597654",
+    "members_crc_verified": 3611,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://docs-assets.developer.apple.com/ml-research/datasets/arkitscenes/v1/raw/Training/47333462/lowres_wide.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/arkitscenes/raw/Training/47333462/lowres_wide.zip.download.json"
+  },
+  {
+    "path": "data/datasets/arkitscenes/raw/Training/47333462/lowres_wide_intrinsics.zip",
+    "bytes": 738552,
+    "sha256": "aec877f5e0cb7ff489eef533f302dc9e4000c676200ee2fc31aceb9a00f0e9e0",
+    "members_crc_verified": 3611,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://docs-assets.developer.apple.com/ml-research/datasets/arkitscenes/v1/raw/Training/47333462/lowres_wide_intrinsics.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/arkitscenes/raw/Training/47333462/lowres_wide_intrinsics.zip.download.json"
+  },
+  {
+    "path": "data/datasets/arkitscenes/raw/Validation/41069050/lowres_depth.zip",
+    "bytes": 43835272,
+    "sha256": "8c546b93eae38d561112e32edc4e5fbe6e3fa35fb3e57f6d1ced210213986c41",
+    "members_crc_verified": 1899,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://docs-assets.developer.apple.com/ml-research/datasets/arkitscenes/v1/raw/Validation/41069050/lowres_depth.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/arkitscenes/raw/Validation/41069050/lowres_depth.zip.download.json"
+  },
+  {
+    "path": "data/datasets/arkitscenes/raw/Validation/41069050/lowres_wide.zip",
+    "bytes": 119940603,
+    "sha256": "c1c369f2511167dc35cc10a615f157fce19831a343a9cf8e279f01faa0d68cd2",
+    "members_crc_verified": 1900,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://docs-assets.developer.apple.com/ml-research/datasets/arkitscenes/v1/raw/Validation/41069050/lowres_wide.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/arkitscenes/raw/Validation/41069050/lowres_wide.zip.download.json"
+  },
+  {
+    "path": "data/datasets/arkitscenes/raw/Validation/41069050/lowres_wide_intrinsics.zip",
+    "bytes": 383527,
+    "sha256": "1d26d13dcbce0b2b590cbcefb65afff5ffe21b39f4b7f958348e9ea574214661",
+    "members_crc_verified": 1900,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://docs-assets.developer.apple.com/ml-research/datasets/arkitscenes/v1/raw/Validation/41069050/lowres_wide_intrinsics.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/arkitscenes/raw/Validation/41069050/lowres_wide_intrinsics.zip.download.json"
+  },
+  {
+    "path": "data/datasets/seven_scenes/raw/heads/seq-02.zip",
+    "bytes": 475830361,
+    "sha256": "a370b2121abdc68d6bfe03178f55628dab00b3f0ea905ce78d4deefd29e97752",
+    "members_crc_verified": 3000,
+    "excluded_ancillary_members": [
+      "seq-02/Thumbs.db"
+    ],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://download.microsoft.com/download/2/8/5/28564B23-0828-408F-8631-23B1EFF1DAC8/heads.zip",
+    "native_archive_member": "heads/seq-02.zip",
+    "journal": "data/datasets/seven_scenes/raw/heads/seq-02.zip.download.json"
+  }
+]

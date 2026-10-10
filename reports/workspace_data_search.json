@@ -1,0 +1,361 @@
+{
+  "videos": [
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/seven_scenes/processed/heads_seq02/rgb.mp4",
+      "bytes": 1248942,
+      "classification": "prepared research recording; no reviewed real change ground truth"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/moved/after/rgb.mp4",
+      "bytes": 254619,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/moved/before/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/unchanged/after/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/unchanged/before/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/added/after/rgb.mp4",
+      "bytes": 256867,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/added/before/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/removed/after/rgb.mp4",
+      "bytes": 253185,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/removed/before/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/small_displacement/after/rgb.mp4",
+      "bytes": 256773,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/small_displacement/before/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/occlusion/after/rgb.mp4",
+      "bytes": 238481,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/occlusion/before/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/lighting/after/rgb.mp4",
+      "bytes": 225588,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/lighting/before/rgb.mp4",
+      "bytes": 255653,
+      "classification": "synthetic region augmentation"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/processed/41069050/rgb.mp4",
+      "bytes": 271840,
+      "classification": "prepared research recording; no reviewed real change ground truth"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/processed/47333462/rgb.mp4",
+      "bytes": 59180,
+      "classification": "prepared research recording; no reviewed real change ground truth"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/processed/47333462_synchronized/rgb.mp4",
+      "bytes": 394763,
+      "classification": "prepared research recording; no reviewed real change ground truth"
+    },
+    {
+      "path": "/workspace/spatialmemory-fixtures/before.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture"
+    },
+    {
+      "path": "/workspace/spatialmemory-fixtures/after.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/418b37750b0c404cb326c3a265191480/before.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/418b37750b0c404cb326c3a265191480/after.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/4ba26933e1dd4c169c3005047d4ae211/before.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/4ba26933e1dd4c169c3005047d4ae211/after.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/62567fd9070d46b2b554d2d5cf6684de/before.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/62567fd9070d46b2b554d2d5cf6684de/after.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/d1246c68f55a42b2b623c42ce043f6bd/before.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/d1246c68f55a42b2b623c42ce043f6bd/after.mp4",
+      "bytes": 224099,
+      "classification": "synthetic fixture upload"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/sav_dataset/example/sav_000001.mp4",
+      "bytes": 5725431,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/notebooks/videos/bedroom.mp4",
+      "bytes": 2380401,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/demo/frontend/src/assets/videos/sam2_720px_dark.mp4",
+      "bytes": 1242376,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/demo/data/gallery/05_default_juggle.mp4",
+      "bytes": 1842699,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/demo/data/gallery/03_blocks.mp4",
+      "bytes": 1808832,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/demo/data/gallery/01_dog.mp4",
+      "bytes": 1738970,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/demo/data/gallery/04_coffee.mp4",
+      "bytes": 1177415,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/sam2/demo/data/gallery/02_cups.mp4",
+      "bytes": 2543710,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/single_cartoon.mp4",
+      "bytes": 228582,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/great_wall.mp4",
+      "bytes": 514177,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/Colosseum.mp4",
+      "bytes": 2093930,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/single_oil_painting.mp4",
+      "bytes": 794368,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/pyramid.mp4",
+      "bytes": 1130332,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/fern.mp4",
+      "bytes": 3173234,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/room.mp4",
+      "bytes": 273800,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    },
+    {
+      "path": "/workspace/spatialmemory-thirdparty/vggt/examples/videos/kitchen.mp4",
+      "bytes": 6986086,
+      "classification": "dependency demonstration video; no verified paired change annotations"
+    }
+  ],
+  "annotation_candidates": [
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/results/vggt_pipeline/changes/changes.json",
+      "bytes": 45,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0', 'events': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=missing, input_value={'schema_version': '1.0', 'events': []}, in"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/results/semantic_pipeline_verified/changes/changes.json",
+      "bytes": 139413,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'schema_version': '1.0'... distinct viewpoints.'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0',...distinct viewpoints.'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=m"
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/moved/changes.json",
+      "bytes": 717,
+      "schema_valid": true,
+      "origin": "UNKNOWN",
+      "count": 1,
+      "independent_reviewed": 0,
+      "provenance": null,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/unchanged/changes.json",
+      "bytes": 725,
+      "schema_valid": true,
+      "origin": "UNKNOWN",
+      "count": 1,
+      "independent_reviewed": 0,
+      "provenance": null,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/added/changes.json",
+      "bytes": 633,
+      "schema_valid": true,
+      "origin": "UNKNOWN",
+      "count": 1,
+      "independent_reviewed": 0,
+      "provenance": null,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/removed/changes.json",
+      "bytes": 633,
+      "schema_valid": true,
+      "origin": "UNKNOWN",
+      "count": 1,
+      "independent_reviewed": 0,
+      "provenance": null,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/small_displacement/changes.json",
+      "bytes": 730,
+      "schema_valid": true,
+      "origin": "UNKNOWN",
+      "count": 1,
+      "independent_reviewed": 0,
+      "provenance": null,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/occlusion/changes.json",
+      "bytes": 725,
+      "schema_valid": true,
+      "origin": "UNKNOWN",
+      "count": 1,
+      "independent_reviewed": 0,
+      "provenance": null,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/lighting/changes.json",
+      "bytes": 724,
+      "schema_valid": true,
+      "origin": "UNKNOWN",
+      "count": 1,
+      "independent_reviewed": 0,
+      "provenance": null,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/spatialmemory-real-recording-control-20261010/changes/changes.json",
+      "bytes": 36403,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'schema_version': '1.0'...nce are insufficient.'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0',...ce are insufficient.'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=m"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/418b37750b0c404cb326c3a265191480/output/changes/changes.json",
+      "bytes": 139413,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'schema_version': '1.0'... distinct viewpoints.'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0',...distinct viewpoints.'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=m"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/4ba26933e1dd4c169c3005047d4ae211/output/changes/changes.json",
+      "bytes": 45,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0', 'events': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=missing, input_value={'schema_version': '1.0', 'events': []}, in"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/62567fd9070d46b2b554d2d5cf6684de/output/changes/changes.json",
+      "bytes": 139413,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'schema_version': '1.0'... distinct viewpoints.'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0',...distinct viewpoints.'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=m"
+    },
+    {
+      "path": "/workspace/spatialmemory-runs/d1246c68f55a42b2b623c42ce043f6bd/output/changes/changes.json",
+      "bytes": 45,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0', 'events': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=missing, input_value={'schema_version': '1.0', 'events': []}, in"
+    },
+    {
+      "path": "/workspace/spatialmemory-prediction-check-20261010/changes/changes.json",
+      "bytes": 139413,
+      "schema_valid": false,
+      "error": "3 validation errors for Annotations\nevents\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'schema_version': '1.0'... distinct viewpoints.'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nscene_id\n  Field required [type=missing, input_value={'schema_version': '1.0',...distinct viewpoints.'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nchanges\n  Field required [type=m"
+    }
+  ],
+  "3rscan_asset_candidates": [],
+  "unreadable_directories": [],
+  "real_annotated_benchmark_available": false
+}

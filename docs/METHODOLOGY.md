@@ -33,3 +33,7 @@ UI summaries are deterministic presentations of computed classes and estimated l
 Model weights and datasets retain their original licences. In particular, the VGGT profile uses a noncommercial research checkpoint; the interface displays this condition when selected. Raw recordings, checkpoints, caches and credentials are excluded from Git.
 
 See [evaluation evidence](../EVALUATION.md), [implementation review](REVIEW.md), [dataset inventory](datasets_report.json), [model provenance](../MODEL_REGISTRY.md) and [input contracts](INPUTS.md).
+
+## Dataset recovery continuation
+
+Provenance-aware annotation schemas, a separate human annotation workspace, pair/input-hash verification, explicit benchmark identity mapping and measured process-resource profiling are now available. The current regression suite passes 92 tests. One actual ARKit recording passed a full inference control, with an UNKNOWN object result; it is not a genuine two-visit benchmark. See [dataset quality report](../reports/dataset_quality_report.md). The advanced model-stack and real-accuracy limitations above remain unchanged.

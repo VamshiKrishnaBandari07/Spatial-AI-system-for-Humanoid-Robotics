@@ -1,0 +1,22 @@
+{
+  "completed": false,
+  "verified_real_changed_pairs": 0,
+  "verified_real_annotation_sets": 0,
+  "real_benchmark_metrics_computed": false,
+  "ablation_studies_run": false,
+  "core_tests_passed": 92,
+  "native_frames_checked": 144,
+  "real_recording_control_completed": true,
+  "completion_conditions": {
+    "genuine_same_scene_changed_pair": false,
+    "documented_physical_changes_for_pair": false,
+    "both_pair_visits_reconstruction_usable": false,
+    "shared_cross_visit_registration_verified": false,
+    "ground_truth_provenance_verified": false,
+    "full_pipeline_on_valid_pair": false,
+    "detected_real_changes_visualized": false,
+    "quantitative_real_ground_truth_results": false,
+    "failures_and_limits_documented": true,
+    "real_benchmark_reproducible": false
+  }
+}

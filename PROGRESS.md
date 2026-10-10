@@ -64,3 +64,13 @@ Verified and corrected UI persistence, trial-load races, draft handling, upload 
 ## 2026-10-10 — Professional workspace and publication review
 
 Restored SpatialMemory-X Ultra branding, direct user wording, dark/light themes, readable processing stages and evidence summaries while preserving original report provenance. Both browser suites and all 79 Python tests pass. Added methodology/specification status review; no model architecture or training changes.
+
+## 2026-10-10 — Dataset recovery and ground-truth safeguards
+
+Verified actual on-disk sizes, seven retained archives and 19,531 CRC-checked payload files. Validated all 144 prepared native frames, per-frame ARKit calibration, source timestamps, metric depth conversion and camera/world round trips; generated ignored native ARKit depth clouds. Replica remains appearance-only and 7-Scenes depth is not silently registered with RGB.
+
+Researched official 3RScan/RIO10 documentation and ETHZ/TU Wien alternatives. Access forms remain unsubmitted; official host additions were saved without changing model architecture, checkpoints or training. No accessible, licensed, complete real annotated before/after pair obtained. Added typed annotation levels/provenance, an independent annotation workspace, source-hash pair validation, explicit identity mapping, provenance-gated benchmark arithmetic and process resource profiling.
+
+Actual full pretrained RGB inference on a single real ARKit recording supplied twice completed in 171.7 seconds, 9,961 MiB peak individual child RSS; 1,348 points per state, 761 registration inliers and 152/152 held-out inliers. One estimated electronic-device region remains UNKNOWN with one distinct view per visit; semantic label unverified. This is an inference control, not supervised real-scene accuracy.
+
+Development and independent clean CPU suites each pass 92 tests. Annotation-browser and existing edge-case browser checks pass. Reports retain rejected pairing, unavailable metrics, acquisition restrictions and explicit incomplete ten-condition status. Genuine changed-pair registration, supervised results and ablations remain blocked.

@@ -1,0 +1,15 @@
+{
+  "downloaded": false,
+  "checks": [
+    {
+      "url": "https://cvg.cit.tum.de/data/datasets/rgbd-dataset/download",
+      "status": "BLOCKED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://cvg.cit.tum.de/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_xyz.tgz",
+      "status": "BLOCKED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ]
+}
