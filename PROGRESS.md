@@ -74,3 +74,9 @@ Researched official 3RScan/RIO10 documentation and ETHZ/TU Wien alternatives. Ac
 Actual full pretrained RGB inference on a single real ARKit recording supplied twice completed in 171.7 seconds, 9,961 MiB peak individual child RSS; 1,348 points per state, 761 registration inliers and 152/152 held-out inliers. One estimated electronic-device region remains UNKNOWN with one distinct view per visit; semantic label unverified. This is an inference control, not supervised real-scene accuracy.
 
 Development and independent clean CPU suites each pass 92 tests. Annotation-browser and existing edge-case browser checks pass. Reports retain rejected pairing, unavailable metrics, acquisition restrictions and explicit incomplete ten-condition status. Genuine changed-pair registration, supervised results and ablations remain blocked.
+
+### 2026-10-10 — Approved real 3RScan pair acquired
+
+After confirmed official approval and Terms of Use agreement, one native training reference/rescan pair was downloaded from the official HTTPS host with bounded transfers and SHA-256 journals. Both ZIPs were fully read with CRC validation. All 257 RGB-D/pose frame sets and 40,097 annotated vertices passed native checks. Existing canonical adapter conversion and metadata validation passed. Together with earlier checks, 401 native frame sets have been inspected. Native change IDs are retained in an UNREVIEWED canonical draft; no reviewer identity or extra change labels were invented.
+
+A fresh unchanged VGGT/semantic consensus run on the pair failed at shared registration after 346.2 seconds. Both visits produced finite neural arrays; alignment had insufficient nondegenerate consensus. No registration thresholds were relaxed and no change predictions, accuracy or F1 were fabricated. Full completion remains false. See reports/3rscan_acquisition.json, reports/3rscan_native_validation.json and reports/3rscan_inference_attempt.json.

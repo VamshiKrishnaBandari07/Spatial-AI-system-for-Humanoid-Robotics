@@ -1,0 +1,48 @@
+{
+  "status": "downloaded_and_extracted",
+  "access_approval": "User confirmed official approval and agreement to Terms of Use",
+  "raw_root": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/3rscan/raw",
+  "reference": "02b33dfb-be2b-2d54-92d2-cd012b2b3c40",
+  "rescan": "fcf66d9e-622d-291c-84c2-bb23dfe31327",
+  "recordings": 2,
+  "files": [
+    {
+      "source": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/02b33dfb-be2b-2d54-92d2-cd012b2b3c40/sequence.zip",
+      "bytes": 23324158,
+      "sha256": "b41fd9878c81a6c8d38a02569b693241e026f028a79ae6defc9eacb38fd84cd8",
+      "official_checksum_available": false
+    },
+    {
+      "source": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/02b33dfb-be2b-2d54-92d2-cd012b2b3c40/semseg.v2.json",
+      "bytes": 18137,
+      "sha256": "d8fa463b6fe8234ea89981227a69453ac0ecdba492045ee97a360d730a9333f6",
+      "official_checksum_available": false
+    },
+    {
+      "source": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/02b33dfb-be2b-2d54-92d2-cd012b2b3c40/labels.instances.annotated.v2.ply",
+      "bytes": 1862024,
+      "sha256": "212417f814e49cbfade969b8a4a945e0a5b132dead75728a7dd9ade7aa05ee8c",
+      "official_checksum_available": false
+    },
+    {
+      "source": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/fcf66d9e-622d-291c-84c2-bb23dfe31327/sequence.zip",
+      "bytes": 19826323,
+      "sha256": "fbde0c797266fd697c7ba2c7421e26ce483256947d6776ea8208519fd3a5375d",
+      "official_checksum_available": false
+    },
+    {
+      "source": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/fcf66d9e-622d-291c-84c2-bb23dfe31327/semseg.v2.json",
+      "bytes": 15293,
+      "sha256": "fd42cf9019f0c90dcceb47015fa76475eb83d8a2f1ce6468c631a256cab012bb",
+      "official_checksum_available": false
+    },
+    {
+      "source": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/fcf66d9e-622d-291c-84c2-bb23dfe31327/labels.instances.annotated.v2.ply",
+      "bytes": 1090987,
+      "sha256": "30702aa9e0541428a3850fdff31ad68a6b76b079066401a6d220b62f261a2c52",
+      "official_checksum_available": false
+    }
+  ],
+  "ground_truth_reviewed": false,
+  "benchmark_run": false
+}

@@ -1,0 +1,123 @@
+{
+  "status": "failed",
+  "stage": "shared_registration",
+  "error": "Registration gate failed: Insufficient nondegenerate consensus",
+  "runtime_seconds": 346.1983293750018,
+  "process_wall_seconds": 348.3761429649967,
+  "peak_child_process_rss_mib": 9966.765625,
+  "memory_method": "Fresh wrapper process resource.getrusage(RUSAGE_CHILDREN).ru_maxrss; maximum individual child RSS, not aggregate process-tree or GPU memory",
+  "manifest_sha256": "074a7aeebc052a21b5f632bdf83b50be614e6b4f518ac2f8c8b43e8281b38caf",
+  "config_sha256": "e4eae0ee9b1f7006918ea50536780485d71ce66e86b2d23e08c3e5e67f2b1705",
+  "manifest_path": "data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/manifest.json",
+  "output_directory": "/workspace/spatialmemory-3rscan-pair-20261010",
+  "source_failure_sha256": "a9099703dd41d5ea3219e76a32d9d1d968fdebf7add6bd8f4bdd1cc6f14a0cc3",
+  "neural_prediction_arrays": {
+    "before": {
+      "extrinsics": {
+        "shape": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "finite": true
+      },
+      "intrinsics": {
+        "shape": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "finite": true
+      },
+      "depth": {
+        "shape": [
+          1,
+          2,
+          294,
+          518,
+          1
+        ],
+        "finite": true
+      },
+      "world_points": {
+        "shape": [
+          1,
+          2,
+          294,
+          518,
+          3
+        ],
+        "finite": true
+      },
+      "world_points_conf": {
+        "shape": [
+          1,
+          2,
+          294,
+          518
+        ],
+        "finite": true
+      }
+    },
+    "after": {
+      "extrinsics": {
+        "shape": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "finite": true
+      },
+      "intrinsics": {
+        "shape": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "finite": true
+      },
+      "depth": {
+        "shape": [
+          1,
+          2,
+          294,
+          518,
+          1
+        ],
+        "finite": true
+      },
+      "world_points": {
+        "shape": [
+          1,
+          2,
+          294,
+          518,
+          3
+        ],
+        "finite": true
+      },
+      "world_points_conf": {
+        "shape": [
+          1,
+          2,
+          294,
+          518
+        ],
+        "finite": true
+      }
+    }
+  },
+  "sensor_fusion": "RGB-only neural reconstruction; supplied native depth/poses retained, not fused",
+  "registration_gate_relaxed": false,
+  "real_pair_inference_attempted": true,
+  "precision": null,
+  "recall": null,
+  "F1": null,
+  "changes_produced": false,
+  "ground_truth_reviewed": false,
+  "benchmark_ready": false
+}

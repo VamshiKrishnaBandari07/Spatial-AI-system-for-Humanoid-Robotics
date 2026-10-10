@@ -83,6 +83,12 @@ def main():
         "memory": subprocess.check_output(["free", "-h"], text=True),
     }
     date = datetime.now(timezone.utc).date().isoformat()
+    acquisition_path = args.output / "3rscan_acquisition.json"
+    access_note = "Official approval has not been recorded in this audit"
+    if acquisition_path.exists():
+        access_note = json.loads(acquisition_path.read_text()).get(
+            "access_approval", access_note
+        )
     inventory = {
         "date": date,
         "environment": environment,
@@ -90,7 +96,7 @@ def main():
         "archives": archives,
         "3RScan": {
             "files": datasets[-1]["file_count"],
-            "access": "official approval must be independently verified",
+            "access": access_note,
         },
     }
     (args.output / "dataset_inventory.json").write_text(

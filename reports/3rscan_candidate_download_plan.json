@@ -1,5 +1,5 @@
 {
-  "status": "AWAITING_OFFICIAL_ACCESS_CONFIRMATION",
+  "status": "DOWNLOADED_AND_NATIVE_INPUTS_VALIDATED",
   "reference": "02b33dfb-be2b-2d54-92d2-cd012b2b3c40",
   "rescan": "fcf66d9e-622d-291c-84c2-bb23dfe31327",
   "relationship_metadata_path": "data/datasets/3rscan/downloader/3RScan.json",
@@ -11,8 +11,8 @@
     "rigid",
     "transform"
   ],
-  "candidate_only": true,
-  "scan_files_verified": false,
+  "candidate_only": false,
+  "scan_files_verified": true,
   "required_types": [
     "sequence.zip",
     "semseg.v2.json",
@@ -21,5 +21,5 @@
   "raw_destination": "data/datasets/3rscan/raw",
   "release_limit": "One reference/rescan pair only; file sizes must be checked before acquisition",
   "data_usage": "non-commercial research/education subject to official approval and Terms of Use",
-  "annotation_status": "Native metadata available; scan assets and reviewed change labels not available"
+  "annotation_status": "Native instance annotations verified; canonical draft is UNREVIEWED and not evaluation ready"
 }

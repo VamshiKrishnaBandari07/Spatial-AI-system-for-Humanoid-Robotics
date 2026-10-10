@@ -3,8 +3,8 @@
   "environment": {
     "cpu_affinity_count": 5,
     "nvidia_smi_available": false,
-    "free_disk_bytes": 16798846976,
-    "memory": "               total        used        free      shared  buff/cache   available\nMem:            33Gi       1.2Gi        17Gi        40Mi        14Gi        32Gi\nSwap:             0B          0B          0B\n"
+    "free_disk_bytes": 16607145984,
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:            33Gi       1.2Gi        17Gi        41Mi        15Gi        32Gi\nSwap:             0B          0B          0B\n"
   },
   "datasets": [
     {
@@ -65,9 +65,20 @@
     {
       "dataset": "3rscan",
       "path": "data/datasets/3rscan",
-      "file_count": 0,
-      "size_bytes": 0,
-      "extensions": {},
+      "file_count": 1062,
+      "size_bytes": 176772449,
+      "extensions": {
+        ".json": 23,
+        ".pdf": 1,
+        ".py": 1,
+        ".txt": 260,
+        ".npy": 257,
+        ".mp4": 2,
+        ".jpg": 257,
+        ".pgm": 257,
+        ".ply": 2,
+        ".zip": 2
+      },
       "sequence_manifests": []
     }
   ],
@@ -136,10 +147,28 @@
       ],
       "acquisition_journal_hash_matches": true,
       "upstream_checksum_verified": false
+    },
+    {
+      "path": "data/datasets/3rscan/raw/02b33dfb-be2b-2d54-92d2-cd012b2b3c40/sequence.zip",
+      "bytes": 23324158,
+      "sha256": "b41fd9878c81a6c8d38a02569b693241e026f028a79ae6defc9eacb38fd84cd8",
+      "members_crc_verified": 430,
+      "excluded_ancillary_members": [],
+      "acquisition_journal_hash_matches": true,
+      "upstream_checksum_verified": false
+    },
+    {
+      "path": "data/datasets/3rscan/raw/fcf66d9e-622d-291c-84c2-bb23dfe31327/sequence.zip",
+      "bytes": 19826323,
+      "sha256": "fbde0c797266fd697c7ba2c7421e26ce483256947d6776ea8208519fd3a5375d",
+      "members_crc_verified": 343,
+      "excluded_ancillary_members": [],
+      "acquisition_journal_hash_matches": true,
+      "upstream_checksum_verified": false
     }
   ],
   "3RScan": {
-    "files": 0,
-    "access": "official approval must be independently verified"
+    "files": 1062,
+    "access": "User confirmed official approval and agreement to Terms of Use"
   }
 }

@@ -135,3 +135,7 @@ These benchmark paths are placeholders for verified data, not included recording
 ## Dataset access preparation
 
 See [official access steps and smartphone templates](docs/DATASET_ACCESS.md) for the remaining real-data requirements. Prepared empty directories are placeholders. TUM RGB-D acquisition is blocked by the current network policy; the required domain addition is saved for environment review and publication.
+
+### Approved 3RScan subset
+
+One official reference/rescan pair is now downloaded and integrated, following confirmed access approval. All 257 native RGB-D/pose frame sets and instance-labeled geometry passed validation. The canonical label draft remains unreviewed; supervised prediction accuracy is unavailable. See [acquisition](reports/3rscan_acquisition.json), [native validation](reports/3rscan_native_validation.json) and [exact paths and remaining review requirements](docs/DATASET_ACCESS.md). Raw files remain excluded from Git.

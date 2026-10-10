@@ -7,9 +7,9 @@ Date: 2026-10-10. Recomputed from actual on-disk files. No source assets deleted
 | arkitscenes | 17288 | 1101.9 | `data/datasets/arkitscenes` |
 | seven_scenes | 3067 | 964.9 | `data/datasets/seven_scenes` |
 | replica | 10 | 4276.8 | `data/datasets/replica` |
-| 3rscan | 0 | 0.0 | `data/datasets/3rscan` |
+| 3rscan | 1062 | 168.6 | `data/datasets/3rscan` |
 
-CPU affinity: 5; exposed nvidia-smi: False; free disk: 15.65 GiB.
+CPU affinity: 5; exposed nvidia-smi: False; free disk: 15.47 GiB.
 
 Replica storage includes an incomplete 4 GiB compressed prefix and one native atlas. It is not a complete scene. Duplicate prepared ARKit manifests describe different preparations of the same recording, not extra scenes.
 

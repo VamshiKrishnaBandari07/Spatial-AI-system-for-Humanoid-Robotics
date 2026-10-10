@@ -84,5 +84,29 @@
     "source_url": "https://download.microsoft.com/download/2/8/5/28564B23-0828-408F-8631-23B1EFF1DAC8/heads.zip",
     "native_archive_member": "heads/seq-02.zip",
     "journal": "data/datasets/seven_scenes/raw/heads/seq-02.zip.download.json"
+  },
+  {
+    "path": "data/datasets/3rscan/raw/02b33dfb-be2b-2d54-92d2-cd012b2b3c40/sequence.zip",
+    "bytes": 23324158,
+    "sha256": "b41fd9878c81a6c8d38a02569b693241e026f028a79ae6defc9eacb38fd84cd8",
+    "members_crc_verified": 430,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/02b33dfb-be2b-2d54-92d2-cd012b2b3c40/sequence.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/3rscan/raw/02b33dfb-be2b-2d54-92d2-cd012b2b3c40/sequence.zip.download.json"
+  },
+  {
+    "path": "data/datasets/3rscan/raw/fcf66d9e-622d-291c-84c2-bb23dfe31327/sequence.zip",
+    "bytes": 19826323,
+    "sha256": "fbde0c797266fd697c7ba2c7421e26ce483256947d6776ea8208519fd3a5375d",
+    "members_crc_verified": 343,
+    "excluded_ancillary_members": [],
+    "acquisition_journal_hash_matches": true,
+    "upstream_checksum_verified": false,
+    "source_url": "https://campar.in.tum.de/public_datasets/3RScan/Dataset/fcf66d9e-622d-291c-84c2-bb23dfe31327/sequence.zip",
+    "native_archive_member": null,
+    "journal": "data/datasets/3rscan/raw/fcf66d9e-622d-291c-84c2-bb23dfe31327/sequence.zip.download.json"
   }
 ]

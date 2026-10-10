@@ -1,23 +1,25 @@
 # Real-data access and benchmark inputs
 
-The workspace search is recorded in [workspace_data_search.json](../reports/workspace_data_search.json), including exact paths. It found 44 videos and 15 annotation candidates. Available videos are prepared research sequences, explicit synthetic augmentations and fixtures, fixture uploads, or dependency demonstration clips. Seven annotation files describe synthetic region transformations; eight are inference outputs rather than annotation-schema ground truth. None supplies independently reviewed real change annotations. No 3RScan scan assets were found.
+The initial workspace search, before the approved acquisition, is recorded in [workspace_data_search.json](../reports/workspace_data_search.json), including exact paths. It found 44 videos and 15 annotation candidates. Available videos are prepared research sequences, explicit synthetic augmentations and fixtures, fixture uploads, or dependency demonstration clips. Seven annotation files describe synthetic region transformations; eight are inference outputs rather than annotation-schema ground truth. None supplied independently reviewed real change annotations. No 3RScan scan assets were found at that stage; the approved acquisition below supersedes that absence finding.
 
 ## 3RScan
 
-Use the [official project](https://waldjohannau.github.io/RIO/) and its [access form](https://forms.gle/NvL5dvB4tSFrHfQH6). Read the Terms of Use, provide your actual applicant details, and obtain approval and the official downloader. No request or agreement has been submitted on your behalf. Restrict the first acquisition to one documented reference/rescan relationship and necessary file types; retain the native relationship metadata and its checksum.
+Use the [official project](https://waldjohannau.github.io/RIO/) and its [access form](https://forms.gle/NvL5dvB4tSFrHfQH6). Read the Terms of Use, provide your actual applicant details, and obtain approval and the official downloader. No request or agreement was submitted on your behalf; you subsequently confirmed your own official approval and agreement. Restrict future acquisitions to one documented reference/rescan relationship and necessary file types; retain the native relationship metadata and its checksum.
 
-The empty local directory `data/datasets/3rscan/raw/` is prepared for approved files. Expected layout after acquisition:
+The local directory `data/datasets/3rscan/raw/` now contains the approved pair. Layout:
 
 ```text
 data/datasets/3rscan/
+  downloader/3RScan.json
   raw/
-    3RScan.json
-    <approved-reference-id>/sequence/
-    <approved-rescan-id>/sequence/
+    <approved-reference-id>/sequence.zip
+    <approved-reference-id>/extracted/
+    <approved-rescan-id>/sequence.zip
+    <approved-rescan-id>/extracted/
   processed/
 ```
 
-These are expected paths, not downloaded assets. Preserve native RGB/depth frames, calibration, timestamps, camera poses, instance annotations and documented object relationships. The existing `spatialmemory.datasets.convert_3rscan(root, pairs_json, reference, rescan, output, split)` adapter rejects undocumented pair relationships. Native change metadata must still be converted and reviewed; ingestion alone does not produce evaluation-ready labels. Follow [annotation_protocol.md](annotation_protocol.md) for provenance and pair gates. Keep all raw files outside Git.
+The scan-ID placeholders refer to the actual IDs listed below; the relationship JSON is retained in the downloader directory. Preserve native RGB/depth frames, calibration, timestamps, camera poses, instance annotations and documented object relationships. The existing `spatialmemory.datasets.convert_3rscan(root, pairs_json, reference, rescan, output, split)` adapter rejects undocumented pair relationships. Native change metadata must still be converted and reviewed; ingestion alone does not produce evaluation-ready labels. Follow [annotation_protocol.md](annotation_protocol.md) for provenance and pair gates. Keep all raw files outside Git.
 
 ## Smartphone recordings
 
@@ -35,4 +37,20 @@ When accessible, verify the source license and archive size before acquisition, 
 
 ## Uploaded downloader inspection
 
-The supplied Gist archive was inspected and its downloader retained locally under ignored `data/datasets/3rscan/downloader/download_3rscan.py`. The official HTTPS metadata and Terms of Use are accessible; the complete relationship JSON contains 478 entries. The Terms of Use explicitly require approval and restrict use to non-commercial research and education; commercial-employer applicants must also have authority to bind their employer. No agreement was accepted and no scan assets were downloaded. A candidate reference/rescan relationship is recorded in `reports/3rscan_candidate_download_plan.json`, subject to approval confirmation and download-size checks. These metadata and candidate IDs are not proof that scan files or evaluation-ready labels are available.
+The supplied Gist archive was inspected and its downloader retained locally under ignored `data/datasets/3rscan/downloader/download_3rscan.py`. The official HTTPS metadata and Terms of Use are accessible; the complete relationship JSON contains 478 entries. The Terms of Use explicitly require approval and restrict use to non-commercial research and education; commercial-employer applicants must also have authority to bind their employer. At inspection, no agreement had been accepted on your behalf and no scan assets had been downloaded. The reference/rescan relationship is recorded in `reports/3rscan_candidate_download_plan.json`, with its subsequent download/validation status. Relationship metadata alone is not proof that evaluation-ready labels are available.
+
+## Approved subset acquired
+
+The user subsequently confirmed official approval and agreement to Terms of Use. One native training reference/rescan pair was acquired from the official HTTPS host: reference `02b33dfb-be2b-2d54-92d2-cd012b2b3c40`, rescan `fcf66d9e-622d-291c-84c2-bb23dfe31327`. Raw sequences, semantic annotations and labeled geometry are under `data/datasets/3rscan/raw/<scan-id>/`. The integrated manifest is `data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/manifest.json`. All 257 native frame sets passed RGB/depth/pose validation; 3rscan_acquisition.json and 3rscan_native_validation.json report computed checks. Previous absence/access statements above are historical stages, not the current acquisition status.
+
+The canonical `annotations.draft.json` in that processed directory is explicitly UNREVIEWED. Native metadata describes rigid changes for a toilet, scale and trash can; movement-versus-rotation mapping, full inventory coverage, reviewer provenance and metric shared-transform units require validation. Do not treat missing objects in incomplete coverage as removed, or all unlisted objects as unchanged. No benchmark metrics are claimed from this draft. The current neural profile uses RGB and retains optional sensor metadata without fusing it.
+
+Native input validation can be repeated without downloads or model changes:
+
+```bash
+python scripts/check_3rscan_inputs.py \
+  --plan reports/3rscan_candidate_download_plan.json \
+  --manifest data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/manifest.json
+```
+
+The unchanged neural CPU profile was attempted on the genuine pair. Both visits produced finite neural outputs, but shared registration failed with insufficient nondegenerate consensus. The failed run and partial outputs are retained at `/workspace/spatialmemory-3rscan-pair-20261010`; the report is `reports/3rscan_inference_attempt.json`. No completed change predictions or supervised accuracy metrics were produced. Fixing or configuring valid cross-session alignment is separate from dataset acquisition; no architecture or training changes were made during this acquisition.

@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "scenes": 1,
+  "recordings": 2,
+  "native_split": "train",
+  "scans": [
+    {
+      "scan_id": "02b33dfb-be2b-2d54-92d2-cd012b2b3c40",
+      "frames_checked": 143,
+      "declared_frames": 143,
+      "rgb_dimensions": [
+        960,
+        540
+      ],
+      "depth_dimensions": [
+        224,
+        172
+      ],
+      "depth_counts_per_metre": 1000.0,
+      "RGB_intrinsics": [
+        [
+          756.832,
+          0.0,
+          492.889
+        ],
+        [
+          0.0,
+          756.026,
+          270.419
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "depth_intrinsics": [
+        [
+          176.594,
+          0.0,
+          114.613
+        ],
+        [
+          0.0,
+          240.808,
+          85.7915
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rgb_depth_registered": false,
+      "valid_depth_pixels": 4335557,
+      "maximum_depth_projection_roundtrip_pixels": 2.842170943040401e-14,
+      "native_T_world_camera_poses_checked": 143,
+      "annotation_objects": 28,
+      "annotated_PLY_vertices_checked": 25011,
+      "status": "passed",
+      "timestamp_source": "Native timestamps absent; conversion retains frame indices with an explicitly derived 30-fps schedule"
+    },
+    {
+      "scan_id": "fcf66d9e-622d-291c-84c2-bb23dfe31327",
+      "frames_checked": 114,
+      "declared_frames": 114,
+      "rgb_dimensions": [
+        960,
+        540
+      ],
+      "depth_dimensions": [
+        224,
+        172
+      ],
+      "depth_counts_per_metre": 1000.0,
+      "RGB_intrinsics": [
+        [
+          756.832,
+          0.0,
+          492.889
+        ],
+        [
+          0.0,
+          756.026,
+          270.419
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "depth_intrinsics": [
+        [
+          176.594,
+          0.0,
+          114.613
+        ],
+        [
+          0.0,
+          240.808,
+          85.7915
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rgb_depth_registered": false,
+      "valid_depth_pixels": 3410581,
+      "maximum_depth_projection_roundtrip_pixels": 2.842170943040401e-14,
+      "native_T_world_camera_poses_checked": 114,
+      "annotation_objects": 24,
+      "annotated_PLY_vertices_checked": 15086,
+      "status": "passed",
+      "timestamp_source": "Native timestamps absent; conversion retains frame indices with an explicitly derived 30-fps schedule"
+    }
+  ],
+  "documented_native_rigid_changes": [
+    {
+      "before_id": 30,
+      "after_id": 30,
+      "before_label": "scale",
+      "after_label": "scale"
+    },
+    {
+      "before_id": 12,
+      "after_id": 12,
+      "before_label": "toilet",
+      "after_label": "toilet"
+    },
+    {
+      "before_id": 27,
+      "after_id": 27,
+      "before_label": "trash can",
+      "after_label": "trash can"
+    }
+  ],
+  "annotations_draft": "data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/annotations.draft.json",
+  "annotation_quality": "UNREVIEWED",
+  "canonical_change_classes": "UNKNOWN until native rigid change/rotation semantics are reviewed",
+  "full_object_inventory_reviewed": false,
+  "benchmark_metrics_computed": false,
+  "metric_shared_alignment_verified": false,
+  "notes": "RGB and depth differ in resolution and intrinsics. Native depth preserved in metres but not silently treated as registered RGB. Official FAQ/source transform-unit convention requires resolution before metric object displacement reporting."
+}

@@ -18,6 +18,18 @@ def main():
         (folder / "pair_validation_arkit_unverified_pair.json").read_text()
     )
     control = json.loads((folder / "real_recording_inference_control.json").read_text())
+    scan_validation_path = folder / "3rscan_native_validation.json"
+    scan_validation = (
+        json.loads(scan_validation_path.read_text())
+        if scan_validation_path.exists()
+        else None
+    )
+    scan_attempt_path = folder / "3rscan_inference_attempt.json"
+    scan_attempt = (
+        json.loads(scan_attempt_path.read_text())
+        if scan_attempt_path.exists()
+        else None
+    )
     test_log = (folder / "regression_test_output.txt").read_text()
     count = re.search(r"(\d+) passed", test_log)
     if not count:
@@ -36,7 +48,11 @@ def main():
         "arkitscenes": "Two source recordings; RGB, native depth, variable per-frame K, timestamps and camera-to-world poses",
         "seven_scenes": "Heads seq-02; RGB, depth, poses and nominal depth K; RGB calibration/extrinsics unavailable",
         "replica": "One finite 5616×5616×3 float16 Ptex atlas and incomplete release prefix; no geometry/camera recording",
-        "3rscan": "No scan assets; official access approval required",
+        "3rscan": (
+            "One approved reference/rescan pair; RGB, native depth/calibration/poses and instance annotations verified; canonical labels unreviewed"
+            if scan_validation
+            else "No scan assets; official access approval required"
+        ),
     }
     for dataset in inventory["datasets"]:
         rows.append(
@@ -56,7 +72,7 @@ def main():
         "",
         "## Pair and annotation readiness",
         "",
-        f"The proposed ARKit recording combination is **{pair['pair_validity_status']}**: distinct visit IDs are not same-room correspondence evidence, physical changes are undocumented, shared cross-visit registration is unverified and independent change ground truth is absent. Heads has one sequence; Replica has no recordings; 3RScan has no downloaded scans. Thus there are **zero verified real annotated change pairs**.",
+        f"The proposed ARKit recording combination is **{pair['pair_validity_status']}**: distinct visit IDs are not same-room correspondence evidence, physical changes are undocumented, shared cross-visit registration is unverified and independent change ground truth is absent. Heads has one sequence; Replica has no recordings. There are **zero independently reviewed canonical real annotation sets ready for benchmark evaluation**.",
         "",
         "The annotation workspace supports independent playback, persistent object IDs, before/after observation association, UNKNOWN, import/review and validated export. This task created no real human annotations. Browser fixtures are explicitly synthetic. Reviews are page-local and declarations are not authenticated. Richer annotation levels are supported by the typed schema; geometry asset references do not constitute validated IoU ground truth.",
         "",
@@ -97,27 +113,50 @@ def main():
         "",
         "3RScan/RIO10 require official access approval. ETH Zurich and TU Wien download/source hosts are denied by current runtime policy; additive domain requirements are saved but not active. Their dataset licences, pair sizes and annotation files remain unverified. No forms/emails were submitted. No full archives were downloaded to work around access restrictions. See `dataset_selection.md` and `dataset_source_checks.json`.",
         "",
-        "The ten real-data completion criteria are **not satisfied**. No genuine changed pair means full cross-visit registration, supervised end-to-end metrics and ablations cannot be executed. Source-based human annotation and approved dataset access remain prerequisites. Verified loader checks and one real-recording control do not resolve the benchmark data problem.",
+        "The ten real-data completion criteria are **not satisfied**. Canonical ground-truth review, shared cross-visit registration validation, quantitative supervised metrics and ablations remain prerequisites. Loader checks and inference completion alone do not establish prediction accuracy.",
         "",
         "## Workspace search and access preparation",
         "",
-        "The complete workspace search found 44 videos and 15 annotation candidates, with no approved 3RScan scan assets or independently reviewed real change labels. Exact paths and video classifications are in workspace_data_search.json. Synthetic upload origins were checked against fixture SHA-256 hashes. Expected 3RScan and smartphone directories are empty placeholders, not acquired recordings. The empty smartphone annotation template and official access steps are documented in ../docs/DATASET_ACCESS.md.",
+        "The initial workspace search found 44 videos and 15 annotation candidates, with no approved 3RScan scan assets or independently reviewed real change labels at that time. Exact historical paths and video classifications are in workspace_data_search.json. Subsequent approved acquisitions are documented separately; the initial search is not a current inventory. Smartphone directories remain empty. The empty smartphone annotation template and official access steps are documented in ../docs/DATASET_ACCESS.md.",
         "",
         "TUM RGB-D official documentation is accessible and confirms the default data license is CC BY 4.0. Its archive redirects to webshare.cvg.cit.tum.de, still blocked by runtime policy (HTTP tunnel 403). No TUM files are available. The additional archive host is saved in the environment draft and requires settings publication before retrying; see tum_access_check.json.",
     ]
+    if scan_validation:
+        rows += [
+            "",
+            "## Approved 3RScan acquisition",
+            "",
+            f"One documented reference/rescan pair was acquired after the user confirmed official approval and agreement to Terms of Use. All {sum(s['frames_checked'] for s in scan_validation['scans'])} native RGB-D/pose frame sets passed validation, together with semantic IDs and annotated PLY vertices. Original RGB/depth have different dimensions and intrinsics; no pixel registration is assumed. The native split is train. See 3rscan_acquisition.json and 3rscan_native_validation.json for exact paths, hashes, sizes and observations.",
+            "",
+            "Native metadata documents three rigid changes (toilet, scale, trash can). The derived annotation draft retains native IDs and remains UNREVIEWED with UNKNOWN canonical classes, avoiding an unverified mapping of rigid changes to movement/rotation labels. Review labels, resolve the source transform-unit convention and verify shared registration before supervised evaluation. No identity mapping or reviewer identities were invented.",
+        ]
+    if scan_attempt:
+        rows += [
+            "",
+            f"The unchanged consensus CPU profile was attempted on the real pair. It failed at {scan_attempt['stage']}: {scan_attempt['error']}. Runtime {scan_attempt['runtime_seconds']:.1f} seconds; wall time {scan_attempt['process_wall_seconds']:.1f} seconds; peak individual child RSS {scan_attempt['peak_child_process_rss_mib']:.1f} MiB. Both visits produced finite neural pose/depth/point-map arrays, but shared registration was rejected. No gate was relaxed, no changes were generated, and no supervised metrics were computed. See 3rscan_inference_attempt.json and pair_validation_3rscan.json.",
+        ]
     (folder / "dataset_quality_report.md").write_text("\n".join(rows) + "\n")
     status = {
         "completed": False,
-        "verified_real_changed_pairs": 0,
+        "verified_real_changed_pairs": 1 if scan_validation else 0,
         "verified_real_annotation_sets": 0,
         "real_benchmark_metrics_computed": False,
         "ablation_studies_run": False,
         "core_tests_passed": int(count.group(1)),
-        "native_frames_checked": sum(s["frames_checked"] for s in native["sequences"]),
+        "native_frames_checked": sum(s["frames_checked"] for s in native["sequences"])
+        + (
+            sum(s["frames_checked"] for s in scan_validation["scans"])
+            if scan_validation
+            else 0
+        ),
         "real_recording_control_completed": control["status"] == "complete",
+        "real_changed_pair_inference_attempted": scan_attempt is not None,
+        "real_changed_pair_inference_status": scan_attempt["status"]
+        if scan_attempt
+        else None,
         "completion_conditions": {
-            "genuine_same_scene_changed_pair": False,
-            "documented_physical_changes_for_pair": False,
+            "genuine_same_scene_changed_pair": scan_validation is not None,
+            "documented_physical_changes_for_pair": scan_validation is not None,
             "both_pair_visits_reconstruction_usable": False,
             "shared_cross_visit_registration_verified": False,
             "ground_truth_provenance_verified": False,

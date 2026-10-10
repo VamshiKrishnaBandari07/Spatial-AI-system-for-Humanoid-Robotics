@@ -1,0 +1,213 @@
+{
+  "scene_id": "02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327",
+  "before_recording_id": "02b33dfb-be2b-2d54-92d2-cd012b2b3c40",
+  "after_recording_id": "fcf66d9e-622d-291c-84c2-bb23dfe31327",
+  "source_dataset": "3rscan",
+  "split": "train",
+  "source_url": "https://waldjohannau.github.io/RIO/",
+  "data_origin": "REAL",
+  "shared_environment_relationship_verified": true,
+  "relationship_evidence": "data/datasets/3rscan/downloader/3RScan.json",
+  "relationship_sha256": "674a00f50f76b198b9de44efd86c390fea3da37ba8f12cf8ccd00045e265fa64",
+  "relationship_limitation": "Official metadata or human capture provenance is required; a declaration is not independent physical verification",
+  "camera_geometry_availability": {
+    "before": {
+      "camera": true,
+      "poses": true,
+      "depth_dir": true
+    },
+    "after": {
+      "camera": true,
+      "poses": true,
+      "depth_dir": true
+    }
+  },
+  "videos_decodable": true,
+  "video_probe": [
+    {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "mpeg4",
+          "codec_long_name": "MPEG-4 part 2",
+          "profile": "Simple Profile",
+          "codec_type": "video",
+          "codec_tag_string": "mp4v",
+          "codec_tag": "0x7634706d",
+          "width": 960,
+          "height": 540,
+          "coded_width": 960,
+          "coded_height": 540,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 0,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "16:9",
+          "pix_fmt": "yuv420p",
+          "level": 1,
+          "chroma_location": "left",
+          "refs": 1,
+          "quarter_sample": "false",
+          "divx_packed": "false",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 73216,
+          "duration": "4.766667",
+          "bit_rate": "4035002",
+          "nb_frames": "143",
+          "extradata_size": 47,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/before/rgb.mp4",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "4.766667",
+        "size": "2405802",
+        "bit_rate": "4037709",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2mp41",
+          "encoder": "Lavf59.27.100"
+        }
+      }
+    },
+    {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "mpeg4",
+          "codec_long_name": "MPEG-4 part 2",
+          "profile": "Simple Profile",
+          "codec_type": "video",
+          "codec_tag_string": "mp4v",
+          "codec_tag": "0x7634706d",
+          "width": 960,
+          "height": 540,
+          "coded_width": 960,
+          "coded_height": 540,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 0,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "16:9",
+          "pix_fmt": "yuv420p",
+          "level": 1,
+          "chroma_location": "left",
+          "refs": 1,
+          "quarter_sample": "false",
+          "divx_packed": "false",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 58368,
+          "duration": "3.800000",
+          "bit_rate": "5407210",
+          "nb_frames": "114",
+          "extradata_size": 47,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/after/rgb.mp4",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "3.800000",
+        "size": "2569850",
+        "bit_rate": "5410210",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2mp41",
+          "encoder": "Lavf59.27.100"
+        }
+      }
+    }
+  ],
+  "input_hashes": [
+    "ea14d4368174664118d7cb33766a11e97d0115df673d1065020053fa3aa0e44c",
+    "5ce66c88b2f95ac91199b0329a20fd8e11b593df45fae03375fcf68fbf1c1a90"
+  ],
+  "static_landmark_overlap": null,
+  "registration_verified": false,
+  "registration_residual": null,
+  "registration_residual_units": "Report reconstruction units; not metres unless source scale is independently verified",
+  "registration_uncertainty": null,
+  "ground_truth_change_available": false,
+  "physical_changes_documented": true,
+  "pair_validity_status": "RELATIONSHIP_ONLY",
+  "warnings": [
+    "Inference report does not match the scene and input hashes",
+    "Shared registration/static overlap not verified on matching inference output",
+    "Independent reviewed real change annotations are unavailable"
+  ]
+}
