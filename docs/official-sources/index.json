@@ -1,0 +1,128 @@
+[
+  {
+    "repo": "facebookresearch/vggt",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/facebookresearch/vggt/main/README.md",
+        "sha256": "56426b9aea25174ccbc4c2c37a3a22107fd8b5ac9dc5a8bf008e7457402ed3bd"
+      },
+      "LICENSE.txt": {
+        "url": "https://raw.githubusercontent.com/facebookresearch/vggt/main/LICENSE.txt",
+        "sha256": "b94e46746792d1adfa0ebdbccada5d4576d244ae230be9de8a46b5868fff001b"
+      }
+    }
+  },
+  {
+    "repo": "naver/dust3r",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/naver/dust3r/main/README.md",
+        "sha256": "30b6eb07fb95e2419ca5024762fdfe34af34b58a0eebb1ef9babd7aed319c736"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/naver/dust3r/main/LICENSE",
+        "sha256": "f06b394a6b4804e68c4f8ff4298aec5cc981fba8934fc56525c91cc64a7d1d58"
+      }
+    }
+  },
+  {
+    "repo": "naver/mast3r",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/naver/mast3r/main/README.md",
+        "sha256": "e27632071ccd11ad96ceba95c786b8a260caf69f90726c9ccf6f664e7dfcad28"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/naver/mast3r/main/LICENSE",
+        "sha256": "949b1a3b437ed0b38ce51dae24babcca3395c9adae55163311ba84d44766b8ec"
+      }
+    }
+  },
+  {
+    "repo": "facebookresearch/sam2",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/facebookresearch/sam2/main/README.md",
+        "sha256": "eea69ee1042fb30933c5ca5019fbf0f6f9366cec5e792109281b5023a4f1589c"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/facebookresearch/sam2/main/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    }
+  },
+  {
+    "repo": "IDEA-Research/GroundingDINO",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/IDEA-Research/GroundingDINO/main/README.md",
+        "sha256": "d69cf3fd022661e6be19c56a421020f3ee9e027375020ef6a3def0149ddf9595"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/IDEA-Research/GroundingDINO/main/LICENSE",
+        "sha256": "b403c98ec1ffaccb0124632592a3d99642cddc3031ca412b402568e6c06c202a"
+      }
+    }
+  },
+  {
+    "repo": "facebookresearch/dinov2",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/facebookresearch/dinov2/main/README.md",
+        "sha256": "d1bc2e9686522bbd66ed6123dc81eb36b3a98e8ea9a2ca97778f54a1c641c9e1"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/facebookresearch/dinov2/main/LICENSE",
+        "sha256": "600cc67cc4cb2f5ea317dcfc687ad1c74dc4bec8782bbe9db0afd83513b935b7"
+      }
+    }
+  },
+  {
+    "repo": "DepthAnything/Depth-Anything-V2",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/README.md",
+        "sha256": "987d1ab991c1b149276a0426bec7d8f3472d85c29ec976d96ea657aa960fad50"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    }
+  },
+  {
+    "repo": "colmap/colmap",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/colmap/colmap/main/README.md",
+        "sha256": "98023da1a00b0977669270faef894245ef361857047f18f449c8fa449e94569f"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/colmap/colmap/main/LICENSE",
+        "sha256": "b427b1780b9c1d5996a641597b35d6c97163316bf6b15f7f7bc27518d3dd8b36"
+      }
+    }
+  },
+  {
+    "repo": "ultralytics/ultralytics",
+    "retrieved_date": "2026-10-09",
+    "files": {
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/main/README.md",
+        "sha256": "0e01c0e5ca7f1868e0c91406a9a0a8a9ea1e21f766fbc3c5d79f3d68e7ef259e"
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/ultralytics/ultralytics/main/LICENSE",
+        "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+      }
+    }
+  }
+]

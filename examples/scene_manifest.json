@@ -1,0 +1,1 @@
+{"schema_version":"1.0","scene_id":"scene_001","environment":"indoor","coordinate_convention":"opencv","before":{"video":"data/raw/scene_001/before/rgb.mp4","camera":null,"depth_dir":null,"poses":null,"imu":null},"after":{"video":"data/raw/scene_001/after/rgb.mp4","camera":null,"depth_dir":null,"poses":null,"imu":null},"annotations":null,"rgb_only":true}

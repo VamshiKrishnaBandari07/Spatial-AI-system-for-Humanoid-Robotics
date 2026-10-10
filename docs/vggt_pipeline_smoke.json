@@ -1,0 +1,77 @@
+{
+  "scene_id": "synthetic_vggt_control",
+  "workflow": "CPU vggt geometry baseline",
+  "registration": {
+    "valid": true,
+    "scale": 1.000000184254828,
+    "rotation": [
+      [
+        1.0000000309958101,
+        -5.312318640537939e-10,
+        -3.230599121550881e-10
+      ],
+      [
+        -5.312318640537939e-10,
+        0.9999999868231468,
+        1.6109114042706096e-09
+      ],
+      [
+        -3.230599121550881e-10,
+        1.6109114042706096e-09,
+        0.9999999948719653
+      ]
+    ],
+    "translation": [
+      -6.565371898914485e-09,
+      -2.123165265561361e-09,
+      -1.751219496082257e-07
+    ],
+    "inliers": 1456,
+    "correspondences": 1456,
+    "rmse": 3.975785012216927e-08,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed"
+  },
+  "geometry": {
+    "before": {
+      "backend": "VGGT",
+      "points": 2102,
+      "registered_frames": 2,
+      "selected_frames": 2,
+      "scale": "unverified monocular",
+      "confidence_filter": "per-frame median raw confidence; not calibrated",
+      "raw_confidence_range": [
+        1.0,
+        10.727627754211426
+      ],
+      "checkpoint_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+      "source_commit": "a288dd0f14786c93483e45524328726ab7b1b4ce",
+      "intrinsics_source": "VGGT prediction; accuracy unvalidated",
+      "predictions_file": "results/vggt_pipeline/neural/before/predictions.npz"
+    },
+    "after": {
+      "backend": "VGGT",
+      "points": 2102,
+      "registered_frames": 2,
+      "selected_frames": 2,
+      "scale": "unverified monocular",
+      "confidence_filter": "per-frame median raw confidence; not calibrated",
+      "raw_confidence_range": [
+        1.0,
+        10.727627754211426
+      ],
+      "checkpoint_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+      "source_commit": "a288dd0f14786c93483e45524328726ab7b1b4ce",
+      "intrinsics_source": "VGGT prediction; accuracy unvalidated",
+      "predictions_file": "results/vggt_pipeline/neural/after/predictions.npz"
+    }
+  },
+  "runtime_seconds": 74.93266529400034,
+  "limitations": [
+    "Sparse geometric candidates have no semantic identity.",
+    "No measured depth: absence is UNKNOWN.",
+    "No metric scale calibration.",
+    "Static-background dominance is assumed, not guaranteed."
+  ],
+  "input": "synthetic identical panel videos; no real-world performance claim"
+}

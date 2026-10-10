@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "input": "synthetic identical textured-panel videos",
+  "workflow": "CPU vggt semantic consensus",
+  "runtime_seconds": 117.49370086599811,
+  "physical_changes": 0,
+  "semantic_decisions": 2,
+  "registration_inliers": 48,
+  "heldout_count": 9,
+  "heldout_inliers": 9,
+  "checks": [
+    "browser upload",
+    "actual neural/semantic processing",
+    "object decision selection",
+    "mask evidence image loading",
+    "layer toggles",
+    "zoom",
+    "persisted run reload",
+    "mobile overflow",
+    "no browser JavaScript errors"
+  ],
+  "real_world_accuracy": "unmeasured"
+}

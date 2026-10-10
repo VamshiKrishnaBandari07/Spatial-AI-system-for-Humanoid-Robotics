@@ -1,0 +1,19 @@
+{
+  "input": "explicitly synthetic orange rectangle",
+  "status": "passed",
+  "iou_against_synthetic_rectangle": 1.0,
+  "seconds": 5.400409388999833,
+  "evidence": {
+    "raw_predicted_iou": 0.9932851791381836,
+    "area_pixels": 12000,
+    "provenance": {
+      "model": "facebook/sam2.1-hiera-tiny",
+      "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+      "source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+      "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+      "device": "cpu",
+      "calibrated": false
+    }
+  },
+  "real_world_accuracy": "unmeasured"
+}

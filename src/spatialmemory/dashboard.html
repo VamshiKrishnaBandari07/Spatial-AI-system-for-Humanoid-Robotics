@@ -1,0 +1,2198 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SpatialMemory-X Ultra · Scene comparison</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f5f2;
+        --panel: #fff;
+        --line: #dce2dd;
+        --muted: #65746f;
+        --text: #19342c;
+        --accent: #087b62;
+        --dark: #112b24;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 24px;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font:
+          14px/1.55 system-ui,
+          -apple-system,
+          sans-serif;
+        margin: 0;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button,
+      a,
+      input,
+      select,
+      textarea {
+        touch-action: manipulation;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible,
+      canvas:focus-visible {
+        outline: 3px solid #31a786;
+        outline-offset: 3px;
+      }
+      a {
+        color: var(--accent);
+      }
+      .skip-link {
+        position: fixed;
+        top: -80px;
+        left: 20px;
+        z-index: 10;
+        background: #fff;
+        padding: 12px;
+      }
+      .skip-link:focus {
+        top: 12px;
+      }
+      .rail {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: 214px;
+        background: var(--dark);
+        color: #d9e9e2;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      .brand {
+        font-size: 19px;
+        font-weight: 750;
+        letter-spacing: -0.7px;
+        color: #fff;
+      }
+      .brand-mark {
+        display: inline-grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #66b397;
+        border-radius: 9px;
+        margin-right: 8px;
+        color: #8ce2bf;
+      }
+      .rail small {
+        color: #a6c2b6;
+        display: block;
+        font-size: 11px;
+        margin: 7px 0 0 42px;
+      }
+      .rail nav {
+        display: grid;
+        gap: 8px;
+      }
+      .rail a {
+        color: #b7cfc3;
+        text-decoration: none;
+        padding: 11px 12px;
+        border-radius: 8px;
+      }
+      .rail a:hover,
+      .rail a.active {
+        background: #25453a;
+        color: #fff;
+      }
+      .rail a span {
+        display: inline-block;
+        width: 25px;
+        font-size: 12px;
+        color: #8ab39f;
+      }
+      .rail-bottom {
+        margin-top: auto;
+        font-size: 12px;
+        color: #a6c2b6;
+        border-top: 1px solid #335046;
+        padding-top: 16px;
+      }
+      main {
+        max-width: 1680px;
+        margin: 0 auto 0 214px;
+        padding: 32px 36px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 25px;
+      }
+      .eyebrow {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      h1 {
+        font-size: 29px;
+        line-height: 1.2;
+        letter-spacing: -1px;
+        margin: 8px 0;
+      }
+      h2 {
+        font-size: 17px;
+        margin: 0 0 14px;
+        letter-spacing: -0.3px;
+      }
+      h3 {
+        font-size: 14px;
+        margin: 0 0 10px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .tag {
+        font-size: 11px;
+        background: #e6eee8;
+        border: 1px solid #d6e1d9;
+        padding: 7px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
+      }
+      .service-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: #8e9993;
+        border-radius: 50%;
+        margin-right: 7px;
+      }
+      .service-dot.online {
+        background: #168663;
+      }
+      .intro {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 24px 28px;
+        background: #e7eee7;
+        border: 1px solid #d8e3d9;
+        border-radius: 12px;
+        margin-bottom: 20px;
+      }
+      .intro p {
+        margin: 6px 0 0;
+        max-width: 680px;
+      }
+      .intro strong {
+        font-size: 18px;
+        letter-spacing: -0.4px;
+      }
+      .steps {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .step {
+        border: 1px solid #c8d6cc;
+        border-radius: 6px;
+        padding: 7px 10px;
+        font-size: 11px;
+        background: #f3f6f1;
+      }
+      .step.current {
+        background: #13684f;
+        color: #fff;
+        border-color: #13684f;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr);
+        gap: 20px;
+      }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        padding: 22px;
+        border-radius: 12px;
+        margin: 20px 0;
+        min-width: 0;
+      }
+      .workspace .panel {
+        margin: 0;
+      }
+      .panel-heading,
+      .banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+      .panel-heading {
+        margin-bottom: 16px;
+      }
+      .panel-heading h2 {
+        margin: 0;
+      }
+      .section-number {
+        font:
+          11px ui-monospace,
+          monospace;
+        color: #81948a;
+        margin-right: 10px;
+      }
+      .warning {
+        color: #655e40;
+        background: #f7f3e6;
+        border: 1px solid #e8e0c4;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 12px;
+        margin: 18px 0;
+      }
+      .upload {
+        background: #fafcf9;
+        border: 1px dashed #b6c9bd;
+        border-radius: 9px;
+        padding: 18px;
+        cursor: pointer;
+        min-width: 0;
+      }
+      .upload-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 650;
+      }
+      .upload-icon {
+        font-size: 20px;
+        font-weight: 400;
+        color: #779387;
+      }
+      .upload small {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 4px;
+      }
+      .file-label {
+        font-size: 12px;
+        color: var(--accent);
+        overflow-wrap: anywhere;
+        display: block;
+        margin-top: 8px;
+      }
+      label {
+        display: block;
+      }
+      input,
+      select,
+      button,
+      textarea {
+        border: 1px solid #c9d5cc;
+        border-radius: 6px;
+        background: #fff;
+        color: var(--text);
+        padding: 9px 12px;
+      }
+      input[type="file"] {
+        max-width: 100%;
+        width: 100%;
+        margin: 12px 0 0;
+        font-size: 11px;
+        background: transparent;
+        border: 0;
+        padding: 0;
+      }
+      input[type="file"]::file-selector-button {
+        border: 1px solid #cbd8ce;
+        border-radius: 5px;
+        padding: 7px 10px;
+        background: #fff;
+        color: var(--text);
+        margin-right: 9px;
+      }
+      input[type="checkbox"] {
+        accent-color: var(--accent);
+      }
+      button {
+        cursor: pointer;
+      }
+      button:hover {
+        background: #edf4ee;
+      }
+      button.primary {
+        background: var(--accent);
+        color: #fff;
+        font-weight: 650;
+        border: 0;
+        padding: 11px 20px;
+      }
+      button.primary:hover {
+        background: #086b55;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .controls {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 20px;
+      }
+      .controls label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        max-width: 100%;
+        flex-wrap: wrap;
+      }
+      .controls select {
+        max-width: 100%;
+      }
+      .metadata {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .metadata label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .metadata input {
+        display: block;
+        width: 100%;
+        margin-top: 6px;
+      }
+      .form-note {
+        font-size: 11px;
+        margin: 12px 0 0;
+      }
+      .form-actions {
+        margin-left: auto;
+      }
+      video {
+        width: 100%;
+        max-height: 180px;
+        display: none;
+        border-radius: 6px;
+        margin-top: 12px;
+        background: #112b24;
+      }
+      .scene-surface {
+        position: relative;
+      }
+      canvas {
+        width: 100%;
+        height: 420px;
+        background: #10251f;
+        border-radius: 8px;
+        touch-action: none;
+        display: block;
+      }
+      .scene-empty {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        text-align: center;
+        pointer-events: none;
+        color: #afc6ba;
+        padding: 35px;
+      }
+      .scene-empty strong {
+        font-size: 17px;
+        color: #e3eee7;
+      }
+      .scene-empty p {
+        max-width: 320px;
+        margin: 8px auto;
+        font-size: 12px;
+      }
+      .scene-empty .empty-symbol {
+        font-size: 42px;
+        color: #618674;
+        margin-bottom: 16px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        font-size: 11px;
+        margin-bottom: 15px;
+      }
+      .toolbar label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .legend {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        display: inline-block;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin: 20px 0;
+      }
+      .stat {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        padding: 17px 20px;
+        border-radius: 10px;
+      }
+      .stat strong {
+        font-size: 27px;
+        font-weight: 550;
+        letter-spacing: -1px;
+        display: block;
+        margin-top: 8px;
+      }
+      .stat span {
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .stat .stat-label {
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .event {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: #f8faf7;
+        margin: 8px 0;
+        padding: 12px;
+        border-color: var(--line);
+      }
+      .event.selected {
+        border-color: var(--accent);
+        background: #eaf4ec;
+        box-shadow: inset 3px 0 var(--accent);
+      }
+      .event small {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 5px;
+      }
+      .chip {
+        font-size: 10px;
+        font-weight: 750;
+        display: inline-block;
+        margin-right: 7px;
+        letter-spacing: 0.3px;
+      }
+      .evidence-image {
+        width: 100%;
+        border-radius: 7px;
+      }
+      .evidence-frame {
+        margin: 0;
+        min-width: 0;
+      }
+      #frames {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .frame-title {
+        font-size: 11px;
+        color: var(--muted);
+        margin: 12px 0 5px;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        font:
+          11px/1.6 ui-monospace,
+          monospace;
+        overflow: auto;
+        max-height: 450px;
+        color: #40564a;
+        background: #f5f7f3;
+        border-radius: 6px;
+        padding: 14px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid var(--line);
+      }
+      th {
+        color: var(--muted);
+        font-weight: 500;
+      }
+      td {
+        overflow-wrap: anywhere;
+      }
+      #memory {
+        overflow-x: auto;
+      }
+      details > summary {
+        cursor: pointer;
+        color: var(--accent);
+        font-size: 12px;
+        padding: 10px 0;
+      }
+      #status {
+        color: var(--accent);
+        font-size: 12px;
+        margin-bottom: 0;
+        overflow-wrap: anywhere;
+      }
+      .empty {
+        color: var(--muted);
+        padding: 20px 0;
+        font-size: 12px;
+      }
+      #events {
+        max-height: 410px;
+        overflow: auto;
+      }
+      .filter-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+      }
+      .filter-row select {
+        padding: 6px 9px;
+        max-width: 180px;
+      }
+      .review-form {
+        border-top: 1px solid var(--line);
+        margin-top: 20px;
+        padding-top: 18px;
+      }
+      .review-form label {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 10px 0;
+      }
+      .review-form select,
+      .review-form textarea {
+        display: block;
+        width: 100%;
+        margin-top: 5px;
+      }
+      .review-form textarea {
+        resize: vertical;
+        min-height: 75px;
+      }
+      .review-status {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .run-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        border-bottom: 1px solid var(--line);
+        padding: 12px 0;
+      }
+      .run-item strong {
+        font-size: 13px;
+      }
+      .run-item small {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .run-item button {
+        font-size: 12px;
+      }
+      .footer {
+        font-size: 11px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        margin: 24px 0;
+      }
+      .kbd {
+        font:
+          10px ui-monospace,
+          monospace;
+        border: 1px solid var(--line);
+        padding: 1px 4px;
+        border-radius: 3px;
+      }
+      .export-group {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .export-group button {
+        font-size: 12px;
+      }
+      .workspace-note {
+        font-size: 11px;
+        margin-bottom: 0;
+      }
+      .alignment-badge {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      @media (min-width: 1600px) {
+        main {
+          padding: 40px 50px;
+        }
+      }
+      @media (max-width: 1100px) {
+        .rail {
+          width: 175px;
+          padding: 25px 14px;
+        }
+        main {
+          margin-left: 175px;
+          padding: 25px 22px;
+        }
+        .workspace {
+          grid-template-columns: minmax(0, 1.4fr) minmax(270px, 1fr);
+        }
+        .intro {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 850px) {
+        .rail {
+          position: static;
+          width: 100%;
+          padding: 15px 18px;
+          gap: 14px;
+        }
+        .rail small,
+        .rail-bottom {
+          display: none;
+        }
+        .rail nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+        .rail a {
+          padding: 6px 10px;
+          font-size: 12px;
+        }
+        .rail a span {
+          width: 18px;
+        }
+        main {
+          margin: 0;
+          padding: 20px 18px;
+        }
+        .grid,
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        header {
+          align-items: flex-start;
+        }
+        .tag {
+          font-size: 10px;
+          white-space: normal;
+          max-width: 125px;
+        }
+        h1 {
+          font-size: 25px;
+        }
+        canvas {
+          height: 340px;
+        }
+        #frames {
+          grid-template-columns: 1fr;
+        }
+        .metadata {
+          grid-template-columns: 1fr;
+        }
+        .intro {
+          padding: 20px;
+        }
+        .panel {
+          padding: 18px;
+        }
+        .form-actions {
+          margin-left: 0;
+          width: 100%;
+        }
+        .form-actions button {
+          width: 100%;
+        }
+        .footer {
+          flex-direction: column;
+        }
+        .run-item {
+          flex-wrap: wrap;
+        }
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      header > div {
+        min-width: 0;
+      }
+      #themeToggle {
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .intro {
+        flex-wrap: wrap;
+      }
+      .intro > div:first-child {
+        flex: 1 1 380px;
+      }
+      .method-overview {
+        order: 3;
+        flex-basis: 100%;
+      }
+      .method-overview p {
+        font-size: 12px;
+        max-width: 900px;
+      }
+      .scene-empty .empty-symbol {
+        font-family: system-ui;
+      }
+      #loadedTrial {
+        margin-bottom: 14px;
+        overflow-wrap: anywhere;
+      }
+      html[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #0c1814;
+        --panel: #15251e;
+        --line: #2b4035;
+        --muted: #a0b7aa;
+        --text: #e8f0ea;
+        --accent: #79dfb5;
+        --dark: #10271e;
+      }
+      html[data-theme="dark"] .rail {
+        background: #10271e;
+      }
+      html[data-theme="dark"] .tag {
+        background: #1e3528;
+        border-color: #355442;
+      }
+      html[data-theme="dark"] .intro {
+        background: #192f23;
+        border-color: #304c39;
+      }
+      html[data-theme="dark"] .step {
+        background: #1b3025;
+        border-color: #3b5544;
+        color: #bcd2c3;
+      }
+      html[data-theme="dark"] .step.current {
+        background: #79dfb5;
+        border-color: #79dfb5;
+        color: #10271e;
+      }
+      html[data-theme="dark"] .upload {
+        background: #12211a;
+        border-color: #45624f;
+      }
+      html[data-theme="dark"] input,
+      html[data-theme="dark"] select,
+      html[data-theme="dark"] textarea,
+      html[data-theme="dark"] button {
+        background: #1b3025;
+        border-color: #3b5745;
+        color: #e8f0ea;
+      }
+      html[data-theme="dark"] input[type="file"] {
+        background: transparent;
+        border: 0;
+      }
+      html[data-theme="dark"] input[type="file"]::file-selector-button {
+        background: #20382a;
+        color: #e8f0ea;
+        border-color: #46634d;
+      }
+      html[data-theme="dark"] button:hover {
+        background: #294431;
+      }
+      html[data-theme="dark"] button.primary {
+        background: #79dfb5;
+        color: #10271e;
+      }
+      html[data-theme="dark"] button.primary:hover {
+        background: #9be9c7;
+      }
+      html[data-theme="dark"] .event {
+        background: #192c21;
+      }
+      html[data-theme="dark"] .event.selected {
+        background: #234231;
+      }
+      html[data-theme="dark"] .warning {
+        background: #302b1d;
+        border-color: #5a4b2b;
+        color: #ead7a1;
+      }
+      html[data-theme="dark"] pre {
+        background: #102019;
+        color: #c5d9cb;
+      }
+      html[data-theme="dark"] .alignment-badge {
+        color: var(--muted);
+      }
+      html[data-theme="dark"] .chip[data-change="ADDED"] {
+        color: #71d898 !important;
+      }
+      html[data-theme="dark"] .chip[data-change="REMOVED"] {
+        color: #f68083 !important;
+      }
+      html[data-theme="dark"] .chip[data-change="MOVED"] {
+        color: #66b4ff !important;
+      }
+      html[data-theme="dark"] .chip[data-change="UNCHANGED"] {
+        color: #b6c4bc !important;
+      }
+      html[data-theme="dark"] .chip[data-change="UNKNOWN"] {
+        color: #ecc16b !important;
+      }
+      html[data-theme="dark"] #alignmentBadge[data-valid="true"] {
+        color: #79dfb5 !important;
+      }
+      html[data-theme="dark"] #alignmentBadge[data-valid="false"] {
+        color: #f68083 !important;
+      }
+      @media (max-width: 850px) {
+        header {
+          display: block;
+        }
+        .header-actions {
+          margin-top: 14px;
+        }
+        .intro > div:first-child {
+          flex-basis: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#trial">Skip to your workspace</a>
+    <aside class="rail" aria-label="Workspace navigation">
+      <div>
+        <div class="brand"><span class="brand-mark">S</span>SpatialMemory</div>
+        <small>SPATIAL AI WORKSPACE</small>
+      </div>
+      <nav>
+        <a class="active" href="#trial"><span>01</span> New comparison</a
+        ><a href="#scene"><span>02</span> Scene comparison</a
+        ><a href="#evidence-panel"><span>03</span> Evidence &amp; review</a
+        ><a href="#history"><span>04</span> Recent comparisons</a
+        ><a href="#diagnostic-panel"><span>05</span> Analysis details</a>
+      </nav>
+      <div class="rail-bottom">
+        Your workspace<br />Compare · Inspect · Review<br /><br />SpatialMemory-X
+        Ultra
+      </div>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <div class="eyebrow">Spatial intelligence / scene comparison</div>
+          <h1>SpatialMemory-X Ultra</h1>
+          <div class="muted">
+            Compare your recordings and understand what changed.
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="tag" id="serviceStatus" data-state="connecting"
+            ><i class="service-dot"></i>Connecting…</span
+          ><button
+            type="button"
+            id="themeToggle"
+            aria-label="Switch to light theme"
+          >
+            Light theme
+          </button>
+        </div>
+      </header>
+      <div class="intro">
+        <div>
+          <strong>See your space before and after.</strong>
+          <p class="muted">
+            Upload two recordings of the same space. Explore the aligned 3D
+            scene, inspect changes, and save your review.
+          </p>
+        </div>
+        <details class="method-overview">
+          <summary>How your comparison works</summary>
+          <p>
+            We prepare your frames, reconstruct each recording, and align the
+            scenes before comparing them. Object analysis uses masks, appearance
+            and distinct viewpoints to assess changes. Results with insufficient
+            evidence remain Unknown.
+          </p>
+        </details>
+        <div class="steps" aria-label="Comparison workflow">
+          <span class="step current" id="stepInput">1 · Upload</span
+          ><span class="step" id="stepProcess">2 · Analyze</span
+          ><span class="step" id="stepReview">3 · Review</span>
+        </div>
+      </div>
+      <section class="panel" id="trial" tabindex="-1">
+        <div class="panel-heading">
+          <h2><span class="section-number">01</span>Start a comparison</h2>
+          <span class="muted" style="font-size: 11px"
+            >Two videos · one environment</span
+          >
+        </div>
+        <form id="upload">
+          <div class="metadata">
+            <label
+              >Comparison name<input
+                id="trialName"
+                maxlength="100"
+                placeholder="e.g. Workshop · furniture change" /></label
+            ><label
+              >Reviewer<input
+                id="reviewerName"
+                maxlength="80"
+                placeholder="Your name or team"
+            /></label>
+          </div>
+          <div class="grid">
+            <label class="upload"
+              ><span class="upload-title"
+                ><span class="upload-icon">↗</span>Before recording</span
+              ><small>Your space before the change</small
+              ><span class="file-label" id="beforeFile"
+                >No recording selected</span
+              ><input
+                type="file"
+                name="before"
+                accept=".mp4,.mov,.mkv,video/*"
+                required /><video controls id="bv"></video></label
+            ><label class="upload"
+              ><span class="upload-title"
+                ><span class="upload-icon">↗</span>After recording</span
+              ><small>Your space after the change</small
+              ><span class="file-label" id="afterFile"
+                >No recording selected</span
+              ><input
+                type="file"
+                name="after"
+                accept=".mp4,.mov,.mkv,video/*"
+                required /><video controls id="av"></video
+            ></label>
+          </div>
+          <div class="controls">
+            <label
+              >Analysis mode<select name="geometry_backend">
+                <option value="sparse">Fast reconstruction</option>
+                <option value="vggt">Detailed reconstruction · research</option>
+              </select></label
+            ><label
+              ><input
+                type="checkbox"
+                name="semantics_enabled"
+                value="true"
+                checked
+              />Analyze objects</label
+            >
+            <div class="form-actions">
+              <button class="primary" id="run">Analyze recordings →</button>
+            </div>
+          </div>
+          <p class="muted form-note">
+            MP4, MOV or MKV · up to 512 MiB each. Record slow, overlapping
+            views. Your recordings stay on this server; analysis may take
+            several minutes.
+          </p>
+          <p class="warning" id="profileNotice" hidden>
+            Detailed reconstruction uses a research model licensed for
+            noncommercial use. Review the VGGT licence before using this mode
+            for company work.
+          </p>
+        </form>
+        <p id="status" role="status" aria-live="polite">
+          Choose your before and after recordings to begin.
+        </p>
+      </section>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">Reconstruction</span
+          ><strong id="pointCount">—</strong><span>3D scene points</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Changes to review</span
+          ><strong id="eventCount">—</strong
+          ><span>Added, removed or moved</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Needs review</span
+          ><strong id="unknownCount">—</strong><span>Uncertain results</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Processing time</span
+          ><strong id="runtime">—</strong><span>Elapsed analysis time</span>
+        </div>
+      </div>
+      <div class="workspace">
+        <section class="panel" id="scene">
+          <div class="banner">
+            <h2><span class="section-number">02</span>Your 3D scene</h2>
+            <span id="alignmentBadge" class="alignment-badge"
+              >Alignment pending</span
+            ><button id="resetView">Reset view</button>
+          </div>
+          <p id="loadedTrial" class="muted workspace-note" role="status">
+            Your comparison will appear here.
+          </p>
+          <div class="toolbar">
+            <label
+              ><input id="beforeLayer" type="checkbox" checked />Before</label
+            ><label
+              ><input id="afterLayer" type="checkbox" checked />After</label
+            ><label
+              ><input id="cameraLayer" type="checkbox" checked />Cameras</label
+            ><label
+              ><input id="objectLayer" type="checkbox" checked />Object
+              bounds</label
+            ><label
+              ><input id="changeLayer" type="checkbox" checked />Result
+              locations</label
+            >
+          </div>
+          <div class="scene-surface">
+            <div class="scene-empty" id="sceneEmpty">
+              <div class="empty-symbol">◇</div>
+              <strong>Your scene will appear here</strong>
+              <p>
+                Add your recordings to explore the scene, viewpoints and
+                changes.
+              </p>
+            </div>
+            <canvas
+              tabindex="0"
+              id="world"
+              width="1100"
+              height="470"
+              aria-label="Interactive reconstructed 3D point cloud. Arrow keys rotate. Plus and minus zoom. Zero resets."
+            ></canvas>
+          </div>
+          <div class="legend">
+            <span><i class="dot" style="background: #71d898"></i>Added</span
+            ><span><i class="dot" style="background: #f68083"></i>Removed</span
+            ><span><i class="dot" style="background: #66b4ff"></i>Moved</span
+            ><span
+              ><i class="dot" style="background: #a7b4c8"></i>Unchanged</span
+            ><span><i class="dot" style="background: #ecc16b"></i>Unknown</span>
+          </div>
+          <p class="muted workspace-note">
+            Drag to orbit · scroll to zoom · Shift + drag to pan · arrow keys to
+            orbit
+          </p>
+        </section>
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Change results</h2>
+            <span id="reviewCount" class="alignment-badge">No results yet</span>
+          </div>
+          <label class="muted filter-row"
+            >Show<select id="filter">
+              <option value="all">All results</option>
+              <option value="ADDED">Added</option>
+              <option value="REMOVED">Removed</option>
+              <option value="MOVED">Moved</option>
+              <option value="UNCHANGED">Unchanged</option>
+              <option value="UNKNOWN">Unknown</option>
+            </select></label
+          >
+          <div id="events" class="empty">
+            Analyze your recordings to see results.
+          </div>
+        </section>
+      </div>
+      <div class="grid">
+        <section class="panel" id="evidence-panel">
+          <h2><span class="section-number">03</span>Evidence &amp; review</h2>
+          <p id="explanation" class="muted">
+            Select a result to inspect its supporting views.
+          </p>
+          <div id="frames"></div>
+          <details>
+            <summary>Full result record</summary>
+            <pre id="evidence">No result selected.</pre>
+          </details>
+          <form class="review-form" id="reviewForm">
+            <h3>Your assessment</h3>
+            <p class="review-status">
+              Check the supporting views, then record your assessment. Your
+              reviews are saved in this browser.
+            </p>
+            <label
+              >Assessment<select id="reviewDecision" disabled>
+                <option value="unreviewed">Not reviewed</option>
+                <option value="supported">Supported by the evidence</option>
+                <option value="unsupported">
+                  Not supported by the evidence
+                </option>
+                <option value="investigate">More evidence needed</option>
+              </select></label
+            ><label
+              >Reviewer notes<textarea
+                id="reviewNotes"
+                maxlength="2000"
+                disabled
+                placeholder="Add your observations or note what needs another view."
+              ></textarea></label
+            ><button id="saveReview" type="submit" disabled>Save review</button>
+            <p class="review-status" id="reviewStatus" role="status">
+              Select a result to begin your review.
+            </p>
+          </form>
+        </section>
+        <section class="panel">
+          <h2>Spatial memory</h2>
+          <p class="muted">
+            Explore the objects and spatial relationships in your before and
+            after recordings.
+          </p>
+          <div id="memory" class="empty">
+            Object information will appear after analysis.
+          </div>
+        </section>
+      </div>
+      <section class="panel" id="history">
+        <div class="panel-heading">
+          <h2><span class="section-number">04</span>Recent comparisons</h2>
+          <div class="export-group">
+            <button id="exportReport" disabled>Download report</button
+            ><button id="exportReview" disabled>Download reviews</button>
+          </div>
+        </div>
+        <p class="muted form-note">
+          Reopen your recent comparisons or download your results and review
+          notes.
+        </p>
+        <div id="recentRuns" class="empty">
+          Your completed comparisons will appear here.
+        </div>
+      </section>
+      <section class="panel" id="diagnostic-panel">
+        <h2><span class="section-number">05</span>Analysis details</h2>
+        <p id="registration" class="muted">
+          Alignment details will appear after analysis.
+        </p>
+        <details>
+          <summary>Processing details &amp; model versions</summary>
+          <pre id="diagnostics">No comparison loaded.</pre>
+        </details>
+      </section>
+      <details id="interpretation" class="panel">
+        <summary>Understanding your results</summary>
+        <p class="muted">
+          Object labels and change types are estimates from your recordings.
+          Review the supporting views before accepting a result. An object
+          outside the recorded views stays Unknown.
+        </p>
+        <p class="muted">
+          Distances use reconstruction units until metric scale is established.
+          Real-world accuracy has not yet been benchmarked. This workspace
+          analyzes recordings and has no robot control connection.
+        </p>
+      </details>
+      <footer class="footer">
+        <span>SpatialMemory-X Ultra · Indoor spatial intelligence</span
+        ><span>Your recordings stay on this server.</span>
+      </footer>
+    </main>
+    <script>
+      const $ = (id) => document.getElementById(id),
+        canvas = $("world"),
+        ctx = canvas.getContext("2d");
+      const colors = {
+        ADDED: "#71d898",
+        REMOVED: "#f68083",
+        MOVED: "#66b4ff",
+        UNCHANGED: "#a7b4c8",
+        UNKNOWN: "#ecc16b",
+      };
+      let cloud = null,
+        report = null,
+        job = null,
+        selected = null,
+        yaw = 0.5,
+        pitch = 0.2,
+        zoom = 1,
+        pan = [0, 0],
+        drag = null,
+        center = [0, 0, 0],
+        radius = 1;
+      const previews = {};
+      let trialPending = null;
+      let loadGeneration = 0;
+      let busy = false;
+      let capabilities = null;
+      let loadingControls = null;
+      let serviceAvailable = true;
+      function applyCapabilities() {
+        if (!capabilities) return;
+        const geometry = document.querySelector("[name=geometry_backend]");
+        const masks = document.querySelector("[name=semantics_enabled]");
+        geometry.querySelector("[value=vggt]").disabled = !capabilities.vggt;
+        if (!capabilities.vggt && geometry.value === "vggt")
+          geometry.value = "sparse";
+        if (!capabilities.semantics) {
+          masks.checked = false;
+          masks.disabled = true;
+        }
+        profileNotice();
+      }
+      function beginLoadingForm() {
+        if (busy) return;
+        if (!loadingControls)
+          loadingControls = Array.from($("upload").elements).map((control) => [
+            control,
+            control.disabled,
+          ]);
+        for (const [control] of loadingControls) control.disabled = true;
+      }
+      function endLoadingForm() {
+        if (loadingControls) {
+          for (const [control, disabled] of loadingControls)
+            control.disabled = disabled;
+          loadingControls = null;
+        }
+        applyCapabilities();
+        if (!serviceAvailable) $("run").disabled = true;
+      }
+      const sessionStorageFallback = new Map();
+      const assessments = new Set([
+        "unreviewed",
+        "supported",
+        "unsupported",
+        "investigate",
+      ]);
+      function rememberLast(id) {
+        try {
+          localStorage.setItem("spatialmemory_last_run", id);
+        } catch {
+          /* The current run remains usable without browser persistence. */
+        }
+      }
+      function lastRun() {
+        try {
+          return localStorage.getItem("spatialmemory_last_run");
+        } catch {
+          return null;
+        }
+      }
+      function trialHistory() {
+        return stored("spatialmemory_trials", [])
+          .filter(
+            (t) =>
+              t &&
+              /^[a-f0-9]{32}$/.test(t.id) &&
+              typeof t.name === "string" &&
+              typeof t.reviewer === "string" &&
+              typeof (t.opened_at || t.completed_at) === "string" &&
+              Number.isFinite(Date.parse(t.opened_at || t.completed_at)),
+          )
+          .map((t) => ({ ...t, opened_at: t.opened_at || t.completed_at }));
+      }
+      function reviewRecords(key = reviewKey()) {
+        return Object.fromEntries(
+          Object.entries(stored(key, {})).filter(
+            ([id, r]) =>
+              r &&
+              assessments.has(r.assessment) &&
+              typeof r.notes === "string" &&
+              typeof r.reviewer === "string",
+          ),
+        );
+      }
+      function draftsKey() {
+        return "spatialmemory_review_drafts_" + job;
+      }
+      function captureReviewDraft() {
+        if (!job || !selected) return;
+        const drafts = reviewRecords(draftsKey());
+        drafts[selected] = {
+          assessment: $("reviewDecision").value,
+          notes: $("reviewNotes").value,
+          reviewer: $("reviewerName").value.trim(),
+        };
+        const saved = persist(draftsKey(), drafts);
+        $("reviewStatus").textContent = saved
+          ? "Your draft is saved. Select Save review to record your assessment."
+          : "Your draft is available until you close this page. Browser storage is unavailable.";
+      }
+      $("reviewDecision").addEventListener("change", captureReviewDraft);
+      $("reviewNotes").addEventListener("input", captureReviewDraft);
+      function stored(key, fallback) {
+        try {
+          const value = sessionStorageFallback.has(key)
+            ? sessionStorageFallback.get(key)
+            : JSON.parse(localStorage.getItem(key));
+          if (Array.isArray(fallback))
+            return Array.isArray(value) ? value : fallback;
+          return value && typeof value === "object" && !Array.isArray(value)
+            ? value
+            : fallback;
+        } catch {
+          return fallback;
+        }
+      }
+      function persist(key, value) {
+        sessionStorageFallback.set(key, value);
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+          return true;
+        } catch {
+          return false;
+        }
+      }
+      function applyTheme(theme) {
+        const value = theme === "light" ? "light" : "dark";
+        document.documentElement.dataset.theme = value;
+        $("themeToggle").textContent =
+          value === "dark" ? "Light theme" : "Dark theme";
+        $("themeToggle").setAttribute(
+          "aria-label",
+          value === "dark" ? "Switch to light theme" : "Switch to dark theme",
+        );
+      }
+      applyTheme(stored("spatialmemory_theme", {}).theme);
+      $("themeToggle").onclick = () => {
+        const theme =
+          document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        applyTheme(theme);
+        persist("spatialmemory_theme", { theme });
+      };
+      function workflow(active) {
+        for (const [i, id] of [
+          "stepInput",
+          "stepProcess",
+          "stepReview",
+        ].entries())
+          $(id).classList.toggle("current", i === active);
+      }
+      function profileNotice() {
+        $("profileNotice").hidden =
+          document.querySelector("[name=geometry_backend]").value !== "vggt";
+      }
+      document
+        .querySelector("[name=geometry_backend]")
+        .addEventListener("change", profileNotice);
+      function reviewKey() {
+        return "spatialmemory_reviews_" + job;
+      }
+      function refreshReviewCount() {
+        if (!report) return;
+        const reviews = reviewRecords();
+        const count = report.events.filter(
+          (e) => reviews[e.id] && reviews[e.id].assessment !== "unreviewed",
+        ).length;
+        $("reviewCount").textContent =
+          count + " / " + report.events.length + " reviewed";
+      }
+      function reviewSelection(event) {
+        const saved = reviewRecords()[event.id];
+        const draft = reviewRecords(draftsKey())[event.id];
+        const current = draft || saved;
+        for (const id of ["reviewDecision", "reviewNotes", "saveReview"])
+          $(id).disabled = false;
+        $("reviewDecision").value = current?.assessment || "unreviewed";
+        $("reviewNotes").value = current?.notes || "";
+        $("reviewStatus").textContent = draft
+          ? "Your draft is restored. Select Save review when you are ready."
+          : saved
+            ? "Your saved review · " + (saved.reviewer || "unnamed reviewer")
+            : "You have not reviewed this result yet.";
+      }
+      $("reviewForm").onsubmit = (e) => {
+        e.preventDefault();
+        if (!job || !selected) return;
+        const records = reviewRecords();
+        records[selected] = {
+          assessment: $("reviewDecision").value,
+          notes: $("reviewNotes").value,
+          reviewer: $("reviewerName").value.trim(),
+          recorded_at: new Date().toISOString(),
+          provenance: "human review; not ground truth",
+        };
+        const saved = persist(reviewKey(), records);
+        const drafts = reviewRecords(draftsKey());
+        delete drafts[selected];
+        persist(draftsKey(), drafts);
+        $("reviewStatus").textContent = saved
+          ? "Your review is saved in this browser."
+          : "Review kept for this session only. Download reviews before closing this page.";
+        refreshReviewCount();
+      };
+      function downloadJSON(value, name) {
+        const url = URL.createObjectURL(
+          new Blob([JSON.stringify(value, null, 2)], {
+            type: "application/json",
+          }),
+        );
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+      $("exportReport").onclick = () => {
+        if (report)
+          downloadJSON(report, "spatialmemory-" + job + "-report.json");
+      };
+      $("exportReview").onclick = () => {
+        if (job)
+          downloadJSON(
+            {
+              job_id: job,
+              trial: trialHistory().find((t) => t.id === job) || null,
+              reviews: reviewRecords(),
+              provenance:
+                "Browser-stored human assessments, separate from model output and ground truth",
+            },
+            "spatialmemory-" + job + "-reviews.json",
+          );
+      };
+      function showRecent() {
+        const trials = trialHistory();
+        $("recentRuns").replaceChildren();
+        if (!trials.length) {
+          $("recentRuns").textContent =
+            "Your completed comparisons will appear here.";
+          return;
+        }
+        for (const trial of trials) {
+          const row = document.createElement("div");
+          row.className = "run-item";
+          const info = document.createElement("div"),
+            name = document.createElement("strong"),
+            detail = document.createElement("small"),
+            open = document.createElement("button");
+          name.textContent = trial.name || "Untitled comparison";
+          detail.textContent =
+            "Opened " +
+            new Date(trial.opened_at).toLocaleString() +
+            " · " +
+            trial.id.slice(0, 8);
+          open.textContent = "Open comparison";
+          open.disabled = busy;
+          open.onclick = async () => {
+            open.disabled = true;
+            try {
+              if (await loadRun(trial.id))
+                $("scene").scrollIntoView({ behavior: "smooth" });
+            } catch (e) {
+              $("status").textContent =
+                "Could not open your comparison: " + e.message;
+            } finally {
+              open.disabled = false;
+            }
+          };
+          info.append(name, detail);
+          row.append(info, open);
+          $("recentRuns").append(row);
+        }
+      }
+      showRecent();
+      canvas.addEventListener("keydown", (e) => {
+        if (
+          ![
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "ArrowDown",
+            "+",
+            "=",
+            "-",
+            "0",
+          ].includes(e.key)
+        )
+          return;
+        e.preventDefault();
+        if (e.key === "ArrowLeft") yaw -= 0.12;
+        if (e.key === "ArrowRight") yaw += 0.12;
+        if (e.key === "ArrowUp") pitch -= 0.12;
+        if (e.key === "ArrowDown") pitch += 0.12;
+        if (["+", "="].includes(e.key)) zoom = Math.min(12, zoom * 1.1);
+        if (e.key === "-") zoom = Math.max(0.1, zoom / 1.1);
+        if (e.key === "0") $("resetView").click();
+        draw();
+      });
+      document.querySelectorAll(".rail nav a").forEach((a) =>
+        a.addEventListener("click", () => {
+          document
+            .querySelectorAll(".rail nav a")
+            .forEach((n) => n.classList.toggle("active", n === a));
+        }),
+      );
+      for (const [name, id] of [
+        ["before", "bv"],
+        ["after", "av"],
+      ])
+        document.querySelector(`[name=${name}]`).onchange = (e) => {
+          if (previews[name]) {
+            URL.revokeObjectURL(previews[name]);
+            delete previews[name];
+          }
+          e.target.setCustomValidity("");
+          if (e.target.files[0]) {
+            const file = e.target.files[0];
+            $(name + "File").textContent =
+              file.name + " · " + (file.size / 1024 / 1024).toFixed(1) + " MiB";
+            e.target.setCustomValidity(
+              file.size > 512 * 1024 * 1024
+                ? "Recording exceeds the 512 MiB limit. Choose a shorter clip."
+                : "",
+            );
+            previews[name] = URL.createObjectURL(e.target.files[0]);
+            $(id).removeAttribute("poster");
+            $(id).src = previews[name];
+            $(id).style.display = "block";
+          } else {
+            $(name + "File").textContent = "No recording selected";
+            $(id).pause();
+            $(id).removeAttribute("src");
+            $(id).removeAttribute("poster");
+            $(id).load();
+            $(id).style.display = "none";
+          }
+        };
+      function projected(p) {
+        let [x, y, z] = p.map((v, i) => (v - center[i]) / radius),
+          X = x * Math.cos(yaw) + z * Math.sin(yaw),
+          Z = -x * Math.sin(yaw) + z * Math.cos(yaw),
+          Y = y * Math.cos(pitch) - Z * Math.sin(pitch);
+        return [
+          canvas.width / 2 +
+            pan[0] +
+            X * Math.min(canvas.width, canvas.height) * 0.42 * zoom,
+          canvas.height / 2 +
+            pan[1] +
+            Y * Math.min(canvas.width, canvas.height) * 0.42 * zoom,
+        ];
+      }
+      function dot(p, color, size = 2) {
+        const [x, y] = projected(p);
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, size, size);
+      }
+      function line(a, b, color) {
+        const [x, y] = projected(a),
+          [u, v] = projected(b);
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(u, v);
+        ctx.stroke();
+      }
+      function extent(bounds, color) {
+        if (!bounds) return;
+        let [lo, hi] = bounds,
+          corners = [];
+        for (let x of [lo[0], hi[0]])
+          for (let y of [lo[1], hi[1]])
+            for (let z of [lo[2], hi[2]]) corners.push([x, y, z]);
+        for (let i = 0; i < 8; i++)
+          for (let bit of [1, 2, 4])
+            if (i < (i ^ bit)) line(corners[i], corners[i ^ bit], color);
+      }
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (!cloud) return;
+        if ($("beforeLayer").checked)
+          cloud.before.forEach((p) => dot(p, "#687a94"));
+        if ($("afterLayer").checked)
+          cloud.after.forEach((p) => dot(p, "#6ac2df"));
+        if ($("cameraLayer").checked && report)
+          report.cameras.forEach((c) => dot(c.position, "#ecc16b", 4));
+        if (!report) return;
+        for (let e of report.events) {
+          let color = colors[e.change] || colors.UNKNOWN;
+          ctx.lineWidth = e.id === selected ? 2 : 1;
+          if ($("objectLayer").checked) {
+            extent(e.evidence.before_extent, color);
+            extent(e.evidence.after_extent, color);
+          }
+          if ($("changeLayer").checked) {
+            if (e.before_position) dot(e.before_position, color, 6);
+            if (e.after_position) dot(e.after_position, color, 6);
+            if (e.before_position && e.after_position && e.change === "MOVED")
+              line(e.before_position, e.after_position, color);
+          }
+        }
+        ctx.lineWidth = 1;
+      }
+      canvas.onpointerdown = (e) => {
+        drag = [e.clientX, e.clientY];
+        canvas.setPointerCapture(e.pointerId);
+      };
+      canvas.onpointerup = () => (drag = null);
+      canvas.onpointercancel = () => (drag = null);
+      canvas.onpointermove = (e) => {
+        if (!drag) return;
+        let dx = e.clientX - drag[0],
+          dy = e.clientY - drag[1];
+        if (e.shiftKey) {
+          const rect = canvas.getBoundingClientRect();
+          pan[0] += (dx * canvas.width) / Math.max(1, rect.width);
+          pan[1] += (dy * canvas.height) / Math.max(1, rect.height);
+        } else {
+          yaw += dx * 0.01;
+          pitch += dy * 0.01;
+        }
+        drag = [e.clientX, e.clientY];
+        draw();
+      };
+      canvas.addEventListener(
+        "wheel",
+        (e) => {
+          e.preventDefault();
+          zoom = Math.max(
+            0.1,
+            Math.min(12, zoom * Math.exp(-e.deltaY * 0.001)),
+          );
+          draw();
+        },
+        { passive: false },
+      );
+      for (let id of [
+        "beforeLayer",
+        "afterLayer",
+        "cameraLayer",
+        "objectLayer",
+        "changeLayer",
+      ])
+        $(id).onchange = draw;
+      $("resetView").onclick = () => {
+        yaw = 0.5;
+        pitch = 0.2;
+        zoom = 1;
+        pan = [0, 0];
+        draw();
+      };
+      const stageLabels = {
+        ingestion_before: "Preparing your before recording",
+        ingestion_after: "Preparing your after recording",
+        geometry_cache_validation: "Checking saved reconstruction",
+        neural_model_loading: "Preparing detailed reconstruction",
+        reconstruction_before: "Reconstructing your before scene",
+        reconstruction_after: "Reconstructing your after scene",
+        semantic_model_loading: "Preparing object analysis",
+        semantic_before: "Analyzing objects before the change",
+        semantic_after: "Analyzing objects after the change",
+        shared_registration: "Aligning your scenes",
+        geometric_candidates: "Comparing scene geometry",
+        semantic_consensus: "Reviewing object evidence",
+        starting: "Starting your analysis",
+        uploading: "Uploading your recordings",
+        complete: "Finalizing your results",
+      };
+      function processingMessage(state) {
+        if (state.status === "queued")
+          return (
+            "Your comparison is queued · " +
+            (stageLabels[state.stage] || "Waiting for analysis")
+          );
+        return stageLabels[state.stage] || "Analyzing your recordings";
+      }
+      async function responseError(response) {
+        const text = await response.text();
+        try {
+          const data = JSON.parse(text);
+          if (typeof data.detail === "string") return data.detail;
+        } catch {
+          /* Plain-text errors remain visible. */
+        }
+        return text || `Request failed (${response.status})`;
+      }
+      async function get(url) {
+        let r = await fetch(url);
+        if (!r.ok) throw Error(await responseError(r));
+        return r.json();
+      }
+      function displayLabel(event) {
+        const label = event.semantic_label || "Unlabeled region";
+        return label.charAt(0).toUpperCase() + label.slice(1);
+      }
+      function resultSummary(event) {
+        const label = displayLabel(event);
+        const summaries = {
+          MOVED: `${label} appears to have moved between your recordings. Compare its before and after views to assess the change.`,
+          ADDED: `${label} appears to have been added. Review its location in both recordings to check whether it was previously obscured.`,
+          REMOVED: `${label} may have been removed. Check whether its previous location is visible in the after recording.`,
+          UNCHANGED: `${label} appears unchanged across the supporting views. Review the recordings to assess this result.`,
+          UNKNOWN:
+            "More evidence is needed for this result. Check scene coverage, alignment and object identity before deciding what changed.",
+        };
+        return summaries[event.change] || event.explanation;
+      }
+      function inspect(event) {
+        selected = event.id;
+        reviewSelection(event);
+        $("evidence").textContent = JSON.stringify(event, null, 2);
+        $("explanation").textContent = resultSummary(event);
+        $("frames").replaceChildren();
+        const observations = event.evidence.observations || [];
+        if (observations.length) {
+          for (let o of observations) {
+            const label = document.createElement("div");
+            label.className = "frame-title";
+            const score = Number.isFinite(o.provenance?.raw_detector_score)
+              ? o.provenance.raw_detector_score.toFixed(3)
+              : "unavailable";
+            const state = o.frame_id.startsWith("before:") ? "Before" : "After";
+            label.textContent = `${state} · ${Number.isFinite(o.timestamp) ? o.timestamp.toFixed(2) + " s" : "Time unavailable"}`;
+            const technical = document.createElement("details");
+            const technicalTitle = document.createElement("summary");
+            const technicalText = document.createElement("p");
+            technicalTitle.textContent = "Observation details";
+            technicalText.className = "muted form-note";
+            technicalText.textContent = `${o.frame_id} · raw detector score ${score} · ${o.provenance?.tracking?.status || "observation"}. This score is not a calibrated probability.`;
+            technical.append(technicalTitle, technicalText);
+            const img = document.createElement("img");
+            img.className = "evidence-image";
+            img.src = `/jobs/${job}/evidence/${encodeURIComponent(o.provenance.evidence_file)}`;
+            img.alt = `${o.label} object mask · ${state} · ${o.frame_id}`;
+            const figure = document.createElement("figure");
+            figure.className = "evidence-frame";
+            img.onerror = () => {
+              img.style.display = "none";
+              const message = document.createElement("p");
+              message.className = "warning";
+              message.textContent =
+                "Supporting image unavailable. Request another view before accepting this result.";
+              figure.append(message);
+            };
+            figure.append(label, img, technical);
+            $("frames").append(figure);
+          }
+        } else {
+          const info = document.createElement("p");
+          info.className = "muted";
+          info.textContent =
+            "No object mask is available for this region. Check its location in the 3D scene.";
+          $("frames").append(info);
+        }
+        showEvents();
+        draw();
+      }
+      function showEvents() {
+        let filtered = report.events.filter(
+          (e) => $("filter").value === "all" || e.change === $("filter").value,
+        );
+        $("events").replaceChildren();
+        if (!filtered.length) {
+          const p = document.createElement("p");
+          p.className = "empty";
+          p.textContent =
+            "No results match this filter. Review scene coverage before concluding that nothing changed.";
+          $("events").append(p);
+        }
+        for (let event of filtered) {
+          const button = document.createElement("button");
+          button.className =
+            "event" + (selected === event.id ? " selected" : "");
+          const tag = document.createElement("span");
+          tag.className = "chip";
+          tag.style.color =
+            {
+              ADDED: "#147a49",
+              REMOVED: "#b33c45",
+              MOVED: "#2661a5",
+              UNCHANGED: "#536459",
+              UNKNOWN: "#836216",
+            }[event.change] || "#536459";
+          tag.textContent =
+            event.change.charAt(0) + event.change.slice(1).toLowerCase();
+          tag.dataset.change = event.change;
+          const label = document.createElement("span");
+          label.textContent = displayLabel(event);
+          const detail = document.createElement("small");
+          const stateLabel =
+            {
+              probable: "Proposed change",
+              supported: "Supported by evidence",
+              ambiguous: "Needs review",
+              unobservable: "More coverage needed",
+              candidate: "Needs review",
+            }[event.decision_status] || "Needs review";
+          detail.textContent = `${stateLabel} · ${event.supporting_frames.length} supporting frames`;
+          button.append(tag, label, detail);
+          button.onclick = () => inspect(event);
+          $("events").append(button);
+        }
+      }
+      $("filter").onchange = () => {
+        if (report) showEvents();
+      };
+      function showMemory() {
+        const memory = report.spatial_memory;
+        $("memory").replaceChildren();
+        if (!memory) {
+          $("memory").textContent =
+            "Object analysis was not enabled for this comparison.";
+          return;
+        }
+        const table = document.createElement("table");
+        const head = document.createElement("tr");
+        for (let label of [
+          "State",
+          "Object",
+          "Estimated label",
+          "Distinct views",
+        ]) {
+          let th = document.createElement("th");
+          th.textContent = label;
+          head.append(th);
+        }
+        table.append(head);
+        let total = 0;
+        for (let state of ["before", "after"])
+          for (let o of memory[state].objects) {
+            total++;
+            const row = document.createElement("tr");
+            for (let v of [state, o.id, o.label, o.distinct_views]) {
+              let td = document.createElement("td");
+              td.textContent = v;
+              row.append(td);
+            }
+            table.append(row);
+          }
+        if (total) $("memory").append(table);
+        else
+          $("memory").textContent =
+            "No objects met the analysis criteria. Check your scene coverage or try a clearer recording.";
+        const details = document.createElement("details"),
+          summary = document.createElement("summary"),
+          pre = document.createElement("pre");
+        summary.textContent = "Object relationships";
+        pre.textContent = JSON.stringify(
+          { before: memory.before.graph, after: memory.after.graph },
+          null,
+          2,
+        );
+        details.append(summary, pre);
+        $("memory").append(details);
+      }
+      async function loadRun(id) {
+        const generation = ++loadGeneration;
+        beginLoadingForm();
+        $("status").textContent =
+          "Loading your comparison… Your current results remain visible until it is ready.";
+        try {
+          let nextReport, nextCloud;
+          try {
+            [nextReport, nextCloud] = await Promise.all([
+              get(`/jobs/${id}/report`),
+              get(`/jobs/${id}/world`),
+            ]);
+          } catch (error) {
+            if (generation !== loadGeneration) return false;
+            throw error;
+          }
+          if (generation !== loadGeneration) return false;
+          job = id;
+          report = nextReport;
+          cloud = nextCloud;
+          const points = [...cloud.before, ...cloud.after];
+          center = [0, 0, 0];
+          for (let p of points)
+            for (let i = 0; i < 3; i++)
+              center[i] += p[i] / Math.max(1, points.length);
+          radius = 0.001;
+          for (let p of points)
+            radius = Math.max(
+              radius,
+              Math.hypot(...p.map((v, i) => v - center[i])),
+            );
+          $("pointCount").textContent = (
+            report.geometry.before.points + report.geometry.after.points
+          ).toLocaleString();
+          $("eventCount").textContent = report.events.filter((e) =>
+            ["ADDED", "REMOVED", "MOVED"].includes(e.change),
+          ).length;
+          $("unknownCount").textContent = report.events.filter(
+            (e) => e.change === "UNKNOWN",
+          ).length;
+          $("runtime").textContent = report.runtime_seconds.toFixed(1) + " s";
+          $("registration").textContent =
+            `Alignment ${report.registration.valid ? "passed" : "failed"} · ${report.registration.inliers} inlier correspondences · ${report.registration.heldout_inliers || 0}/${report.registration.heldout_count || 0} held-out inliers · residual ${Number.isFinite(report.registration.rmse) ? report.registration.rmse.toPrecision(3) : "unavailable"} reconstruction units`;
+          $("alignmentBadge").textContent = report.registration.valid
+            ? "Alignment passed"
+            : "Alignment failed · investigate";
+          $("alignmentBadge").dataset.valid = String(report.registration.valid);
+          $("alignmentBadge").style.color = report.registration.valid
+            ? "#087b62"
+            : "#b33c45";
+          $("diagnostics").textContent = JSON.stringify(
+            {
+              registration: report.registration,
+              geometry: report.geometry,
+              stages: report.stages,
+              versions: report.versions,
+              limitations: report.limitations,
+            },
+            null,
+            2,
+          );
+          showEvents();
+          showMemory();
+          draw();
+          rememberLast(job);
+          $("status").textContent =
+            "Loaded your comparison · select a result to review.";
+          $("sceneEmpty").hidden = true;
+          $("sceneEmpty").style.display = "none";
+          workflow(2);
+          $("exportReport").disabled = false;
+          $("exportReview").disabled = false;
+          selected = null;
+          for (const id of ["reviewDecision", "reviewNotes", "saveReview"])
+            $(id).disabled = true;
+          $("frames").replaceChildren();
+          $("evidence").textContent = "No result selected.";
+          $("explanation").textContent =
+            "Select a result to inspect its supporting views.";
+          $("reviewNotes").value = "";
+          $("reviewStatus").textContent =
+            "Select a result to begin your review.";
+          // A restored research run must not re-enable profiles unavailable on this server.
+          const geometrySelect = document.querySelector(
+            "[name=geometry_backend]",
+          );
+          geometrySelect.value =
+            report.config.geometry_backend === "vggt" && capabilities?.vggt
+              ? "vggt"
+              : "sparse";
+          document.querySelector("[name=semantics_enabled]").checked = Boolean(
+            report.config.semantics_enabled && capabilities?.semantics,
+          );
+          profileNotice();
+          const trials = trialHistory();
+          let trial = trials.find((t) => t.id === job);
+          if (!trial) {
+            trial = {
+              id: job,
+              name: trialPending?.name || "Video comparison",
+              reviewer: trialPending?.reviewer || "",
+              opened_at: new Date().toISOString(),
+            };
+            trials.unshift(trial);
+            persist("spatialmemory_trials", trials.slice(0, 30));
+          }
+          $("loadedTrial").textContent =
+            "Viewing " +
+            trial.name +
+            " · " +
+            job.slice(0, 8) +
+            " · " +
+            (report.config.geometry_backend || "sparse") +
+            " geometry";
+          $("trialName").value = trial.name;
+          $("reviewerName").value = trial.reviewer;
+          trialPending = null;
+          showRecent();
+          refreshReviewCount();
+          showEvents();
+          draw();
+          for (let [state, id] of [
+            ["before", "bv"],
+            ["after", "av"],
+          ]) {
+            const input = document.querySelector(`[name=${state}]`);
+            input.value = "";
+            input.setCustomValidity("");
+            if (previews[state]) {
+              URL.revokeObjectURL(previews[state]);
+              delete previews[state];
+            }
+            $(state + "File").textContent =
+              "Saved recording · choose a file for a new comparison";
+            $(id).removeAttribute("poster");
+            $(id).src = `/jobs/${job}/video/${state}`;
+            const first = report.cameras.find((c) => c.state === state);
+            if (first) {
+              const index = first.frame_id.split(":").pop();
+              $(id).poster =
+                `/jobs/${job}/frames/${state}/${state}_${index.padStart(6, "0")}.jpg`;
+            }
+            $(id).style.display = "block";
+          }
+          return true;
+        } finally {
+          if (generation === loadGeneration) endLoadingForm();
+        }
+      }
+      $("upload").onsubmit = async (e) => {
+        e.preventDefault();
+        if (busy || loadingControls) return;
+        const previousJob = job;
+        const formData = new FormData(e.target);
+        const controls = Array.from(e.target.elements).map((control) => [
+          control,
+          control.disabled,
+        ]);
+        ++loadGeneration;
+        busy = true;
+        for (const [control] of controls) control.disabled = true;
+        $("run").disabled = true;
+        $("exportReport").disabled = true;
+        $("exportReview").disabled = true;
+        trialPending = {
+          name: $("trialName").value.trim(),
+          reviewer: $("reviewerName").value.trim(),
+        };
+        workflow(1);
+        showRecent();
+        try {
+          $("status").textContent = "Uploading your recordings…";
+          const response = await fetch("/jobs", {
+            method: "POST",
+            body: formData,
+          });
+          if (!response.ok) throw Error(await responseError(response));
+          const processingJob = (await response.json()).id;
+          while (true) {
+            let s = await get("/jobs/" + processingJob);
+            $("status").textContent = processingMessage(s);
+            if (["failed", "interrupted"].includes(s.status))
+              throw Error(s.error || "Processing interrupted");
+            if (s.status === "complete") break;
+            await new Promise((r) => setTimeout(r, 1000));
+          }
+          await loadRun(processingJob);
+          $("status").textContent =
+            "Processing complete · your results are ready to review.";
+        } catch (error) {
+          $("status").textContent = "Failed: " + error.message;
+          workflow(report ? 2 : 0);
+          trialPending = null;
+          job = previousJob;
+          $("exportReport").disabled = !report;
+          $("exportReview").disabled = !report;
+        } finally {
+          busy = false;
+          for (const [control, disabled] of controls)
+            control.disabled = disabled;
+          applyCapabilities();
+          if (!serviceAvailable) $("run").disabled = true;
+          showRecent();
+        }
+      };
+      new ResizeObserver(() => {
+        const rect = canvas.getBoundingClientRect(),
+          ratio = window.devicePixelRatio || 1;
+        canvas.width = Math.max(1, Math.round(rect.width * ratio));
+        canvas.height = Math.max(1, Math.round(rect.height * ratio));
+        draw();
+      }).observe(canvas);
+      get("/health")
+        .then((h) => {
+          $("serviceStatus").dataset.state = "ready";
+          $("serviceStatus").replaceChildren();
+          const dot = document.createElement("i");
+          dot.className = "service-dot online";
+          $("serviceStatus").append(
+            dot,
+            document.createTextNode("Ready for your recordings"),
+          );
+          const c = h.capabilities;
+          capabilities = c || { sparse: true, vggt: false, semantics: false };
+          if (!c) return;
+          const geometry = document.querySelector(
+              "select[name=geometry_backend]",
+            ),
+            masks = document.querySelector("input[name=semantics_enabled]");
+          if (!c.vggt) {
+            geometry.value = "sparse";
+            geometry.querySelector("option[value=vggt]").disabled = true;
+          }
+          if (!c.semantics) {
+            masks.checked = false;
+            masks.disabled = true;
+          }
+          profileNotice();
+        })
+        .catch(() => {
+          serviceAvailable = false;
+          $("serviceStatus").dataset.state = "unavailable";
+          $("serviceStatus").textContent = "Connection unavailable";
+          $("status").textContent =
+            "We could not connect. Check your connection and reload this page.";
+          $("run").disabled = true;
+        });
+      const last = lastRun();
+      const startupGeneration = loadGeneration;
+      if (last && /^[a-f0-9]{32}$/.test(last))
+        get("/jobs/" + last)
+          .then((s) => {
+            if (
+              s.status === "complete" &&
+              startupGeneration === loadGeneration &&
+              !busy
+            )
+              return loadRun(last);
+          })
+          .catch((error) => {
+            if (!busy && !report)
+              $("status").textContent =
+                "We could not reopen your last comparison: " +
+                error.message +
+                ". You can start a new comparison.";
+          });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+[
+  {
+    "model": "facebook/dinov2-small",
+    "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+    "purpose": "appearance",
+    "status": "passed",
+    "seconds": 13.560374373000059,
+    "input": "synthetic textured-panel fixture frame",
+    "evaluation": "inference smoke only; no real-world accuracy claim",
+    "descriptor_dimensions": 384,
+    "norm": 1.0000000108928946
+  },
+  {
+    "model": "depth-anything/Depth-Anything-V2-Small-hf",
+    "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+    "purpose": "relative_depth",
+    "status": "passed",
+    "seconds": 11.298550804999877,
+    "input": "synthetic textured-panel fixture frame",
+    "evaluation": "inference smoke only; no real-world accuracy claim",
+    "depth_shape": [
+      518,
+      686
+    ],
+    "finite": true,
+    "metric": false
+  },
+  {
+    "model": "IDEA-Research/grounding-dino-tiny",
+    "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+    "purpose": "detection",
+    "status": "passed",
+    "seconds": 34.87604172800002,
+    "input": "synthetic textured-panel fixture frame",
+    "evaluation": "inference smoke only; no real-world accuracy claim",
+    "detections": {
+      "boxes": [
+        [
+          55.26641845703125,
+          64.23847961425781,
+          591.3189086914062,
+          421.2658386230469
+        ]
+      ],
+      "raw_scores": [
+        0.3255060315132141
+      ],
+      "labels": [
+        "table"
+      ],
+      "calibrated": false,
+      "provenance": {
+        "model": "IDEA-Research/grounding-dino-tiny",
+        "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+        "device": "cpu"
+      }
+    }
+  }
+]

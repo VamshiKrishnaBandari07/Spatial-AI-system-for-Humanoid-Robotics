@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "input": "synthetic identical textured panel videos",
+  "workflow": "CPU vggt geometry baseline",
+  "events": 0,
+  "points": 2102,
+  "runtime_seconds": 94.7351709720001,
+  "registration_inliers": 1456,
+  "evaluation": "Live HTTP application functionality, not real-world accuracy"
+}

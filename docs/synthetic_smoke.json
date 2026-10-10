@@ -1,0 +1,42 @@
+{
+  "fixture": "synthetic textured multi-depth panels, identical recordings",
+  "status": {
+    "status": "complete",
+    "stage": "complete"
+  },
+  "events": 0,
+  "registration": {
+    "valid": true,
+    "scale": 0.9999999999999996,
+    "rotation": [
+      [
+        1.0,
+        1.4510629332154902e-16,
+        -1.479959710398246e-16
+      ],
+      [
+        -3.4839408759830105e-17,
+        0.9999999999999999,
+        -2.1424747213002635e-16
+      ],
+      [
+        -1.6588265200656754e-16,
+        1.5230781894297648e-16,
+        0.9999999999999996
+      ]
+    ],
+    "translation": [
+      4.218847493575595e-15,
+      5.662137425588298e-15,
+      2.1316282072803006e-14
+    ],
+    "inliers": 1519,
+    "correspondences": 1519,
+    "rmse": 5.160516982449374e-15,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed"
+  },
+  "runtime_seconds": 3.145570455999973,
+  "world_points": 1764,
+  "evidence_frame_request": "HTTP 200"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "mode": "UI regressions using an existing synthetic report; failure responses explicitly simulated",
+  "checks": [
+    "wrong-shaped browser storage",
+    "unsaved review drafts across selection and reload",
+    "stale trial load race",
+    "unavailable profile after research-run restore",
+    "cleared file preview and validation",
+    "upload form snapshot and busy controls",
+    "missing detector score and evidence image",
+    "320px viewport at 2x pixel ratio",
+    "blocked browser storage with session review export",
+    "offline service startup"
+  ],
+  "model_outputs_modified": false,
+  "training_started": false,
+  "real_world_accuracy": "not evaluated"
+}

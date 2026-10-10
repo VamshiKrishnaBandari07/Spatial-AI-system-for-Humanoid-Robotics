@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "mode": "existing completed synthetic-run replay; no new inference",
+  "job_id": "418b37750b0c404cb326c3a265191480",
+  "checks": [
+    "original product branding and direct result copy",
+    "dark theme and persisted light theme toggle",
+    "friendly labels for actual processing stages",
+    "unchanged original report provenance",
+    "empty state",
+    "service availability",
+    "research profile licence notice",
+    "real report and geometry loading",
+    "evidence image loading",
+    "browser review save and reload",
+    "report and separate review downloads",
+    "keyboard orbit and zoom",
+    "layer toggles",
+    "recent trial restore",
+    "simulated HTTP 429 recovery",
+    "mobile overflow",
+    "no JavaScript errors"
+  ],
+  "real_world_accuracy": "not evaluated"
+}

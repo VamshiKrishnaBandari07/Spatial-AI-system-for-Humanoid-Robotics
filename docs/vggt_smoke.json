@@ -1,0 +1,52 @@
+{
+  "model": "facebook/VGGT-1B",
+  "checkpoint_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+  "checkpoint_sha256": "d15bf50a8615c8225ed48b51ea5cac673d82442ec0309036df555a053253afe0",
+  "source_commit": "a288dd0f14786c93483e45524328726ab7b1b4ce",
+  "device": "cpu",
+  "frames": [
+    "synthetic frame 0",
+    "synthetic frame 3"
+  ],
+  "input_type": "synthetic textured panels",
+  "status": "passed",
+  "shapes": {
+    "extrinsics": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "intrinsics": [
+      1,
+      2,
+      3,
+      3
+    ],
+    "depth": [
+      1,
+      2,
+      392,
+      518,
+      1
+    ],
+    "world_points": [
+      1,
+      2,
+      392,
+      518,
+      3
+    ],
+    "world_points_conf": [
+      1,
+      2,
+      392,
+      518
+    ]
+  },
+  "seconds": 72.80026149900004,
+  "peak_process_rss_mib": 9883.36328125,
+  "scale_status": "unverified",
+  "evaluation": "inference smoke only, no reconstruction accuracy or calibrated confidence claim",
+  "checkpoint_license": "CC-BY-NC-4.0; research profile, no commercial deployment"
+}

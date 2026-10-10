@@ -1,0 +1,30 @@
+# Model selection and source audit
+
+Official READMEs and available licenses checked on 2026-10-09. Source URLs and SHA-256 digests are in `docs/official-sources/index.json`. Hardware allocations below are planning estimates, not measured requirements; memory varies with resolution, batch size and frames. No candidate is selected on claimed accuracy without a local benchmark.
+
+| Model / purpose | Official repository | Checkpoint | License / restrictions | Hardware / planning memory | Dependencies; I/O | Strength and weakness | Decision |
+|---|---|---|---|---|---|---|---|
+| SIFT/SfM / geometry | opencv/opencv | none | Apache-2.0 | CPU; bounded sparse scene | OpenCV, SciPy; RGB → sparse points, poses | Auditable reprojection; fails on low texture and pure rotation | Primary tested CPU baseline |
+| COLMAP / geometry | colmap/colmap | none | BSD; third-party dependencies separate | CPU or CUDA; several GB, scene-dependent | COLMAP; RGB → sparse/dense models | Mature bundle adjustment; expensive dense stage | Secondary candidate, not installed |
+| VGGT / neural geometry | facebookresearch/vggt | VGGT-1B; VGGT-1B-Commercial | Original weights noncommercial; commercial checkpoint gated; official license excludes military use | GPU preferred; multi-frame memory must be profiled | PyTorch, torchvision; RGB sequence → intrinsics, extrinsics, depth, point maps | Joint camera/depth; scale and domain uncertainty | Two-frame CPU inference passed; optional research geometry backend; real-world validation pending |
+| VGGT-Omega | facebookresearch/vggt | No distinct checkpoint verified here | Follow exact upstream code/checkpoint license | GPU; memory optimizations described upstream | Same upstream family | Official README references Omega optimizations; no unverified separate package installed | Deferred |
+| DUSt3R / pair geometry | naver/dust3r | ViTLarge_BaseDecoder_512_dpt | CC BY-NC-SA 4.0 plus dataset restrictions | GPU preferred; several GB estimated | PyTorch, CroCo; pairs → point maps | Uncalibrated pair reconstruction; noncommercial restrictions | Isolated candidate |
+| MASt3R / matching | naver/mast3r | ViTLarge_BaseDecoder_512_catmlpdpt_metric | CC BY-NC-SA 4.0 and CHECKPOINTS_NOTICE, restrictive training sources | GPU preferred; several GB estimated | PyTorch, DUSt3R; pairs → geometry/descriptors | Strong cross-view matching; license and compute constraints | Isolated candidate |
+| Depth Anything V2 / relative depth | DepthAnything/Depth-Anything-V2 | Depth-Anything-V2-Small-hf | Small Apache-2.0; Base/Large/Giant noncommercial | CPU possible; ~100 MB weights, activations additional | Transformers/PyTorch; RGB → relative depth | Dense prior; NOT metric depth or independent visibility evidence | Actual CPU inference smoke passed; no real-world depth benchmark |
+| Grounding DINO / open detection | IDEA-Research/GroundingDINO | grounding-dino-tiny | Apache-2.0; verify selected model card | CPU possible, GPU preferred; hundreds MB weights | Transformers/PyTorch; RGB+text → boxes/scores | Open vocabulary; scores uncalibrated, small objects challenging | Actual CPU inference smoke passed; semantic labels not validated |
+| SAM 2 / segmentation | facebookresearch/sam2 | sam2.1_hiera_tiny | Apache-2.0 for code/checkpoints; components separately licensed | GPU preferred; temporal memory scene-dependent | PyTorch; RGB+prompts → masks/tracks | Prompt propagation; drift/occlusion still need verification | Pinned official image predictor integrated; synthetic box-mask smoke passed; video-memory tracking deferred |
+| DINOv2 / identity | facebookresearch/dinov2 | dinov2-small | Original DINOv2 Apache-2.0; newer XRay/Cell variants have different licenses | CPU; ~90 MB weights, activations additional | Transformers/PyTorch; crop → descriptor | Appearance consistency; identical objects remain ambiguous | Actual CPU descriptor inference passed; identity benchmark pending |
+| YOLO / closed detection | ultralytics/ultralytics | none selected | AGPL-3.0 or enterprise license | CPU/GPU model-dependent | Ultralytics; RGB → boxes | Efficient; fixed vocabulary, licensing obligations | Excluded from default dependencies |
+
+No model weights are redistributed. Relative depth is never treated as calibrated free-space evidence. The optional consensus profile integrates VGGT, Grounding DINO, SAM 2 and DINOv2; Depth Anything remains diagnostic. Predicted visibility is explicitly distinguished from measured depth. No ensemble performance claim or calibrated posterior is justified without labeled real recordings.
+
+## Verified pinned research revisions
+
+- DINOv2 Small: `ed25f3a31f01632728cabb09d1542f84ab7b0056`, Apache-2.0 model card.
+- Depth Anything V2 Small HF: `5426e4f0f36572d16453bbda7a8389317b1bef99`, Apache-2.0 model card.
+- Grounding DINO Tiny: `a2bb814dd30d776dcf7e30523b00659f4f141c71`, Apache-2.0 model card.
+- VGGT-1B original research checkpoint: `860abec7937da0a4c03c41d3c269c366e82abdf9`, CC-BY-NC-4.0 model card. Official source `a288dd0f14786c93483e45524328726ab7b1b4ce`. Verified model.pt SHA-256: `d15bf50a8615c8225ed48b51ea5cac673d82442ec0309036df555a053253afe0`. Do not use this checkpoint for commercial deployment; the separate commercial checkpoint has different access/terms and was not obtained.
+
+Actual local smoke summaries: `docs/neural_smoke.json`, `docs/vggt_smoke.json`. Measured memory/time apply only to these inputs and this machine. The official source's older pinned torch/torchvision versions were not installed blindly; reviewed CPU adapters were executed successfully with torch 2.6.0+cpu and torchvision 0.21.0+cpu.
+
+- SAM 2.1 Hiera Tiny: HF revision `de431c4043854a71d8101e17995dfe596bf101a5`; official source `2b90b9f5ceec907a1c18123530e92e794ad901a4`. Checkpoint SHA-256 `7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69`; Apache-2.0. CPU image inference uses no custom CUDA extension. A prompted synthetic rectangle mask passed in 5.4 seconds, with IoU 1.0 against the generated rectangle. This does not measure real-object segmentation accuracy. Evidence: `docs/sam2_smoke.json`.

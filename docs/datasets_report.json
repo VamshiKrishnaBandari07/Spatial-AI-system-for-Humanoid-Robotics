@@ -1,0 +1,387 @@
+{
+  "date": "2026-10-09",
+  "scope": "Dataset-only task; models, checkpoints, training and live app unchanged",
+  "data_root": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets",
+  "disk_free_bytes": 16843194368,
+  "datasets": {
+    "ARKitScenes": {
+      "status": "downloaded and verified",
+      "location": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes",
+      "scenes": 2,
+      "recordings": 2,
+      "modalities": [
+        "RGB",
+        "metric depth",
+        "timestamped poses",
+        "variable per-frame calibration"
+      ],
+      "recording_details": [
+        {
+          "scene_id": "arkit_visit_467138",
+          "recording_id": "47333462",
+          "split": "train",
+          "native_split": "Training",
+          "raw_rgb_frames": 3611,
+          "raw_depth_frames": 3610,
+          "prepared_frames": 48,
+          "manifest": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/processed/47333462_synchronized/sequence.json",
+          "RGB_frames_without_matching_depth": [
+            "47333462_57352.271.png"
+          ]
+        },
+        {
+          "scene_id": "arkit_visit_381644",
+          "recording_id": "41069050",
+          "split": "validation",
+          "native_split": "Validation",
+          "raw_rgb_frames": 1900,
+          "raw_depth_frames": 1899,
+          "prepared_frames": 48,
+          "manifest": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/processed/41069050/sequence.json",
+          "RGB_frames_without_matching_depth": [
+            "41069050_5044.701.png"
+          ]
+        }
+      ],
+      "preprocessing": "48 synchronized frames each, full-duration coverage, source timestamps preserved",
+      "integration": "Native RGB-D loader and canonical RGB/poses/timestamps. Variable intrinsics preserved separately; fixed-camera core does not receive falsely aligned variable-calibration depth.",
+      "source": "https://github.com/apple/ARKitScenes",
+      "license": "Apple ARKitScenes LICENSE, source copy retained",
+      "missing": [
+        "IMU",
+        "confidence frames",
+        "highres depth",
+        "real change annotations"
+      ],
+      "size_bytes": 1155472758
+    },
+    "3RScan": {
+      "status": "not downloaded; official access approval required",
+      "location": null,
+      "scenes": 0,
+      "recordings": 0,
+      "modalities": [],
+      "preprocessing": "not run",
+      "integration": "Existing reference/rescan adapter retained; authorized input and official relationship metadata required",
+      "source": "https://waldjohannau.github.io/RIO/",
+      "license": "3RScan data Terms of Use; code MIT is not the dataset license",
+      "access_steps": "Complete https://forms.gle/NvL5dvB4tSFrHfQH6; obtain approved official downloader; select a documented reference/rescan pair.",
+      "missing": [
+        "access approval",
+        "RGB-D scans",
+        "reference/rescan change metadata"
+      ],
+      "size_bytes": 0
+    },
+    "7-Scenes": {
+      "status": "one official sequence downloaded and verified",
+      "location": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/seven_scenes",
+      "scenes": 1,
+      "recordings": 1,
+      "modalities": [
+        "RGB",
+        "metric depth",
+        "camera-to-world poses",
+        "nominal depth intrinsics, not calibrated RGB"
+      ],
+      "native_frames": 1000,
+      "prepared_frames": 48,
+      "preprocessing": "3000 modality members pass CRC; invalid depth handled; original and nearest-SO3 poses retained",
+      "integration": "Native tensors plus canonical RGB/poses/timestamps. Unregistered raw depth retained but excluded from aligned fusion.",
+      "native_split": "sequence2 train, original split text files retained",
+      "project_split": "whole heads scene reserved test; not an official 7-Scenes test benchmark",
+      "source": "https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/",
+      "license": "Microsoft MSR-LA, noncommercial research; original RTF retained",
+      "missing": [
+        "RGB calibration",
+        "true depth calibration",
+        "RGB-depth extrinsics",
+        "hardware timestamps",
+        "change annotations"
+      ],
+      "ignored_ancillary_corruption": "Native Thumbs.db has bad CRC; excluded Windows thumbnail cache, all RGB/depth/pose CRCs valid",
+      "size_bytes": 1011737390
+    },
+    "Replica": {
+      "status": "partial native asset verified, no complete renderable scene",
+      "location": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/replica",
+      "partial_scenes": 1,
+      "complete_scenes": 0,
+      "recordings": 0,
+      "modalities": [
+        "native raw RGB float16 Ptex atlas 5616x5616x3"
+      ],
+      "preprocessing": "Format confirmed against official PTexLib; finite native tensor; three exact appearance transformations",
+      "integration": "Real atlas crop passes existing DINOv2 appearance expert, 384 finite dimensions. No geometry integration claimed.",
+      "source": "https://github.com/facebookresearch/Replica-Dataset",
+      "license": "Replica noncommercial research/educational terms",
+      "missing": [
+        "mesh",
+        "complete textures and parameters",
+        "semantics",
+        "camera renderings",
+        "depth",
+        "poses"
+      ],
+      "subset_reason": "Official v1.0 split gzip release checked. Cached 4 GiB compressed prefix reached budget before selected geometry; no complete scene claimed. Existing verified atlas remains usable for appearance only.",
+      "size_bytes": 4484565554,
+      "release_source": "https://github.com/facebookresearch/Replica-Dataset/releases/tag/v1.0",
+      "geometry_download_attempt": {
+        "dataset": "Replica",
+        "scene": "apartment_0",
+        "source": "https://github.com/facebookresearch/Replica-Dataset/releases/tag/v1.0",
+        "status": "incomplete",
+        "error": "Replica prefix transfer budget exhausted",
+        "files": [],
+        "compressed_prefix_bytes": 4294967296,
+        "new_network_bytes": 4294967296,
+        "prefix_cache": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/replica/cache/official_release_prefix.gz.partial",
+        "full_archive_downloaded": false,
+        "archive_crc_verified": false,
+        "missing_geometry": [
+          "mesh.ply",
+          "semantic.json",
+          "semantic.bin",
+          "preseg.json",
+          "preseg.bin"
+        ]
+      }
+    }
+  },
+  "splits": {
+    "train": "ARKit visit467138",
+    "validation": "ARKit visit381644",
+    "test": "7-Scenes heads project scene holdout",
+    "policy": "Native split metadata retained. No source scene or synthetic derivative crosses project splits.",
+    "manifests": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/manifests"
+  },
+  "augmentation": {
+    "synthetic_geometric_examples": 7,
+    "cases": [
+      "MOVED 0.20m",
+      "MOVED 0.02m",
+      "ADDED cloned region",
+      "REMOVED region",
+      "UNCHANGED",
+      "lighting x0.8",
+      "image-space occlusion"
+    ],
+    "ground_truth": "Exact virtual geometric-region transforms, not verified semantic objects or real observed changes",
+    "rendering": "Nearest-point depth buffer, unfilled pixels invalid/unknown; source camera viewpoints with fixed documented synthetic K",
+    "source_scene": "ARKit visit467138",
+    "split": "train",
+    "examples_manifest": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/examples.json"
+  },
+  "validation": {
+    "tests_passed": 67,
+    "dataset_tests_passed": 9,
+    "ARKit_loader": {
+      "dataset": "ARKitScenes",
+      "recording": "47333462",
+      "scene_id": "arkit_visit_467138",
+      "frames": 48,
+      "RGB_CHW": [
+        3,
+        192,
+        256
+      ],
+      "depth_shape": [
+        192,
+        256
+      ],
+      "depth_unit": "metres",
+      "finite_valid_depth_points": 1329,
+      "depth_range_metres": [
+        0.7289999723434448,
+        2.4159998893737793
+      ],
+      "K": [
+        [
+          213.172,
+          0.0,
+          126.775
+        ],
+        [
+          0.0,
+          213.172,
+          92.7981
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_camera_valid": true,
+      "projection_roundtrip_max_px": 1.1901590823981678e-13,
+      "source_timestamps_ns": [
+        57352888000000,
+        57412380000000
+      ],
+      "RGB_depth_alignment": true,
+      "variable_intrinsics_preserved": true,
+      "calibration_sidecar": "per_frame_intrinsics.json",
+      "change_ground_truth": null
+    },
+    "seven_scenes_loader": {
+      "dataset": "7-Scenes",
+      "scene": "heads",
+      "recording": "seq-02",
+      "native_split": "train",
+      "project_split": "test",
+      "split_policy": "All heads data held out together; native TrainSplit.txt preserved, not a native test benchmark",
+      "verified_native_frames": 1000,
+      "prepared_frames": 48,
+      "rgb_tensor_shape": [
+        3,
+        480,
+        640
+      ],
+      "depth_shape": [
+        480,
+        640
+      ],
+      "depth_unit": "metres",
+      "K_depth_nominal": [
+        [
+          585.0,
+          0.0,
+          320.0
+        ],
+        [
+          0.0,
+          585.0,
+          240.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "K_rgb": null,
+      "RGB_depth_alignment": false,
+      "T_world_camera_valid": true,
+      "maximum_rotation_projection_frobenius": 0.00039597344963589144,
+      "pose_handling": "Small native rotation drift projected to nearest SO3; original matrices preserved per frame",
+      "changes": null
+    },
+    "Replica_component_loader": {
+      "dataset": "Replica",
+      "verified_asset": "data/datasets/replica/raw/apartment_0/textures/27-color-ptex.hdr",
+      "native_tensor_shape": [
+        5616,
+        5616,
+        3
+      ],
+      "native_dtype": "float16",
+      "model_input_shape": [
+        3,
+        512,
+        512
+      ],
+      "appearance_descriptor_shape": [
+        384
+      ],
+      "finite_descriptor": true,
+      "descriptor_norm": 0.9999999727972608,
+      "expert_provenance": {
+        "model": "facebook/dinov2-small",
+        "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+        "device": "cpu"
+      },
+      "camera_validation": "unavailable: atlas is not a camera image",
+      "coordinate_transforms": "unavailable: no mesh/poses downloaded",
+      "full_rgbd_pipeline_test": "blocked, no complete RGB-D recordings",
+      "synthetic_appearance_augmentations": 3,
+      "physical_change_ground_truth": null
+    },
+    "canonical_pair_checks": {
+      "actual_ARKit_ingested_frames": 12,
+      "actual_ARKit_source_timestamps_retained": true,
+      "pose_sync_valid": true,
+      "sharpness_range": [
+        238.50133864705762,
+        1308.1656988047891
+      ],
+      "synthetic_augmented_pairs": [
+        {
+          "scene": "synthetic_arkit_47333462_added",
+          "annotation_classes": [
+            "ADDED"
+          ],
+          "frames_per_recording": 8,
+          "rgbd_metadata_valid": true,
+          "scale": "synthetic metre-scale from native depth",
+          "warnings": []
+        },
+        {
+          "scene": "synthetic_arkit_47333462_lighting",
+          "annotation_classes": [
+            "UNCHANGED"
+          ],
+          "frames_per_recording": 8,
+          "rgbd_metadata_valid": true,
+          "scale": "synthetic metre-scale from native depth",
+          "warnings": []
+        },
+        {
+          "scene": "synthetic_arkit_47333462_moved",
+          "annotation_classes": [
+            "MOVED"
+          ],
+          "frames_per_recording": 8,
+          "rgbd_metadata_valid": true,
+          "scale": "synthetic metre-scale from native depth",
+          "warnings": []
+        },
+        {
+          "scene": "synthetic_arkit_47333462_occlusion",
+          "annotation_classes": [
+            "UNCHANGED"
+          ],
+          "frames_per_recording": 8,
+          "rgbd_metadata_valid": true,
+          "scale": "synthetic metre-scale from native depth",
+          "warnings": []
+        },
+        {
+          "scene": "synthetic_arkit_47333462_removed",
+          "annotation_classes": [
+            "REMOVED"
+          ],
+          "frames_per_recording": 8,
+          "rgbd_metadata_valid": true,
+          "scale": "synthetic metre-scale from native depth",
+          "warnings": []
+        },
+        {
+          "scene": "synthetic_arkit_47333462_small_displacement",
+          "annotation_classes": [
+            "MOVED"
+          ],
+          "frames_per_recording": 8,
+          "rgbd_metadata_valid": true,
+          "scale": "synthetic metre-scale from native depth",
+          "warnings": []
+        },
+        {
+          "scene": "synthetic_arkit_47333462_unchanged",
+          "annotation_classes": [
+            "UNCHANGED"
+          ],
+          "frames_per_recording": 8,
+          "rgbd_metadata_valid": true,
+          "scale": "synthetic metre-scale from native depth",
+          "warnings": []
+        }
+      ],
+      "physical_real_world_accuracy": "not evaluated",
+      "models_training_and_live_app": "unchanged during dataset task"
+    },
+    "real_world_change_accuracy": "not measured"
+  },
+  "integrity": "HTTPS verification, archive CRC, local SHA256 journals. Local SHA256 is not an upstream-published checksum.",
+  "git_policy": "Raw and prepared datasets under ignored data/; no checkpoints changed.",
+  "updated_date": "2026-10-10"
+}
