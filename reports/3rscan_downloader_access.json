@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-10",
+  "requested_downloader": "https://gist.github.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432",
+  "checks": [
+    {
+      "url": "https://gist.github.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432",
+      "result": "BLOCKED",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://gist.githubusercontent.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432/raw/",
+      "result": "BLOCKED",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    }
+  ],
+  "downloader_inspected": false,
+  "scans_downloaded": false,
+  "terms_accepted": false,
+  "network_draft": "gist.github.com and gist.githubusercontent.com added; requires settings publication; does not activate runtime",
+  "next_step": "Publish saved network settings, inspect downloader access/terms, then acquire a small approved documented pair."
+}
