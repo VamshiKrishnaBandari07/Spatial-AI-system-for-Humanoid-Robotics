@@ -92,6 +92,11 @@ def run(
                 .round()
                 .astype(int)
             ]
+            if config.neural_frame_selection == "quality_diverse":
+                from .ingestion import neural_keyframes
+
+                bk = neural_keyframes(bf, config.neural_frames_per_video)
+                ak = neural_keyframes(af, config.neural_frames_per_video)
             stage("reconstruction_before")
             b = reconstruct_neural(
                 bk,
@@ -121,6 +126,16 @@ def run(
                     input_metadata.get("after", {}).get("camera_data"),
                 )
             )
+        if config.metric_geometry_enabled:
+            if config.geometry_backend != "vggt" or not config.registration_initial:
+                raise ValueError(
+                    "Metric neural workflow requires VGGT and an explicit sourced registration initial transform"
+                )
+            from .sensor_geometry import reconstruct_sensor
+
+            stage("metric_sensor_reconstruction")
+            b = reconstruct_sensor(bf, input_metadata.get("before", {}), b.diagnostics)
+            a = reconstruct_sensor(af, input_metadata.get("after", {}), a.diagnostics)
         b_observations = []
         a_observations = []
         b_masks = {}
@@ -142,7 +157,76 @@ def run(
             )
             del semantic_experts
         stage("shared_registration")
-        registration = register(b, a, config, b_masks, a_masks)
+        if config.metric_geometry_enabled:
+            from .metric_alignment import metric_register
+            from .contracts import Registration
+            from .benchmarking import sha256
+
+            initial = json.loads(Path(config.registration_initial).read_text())
+            if (
+                initial.get("unit") != "metres"
+                or initial.get("source_frame") != "rescan_world"
+                or initial.get("destination_frame") != "reference_world"
+            ):
+                raise ValueError("Unsupported metric initial-transform convention")
+            if sha256(initial["relationship_file"]) != initial["relationship_sha256"]:
+                raise ValueError("Source transform relationship checksum mismatch")
+            if (
+                initial.get("before_video_sha256") != bm["sha256"]
+                or initial.get("after_video_sha256") != am["sha256"]
+            ):
+                raise ValueError(
+                    "Metric initial transform belongs to different recordings"
+                )
+            relationship = json.loads(Path(initial["relationship_file"]).read_text())
+            native_pair = next(
+                (
+                    s
+                    for item in relationship
+                    if item.get("reference") == initial.get("before_recording_id")
+                    for s in item.get("scans", [])
+                    if s.get("reference") == initial.get("after_recording_id")
+                ),
+                None,
+            )
+            if native_pair is None or not np.allclose(
+                np.asarray(native_pair["transform"]).reshape(4, 4, order="F"),
+                initial["T_reference_rescan"],
+                atol=1e-6,
+            ):
+                raise ValueError(
+                    "Metric seed does not match the native reference/rescan transform"
+                )
+            metrics = metric_register(
+                a.points,
+                b.points,
+                initial["T_reference_rescan"],
+                config.registration_threshold,
+            )
+            (output / "registration_diagnostics.json").write_text(
+                json.dumps(metrics, indent=2)
+            )
+            T = np.asarray(metrics["T_reference_rescan"])
+            registration = Registration(
+                valid=metrics["valid"],
+                scale=1,
+                rotation=T[:3, :3].tolist(),
+                translation=T[:3, 3].tolist(),
+                inliers=metrics["refined"]["inliers"],
+                correspondences=metrics["refined"]["source_points"],
+                rmse=metrics["refined"]["inlier_rmse_metres"],
+                threshold=config.registration_threshold,
+                reason=metrics["reason"],
+                heldout_count=metrics["heldout"]["source_points"],
+                heldout_inliers=metrics["heldout"]["inliers"],
+                heldout_rmse=metrics["heldout"]["inlier_rmse_metres"],
+                metric_diagnostics=metrics,
+            )
+        else:
+            registration = register(b, a, config, b_masks, a_masks)
+            (output / "registration_diagnostics.json").write_text(
+                registration.model_dump_json(indent=2)
+            )
         if not registration.valid:
             raise ValueError("Registration gate failed: " + registration.reason)
         aligned = transform(
@@ -172,6 +256,11 @@ def run(
                 output, before_objects, after_objects, semantic_events
             )
             events.extend(semantic_events)
+        if config.metric_geometry_enabled:
+            for event in events:
+                event.coordinate_system = "reference native world; right-handed"
+                event.scale_status = "verified sensor metres"
+                event.displacement_units = "metres"
         np.savez_compressed(
             output / "world.npz",
             before=b.points,
@@ -225,10 +314,19 @@ def run(
             "optional_inputs": {
                 state: {
                     k: (
-                        "validated, retained; not fused by sparse baseline"
+                        (
+                            "used in calibrated metric reconstruction"
+                            if config.metric_geometry_enabled
+                            and k in ["depth_dir", "poses"]
+                            else "validated, retained; not fused by sparse baseline"
+                        )
                         if k in ["depth_dir", "poses", "imu"]
                         else (
-                            "validated; VGGT predicts intrinsics, calibration not fused"
+                            (
+                                "used for calibrated RGB/depth projection"
+                                if config.metric_geometry_enabled
+                                else "validated; VGGT predicts intrinsics, calibration not fused"
+                            )
                             if k == "camera" and config.geometry_backend == "vggt"
                             else "used"
                         )
@@ -243,8 +341,12 @@ def run(
                 "Semantic labels and depth are model predictions, not verified ground truth."
                 if config.semantics_enabled
                 else "Sparse geometric candidates have no semantic identity.",
-                "No measured depth: absence is UNKNOWN.",
-                "No metric scale calibration.",
+                "Missing measured-depth pixels preserve UNKNOWN visibility."
+                if config.metric_geometry_enabled
+                else "No measured depth: absence is UNKNOWN.",
+                "Sensor metric scale used; uncertainty not independently calibrated."
+                if config.metric_geometry_enabled
+                else "No metric scale calibration.",
                 "Static-background dominance is assumed, not guaranteed.",
             ],
         }

@@ -1,0 +1,1035 @@
+{
+  "inference_report_sha256": "2f9992c7e1af840b3a62cd4d85f03dcaedf0ebe85742fcb2400d6f82e1c30c24",
+  "objects": [
+    {
+      "state": "before",
+      "object_id": "before_object_0",
+      "label": "bottle",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_1",
+      "label": "sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_2",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_3",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_4",
+      "label": "sink trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_5",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_6",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_7",
+      "label": "mirror",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_8",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_9",
+      "label": "toilet sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_10",
+      "label": "bottle",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_11",
+      "label": "bottle",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_12",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_13",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_14",
+      "label": "sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_15",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_16",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_17",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_18",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_19",
+      "label": "bottle",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_20",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_21",
+      "label": "bottle",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_22",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_0",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_1",
+      "label": "mirror",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_2",
+      "label": "toilet sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_3",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_4",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_5",
+      "label": "sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_6",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 0,
+      "localized": false
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_7",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_8",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_9",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_10",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_11",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_12",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_13",
+      "label": "toilet",
+      "observations": 2,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_14",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_15",
+      "label": "sink bathtub",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_16",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_17",
+      "label": "bathtub",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_18",
+      "label": "bathtub",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_19",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_20",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_21",
+      "label": "backpack",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_22",
+      "label": "bottle",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_23",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_24",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_25",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_26",
+      "label": "sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_27",
+      "label": "mirror",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_28",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_29",
+      "label": "sink mirror",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_30",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_31",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_32",
+      "label": "backpack towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_33",
+      "label": "box trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_34",
+      "label": "sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    }
+  ],
+  "same_label_pairs": [
+    {
+      "before": "before_object_0",
+      "after": "after_object_22",
+      "label": "bottle",
+      "cosine": 0.24362708402074337,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_1",
+      "after": "after_object_5",
+      "label": "sink",
+      "cosine": 0.30604851788332393,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_1",
+      "after": "after_object_26",
+      "label": "sink",
+      "cosine": 0.2822020855547939,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_1",
+      "after": "after_object_34",
+      "label": "sink",
+      "cosine": 0.3184227129734289,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_2",
+      "after": "after_object_9",
+      "label": "toilet",
+      "cosine": 0.2704757687457779,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_2",
+      "after": "after_object_10",
+      "label": "toilet",
+      "cosine": 0.2366704291101145,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_2",
+      "after": "after_object_13",
+      "label": "toilet",
+      "cosine": 0.27999511221048545,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_2",
+      "after": "after_object_30",
+      "label": "toilet",
+      "cosine": 0.1430214574111622,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_4",
+      "label": "towel",
+      "cosine": 0.2859263593461266,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_11",
+      "label": "towel",
+      "cosine": 0.39175470926428607,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_20",
+      "label": "towel",
+      "cosine": 0.29879788934304974,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_23",
+      "label": "towel",
+      "cosine": 0.38146131329441635,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_24",
+      "label": "towel",
+      "cosine": 0.37486870258113564,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_31",
+      "label": "towel",
+      "cosine": 0.21089455946208988,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_5",
+      "after": "after_object_4",
+      "label": "towel",
+      "cosine": 0.38080569549045007,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_5",
+      "after": "after_object_11",
+      "label": "towel",
+      "cosine": 0.3942528089183315,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_5",
+      "after": "after_object_20",
+      "label": "towel",
+      "cosine": 0.20049881470129832,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_5",
+      "after": "after_object_23",
+      "label": "towel",
+      "cosine": 0.43574737295944066,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_5",
+      "after": "after_object_24",
+      "label": "towel",
+      "cosine": 0.23432190520518328,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_5",
+      "after": "after_object_31",
+      "label": "towel",
+      "cosine": 0.15933620306417437,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_6",
+      "after": "after_object_3",
+      "label": "cabinet",
+      "cosine": 0.2196648713355485,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_6",
+      "after": "after_object_7",
+      "label": "cabinet",
+      "cosine": 0.13458101983512824,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_6",
+      "after": "after_object_19",
+      "label": "cabinet",
+      "cosine": 0.6089398066394177,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_6",
+      "after": "after_object_28",
+      "label": "cabinet",
+      "cosine": 0.591364577148252,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_7",
+      "after": "after_object_1",
+      "label": "mirror",
+      "cosine": 0.11050929083699129,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_7",
+      "after": "after_object_27",
+      "label": "mirror",
+      "cosine": 0.28032405423892864,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_8",
+      "after": "after_object_0",
+      "label": "trash",
+      "cosine": 0.19414012087393825,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_8",
+      "after": "after_object_6",
+      "label": "trash",
+      "cosine": 0.5491505373428042,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_8",
+      "after": "after_object_8",
+      "label": "trash",
+      "cosine": 0.30616501916393146,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_8",
+      "after": "after_object_12",
+      "label": "trash",
+      "cosine": 0.28144008210447885,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_8",
+      "after": "after_object_14",
+      "label": "trash",
+      "cosine": 0.4725031874617656,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_8",
+      "after": "after_object_16",
+      "label": "trash",
+      "cosine": 0.5437801620014925,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_8",
+      "after": "after_object_25",
+      "label": "trash",
+      "cosine": 0.4215699845133241,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_9",
+      "after": "after_object_2",
+      "label": "toilet sink",
+      "cosine": 0.3970132846212122,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_10",
+      "after": "after_object_22",
+      "label": "bottle",
+      "cosine": 0.3730928974500283,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_11",
+      "after": "after_object_22",
+      "label": "bottle",
+      "cosine": 0.41361180158111976,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_12",
+      "after": "after_object_0",
+      "label": "trash",
+      "cosine": 0.22143313783918908,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_12",
+      "after": "after_object_6",
+      "label": "trash",
+      "cosine": 0.4423817808654652,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_12",
+      "after": "after_object_8",
+      "label": "trash",
+      "cosine": 0.2806239184232598,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_12",
+      "after": "after_object_12",
+      "label": "trash",
+      "cosine": 0.34788889403367396,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_12",
+      "after": "after_object_14",
+      "label": "trash",
+      "cosine": 0.37218505098576304,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_12",
+      "after": "after_object_16",
+      "label": "trash",
+      "cosine": 0.4469196159220899,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_12",
+      "after": "after_object_25",
+      "label": "trash",
+      "cosine": 0.3563693231327481,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_13",
+      "after": "after_object_9",
+      "label": "toilet",
+      "cosine": 0.15282973843182832,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_13",
+      "after": "after_object_10",
+      "label": "toilet",
+      "cosine": 0.23493414249033592,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_13",
+      "after": "after_object_13",
+      "label": "toilet",
+      "cosine": 0.1310874696551286,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_13",
+      "after": "after_object_30",
+      "label": "toilet",
+      "cosine": 0.22042602473186024,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_14",
+      "after": "after_object_5",
+      "label": "sink",
+      "cosine": 0.30620306945687115,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_14",
+      "after": "after_object_26",
+      "label": "sink",
+      "cosine": 0.15691764767818212,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_14",
+      "after": "after_object_34",
+      "label": "sink",
+      "cosine": 0.2810883321205558,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_15",
+      "after": "after_object_4",
+      "label": "towel",
+      "cosine": 0.3006610815982712,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_15",
+      "after": "after_object_11",
+      "label": "towel",
+      "cosine": 0.3874085420324595,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_15",
+      "after": "after_object_20",
+      "label": "towel",
+      "cosine": 0.13032426390362625,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_15",
+      "after": "after_object_23",
+      "label": "towel",
+      "cosine": 0.36511276930103514,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_15",
+      "after": "after_object_24",
+      "label": "towel",
+      "cosine": 0.256893823039252,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_15",
+      "after": "after_object_31",
+      "label": "towel",
+      "cosine": 0.08221326078913867,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_16",
+      "after": "after_object_9",
+      "label": "toilet",
+      "cosine": 0.3188867531471142,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_16",
+      "after": "after_object_10",
+      "label": "toilet",
+      "cosine": 0.31514398161776336,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_16",
+      "after": "after_object_13",
+      "label": "toilet",
+      "cosine": 0.1889767001758558,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_16",
+      "after": "after_object_30",
+      "label": "toilet",
+      "cosine": 0.33601445884850384,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_17",
+      "after": "after_object_9",
+      "label": "toilet",
+      "cosine": 0.27946240755106116,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_17",
+      "after": "after_object_10",
+      "label": "toilet",
+      "cosine": 0.2977936087246206,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_17",
+      "after": "after_object_13",
+      "label": "toilet",
+      "cosine": 0.18002420791507634,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_17",
+      "after": "after_object_30",
+      "label": "toilet",
+      "cosine": 0.2868633711912453,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_18",
+      "after": "after_object_9",
+      "label": "toilet",
+      "cosine": 0.2717054877835892,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_18",
+      "after": "after_object_10",
+      "label": "toilet",
+      "cosine": 0.1771254618666786,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_18",
+      "after": "after_object_13",
+      "label": "toilet",
+      "cosine": 0.4127046500757278,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_18",
+      "after": "after_object_30",
+      "label": "toilet",
+      "cosine": 0.24560545785560994,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_19",
+      "after": "after_object_22",
+      "label": "bottle",
+      "cosine": 0.36717968252545075,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_20",
+      "after": "after_object_4",
+      "label": "towel",
+      "cosine": 0.2906949800321618,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_20",
+      "after": "after_object_11",
+      "label": "towel",
+      "cosine": 0.41700023627977895,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_20",
+      "after": "after_object_20",
+      "label": "towel",
+      "cosine": 0.303872097541763,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_20",
+      "after": "after_object_23",
+      "label": "towel",
+      "cosine": 0.2937389179700997,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_20",
+      "after": "after_object_24",
+      "label": "towel",
+      "cosine": 0.38223332086433215,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_20",
+      "after": "after_object_31",
+      "label": "towel",
+      "cosine": 0.28845349431455936,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_21",
+      "after": "after_object_22",
+      "label": "bottle",
+      "cosine": 0.38681302503494785,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_22",
+      "after": "after_object_9",
+      "label": "toilet",
+      "cosine": 0.11081625214872945,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_22",
+      "after": "after_object_10",
+      "label": "toilet",
+      "cosine": 0.20729076228152998,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_22",
+      "after": "after_object_13",
+      "label": "toilet",
+      "cosine": 0.12550643158751318,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_22",
+      "after": "after_object_30",
+      "label": "toilet",
+      "cosine": 0.13377716479754004,
+      "passes_appearance_gate": false
+    }
+  ],
+  "accepted_assignment_candidates": [],
+  "identity_cosine_gate": 0.85,
+  "movement_threshold": 0.16,
+  "scope": "Saved actual neural observations; diagnostics only. No annotation IDs, thresholds or predictions changed."
+}

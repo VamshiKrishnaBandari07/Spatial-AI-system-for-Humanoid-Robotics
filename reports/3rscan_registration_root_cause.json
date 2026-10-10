@@ -1,0 +1,78 @@
+{
+  "mode": "Diagnostic reconstruction from exact saved neural arrays; not fresh inference",
+  "selected_native_indices": [
+    [
+      45,
+      135
+    ],
+    [
+      0,
+      105
+    ]
+  ],
+  "matches": [
+    {
+      "before_frame": "before:45",
+      "after_frame": "after:0",
+      "SIFT_mutual_matches": 1,
+      "depth_confidence_retained_matches": 0
+    },
+    {
+      "before_frame": "before:45",
+      "after_frame": "after:105",
+      "SIFT_mutual_matches": 0,
+      "depth_confidence_retained_matches": 0
+    },
+    {
+      "before_frame": "before:135",
+      "after_frame": "after:0",
+      "SIFT_mutual_matches": 0,
+      "depth_confidence_retained_matches": 0
+    },
+    {
+      "before_frame": "before:135",
+      "after_frame": "after:105",
+      "SIFT_mutual_matches": 0,
+      "depth_confidence_retained_matches": 0
+    }
+  ],
+  "lifted_pairs": 0,
+  "one_to_one_pairs": 0,
+  "registration": {
+    "valid": false,
+    "scale": 1.0,
+    "rotation": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "translation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "inliers": 0,
+    "correspondences": 0,
+    "rmse": null,
+    "threshold": 0.08,
+    "reason": "Insufficient nondegenerate consensus",
+    "heldout_count": 0,
+    "heldout_inliers": 0,
+    "heldout_rmse": null,
+    "foreground_matches_excluded": 0
+  },
+  "sensor_depth_used_in_original_registration": false,
+  "source_pose_used_in_original_registration": false
+}

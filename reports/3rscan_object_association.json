@@ -1,0 +1,182 @@
+{
+  "inference_report_sha256": "7ee997f630f95777f432bb206318cd1dc106baa83993f06cfc4213194445312d",
+  "objects": [
+    {
+      "state": "before",
+      "object_id": "before_object_0",
+      "label": "toilet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_1",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_2",
+      "label": "sink trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_3",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "before",
+      "object_id": "before_object_4",
+      "label": "mirror",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_0",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_1",
+      "label": "sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_2",
+      "label": "trash",
+      "observations": 1,
+      "distinct_views": 0,
+      "localized": false
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_3",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_4",
+      "label": "bathtub",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_5",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_6",
+      "label": "mirror",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_7",
+      "label": "cabinet",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_8",
+      "label": "towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_9",
+      "label": "backpack towel",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_10",
+      "label": "box trash",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    },
+    {
+      "state": "after",
+      "object_id": "after_object_11",
+      "label": "sink",
+      "observations": 1,
+      "distinct_views": 1,
+      "localized": true
+    }
+  ],
+  "same_label_pairs": [
+    {
+      "before": "before_object_1",
+      "after": "after_object_0",
+      "label": "towel",
+      "cosine": 0.2859263593461266,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_1",
+      "after": "after_object_8",
+      "label": "towel",
+      "cosine": 0.21089455946208988,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_0",
+      "label": "towel",
+      "cosine": 0.38080569549045007,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_3",
+      "after": "after_object_8",
+      "label": "towel",
+      "cosine": 0.15933620306417437,
+      "passes_appearance_gate": false
+    },
+    {
+      "before": "before_object_4",
+      "after": "after_object_6",
+      "label": "mirror",
+      "cosine": 0.28032405423892864,
+      "passes_appearance_gate": false
+    }
+  ],
+  "accepted_assignment_candidates": [],
+  "identity_cosine_gate": 0.85,
+  "movement_threshold": 0.16,
+  "scope": "Saved actual neural observations; diagnostics only. No annotation IDs, thresholds or predictions changed."
+}

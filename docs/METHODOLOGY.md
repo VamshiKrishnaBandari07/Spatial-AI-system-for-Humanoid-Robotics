@@ -37,3 +37,13 @@ See [evaluation evidence](../EVALUATION.md), [implementation review](REVIEW.md),
 ## Dataset recovery continuation
 
 Provenance-aware annotation schemas, a separate human annotation workspace, pair/input-hash verification, explicit benchmark identity mapping and measured process-resource profiling are now available. The current regression suite passes 92 tests. One actual ARKit recording passed a full inference control, with an UNKNOWN object result; it is not a genuine two-visit benchmark. See [dataset quality report](../reports/dataset_quality_report.md). The advanced model-stack and real-accuracy limitations above remain unchanged.
+
+## 2026-10-10 — Real 3RScan metric validation update
+
+The later approved real-pair run supersedes earlier unavailable-registration statements for this pair only. The original failure was zero lifted cross-session matches. An opt-in calibrated RGB-D path uses the verified native column-major metre transform and robust, gated coarse-to-fine ICP; held-out overlap is 46.09% and RMSE 0.03970 m. A fresh VGGT/semantic run completed; the final evidence run reuses integrity-validated VGGT predictions and invokes semantic experts again.
+
+The native-source audit supports one positive MOVED instance; other categories remain UNKNOWN/unscored. It was missed: recall 0, F1 0, precision undefined. All 28 final events are UNKNOWN and no semantic association was accepted. Full inventory accuracy, object matching accuracy and calibrated posterior uncertainty are unavailable. Saved-observation ablations remain entirely abstaining. No generalization or completed research-system claim follows. The regression suite now passes 103 tests with one dependency deprecation warning.
+
+See [exact diagnostics, commands, artifacts and limitations](3RSCAN_VALIDATION.md). Historical runs and failed diagnostics remain preserved. No model architecture, training or checkpoints were replaced.
+
+A later twelve-keyframe-per-recording coverage run also completed (611.03 s wall time), producing 69 UNKNOWN decisions and zero accepted cross-session associations. All 80 same-label candidate pairs failed the unchanged 0.85 appearance gate. MOVED subset recall/F1 remains 0 on one supported native instance; extra views did not establish reliable detection. See `reports/3rscan_coverage_evaluation.json` and the validation instructions.

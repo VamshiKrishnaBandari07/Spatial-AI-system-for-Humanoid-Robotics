@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "errors": [],
+  "stats": {
+    "before": 5120,
+    "after": 5050,
+    "truth": 1,
+    "events": 58
+  },
+  "checks": [
+    "Actual HTML loaded using Playwright setContent",
+    "Native truth layer toggled",
+    "Drag rotation",
+    "Wheel zoom"
+  ],
+  "screenshot": "/workspace/spatialmemory-3rscan-coverage-20261010/visualization/viewer_browser.png"
+}

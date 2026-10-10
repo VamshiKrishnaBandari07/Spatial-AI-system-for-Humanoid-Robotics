@@ -1,0 +1,269 @@
+{
+  "status": "complete",
+  "full_research_system_completed": false,
+  "fresh_neural_run": "/workspace/spatialmemory-3rscan-metric-final-20261010",
+  "fresh_neural_profile": {
+    "status": "passed",
+    "exit_code": 0,
+    "wall_seconds": 227.29081670600863,
+    "peak_child_process_rss_mib": 9968.5234375,
+    "memory_method": "Fresh wrapper process resource.getrusage(RUSAGE_CHILDREN).ru_maxrss; maximum individual child RSS, not aggregate process-tree or GPU memory",
+    "report_sha256": "c325e62ed5ea9852127e0e7f50ae74ffc90e92b91d3f97f7d52110052c08db5c",
+    "manifest_sha256": "074a7aeebc052a21b5f632bdf83b50be614e6b4f518ac2f8c8b43e8281b38caf",
+    "config_sha256": "cab44d6f75431daef75876af01c6088413d61b4890666d631ee5474aa5ad5ace",
+    "command": [
+      "/workspace/spatialmemory-venv/bin/python",
+      "-m",
+      "spatialmemory_x",
+      "run",
+      "--manifest",
+      "data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/manifest.json",
+      "--config",
+      "configs/3rscan_metric_cpu.json",
+      "--project-root",
+      ".",
+      "--output",
+      "/workspace/spatialmemory-3rscan-metric-final-20261010"
+    ]
+  },
+  "final_semantic_run": "/workspace/spatialmemory-3rscan-reviewed-final-20261010",
+  "final_profile": {
+    "status": "passed",
+    "exit_code": 0,
+    "wall_seconds": 169.03040045598755,
+    "peak_child_process_rss_mib": 3855.46875,
+    "memory_method": "Fresh wrapper process resource.getrusage(RUSAGE_CHILDREN).ru_maxrss; maximum individual child RSS, not aggregate process-tree or GPU memory",
+    "report_sha256": "7ee997f630f95777f432bb206318cd1dc106baa83993f06cfc4213194445312d",
+    "manifest_sha256": "074a7aeebc052a21b5f632bdf83b50be614e6b4f518ac2f8c8b43e8281b38caf",
+    "config_sha256": "99915ef08f44c418d0dbf64f2a07f76c2e071f0f4ad914942371998c09f7838a",
+    "command": [
+      "/workspace/spatialmemory-venv/bin/python",
+      "-m",
+      "spatialmemory_x",
+      "run",
+      "--manifest",
+      "data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/manifest.json",
+      "--config",
+      "configs/3rscan_metric_replay.json",
+      "--project-root",
+      ".",
+      "--output",
+      "/workspace/spatialmemory-3rscan-reviewed-final-20261010"
+    ]
+  },
+  "final_neural_geometry_mode": "Integrity-validated saved VGGT predictions from fresh_neural_run; Grounding DINO, SAM 2 and DINOv2 invoked again",
+  "seed": 7,
+  "registration": {
+    "valid": true,
+    "scale": 1.0,
+    "rotation": [
+      [
+        0.8017031844145912,
+        -0.5977159043954607,
+        -0.002795282949518377
+      ],
+      [
+        0.5977113833887171,
+        0.8016512635947527,
+        0.009819691165028453
+      ],
+      [
+        -0.0036285431906922833,
+        -0.009543249814030727,
+        0.9999479120666159
+      ]
+    ],
+    "translation": [
+      0.09468612967174041,
+      -0.10709447794819557,
+      0.016677551710163097
+    ],
+    "inliers": 21193,
+    "correspondences": 30435,
+    "rmse": 0.0334637426270012,
+    "threshold": 0.08,
+    "reason": "Metric overlap, RMSE, held-out geometry and correction gates passed",
+    "heldout_count": 6087,
+    "heldout_inliers": 4035,
+    "heldout_rmse": 0.03970239050416826,
+    "foreground_matches_excluded": 0,
+    "metric_diagnostics": {
+      "valid": true,
+      "T_reference_rescan": [
+        [
+          0.8017031844145912,
+          -0.5977159043954607,
+          -0.002795282949518377,
+          0.09468612967174041
+        ],
+        [
+          0.5977113833887171,
+          0.8016512635947527,
+          0.009819691165028453,
+          -0.10709447794819557
+        ],
+        [
+          -0.0036285431906922833,
+          -0.009543249814030727,
+          0.9999479120666159,
+          0.016677551710163097
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "initial": {
+        "source_points": 30435,
+        "target_points": 39874,
+        "fitness": 0.7078363725973386,
+        "reverse_fitness": 0.4945829362491849,
+        "symmetric_overlap": 0.4945829362491849,
+        "inliers": 21543,
+        "inlier_rmse_metres": 0.03473413045070241,
+        "median_distance_metres": 0.03736737136773046,
+        "threshold_metres": 0.08
+      },
+      "refined": {
+        "source_points": 30435,
+        "target_points": 39874,
+        "fitness": 0.696336454739609,
+        "reverse_fitness": 0.4861313136379596,
+        "symmetric_overlap": 0.4861313136379596,
+        "inliers": 21193,
+        "inlier_rmse_metres": 0.0334637426270012,
+        "median_distance_metres": 0.035996371318287,
+        "threshold_metres": 0.08
+      },
+      "heldout": {
+        "source_points": 6087,
+        "target_points": 7975,
+        "fitness": 0.6628881222276983,
+        "reverse_fitness": 0.46094043887147335,
+        "symmetric_overlap": 0.46094043887147335,
+        "inliers": 4035,
+        "inlier_rmse_metres": 0.03970239050416826,
+        "median_distance_metres": 0.0475232533691632,
+        "threshold_metres": 0.08
+      },
+      "history": [
+        {
+          "source_points": 2890,
+          "target_points": 4451,
+          "fitness": 0.9003460207612457,
+          "reverse_fitness": 0.6412042237699394,
+          "symmetric_overlap": 0.6412042237699394,
+          "inliers": 2602,
+          "inlier_rmse_metres": 0.08879326855808643,
+          "median_distance_metres": 0.05763218144606759,
+          "threshold_metres": 0.24
+        },
+        {
+          "source_points": 9577,
+          "target_points": 13265,
+          "fitness": 0.7675681319828757,
+          "reverse_fitness": 0.544515642668677,
+          "symmetric_overlap": 0.544515642668677,
+          "inliers": 7351,
+          "inlier_rmse_metres": 0.048875787870814584,
+          "median_distance_metres": 0.04306402319517767,
+          "threshold_metres": 0.12
+        },
+        {
+          "source_points": 24348,
+          "target_points": 31899,
+          "fitness": 0.6955807458518154,
+          "reverse_fitness": 0.4835261293457475,
+          "symmetric_overlap": 0.4835261293457475,
+          "inliers": 16936,
+          "inlier_rmse_metres": 0.0340699221624202,
+          "median_distance_metres": 0.036942327232356804,
+          "threshold_metres": 0.08
+        }
+      ],
+      "correction_translation_metres": 0.01071191380046819,
+      "correction_rotation_degrees": 0.6417272532414048,
+      "reason": "Metric overlap, RMSE, held-out geometry and correction gates passed",
+      "estimation_condition": "Explicit source initial transform plus robust ICP; not autonomous global registration"
+    }
+  },
+  "event_counts": {
+    "UNKNOWN": 28
+  },
+  "supported_ground_truth_objects": 1,
+  "partial_metrics": {
+    "precision": null,
+    "recall": 0.0,
+    "f1": 0.0,
+    "support": 1
+  },
+  "full_detection_metrics": null,
+  "source_transform_assisted": true,
+  "native_split": "train",
+  "dependencies": {
+    "torch": "2.6.0+cpu",
+    "numpy": "2.3.5",
+    "opencv-python-headless": "4.11.0.86",
+    "scipy": "1.17.0",
+    "transformers": "4.49.0",
+    "Pillow": "11.1.0",
+    "pydantic": "2.13.4"
+  },
+  "visualization_directory": "/workspace/spatialmemory-3rscan-reviewed-final-20261010/visualization",
+  "limits": [
+    "Zero accepted cross-session semantic associations",
+    "All 28 decisions UNKNOWN; no physical change detected",
+    "Only one source-audited positive MOVED instance; other classes unsupported",
+    "Native alignment transform assisted; not autonomous global registration",
+    "Raw confidence and spread are not calibrated posterior probabilities",
+    "No independent scene generalization benchmark",
+    "Restricted source data and derived point clouds remain outside Git",
+    "Workflow string retains legacy VGGT label; primary geometry is measured RGB-D and scene-graph distance values use metres despite generic reconstruction-units label"
+  ],
+  "additional_coverage_run": {
+    "directory": "/workspace/spatialmemory-3rscan-coverage-20261010",
+    "profile": {
+      "status": "passed",
+      "exit_code": 0,
+      "wall_seconds": 611.026956886999,
+      "peak_child_process_rss_mib": 3824.4921875,
+      "memory_method": "Fresh wrapper process resource.getrusage(RUSAGE_CHILDREN).ru_maxrss; maximum individual child RSS, not aggregate process-tree or GPU memory",
+      "report_sha256": "2f9992c7e1af840b3a62cd4d85f03dcaedf0ebe85742fcb2400d6f82e1c30c24",
+      "manifest_sha256": "074a7aeebc052a21b5f632bdf83b50be614e6b4f518ac2f8c8b43e8281b38caf",
+      "config_sha256": "bea75a287749b04e7a427c6b50a32af8716929b3e80fcc12a591cbfde202d469",
+      "command": [
+        "/workspace/spatialmemory-venv/bin/python",
+        "-m",
+        "spatialmemory_x",
+        "run",
+        "--manifest",
+        "data/datasets/3rscan/processed/02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327/manifest.json",
+        "--config",
+        "configs/3rscan_metric_coverage.json",
+        "--project-root",
+        ".",
+        "--output",
+        "/workspace/spatialmemory-3rscan-coverage-20261010"
+      ]
+    },
+    "semantic_frames_per_recording": 12,
+    "counts": {
+      "UNKNOWN": 69
+    },
+    "semantic_counts": {
+      "UNKNOWN": 58
+    },
+    "same_label_candidate_pairs": 80,
+    "pairs_passing_fixed_appearance_gate": 0,
+    "accepted_associations": 0,
+    "partial_MOVED_metrics": {
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1
+    },
+    "geometry_mode": "Same integrity-validated VGGT cache; actual semantic models invoked again"
+  }
+}

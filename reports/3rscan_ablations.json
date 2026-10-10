@@ -1,0 +1,44 @@
+{
+  "inference_report_sha256": "7ee997f630f95777f432bb206318cd1dc106baa83993f06cfc4213194445312d",
+  "mode": "Post-inference replay of saved actual neural observations and measured geometry; no model invocation in this ablation",
+  "rows": [
+    {
+      "mode": "baseline",
+      "semantic_events": 17,
+      "class_counts": {
+        "UNKNOWN": 17
+      },
+      "association_count": 0,
+      "verified_identity_count": 0
+    },
+    {
+      "mode": "without_multi_view_gate",
+      "semantic_events": 17,
+      "class_counts": {
+        "UNKNOWN": 17
+      },
+      "association_count": 0,
+      "verified_identity_count": 0
+    },
+    {
+      "mode": "without_visibility",
+      "semantic_events": 17,
+      "class_counts": {
+        "UNKNOWN": 17
+      },
+      "association_count": 0,
+      "verified_identity_count": 0
+    },
+    {
+      "mode": "without_observed_spread_band",
+      "semantic_events": 17,
+      "class_counts": {
+        "UNKNOWN": 17
+      },
+      "association_count": 0,
+      "verified_identity_count": 0
+    }
+  ],
+  "calibrated_uncertainty_ablation": "Unavailable: no independent likelihood calibration or covariance estimator exists for this pair",
+  "interpretation": "Identical abstaining outputs cannot establish benefit from any component; this is a feasibility ablation, not a general benchmark"
+}

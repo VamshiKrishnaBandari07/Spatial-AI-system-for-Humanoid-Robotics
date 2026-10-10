@@ -1,0 +1,50 @@
+{
+  "inference_report_sha256": "7ee997f630f95777f432bb206318cd1dc106baa83993f06cfc4213194445312d",
+  "rows": [
+    {
+      "state": "before",
+      "frame_id": "before:39",
+      "depth_pairs": 10584,
+      "scale_fit_pixels": 5292,
+      "heldout_pixels": 5292,
+      "fitted_monocular_scale": 0.6786306420076138,
+      "heldout_median_absolute_depth_error_metres": 0.0037748706340789417,
+      "heldout_p90_absolute_depth_error_metres": 0.010723203325271607,
+      "heldout_median_relative_depth_error": 0.006909708975616896
+    },
+    {
+      "state": "before",
+      "frame_id": "before:107",
+      "depth_pairs": 20016,
+      "scale_fit_pixels": 10008,
+      "heldout_pixels": 10008,
+      "fitted_monocular_scale": 0.8969911934062401,
+      "heldout_median_absolute_depth_error_metres": 0.01347897529602049,
+      "heldout_p90_absolute_depth_error_metres": 0.03331912164688112,
+      "heldout_median_relative_depth_error": 0.01538415864113802
+    },
+    {
+      "state": "after",
+      "frame_id": "after:54",
+      "depth_pairs": 11062,
+      "scale_fit_pixels": 5531,
+      "heldout_pixels": 5531,
+      "fitted_monocular_scale": 1.0970090585175931,
+      "heldout_median_absolute_depth_error_metres": 0.02206724405288696,
+      "heldout_p90_absolute_depth_error_metres": 0.06222589588165284,
+      "heldout_median_relative_depth_error": 0.022945000849209626
+    },
+    {
+      "state": "after",
+      "frame_id": "after:104",
+      "depth_pairs": 19116,
+      "scale_fit_pixels": 9558,
+      "heldout_pixels": 9558,
+      "fitted_monocular_scale": 0.8095999102165525,
+      "heldout_median_absolute_depth_error_metres": 0.02527530288696289,
+      "heldout_p90_absolute_depth_error_metres": 0.056253347921371474,
+      "heldout_median_relative_depth_error": 0.04251170151796446
+    }
+  ],
+  "interpretation": "Native measured sensor depth versus actual saved neural depth after robust per-frame scale fitting; held-out alternating pixels are spatially correlated. Nearest-pixel depth resampling; no room-level accuracy or calibrated uncertainty claim."
+}

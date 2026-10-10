@@ -180,3 +180,25 @@ def keyframes(frames, limit=24):
     # Temporal spread is a proxy only; not independent viewpoint confirmation.
     ids = np.linspace(0, len(candidates) - 1, limit).round().astype(int)
     return [candidates[i] for i in ids]
+
+
+def neural_keyframes(frames, count):
+    """Feature-quality selection with temporal spread; not a viewpoint guarantee."""
+    candidates = keyframes(frames)
+    maximum = max(f.features for f in candidates)
+    candidates = [f for f in candidates if f.features >= maximum * 0.1]
+    if len(candidates) < 2:
+        raise ValueError("Insufficient quality-qualified neural frames")
+    selected = [max(candidates, key=lambda f: (f.features, f.sharpness))]
+    span = max(f.timestamp for f in candidates) - min(f.timestamp for f in candidates)
+    while len(selected) < min(count, len(candidates)):
+        remaining = [f for f in candidates if f not in selected]
+        selected.append(
+            max(
+                remaining,
+                key=lambda f: (f.features / maximum) ** 0.5
+                * min(abs(f.timestamp - s.timestamp) for s in selected)
+                / max(span, 1e-9),
+            )
+        )
+    return sorted(selected, key=lambda f: f.index)

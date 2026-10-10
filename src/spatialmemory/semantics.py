@@ -85,6 +85,15 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
         .round()
         .astype(int)
     ]
+    if config.neural_frame_selection == "quality_diverse":
+        from .ingestion import neural_keyframes
+
+        chosen = [
+            f.id
+            for f in neural_keyframes(
+                [frame_lookup[fid] for fid in available], config.semantic_max_frames
+            )
+        ]
     observations = []
     foreground = {}
     raw = []
@@ -398,8 +407,12 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
     return {
         "supported_free_views": len(rays),
         "views": views,
-        "source": "VGGT predicted registered depth; accuracy/uncertainty not calibrated",
-        "metric": False,
+        "source": "Measured calibrated registered depth"
+        if getattr(reconstruction, "diagnostics", {}).get("sensor_geometry_used")
+        else "VGGT predicted registered depth; accuracy/uncertainty not calibrated",
+        "metric": bool(
+            getattr(reconstruction, "diagnostics", {}).get("sensor_geometry_used")
+        ),
     }
 
 

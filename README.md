@@ -6,7 +6,7 @@ Compare two recordings of the same indoor space, inspect their aligned 3D recons
 
 ![SpatialMemory-X Ultra comparison workspace](docs/screenshots/testing-console-desktop.png)
 
-The current release has **92 passing Python tests** and two passing browser verification suites. The screenshots and completed neural smoke runs use synthetic inputs. Real-world detection accuracy and robot deployment readiness require separate evaluation.
+The current release has **103 passing Python tests** and two passing browser verification suites. The screenshots and completed neural smoke runs use synthetic inputs. Real-world detection accuracy and robot deployment readiness require separate evaluation.
 
 ## What runs now
 
@@ -130,7 +130,7 @@ python scripts/benchmark_scene.py \
 
 These benchmark paths are placeholders for verified data, not included recordings or labels. The evaluator rejects unverified relationships, source/input hash mismatches, unreviewed or model-generated ground truth, and unreliable registration. Missing metrics remain unavailable; unannotated detections and UNKNOWN decisions stay visible. For actual memory measurements, use `scripts/profile_inference.py` and pass its matching `--resource-profile` to the benchmark.
 
-[Dataset audit](reports/dataset_audit.md) · [capability matrix](reports/dataset_capability_matrix.csv) · [dataset selection](reports/dataset_selection.md) · [quality report](reports/dataset_quality_report.md) · [completion status](reports/completion_status.json). 3RScan/RIO10 require official approval. Other candidate hosts remain blocked by runtime policy; licences and small-pair availability must be verified before acquisition. No genuine annotated real change pair has been obtained, so the ten benchmark completion conditions remain unsatisfied.
+[Dataset audit](reports/dataset_audit.md) · [capability matrix](reports/dataset_capability_matrix.csv) · [dataset selection](reports/dataset_selection.md) · [quality report](reports/dataset_quality_report.md) · [completion status](reports/completion_status.json). 3RScan/RIO10 require official approval. Other candidate hosts remain blocked by runtime policy; licences and small-pair availability must be verified before acquisition. One approved 3RScan reference/rescan pair now completes source-assisted metric inference. Its supported native MOVED subset contains one instance, missed by the model (recall/F1 0; precision undefined). The ten full research completion conditions remain unsatisfied. See [real-pair validation](docs/3RSCAN_VALIDATION.md).
 
 ## Dataset access preparation
 
@@ -139,3 +139,11 @@ See [official access steps and smartphone templates](docs/DATASET_ACCESS.md) for
 ### Approved 3RScan subset
 
 One official reference/rescan pair is now downloaded and integrated, following confirmed access approval. All 257 native RGB-D/pose frame sets and instance-labeled geometry passed validation. The canonical label draft remains unreviewed; supervised prediction accuracy is unavailable. See [acquisition](reports/3rscan_acquisition.json), [native validation](reports/3rscan_native_validation.json) and [exact paths and remaining review requirements](docs/DATASET_ACCESS.md). Raw files remain excluded from Git.
+
+## Approved 3RScan metric validation
+
+The opt-in profile uses calibrated measured RGB-D geometry, actual VGGT inference for cross-validation, Grounding DINO, SAM 2 and DINOv2. Native reference/rescan alignment initializes robust coarse-to-fine ICP; failed geometric gates stop inference. This does not demonstrate autonomous RGB-only alignment. The completed real pair produces an aligned scene and evidence viewer, but all 28 decisions remain UNKNOWN. No physical change was detected.
+
+[Reproduction and demo instructions](docs/3RSCAN_VALIDATION.md) · [registration diagnosis](reports/3rscan_registration_root_cause.json) · [partial native evaluation](reports/3rscan_partial_evaluation.json). Data, checkpoints and derived geometry remain outside Git.
+
+A later twelve-keyframe-per-recording coverage run also completed (611.03 s wall time), producing 69 UNKNOWN decisions and zero accepted cross-session associations. All 80 same-label candidate pairs failed the unchanged 0.85 appearance gate. MOVED subset recall/F1 remains 0 on one supported native instance; extra views did not establish reliable detection. See `reports/3rscan_coverage_evaluation.json` and the validation instructions.

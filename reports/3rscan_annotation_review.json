@@ -1,0 +1,64 @@
+{
+  "scene_id": "02b33dfb-be2b-2d54-92d2-cd012b2b3c40__fcf66d9e-622d-291c-84c2-bb23dfe31327",
+  "source_hashes": {
+    "relationship": "674a00f50f76b198b9de44efd86c390fea3da37ba8f12cf8ccd00045e265fa64",
+    "before": "d8fa463b6fe8234ea89981227a69453ac0ecdba492045ee97a360d730a9333f6",
+    "after": "fd42cf9019f0c90dcceb47015fa76475eb83d8a2f1ce6468c631a256cab012bb"
+  },
+  "native_split": "train",
+  "data_origin": "REAL",
+  "review_method": "Deterministic source-integrity and transform-convention audit; no human-review identity claimed",
+  "minimum_translation_metres": 0.03,
+  "coordinate_frame": "reference_world",
+  "position_unit": "metres",
+  "supported_categories": [
+    "MOVED"
+  ],
+  "unsupported_categories": [
+    "ADDED",
+    "REMOVED",
+    "UNCHANGED",
+    "ROTATED"
+  ],
+  "exhaustive_change_inventory": false,
+  "rigid_objects": [
+    {
+      "object_id": "12",
+      "native_before_id": 12,
+      "native_after_id": 12,
+      "label": "toilet",
+      "change_type": "UNKNOWN",
+      "label_origin": "explicit native rigid transform",
+      "reason": "Native rigid change has sub-margin centroid translation; rotation-only/small-motion classes unsupported by canonical evaluator",
+      "native_centroid_translation_metres": 0.01886172503828788,
+      "correspondence_verified": true,
+      "native_rigid": true
+    },
+    {
+      "object_id": "27",
+      "native_before_id": 27,
+      "native_after_id": 27,
+      "label": "trash can",
+      "change_type": "MOVED",
+      "label_origin": "explicit native rigid transform",
+      "reason": "Explicit native rigid correspondence with canonical-centroid translation above declared 3 cm review margin",
+      "native_centroid_translation_metres": 0.0692116976988624,
+      "correspondence_verified": true,
+      "native_rigid": true
+    },
+    {
+      "object_id": "30",
+      "native_before_id": 30,
+      "native_after_id": 30,
+      "label": "scale",
+      "change_type": "UNKNOWN",
+      "label_origin": "explicit native rigid transform",
+      "reason": "Native rigid change has sub-margin centroid translation; rotation-only/small-motion classes unsupported by canonical evaluator",
+      "native_centroid_translation_metres": 0.008432432798061976,
+      "correspondence_verified": true,
+      "native_rigid": true
+    }
+  ],
+  "objects_reviewed": 28,
+  "explicit_MOVED_support": 1
+}

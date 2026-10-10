@@ -24,7 +24,10 @@ class Config(BaseModel):
     seed: int = 7
     geometry_backend: Literal["sparse", "vggt"] = "sparse"
     neural_frames_per_video: int = Field(2, ge=2, le=6)
+    neural_frame_selection: Literal["temporal", "quality_diverse"] = "temporal"
     geometry_reuse_from: str | None = None
+    metric_geometry_enabled: bool = False
+    registration_initial: str | None = None
     evidence_calibration: str | None = None
     semantics_enabled: bool = False
     semantic_max_frames: int = Field(4, ge=2, le=24)
@@ -63,6 +66,7 @@ class Registration(BaseModel):
     heldout_inliers: int = 0
     heldout_rmse: float | None = None
     foreground_matches_excluded: int = 0
+    metric_diagnostics: dict | None = None
 
 
 class Event(BaseModel):

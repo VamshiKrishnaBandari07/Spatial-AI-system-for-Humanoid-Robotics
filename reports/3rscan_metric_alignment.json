@@ -1,0 +1,137 @@
+{
+  "valid": false,
+  "T_reference_rescan": [
+    [
+      0.8055054132782714,
+      -0.5924569932206004,
+      -0.012484058791688462,
+      0.11641755841899044
+    ],
+    [
+      0.5925404231516156,
+      0.8055296156433162,
+      0.004237729888536173,
+      -0.07993128466786936
+    ],
+    [
+      0.007545605964053387,
+      -0.010810823877177569,
+      0.999913124580941,
+      0.011012042155272128
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "initial": {
+    "source_points": 9344,
+    "target_points": 10437,
+    "fitness": 0.3558433219178082,
+    "reverse_fitness": 0.36236466417552937,
+    "symmetric_overlap": 0.3558433219178082,
+    "inliers": 3325,
+    "inlier_rmse_metres": 0.039089840796652064,
+    "median_distance_metres": 0.17357397897606625,
+    "threshold_metres": 0.08
+  },
+  "refined": {
+    "source_points": 9344,
+    "target_points": 10437,
+    "fitness": 0.3687928082191781,
+    "reverse_fitness": 0.3692631982370413,
+    "symmetric_overlap": 0.3687928082191781,
+    "inliers": 3446,
+    "inlier_rmse_metres": 0.03805723905330027,
+    "median_distance_metres": 0.1684592464304968,
+    "threshold_metres": 0.08
+  },
+  "heldout": {
+    "source_points": 1869,
+    "target_points": 2088,
+    "fitness": 0.3317281968967362,
+    "reverse_fitness": 0.3314176245210728,
+    "symmetric_overlap": 0.3314176245210728,
+    "inliers": 620,
+    "inlier_rmse_metres": 0.043436227513934535,
+    "median_distance_metres": 0.18835593171641887,
+    "threshold_metres": 0.08
+  },
+  "history": [
+    {
+      "source_points": 1405,
+      "target_points": 1455,
+      "fitness": 0.592170818505338,
+      "reverse_fitness": 0.6254295532646048,
+      "symmetric_overlap": 0.592170818505338,
+      "inliers": 832,
+      "inlier_rmse_metres": 0.11167165194445865,
+      "median_distance_metres": 0.17339570741767799,
+      "threshold_metres": 0.24
+    },
+    {
+      "source_points": 3566,
+      "target_points": 3785,
+      "fitness": 0.42540661805945035,
+      "reverse_fitness": 0.4523117569352708,
+      "symmetric_overlap": 0.42540661805945035,
+      "inliers": 1517,
+      "inlier_rmse_metres": 0.056783665865579494,
+      "median_distance_metres": 0.18218056454274395,
+      "threshold_metres": 0.12
+    },
+    {
+      "source_points": 7475,
+      "target_points": 8349,
+      "fitness": 0.36802675585284284,
+      "reverse_fitness": 0.3651934363396814,
+      "symmetric_overlap": 0.3651934363396814,
+      "inliers": 2751,
+      "inlier_rmse_metres": 0.03888091271726443,
+      "median_distance_metres": 0.16849344531010552,
+      "threshold_metres": 0.08
+    }
+  ],
+  "correction_translation_metres": 0.03504075002164098,
+  "correction_rotation_degrees": 1.2751327874657816,
+  "reason": "Metric registration gate failed",
+  "estimation_condition": "Explicit source initial transform plus robust ICP; not autonomous global registration",
+  "convention_alternatives": {
+    "identity": {
+      "source_points": 26428,
+      "target_points": 34059,
+      "fitness": 0.20606932041773876,
+      "reverse_fitness": 0.20203176840189083,
+      "symmetric_overlap": 0.20203176840189083,
+      "inliers": 5446,
+      "inlier_rmse_metres": 0.044664326863270855,
+      "median_distance_metres": 0.29134670084249725,
+      "threshold_metres": 0.08
+    },
+    "inverse": {
+      "source_points": 26428,
+      "target_points": 34059,
+      "fitness": 0.1624035114272741,
+      "reverse_fitness": 0.1348248627381896,
+      "symmetric_overlap": 0.1348248627381896,
+      "inliers": 4292,
+      "inlier_rmse_metres": 0.04501183936225961,
+      "median_distance_metres": 0.3124356255956121,
+      "threshold_metres": 0.08
+    },
+    "translation_divided_by_1000": {
+      "source_points": 26428,
+      "target_points": 34059,
+      "fitness": 0.23153473588618131,
+      "reverse_fitness": 0.23462227311430164,
+      "symmetric_overlap": 0.23153473588618131,
+      "inliers": 6119,
+      "inlier_rmse_metres": 0.043783524726367005,
+      "median_distance_metres": 0.233899724518274,
+      "threshold_metres": 0.08
+    }
+  },
+  "artifact_directory": "/workspace/spatialmemory-3rscan-metric-diagnostics"
+}

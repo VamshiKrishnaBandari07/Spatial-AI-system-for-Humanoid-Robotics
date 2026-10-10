@@ -1,0 +1,15 @@
+{
+  "regressions": {
+    "passed": 103,
+    "failed": 0,
+    "warnings": 1,
+    "log_sha256": "65acc75716f9173fd964014c4663b2fc7637f102f3f074f5d2a0f78bf4cafccf"
+  },
+  "ruff_F": "passed",
+  "ruff_format_new_files": "passed",
+  "git_diff_check": "passed",
+  "real_inference_evidence": "reports/3rscan_validated_execution.json",
+  "mocked_tests_are_not_accuracy": true,
+  "raw_data_publication": false,
+  "browser_check": "reports/3rscan_viewer_check.json"
+}

@@ -1,0 +1,101 @@
+{
+  "valid": true,
+  "T_reference_rescan": [
+    [
+      0.8017031844145912,
+      -0.5977159043954607,
+      -0.002795282949518377,
+      0.09468612967174041
+    ],
+    [
+      0.5977113833887171,
+      0.8016512635947527,
+      0.009819691165028453,
+      -0.10709447794819557
+    ],
+    [
+      -0.0036285431906922833,
+      -0.009543249814030727,
+      0.9999479120666159,
+      0.016677551710163097
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "initial": {
+    "source_points": 30435,
+    "target_points": 39874,
+    "fitness": 0.7078363725973386,
+    "reverse_fitness": 0.4945829362491849,
+    "symmetric_overlap": 0.4945829362491849,
+    "inliers": 21543,
+    "inlier_rmse_metres": 0.03473413045070241,
+    "median_distance_metres": 0.03736737136773046,
+    "threshold_metres": 0.08
+  },
+  "refined": {
+    "source_points": 30435,
+    "target_points": 39874,
+    "fitness": 0.696336454739609,
+    "reverse_fitness": 0.4861313136379596,
+    "symmetric_overlap": 0.4861313136379596,
+    "inliers": 21193,
+    "inlier_rmse_metres": 0.0334637426270012,
+    "median_distance_metres": 0.035996371318287,
+    "threshold_metres": 0.08
+  },
+  "heldout": {
+    "source_points": 6087,
+    "target_points": 7975,
+    "fitness": 0.6628881222276983,
+    "reverse_fitness": 0.46094043887147335,
+    "symmetric_overlap": 0.46094043887147335,
+    "inliers": 4035,
+    "inlier_rmse_metres": 0.03970239050416826,
+    "median_distance_metres": 0.0475232533691632,
+    "threshold_metres": 0.08
+  },
+  "history": [
+    {
+      "source_points": 2890,
+      "target_points": 4451,
+      "fitness": 0.9003460207612457,
+      "reverse_fitness": 0.6412042237699394,
+      "symmetric_overlap": 0.6412042237699394,
+      "inliers": 2602,
+      "inlier_rmse_metres": 0.08879326855808643,
+      "median_distance_metres": 0.05763218144606759,
+      "threshold_metres": 0.24
+    },
+    {
+      "source_points": 9577,
+      "target_points": 13265,
+      "fitness": 0.7675681319828757,
+      "reverse_fitness": 0.544515642668677,
+      "symmetric_overlap": 0.544515642668677,
+      "inliers": 7351,
+      "inlier_rmse_metres": 0.048875787870814584,
+      "median_distance_metres": 0.04306402319517767,
+      "threshold_metres": 0.12
+    },
+    {
+      "source_points": 24348,
+      "target_points": 31899,
+      "fitness": 0.6955807458518154,
+      "reverse_fitness": 0.4835261293457475,
+      "symmetric_overlap": 0.4835261293457475,
+      "inliers": 16936,
+      "inlier_rmse_metres": 0.0340699221624202,
+      "median_distance_metres": 0.036942327232356804,
+      "threshold_metres": 0.08
+    }
+  ],
+  "correction_translation_metres": 0.01071191380046819,
+  "correction_rotation_degrees": 0.6417272532414048,
+  "reason": "Metric overlap, RMSE, held-out geometry and correction gates passed",
+  "estimation_condition": "Explicit source initial transform plus robust ICP; not autonomous global registration"
+}

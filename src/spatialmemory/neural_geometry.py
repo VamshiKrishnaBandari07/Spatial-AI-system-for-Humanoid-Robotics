@@ -181,6 +181,7 @@ def reusable_predictions(root, config, before_manifest, after_manifest):
     result = {}
     for state in ["before", "after"]:
         diag = report["geometry"][state]
+        diag = diag.get("neural_cross_validation") or diag
         if (
             diag.get("checkpoint_revision") != CHECKPOINT_REVISION
             or diag.get("source_commit") != SOURCE_COMMIT

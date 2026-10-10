@@ -9,7 +9,7 @@ Date: 2026-10-10. Generated from saved executed evidence; no benchmark labels or
 | arkitscenes | 1101.9 | Two source recordings; RGB, native depth, variable per-frame K, timestamps and camera-to-world poses |
 | seven_scenes | 964.9 | Heads seq-02; RGB, depth, poses and nominal depth K; RGB calibration/extrinsics unavailable |
 | replica | 4276.8 | One finite 5616×5616×3 float16 Ptex atlas and incomplete release prefix; no geometry/camera recording |
-| 3rscan | 168.6 | One approved reference/rescan pair; RGB, native depth/calibration/poses and instance annotations verified; canonical labels unreviewed |
+| 3rscan | 168.6 | One approved reference/rescan pair; RGB, native depth/calibration/poses and instance annotations verified; partial native MOVED audit available; full canonical labels unreviewed |
 
 ## Executed input validation
 
@@ -35,7 +35,7 @@ Shared identity alignment and finite arrays passed, but identical-input registra
 
 ## Tests and reproduction
 
-Independent clean CPU suite: **92 passed**. The complete output is `regression_test_output.txt`, including one dependency deprecation warning. Development suite also passed. Annotation browser check: **passed**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.
+Independent clean CPU suite: **103 passed**. The complete output is `regression_test_output.txt`, including one dependency deprecation warning. Development suite also passed. Annotation browser check: **passed**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.
 
 Executed commands (from the repository, with the installed environment activated):
 
@@ -64,7 +64,7 @@ Apple ARKitScenes source licence and Microsoft MSR-LA are retained with raw data
 
 3RScan/RIO10 require official access approval. ETH Zurich and TU Wien download/source hosts are denied by current runtime policy; additive domain requirements are saved but not active. Their dataset licences, pair sizes and annotation files remain unverified. No forms/emails were submitted. No full archives were downloaded to work around access restrictions. See `dataset_selection.md` and `dataset_source_checks.json`.
 
-The ten real-data completion criteria are **not satisfied**. Canonical ground-truth review, shared cross-visit registration validation, quantitative supervised metrics and ablations remain prerequisites. Loader checks and inference completion alone do not establish prediction accuracy.
+The ten real-data completion criteria are **not satisfied**. A full independently reviewed change inventory, successful physical-change detection, calibrated uncertainty and independent-scene benchmarks remain prerequisites. Current partial 3RScan execution evidence appears below. Loader checks and inference completion alone do not establish prediction accuracy.
 
 ## Workspace search and access preparation
 
@@ -76,6 +76,20 @@ TUM RGB-D official documentation is accessible and confirms the default data lic
 
 One documented reference/rescan pair was acquired after the user confirmed official approval and agreement to Terms of Use. All 257 native RGB-D/pose frame sets passed validation, together with semantic IDs and annotated PLY vertices. Original RGB/depth have different dimensions and intrinsics; no pixel registration is assumed. The native split is train. See 3rscan_acquisition.json and 3rscan_native_validation.json for exact paths, hashes, sizes and observations.
 
-Native metadata documents three rigid changes (toilet, scale, trash can). The derived annotation draft retains native IDs and remains UNREVIEWED with UNKNOWN canonical classes, avoiding an unverified mapping of rigid changes to movement/rotation labels. Review labels, resolve the source transform-unit convention and verify shared registration before supervised evaluation. No identity mapping or reviewer identities were invented.
+Native metadata documents three rigid changes (toilet, scale, trash can). The derived annotation draft retains native IDs and remains UNREVIEWED with UNKNOWN canonical classes, avoiding an unverified mapping of rigid changes to movement/rotation labels. This historical draft remains unreviewed. The subsequent deterministic native-source audit and metric registration are reported separately below; no independent human review is claimed. No identity mapping or reviewer identities were invented.
 
-The unchanged consensus CPU profile was attempted on the real pair. It failed at shared_registration: Registration gate failed: Insufficient nondegenerate consensus. Runtime 346.2 seconds; wall time 348.4 seconds; peak individual child RSS 9966.8 MiB. Both visits produced finite neural pose/depth/point-map arrays, but shared registration was rejected. No gate was relaxed, no changes were generated, and no supervised metrics were computed. See 3rscan_inference_attempt.json and pair_validation_3rscan.json.
+The original unchanged consensus CPU profile was attempted on the real pair. It failed at shared_registration: Registration gate failed: Insufficient nondegenerate consensus. Runtime 346.2 seconds; wall time 348.4 seconds; peak individual child RSS 9966.8 MiB. Both visits produced finite neural pose/depth/point-map arrays, but shared registration was rejected. No gate was relaxed, no changes were generated, and no supervised metrics were computed. See 3rscan_inference_attempt.json and pair_validation_3rscan.json.
+
+## Current real-pair metric execution
+
+The opt-in measured RGB-D profile completed with actual neural expert inference and source-transform-assisted robust ICP. Original failure was zero lifted cross-session correspondences, not a demonstrated unit or inversion error. Depth counts convert from millimetres to metres; native column-major scene translations already use metres. The original failed run remains preserved.
+
+Symmetric overlap 48.61%; inlier RMSE 0.03346 m; held-out overlap 46.09% and RMSE 0.03970 m. Fixed gates passed without identity fallback or relaxed thresholds. One fresh VGGT run precedes the final integrity-validated VGGT replay with fresh semantic inference.
+
+The native positive MOVED subset contains one supported instance. It was predicted UNKNOWN: recall 0, F1 0, precision undefined. All 28 final decisions are UNKNOWN and no cross-session semantic association was accepted. Full detection metrics and identity accuracy remain unavailable. Post-inference ablations all abstained and cannot establish component benefit. Uncertainty is not calibrated.
+
+See ../docs/3RSCAN_VALIDATION.md for reproducible commands, precise source conventions, annotated scope, private 3D viewer and reports. This is one training pair with native alignment assistance, not a held-out generalization benchmark.
+
+## Expanded semantic coverage
+
+Twelve keyframes per recording completed in 611.03 seconds. Decisions: {'UNKNOWN': 69}; accepted associations: 0. All 80 same-label pairs failed the unchanged appearance gate. The single supported MOVED instance remains UNKNOWN; extra views do not establish detection accuracy. See 3rscan_coverage_evaluation.json and 3rscan_coverage_ablations.json.
