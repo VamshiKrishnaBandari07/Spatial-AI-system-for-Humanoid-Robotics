@@ -1,0 +1,25 @@
+{
+  "status": "AWAITING_OFFICIAL_ACCESS_CONFIRMATION",
+  "reference": "02b33dfb-be2b-2d54-92d2-cd012b2b3c40",
+  "rescan": "fcf66d9e-622d-291c-84c2-bb23dfe31327",
+  "relationship_metadata_path": "data/datasets/3rscan/downloader/3RScan.json",
+  "relationship_metadata_sha256": "674a00f50f76b198b9de44efd86c390fea3da37ba8f12cf8ccd00045e265fa64",
+  "native_relationship_fields": [
+    "nonrigid",
+    "reference",
+    "removed",
+    "rigid",
+    "transform"
+  ],
+  "candidate_only": true,
+  "scan_files_verified": false,
+  "required_types": [
+    "sequence.zip",
+    "semseg.v2.json",
+    "labels.instances.annotated.v2.ply"
+  ],
+  "raw_destination": "data/datasets/3rscan/raw",
+  "release_limit": "One reference/rescan pair only; file sizes must be checked before acquisition",
+  "data_usage": "non-commercial research/education subject to official approval and Terms of Use",
+  "annotation_status": "Native metadata available; scan assets and reviewed change labels not available"
+}

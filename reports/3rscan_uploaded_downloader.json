@@ -1,0 +1,34 @@
+{
+  "uploaded_archive_sha256": "c592eef82c509606bfdf1d4c3d377667f580fbe413b3240b7633d4c57de3cd66",
+  "downloader_sha256": "bca9f19ef655a25f96159c5e2340916887a7389c5b5302b52668ee6e46d051ee",
+  "downloader_local_path": "data/datasets/3rscan/downloader/download_3rscan.py",
+  "downloader_inspected": true,
+  "declared_license": "CC BY-NC-SA 4.0; source terms of use also required",
+  "full_release_declared_size": "~94GB",
+  "supported_subset_arguments": [
+    "--id",
+    "--type"
+  ],
+  "terms_confirmation_required": true,
+  "terms_accepted_on_user_behalf": false,
+  "script_executed": false,
+  "scan_assets_downloaded": false,
+  "official_source_checks": [
+    {
+      "url": "https://campar.in.tum.de/public_datasets/3RScan/3RScanTOU.pdf",
+      "status": 200,
+      "bytes": 18616
+    },
+    {
+      "url": "https://campar.in.tum.de/public_datasets/3RScan/3RScan.json",
+      "status": 200,
+      "bytes": 3155995,
+      "json_validated": true
+    },
+    {
+      "url": "https://campar.in.tum.de/public_datasets/3RScan/release_scans.txt",
+      "status": 200,
+      "bytes": 51096
+    }
+  ]
+}
