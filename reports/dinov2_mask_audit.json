@@ -1,0 +1,134 @@
+{
+  "mode": "Actual DINOv2 model invocation on saved source crops; no new detector or segmentation invocation",
+  "source_report_sha256": "2f9992c7e1af840b3a62cd4d85f03dcaedf0ebe85742fcb2400d6f82e1c30c24",
+  "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "checkpoint_hashes": {
+    "model.safetensors": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1"
+  },
+  "processor": {
+    "_processor_class": null,
+    "image_processor_type": "BitImageProcessor",
+    "do_resize": true,
+    "size": {
+      "shortest_edge": 256
+    },
+    "resample": 3,
+    "do_center_crop": true,
+    "crop_size": {
+      "height": 224,
+      "width": 224
+    },
+    "do_rescale": true,
+    "rescale_factor": 0.00392156862745098,
+    "do_normalize": true,
+    "image_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "image_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "do_convert_rgb": true
+  },
+  "features": "Final-layer CLS token, L2 normalized; arithmetic mean of normalized descriptors and re-normalization across accepted views",
+  "rows": [
+    {
+      "observation_id": "before_13_0",
+      "source_frame_sha256": "379bbe76d7f56b1ec4a5abfd181d972740d73acaa2928eeabded7958a39e7c65",
+      "mask_sha256": "ab3da03cb233f893720918bfb7add5d0d9bc18b62751c78a15bc056d112d810f",
+      "crop_width": 143,
+      "crop_height": 63,
+      "black_background_fraction": 0.2235542235542236,
+      "stored_vs_repeated_masked_cosine": 0.9999999999999999,
+      "masked_vs_unmasked_cosine": 0.710101736464502,
+      "repeated_norm": 0.9999999500144856
+    },
+    {
+      "observation_id": "before_13_1",
+      "source_frame_sha256": "379bbe76d7f56b1ec4a5abfd181d972740d73acaa2928eeabded7958a39e7c65",
+      "mask_sha256": "bd143e09cba7c98e1228f4619260e5c9348158700d054fc81927aa23fb0ba67d",
+      "crop_width": 132,
+      "crop_height": 142,
+      "black_background_fraction": 0.32511737089201875,
+      "stored_vs_repeated_masked_cosine": 1.0,
+      "masked_vs_unmasked_cosine": 0.48672862726501737,
+      "repeated_norm": 1.0000000502874002
+    },
+    {
+      "observation_id": "before_16_0",
+      "source_frame_sha256": "b317587f2155b8c0e08fe24cc471295f17e2b897035cd146e62f0b3bdebc53ad",
+      "mask_sha256": "00ffc8d293de4cac2cf34cbb09e618a36351ef6795da227daf986a0694c834e1",
+      "crop_width": 238,
+      "crop_height": 227,
+      "black_background_fraction": 0.3621959797134713,
+      "stored_vs_repeated_masked_cosine": 1.0000000000000002,
+      "masked_vs_unmasked_cosine": 0.6413362297967975,
+      "repeated_norm": 0.9999999813967665
+    },
+    {
+      "observation_id": "before_16_1",
+      "source_frame_sha256": "b317587f2155b8c0e08fe24cc471295f17e2b897035cd146e62f0b3bdebc53ad",
+      "mask_sha256": "83172dfe4de3b03dcb16b197f51a331127a67bbbc571f678dd0e00afb29e39c2",
+      "crop_width": 339,
+      "crop_height": 253,
+      "black_background_fraction": 0.5911364510825843,
+      "stored_vs_repeated_masked_cosine": 0.9999999999999998,
+      "masked_vs_unmasked_cosine": 0.346096731129365,
+      "repeated_norm": 1.0000000284214858
+    },
+    {
+      "observation_id": "after_0_0",
+      "source_frame_sha256": "9b022cd6872c046ef55a75d2a532ccd3be92994e13196d2e99c21fdff2b24729",
+      "mask_sha256": "7e469b6421809d27b0fe792ddc8eb191c853a465cd4a5ec42046edfa11eec647",
+      "crop_width": 78,
+      "crop_height": 91,
+      "black_background_fraction": 0.15370526908988447,
+      "stored_vs_repeated_masked_cosine": 0.9999999999999998,
+      "masked_vs_unmasked_cosine": 0.965229725988852,
+      "repeated_norm": 1.0000000436362133
+    },
+    {
+      "observation_id": "after_0_1",
+      "source_frame_sha256": "9b022cd6872c046ef55a75d2a532ccd3be92994e13196d2e99c21fdff2b24729",
+      "mask_sha256": "8ce3ebd20ac465c0b627f79fcd6d61c6cfba2395b036c08196b6f61b881267ce",
+      "crop_width": 78,
+      "crop_height": 252,
+      "black_background_fraction": 0.2139295889295889,
+      "stored_vs_repeated_masked_cosine": 1.0000000000000002,
+      "masked_vs_unmasked_cosine": 0.6834050776033207,
+      "repeated_norm": 1.0000000174922632
+    },
+    {
+      "observation_id": "after_0_2",
+      "source_frame_sha256": "9b022cd6872c046ef55a75d2a532ccd3be92994e13196d2e99c21fdff2b24729",
+      "mask_sha256": "1e85b733fdb17024c18be725c32d67f60e6f2e176a078f71e72a3b91d97358ff",
+      "crop_width": 210,
+      "crop_height": 103,
+      "black_background_fraction": 0.3288488210818308,
+      "stored_vs_repeated_masked_cosine": 1.0000000000000002,
+      "masked_vs_unmasked_cosine": 0.7622028209956105,
+      "repeated_norm": 1.0000000182457105
+    },
+    {
+      "observation_id": "after_0_3",
+      "source_frame_sha256": "9b022cd6872c046ef55a75d2a532ccd3be92994e13196d2e99c21fdff2b24729",
+      "mask_sha256": "b5a0181cb52546b2ec78d5ce580900a0e67667d2706af2aea35decce205eeaa4",
+      "crop_width": 118,
+      "crop_height": 36,
+      "black_background_fraction": 0.4578625235404896,
+      "stored_vs_repeated_masked_cosine": 1.0,
+      "masked_vs_unmasked_cosine": 0.45302231793493764,
+      "repeated_norm": 1.0000000075781013
+    }
+  ],
+  "independent_identity_labels": false,
+  "threshold_recommendation": "No change supported: reviewed identity distributions are unavailable",
+  "limitations": [
+    "Central crop can omit parts of elongated objects",
+    "Black masked background changes embedding context",
+    "Sensitivity is measured; neither crop is assumed correct without independent identities"
+  ]
+}

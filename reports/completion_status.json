@@ -7,7 +7,7 @@
   "ablation_scope": "Saved-observation feasibility replay; all outputs UNKNOWN",
   "partial_native_ground_truth_metrics_computed": true,
   "partial_native_ground_truth_support": 1,
-  "core_tests_passed": 103,
+  "core_tests_passed": 120,
   "native_frames_checked": 401,
   "real_recording_control_completed": true,
   "real_changed_pair_inference_attempted": true,
@@ -23,5 +23,17 @@
     "quantitative_real_ground_truth_results": true,
     "failures_and_limits_documented": true,
     "real_benchmark_reproducible": false
-  }
+  },
+  "semantic_recovery_acceptance": {
+    "regression_suite": true,
+    "validated_registration_preserved": true,
+    "association_changes_supported_by_diagnostics_and_synthetic_cases": true,
+    "real_predictions_inspected_against_supported_native_evidence": true,
+    "genuine_smartphone_execution": false,
+    "shared_3D_and_viewer_available_for_real_pair": true,
+    "failures_visible": true,
+    "reproducible_documentation": true,
+    "challenge_completed": false
+  },
+  "latest_test_log": "semantic_recovery_tests.txt"
 }

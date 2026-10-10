@@ -39,7 +39,10 @@ def main():
         and execution["status"] == "complete"
         and execution["registration"]["valid"]
     )
-    test_log = (folder / "regression_test_output.txt").read_text()
+    latest_log = folder / "semantic_recovery_tests.txt"
+    test_log = (
+        latest_log if latest_log.exists() else folder / "regression_test_output.txt"
+    ).read_text()
     count = re.search(r"(\d+) passed", test_log)
     if not count:
         raise ValueError("No successful executed regression result found")
@@ -93,7 +96,7 @@ def main():
         "",
         "## Tests and reproduction",
         "",
-        f"Independent clean CPU suite: **{count.group(1)} passed**. The complete output is `regression_test_output.txt`, including one dependency deprecation warning. Development suite also passed. Annotation browser check: **{browser['status']}**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.",
+        f"Independent clean CPU suite: **{count.group(1)} passed**. The current output is `semantic_recovery_tests.txt` when present, otherwise `regression_test_output.txt`, including one dependency deprecation warning. The latest full-suite evidence is from the clean CPU environment. Annotation browser check: **{browser['status']}**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.",
         "",
         "Executed commands (from the repository, with the installed environment activated):",
         "",
@@ -165,6 +168,15 @@ def main():
             "",
             f"Twelve keyframes per recording completed in {coverage['profile']['wall_seconds']:.2f} seconds. Decisions: {coverage['counts']}; accepted associations: {coverage['accepted_associations']}. All 80 same-label pairs failed the unchanged appearance gate. The single supported MOVED instance remains UNKNOWN; extra views do not establish detection accuracy. See 3rscan_coverage_evaluation.json and 3rscan_coverage_ablations.json.",
         ]
+    recovery_path = folder / "semantic_recovery_delivery.json"
+    if recovery_path.exists():
+        recovery = json.loads(recovery_path.read_text())
+        rows += [
+            "",
+            "## Semantic recovery audit",
+            "",
+            "All 69 saved UNKNOWN decisions are audited: 50 appearance-gate rejections, 8 no exact-label candidates, 11 geometric differences without positive free space. DINOv2 replay reproduces stored descriptors; independent matching labels are absent, so the appearance floor is unchanged. Configurable multi-cue assignment and declared-error-budget movement tests pass. The real repeat retains identical alignment, all 28 decisions UNKNOWN and missed native MOVED support one. The standard export now includes a self-contained scene viewer. See semantic_recovery_delivery.json and ../docs/HUMANOID_SUBMISSION.md; genuine phone execution remains unrun.",
+        ]
     (folder / "dataset_quality_report.md").write_text("\n".join(rows) + "\n")
     status = {
         "completed": False,
@@ -208,6 +220,9 @@ def main():
             "real_benchmark_reproducible": False,
         },
     }
+    if recovery_path.exists():
+        status["semantic_recovery_acceptance"] = recovery["acceptance"]
+        status["latest_test_log"] = "semantic_recovery_tests.txt"
     (folder / "completion_status.json").write_text(json.dumps(status, indent=2) + "\n")
     print(json.dumps(status, indent=2))
 

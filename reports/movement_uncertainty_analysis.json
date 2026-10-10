@@ -1,0 +1,47 @@
+{
+  "source_report_sha256": "2f9992c7e1af840b3a62cd4d85f03dcaedf0ebe85742fcb2400d6f82e1c30c24",
+  "objects": [
+    {
+      "object_id": "27",
+      "label": "trash can",
+      "source_audited_displacement_metres": 0.0692116976988624,
+      "native_shape_diagnostics": {
+        "before": {
+          "native_annotated_vertex_count": 117,
+          "axis_extent_metres": [
+            0.28876999999999997,
+            0.334282,
+            0.21069000000000004
+          ],
+          "vertices_per_bbox_m3": 5752.768184150651,
+          "density_is_not_sensor_noise": true
+        },
+        "after": {
+          "native_annotated_vertex_count": 119,
+          "axis_extent_metres": [
+            0.31999999999999995,
+            0.3400000000000001,
+            0.24105
+          ],
+          "vertices_per_bbox_m3": 4537.440365069488,
+          "density_is_not_sensor_noise": true
+        }
+      },
+      "prediction_link_verified": false,
+      "object_centroid_uncertainty": null,
+      "depth_error_bound": null,
+      "known_raw_depth_quantization_metres": 0.001,
+      "quantization_is_not_sensor_accuracy": true,
+      "viewpoint_coverage_for_correct_object": null,
+      "reason": "No independently verified prediction-to-native object identity; unrelated detections cannot supply object uncertainty"
+    }
+  ],
+  "registration_rmse_metres": 0.0334637426270012,
+  "heldout_rmse_metres": 0.03970239050416826,
+  "registration_covariance": null,
+  "legacy_displacement_threshold": 0.16,
+  "root_cause_scope": "Identity gate fails before movement classification. Coarse displacement threshold is an additional sensitivity limitation, not the executed primary cause.",
+  "bounded_rule": "Displacement interval radius = two declared depth error budgets + declared alignment error budget + observed before/after repeat-view centroid spreads. Bounds must be supplied with provenance; they are not automatically calibrated or verified.",
+  "missing_error_terms_keep_UNKNOWN": true,
+  "calibration_split_used": null
+}

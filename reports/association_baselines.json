@@ -1,0 +1,293 @@
+{
+  "source_report_sha256": "2f9992c7e1af840b3a62cd4d85f03dcaedf0ebe85742fcb2400d6f82e1c30c24",
+  "baseline_grouping": "Identical legacy grouped observations across all matchers",
+  "appearance_floor_unchanged": 0.85,
+  "normalization": "Cosine maps [-1,1] to [0,1]; Gaussian spatial ranking within configured radius; extent-diagonal ratio; distinct-view support. Ranking scores are not probabilities.",
+  "rows": [
+    {
+      "mode": "legacy",
+      "assignments": 0,
+      "identity_gate_accepted": 0,
+      "matching_accuracy": null,
+      "false_association_rate": null,
+      "matches": []
+    },
+    {
+      "mode": "appearance",
+      "assignments": 0,
+      "identity_gate_accepted": 0,
+      "matching_accuracy": null,
+      "false_association_rate": null,
+      "matches": []
+    },
+    {
+      "mode": "semantic",
+      "assignments": 0,
+      "identity_gate_accepted": 0,
+      "matching_accuracy": null,
+      "false_association_rate": null,
+      "matches": []
+    },
+    {
+      "mode": "semantic_geometry",
+      "assignments": 0,
+      "identity_gate_accepted": 0,
+      "matching_accuracy": null,
+      "false_association_rate": null,
+      "matches": []
+    },
+    {
+      "mode": "multiview",
+      "assignments": 0,
+      "identity_gate_accepted": 0,
+      "matching_accuracy": null,
+      "false_association_rate": null,
+      "matches": []
+    }
+  ],
+  "independent_reviewed_matching_examples": 0,
+  "reason": "Native object-change audit does not supply independent observation identity labels; no matching accuracy or false-association rate claimed",
+  "synthetic_movement_sensitivity": [
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.011
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0.005,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.016
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0.01,
+      "prediction": "UNKNOWN",
+      "interval": [
+        0,
+        0.020999999999999998
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0.02,
+      "prediction": "UNKNOWN",
+      "interval": [
+        0.009000000000000001,
+        0.031
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0.04,
+      "prediction": "MOVED",
+      "interval": [
+        0.029,
+        0.051000000000000004
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0.08,
+      "prediction": "MOVED",
+      "interval": [
+        0.069,
+        0.091
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0.16,
+      "prediction": "MOVED",
+      "interval": [
+        0.149,
+        0.171
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.01,
+      "displacement": 0.32,
+      "prediction": "MOVED",
+      "interval": [
+        0.309,
+        0.331
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.011
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0.005,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.016
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0.01,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.020999999999999998
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0.02,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0.009000000000000001,
+        0.031
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0.04,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0.029,
+        0.051000000000000004
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0.08,
+      "prediction": "UNKNOWN",
+      "interval": [
+        0.069,
+        0.091
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0.16,
+      "prediction": "MOVED",
+      "interval": [
+        0.149,
+        0.171
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.04,
+      "displacement": 0.32,
+      "prediction": "MOVED",
+      "interval": [
+        0.309,
+        0.331
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.011
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0.005,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.016
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0.01,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0,
+        0.020999999999999998
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0.02,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0.009000000000000001,
+        0.031
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0.04,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0.029,
+        0.051000000000000004
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0.08,
+      "prediction": "UNCHANGED",
+      "interval": [
+        0.069,
+        0.091
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0.16,
+      "prediction": "UNKNOWN",
+      "interval": [
+        0.149,
+        0.171
+      ]
+    },
+    {
+      "origin": "SYNTHETIC",
+      "voxel_size": 0.08,
+      "displacement": 0.32,
+      "prediction": "MOVED",
+      "interval": [
+        0.309,
+        0.331
+      ]
+    }
+  ],
+  "legacy_note": "Original matcher already gates on exact semantic label; appearance row is the true appearance-only exploratory alternative and rejects label-conflicting verified identities"
+}

@@ -6,7 +6,7 @@ Compare two recordings of the same indoor space, inspect their aligned 3D recons
 
 ![SpatialMemory-X Ultra comparison workspace](docs/screenshots/testing-console-desktop.png)
 
-The current release has **103 passing Python tests** and two passing browser verification suites. The screenshots and completed neural smoke runs use synthetic inputs. Real-world detection accuracy and robot deployment readiness require separate evaluation.
+The current release has **120 passing Python tests** and two passing browser verification suites. The screenshots and completed neural smoke runs use synthetic inputs. Real-world detection accuracy and robot deployment readiness require separate evaluation.
 
 ## What runs now
 
@@ -147,3 +147,9 @@ The opt-in profile uses calibrated measured RGB-D geometry, actual VGGT inferenc
 [Reproduction and demo instructions](docs/3RSCAN_VALIDATION.md) · [registration diagnosis](reports/3rscan_registration_root_cause.json) · [partial native evaluation](reports/3rscan_partial_evaluation.json). Data, checkpoints and derived geometry remain outside Git.
 
 A later twelve-keyframe-per-recording coverage run also completed (611.03 s wall time), producing 69 UNKNOWN decisions and zero accepted cross-session associations. All 80 same-label candidate pairs failed the unchanged 0.85 appearance gate. MOVED subset recall/F1 remains 0 on one supported native instance; extra views did not establish reliable detection. See `reports/3rscan_coverage_evaluation.json` and the validation instructions.
+
+## Semantic association recovery — 10 October 2026
+
+The full audit of the saved 69 UNKNOWN decisions identifies 50 appearance-gate rejections, 8 missing exact-label candidates and 11 geometric differences without positive free-space evidence. Actual DINOv2 replay reproduced eight stored embeddings; mask/background context changes their features but no independently reviewed identity distribution supports lowering the 0.85 floor. Configurable multi-cue assignment adds registered distance, observed extent and independent-view support, explicit unmatched options and ambiguity protection. Scores are ranking affinities, not calibrated probabilities. Bounded movement abstains when depth/alignment error budgets are absent; unresolved identity hypotheses block conflicting added/removed classifications. Legacy behavior remains the default.
+
+A repeated real-pair run with actual semantic expert invocation and validated VGGT reuse completes with the exact previous metric alignment and 28 UNKNOWN decisions. One supported MOVED instance remains missed (recall/F1 0, precision undefined); full matching/detection accuracy is unavailable. The new standard export includes a self-contained 3D scene/evidence viewer. All 120 tests pass, including original 103. Genuine phone recordings and independent identity/error-budget review remain required; the challenge is not complete. See [docs/HUMANOID_SUBMISSION.md](docs/HUMANOID_SUBMISSION.md), `reports/semantic_recovery_delivery.json` and the UNKNOWN diagnostics.

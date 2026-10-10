@@ -1,0 +1,204 @@
+{
+  "sample_count": 1,
+  "accuracy": 0.0,
+  "per_class": {
+    "MOVED": {
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1
+    },
+    "UNKNOWN": {
+      "precision": 0.0,
+      "recall": null,
+      "f1": 0.0,
+      "support": 0
+    }
+  },
+  "confusion_matrix": {
+    "MOVED": {
+      "MOVED": 0,
+      "UNKNOWN": 1
+    },
+    "UNKNOWN": {
+      "MOVED": 0,
+      "UNKNOWN": 0
+    }
+  },
+  "scope": "Positive-object classification on the explicitly supported native MOVED subset only; not full inventory detection precision or a general benchmark",
+  "native_split": "train",
+  "source_transform_assisted": true,
+  "objects": [
+    {
+      "native_object_id": "27",
+      "truth": "MOVED",
+      "prediction": "UNKNOWN",
+      "candidate_events": [],
+      "mapping_status": "unmatched or ambiguous; abstained"
+    }
+  ],
+  "matching_rule": "Fixed trash/trash-can alias and 0.25m position gate; ambiguous identities remain UNKNOWN",
+  "full_detection_precision": null,
+  "full_detection_recall": null,
+  "full_detection_F1": null,
+  "object_matching_accuracy": null,
+  "object_matching_reason": "No verified prediction-to-native identity mapping for all instances; no fabricated matching accuracy",
+  "unsupported_categories": [
+    "ADDED",
+    "REMOVED",
+    "UNCHANGED",
+    "ROTATED"
+  ],
+  "unscored_native_objects": 27,
+  "semantic_event_counts": {
+    "UNKNOWN": 17
+  },
+  "all_event_counts": {
+    "UNKNOWN": 28
+  },
+  "probability_calibration": "Unavailable: no independent labeled calibration split; raw scores and geometric RMSE are not calibrated probabilities",
+  "inference_report_sha256": "b2f27ba5c78d26da41e421e28a66a4e5be0885a3b1521ef568c3ef5358169114",
+  "native_source_hashes": {
+    "relationship": "674a00f50f76b198b9de44efd86c390fea3da37ba8f12cf8ccd00045e265fa64",
+    "before": "d8fa463b6fe8234ea89981227a69453ac0ecdba492045ee97a360d730a9333f6",
+    "after": "fd42cf9019f0c90dcceb47015fa76475eb83d8a2f1ce6468c631a256cab012bb"
+  },
+  "registration": {
+    "valid": true,
+    "scale": 1.0,
+    "rotation": [
+      [
+        0.8017031844145912,
+        -0.5977159043954607,
+        -0.002795282949518377
+      ],
+      [
+        0.5977113833887171,
+        0.8016512635947527,
+        0.009819691165028453
+      ],
+      [
+        -0.0036285431906922833,
+        -0.009543249814030727,
+        0.9999479120666159
+      ]
+    ],
+    "translation": [
+      0.09468612967174041,
+      -0.10709447794819557,
+      0.016677551710163097
+    ],
+    "inliers": 21193,
+    "correspondences": 30435,
+    "rmse": 0.0334637426270012,
+    "threshold": 0.08,
+    "reason": "Metric overlap, RMSE, held-out geometry and correction gates passed",
+    "heldout_count": 6087,
+    "heldout_inliers": 4035,
+    "heldout_rmse": 0.03970239050416826,
+    "foreground_matches_excluded": 0,
+    "metric_diagnostics": {
+      "valid": true,
+      "T_reference_rescan": [
+        [
+          0.8017031844145912,
+          -0.5977159043954607,
+          -0.002795282949518377,
+          0.09468612967174041
+        ],
+        [
+          0.5977113833887171,
+          0.8016512635947527,
+          0.009819691165028453,
+          -0.10709447794819557
+        ],
+        [
+          -0.0036285431906922833,
+          -0.009543249814030727,
+          0.9999479120666159,
+          0.016677551710163097
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "initial": {
+        "source_points": 30435,
+        "target_points": 39874,
+        "fitness": 0.7078363725973386,
+        "reverse_fitness": 0.4945829362491849,
+        "symmetric_overlap": 0.4945829362491849,
+        "inliers": 21543,
+        "inlier_rmse_metres": 0.03473413045070241,
+        "median_distance_metres": 0.03736737136773046,
+        "threshold_metres": 0.08
+      },
+      "refined": {
+        "source_points": 30435,
+        "target_points": 39874,
+        "fitness": 0.696336454739609,
+        "reverse_fitness": 0.4861313136379596,
+        "symmetric_overlap": 0.4861313136379596,
+        "inliers": 21193,
+        "inlier_rmse_metres": 0.0334637426270012,
+        "median_distance_metres": 0.035996371318287,
+        "threshold_metres": 0.08
+      },
+      "heldout": {
+        "source_points": 6087,
+        "target_points": 7975,
+        "fitness": 0.6628881222276983,
+        "reverse_fitness": 0.46094043887147335,
+        "symmetric_overlap": 0.46094043887147335,
+        "inliers": 4035,
+        "inlier_rmse_metres": 0.03970239050416826,
+        "median_distance_metres": 0.0475232533691632,
+        "threshold_metres": 0.08
+      },
+      "history": [
+        {
+          "source_points": 2890,
+          "target_points": 4451,
+          "fitness": 0.9003460207612457,
+          "reverse_fitness": 0.6412042237699394,
+          "symmetric_overlap": 0.6412042237699394,
+          "inliers": 2602,
+          "inlier_rmse_metres": 0.08879326855808643,
+          "median_distance_metres": 0.05763218144606759,
+          "threshold_metres": 0.24
+        },
+        {
+          "source_points": 9577,
+          "target_points": 13265,
+          "fitness": 0.7675681319828757,
+          "reverse_fitness": 0.544515642668677,
+          "symmetric_overlap": 0.544515642668677,
+          "inliers": 7351,
+          "inlier_rmse_metres": 0.048875787870814584,
+          "median_distance_metres": 0.04306402319517767,
+          "threshold_metres": 0.12
+        },
+        {
+          "source_points": 24348,
+          "target_points": 31899,
+          "fitness": 0.6955807458518154,
+          "reverse_fitness": 0.4835261293457475,
+          "symmetric_overlap": 0.4835261293457475,
+          "inliers": 16936,
+          "inlier_rmse_metres": 0.0340699221624202,
+          "median_distance_metres": 0.036942327232356804,
+          "threshold_metres": 0.08
+        }
+      ],
+      "correction_translation_metres": 0.01071191380046819,
+      "correction_rotation_degrees": 0.6417272532414048,
+      "reason": "Metric overlap, RMSE, held-out geometry and correction gates passed",
+      "estimation_condition": "Explicit source initial transform plus robust ICP; not autonomous global registration"
+    }
+  },
+  "runtime_seconds": 107.20401403099822,
+  "artifacts": "/workspace/spatialmemory-semantic-recovery-final-20261010/visualization"
+}

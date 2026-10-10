@@ -1,0 +1,70 @@
+event_id,object_id,semantic_label,independent_views,primary_blocking_gate,secondary_blocking_gates,ground_truth_identity_verified
+region-0,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-1,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-2,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-3,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-4,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-5,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-6,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-7,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-8,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-9,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+region-10,,unknown region,,geometric_surface_difference_without_positive_free_space,[],False
+object-event-0,before_object_0,bottle,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-1,before_object_1,sink,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-2,before_object_2,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-3,before_object_3,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-4,before_object_4,towel,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-5,before_object_5,sink trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-6,before_object_6,cabinet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-7,before_object_7,mirror,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-8,before_object_8,toilet sink,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-9,before_object_9,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-10,before_object_10,bottle,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-11,before_object_11,bottle,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-12,before_object_12,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-13,before_object_13,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-14,before_object_14,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-15,before_object_15,sink,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-16,before_object_16,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-17,before_object_17,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-18,before_object_18,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-19,before_object_19,bottle,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-20,before_object_20,bottle,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-21,before_object_21,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-22,before_object_22,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-23,after_object_0,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-24,after_object_1,mirror,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-25,after_object_2,toilet sink,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-26,after_object_3,cabinet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-27,after_object_4,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-28,after_object_5,sink,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-29,after_object_6,trash,0,appearance_gate_rejected_all_candidates,"['missing_localization', 'insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-30,after_object_7,cabinet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-31,after_object_8,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-32,after_object_9,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-33,after_object_10,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-34,after_object_11,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-35,after_object_12,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-36,after_object_13,toilet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-37,after_object_14,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-38,after_object_15,sink bathtub,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-39,after_object_16,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-40,after_object_17,bathtub,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-41,after_object_18,bathtub,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-42,after_object_19,cabinet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-43,after_object_20,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-44,after_object_21,backpack,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-45,after_object_22,bottle,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-46,after_object_23,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-47,after_object_24,trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-48,after_object_25,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-49,after_object_26,sink,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-50,after_object_27,cabinet,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-51,after_object_28,mirror,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-52,after_object_29,toilet,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-53,after_object_30,sink mirror,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-54,after_object_31,towel,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-55,after_object_32,sink,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-56,after_object_33,backpack towel,1,no_exact_semantic_candidate,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False
+object-event-57,after_object_34,box trash,1,appearance_gate_rejected_all_candidates,"['insufficient_independent_views', 'insufficient_positive_free_space_views']",False

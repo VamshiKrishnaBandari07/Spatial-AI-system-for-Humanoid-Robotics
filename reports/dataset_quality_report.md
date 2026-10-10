@@ -35,7 +35,7 @@ Shared identity alignment and finite arrays passed, but identical-input registra
 
 ## Tests and reproduction
 
-Independent clean CPU suite: **103 passed**. The complete output is `regression_test_output.txt`, including one dependency deprecation warning. Development suite also passed. Annotation browser check: **passed**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.
+Independent clean CPU suite: **120 passed**. The current output is `semantic_recovery_tests.txt` when present, otherwise `regression_test_output.txt`, including one dependency deprecation warning. The latest full-suite evidence is from the clean CPU environment. Annotation browser check: **passed**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.
 
 Executed commands (from the repository, with the installed environment activated):
 
@@ -93,3 +93,7 @@ See ../docs/3RSCAN_VALIDATION.md for reproducible commands, precise source conve
 ## Expanded semantic coverage
 
 Twelve keyframes per recording completed in 611.03 seconds. Decisions: {'UNKNOWN': 69}; accepted associations: 0. All 80 same-label pairs failed the unchanged appearance gate. The single supported MOVED instance remains UNKNOWN; extra views do not establish detection accuracy. See 3rscan_coverage_evaluation.json and 3rscan_coverage_ablations.json.
+
+## Semantic recovery audit
+
+All 69 saved UNKNOWN decisions are audited: 50 appearance-gate rejections, 8 no exact-label candidates, 11 geometric differences without positive free space. DINOv2 replay reproduces stored descriptors; independent matching labels are absent, so the appearance floor is unchanged. Configurable multi-cue assignment and declared-error-budget movement tests pass. The real repeat retains identical alignment, all 28 decisions UNKNOWN and missed native MOVED support one. The standard export now includes a self-contained scene viewer. See semantic_recovery_delivery.json and ../docs/HUMANOID_SUBMISSION.md; genuine phone execution remains unrun.

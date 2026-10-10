@@ -33,6 +33,22 @@ class Config(BaseModel):
     semantic_max_frames: int = Field(4, ge=2, le=24)
     max_detections_per_frame: int = Field(8, ge=1, le=50)
     detection_threshold: float = Field(0.35, ge=0, le=1)
+    association_mode: Literal[
+        "legacy", "appearance", "semantic", "semantic_geometry", "multiview"
+    ] = "legacy"
+    association_search_radius: float = Field(1.0, gt=0, allow_inf_nan=False)
+    association_min_score: float = Field(0.8, gt=0, lt=1, allow_inf_nan=False)
+    association_ambiguity_margin: float = Field(0.05, ge=0, le=1, allow_inf_nan=False)
+    association_appearance_weight: float = Field(0.5, gt=0, allow_inf_nan=False)
+    association_geometry_weight: float = Field(0.25, ge=0, allow_inf_nan=False)
+    association_shape_weight: float = Field(0.15, ge=0, allow_inf_nan=False)
+    association_view_weight: float = Field(0.1, ge=0, allow_inf_nan=False)
+    movement_mode: Literal["legacy", "bounded"] = "legacy"
+    movement_depth_error_bound: float | None = Field(None, ge=0, allow_inf_nan=False)
+    movement_registration_error_bound: float | None = Field(
+        None, ge=0, allow_inf_nan=False
+    )
+    movement_error_source: str | None = Field(None, min_length=1)
     identity_cosine: float = Field(0.85, ge=0, le=1)
     viewpoint_degrees: float = Field(10, gt=0, le=180)
     min_object_views: int = Field(2, ge=1, le=10)

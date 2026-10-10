@@ -140,8 +140,9 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
             if mask.sum() < 16:
                 continue
             foreground[fid] |= mask
-            crop = rgb[y0:y1, x0:x1].copy()
-            crop[~mask[y0:y1, x0:x1]] = 0
+            from .appearance import masked_crop
+
+            crop = masked_crop(rgb, mask, [x0, y0, x1, y1])
             appearance = experts.appearance.infer(Image.fromarray(crop))
             surface = reconstruction.surfaces.get(fid)
             if surface is not None:
@@ -269,6 +270,10 @@ def group_objects(observations, state, config):
         matches = associate(
             representatives, current, max_cost=1 - config.identity_cosine
         )
+        if config.association_mode != "legacy":
+            from .association import match_objects
+
+            matches = match_objects(groups, current, config, within_recording=True)
         used = set()
         for m in matches:
             g = groups[m["before"]]
@@ -434,6 +439,10 @@ def consensus(before, after, b_reconstruction, a_reconstruction, registration, c
         representatives(after),
         max_cost=1 - config.identity_cosine,
     )
+    if config.association_mode != "legacy":
+        from .association import match_objects
+
+        associations = match_objects(before, after, config)
     events = []
     used_before = set()
     used_after = set()
@@ -559,6 +568,13 @@ def consensus(before, after, b_reconstruction, a_reconstruction, registration, c
             elif displacement < threshold - band:
                 change = Change.UNCHANGED
                 status = "supported"
+            if config.movement_mode == "bounded":
+                from .movement import bounded_movement
+
+                result, movement_details = bounded_movement(a, b, config)
+                change = Change(result)
+                status = "ambiguous" if change == Change.UNKNOWN else "probable"
+                details["bounded_movement"] = movement_details
             b.id = a.id
         contradictions = (
             []
@@ -580,6 +596,26 @@ def consensus(before, after, b_reconstruction, a_reconstruction, registration, c
                 obj.distinct_views >= config.min_object_views
                 and vis["supported_free_views"] >= config.min_object_views
             )
+            unresolved = []
+            if config.association_mode != "legacy":
+                from .association import semantic_label
+
+                other_groups = after if state == "before" else before
+                other_used = used_after if state == "before" else used_before
+                for j, candidate in enumerate(other_groups):
+                    if j in other_used or semantic_label(obj.label) != semantic_label(
+                        candidate.label
+                    ):
+                        continue
+                    if (
+                        obj.position is None
+                        or candidate.position is None
+                        or np.linalg.norm(np.asarray(obj.position) - candidate.position)
+                        <= config.association_search_radius
+                    ):
+                        unresolved.append(candidate.id)
+                if unresolved:
+                    supported = False
             change = (
                 (Change.REMOVED if state == "before" else Change.ADDED)
                 if supported
@@ -590,7 +626,11 @@ def consensus(before, after, b_reconstruction, a_reconstruction, registration, c
                 obj if state == "after" else None,
                 change,
                 "probable" if supported else "unobservable",
-                {"distinct_views": obj.distinct_views, "visibility": vis},
+                {
+                    "distinct_views": obj.distinct_views,
+                    "visibility": vis,
+                    "unresolved_identity_candidates": unresolved,
+                },
             )
     return events, associations
 

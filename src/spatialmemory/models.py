@@ -2,7 +2,6 @@
 
 from dataclasses import dataclass
 import re
-import numpy as np
 
 
 @dataclass
@@ -85,7 +84,9 @@ class Expert:
         }
         if self.spec.purpose == "appearance":
             vector = result.last_hidden_state[:, 0].cpu().numpy()[0]
-            vector /= max(np.linalg.norm(vector), 1e-12)
+            from .association import unit_descriptor
+
+            vector = unit_descriptor(vector)
             return {"descriptor": vector.tolist(), "provenance": provenance}
         if self.spec.purpose == "relative_depth":
             depth = result.predicted_depth.cpu().numpy()[0]

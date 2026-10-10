@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "errors": [],
+  "unknown_decisions": 28,
+  "checks": [
+    "Actual saved scene loaded via setContent",
+    "Unknown filter matches report",
+    "Evidence detail selection",
+    "Before layer toggled",
+    "Drag rotation",
+    "Wheel zoom"
+  ],
+  "screenshot": "/workspace/spatialmemory-semantic-recovery-final-20261010/visualization/scene_viewer_browser.png"
+}

@@ -62,3 +62,7 @@ def export_run(output, report, before, after, bcolors, acolors):
     (output / "diagnostics/processing.json").write_text(
         json.dumps(report["stages"], indent=2)
     )
+
+    from .viewer import write_viewer
+
+    write_viewer(output, report, before, after)
