@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-10",
+  "new_video_paths": [],
+  "workspace_video_count": 44,
+  "3rscan_scan_assets_found": false,
+  "annotations_rechecked": [
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/moved/changes.json",
+      "schema_valid": true,
+      "data_origin": "UNKNOWN",
+      "independently_reviewed_objects": 0,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/unchanged/changes.json",
+      "schema_valid": true,
+      "data_origin": "UNKNOWN",
+      "independently_reviewed_objects": 0,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/added/changes.json",
+      "schema_valid": true,
+      "data_origin": "UNKNOWN",
+      "independently_reviewed_objects": 0,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/removed/changes.json",
+      "schema_valid": true,
+      "data_origin": "UNKNOWN",
+      "independently_reviewed_objects": 0,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/small_displacement/changes.json",
+      "schema_valid": true,
+      "data_origin": "UNKNOWN",
+      "independently_reviewed_objects": 0,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/occlusion/changes.json",
+      "schema_valid": true,
+      "data_origin": "UNKNOWN",
+      "independently_reviewed_objects": 0,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    },
+    {
+      "path": "/workspace/Spatial-AI-system-for-Humanoid-Robotics/data/datasets/arkitscenes/augmentations/47333462/lighting/changes.json",
+      "schema_valid": true,
+      "data_origin": "UNKNOWN",
+      "independently_reviewed_objects": 0,
+      "annotation_sources": [
+        "Exact synthetic point-set transformation; not real-world changes"
+      ]
+    }
+  ],
+  "native_loader_recheck": [
+    {
+      "dataset": "ARKitScenes",
+      "recording_id": "47333462",
+      "frames_checked": 48,
+      "status": "passed"
+    },
+    {
+      "dataset": "ARKitScenes",
+      "recording_id": "41069050",
+      "frames_checked": 48,
+      "status": "passed"
+    },
+    {
+      "dataset": "7-Scenes",
+      "recording_id": "seq-02",
+      "frames_checked": 48,
+      "status": "passed"
+    }
+  ],
+  "real_change_benchmark_run": false,
+  "reason": "No documented real changed pair with independently reviewed annotations",
+  "template": "examples/smartphone_annotations.template.json",
+  "tum_access": "Documentation verified; official archive host blocked; no files downloaded"
+}

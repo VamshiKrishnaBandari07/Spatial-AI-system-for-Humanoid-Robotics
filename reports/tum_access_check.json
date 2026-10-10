@@ -1,15 +1,32 @@
 {
   "downloaded": false,
+  "license": "Official overview: CC BY 4.0 for data unless stated otherwise; BSD-2-Clause for accompanying source code",
   "checks": [
     {
+      "url": "https://cvg.cit.tum.de/data/datasets/rgbd-dataset",
+      "status": 200,
+      "evidence": "Official license statement inspected"
+    },
+    {
       "url": "https://cvg.cit.tum.de/data/datasets/rgbd-dataset/download",
-      "status": "BLOCKED",
-      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+      "status": 200
+    },
+    {
+      "url": "https://cvg.cit.tum.de/data/datasets/rgbd-dataset/file_formats",
+      "status": 200,
+      "evidence": "Registered RGB/depth, PNG depth factor 5000, timestamped world-relative optical-camera poses and Freiburg calibration documented"
     },
     {
       "url": "https://cvg.cit.tum.de/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_xyz.tgz",
+      "status": 302,
+      "redirect": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_xyz.tgz"
+    },
+    {
+      "url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_xyz.tgz",
       "status": "BLOCKED",
-      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+      "error": "Tunnel connection failed: 403 Forbidden"
     }
-  ]
+  ],
+  "size_verified": false,
+  "network_draft": "webshare.cvg.cit.tum.de added; requires review/save/publication; not active"
 }
