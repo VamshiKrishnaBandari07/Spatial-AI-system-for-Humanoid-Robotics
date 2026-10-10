@@ -12,9 +12,9 @@ A real HTTP upload request to the running local application processed two **synt
 
 ## Not measured
 
-No real smartphone videos, licensed dataset scans or manual ground truth are available. Real-world precision, recall, F1, false removal/addition rates, matching accuracy, 3D localization error, coverage, GPU memory and ablations are **unrun**, not zero and not passing. DINOv2, Depth Anything V2, Grounding DINO and VGGT passed pretrained CPU inference smoke checks, but their accuracy is not validated with real ground truth. Docker execution has not been tested.
+No annotated real smartphone before/after change benchmark is available. Verified ARKitScenes and 7-Scenes recordings are available for ingestion and reconstruction checks, but do not supply the required object-change ground truth. Real-world precision, recall, F1, false removal/addition rates, matching accuracy, 3D localization error, coverage, GPU memory and ablations are **unrun**, not zero and not passing. DINOv2, Depth Anything V2, Grounding DINO and VGGT passed pretrained CPU inference smoke checks, but their accuracy is not validated with real ground truth. Docker build/runtime validation is blocked by container DNS; host package-server connectivity works.
 
-Final acceptance tests A–H and N require real video/model outputs and remain unrun. Tests I/J have synthetic/unit evidence only. K has sparse fit diagnostics, not calibrated uncertainty. L has clean CPU installation evidence. M has ignored private-data/checkpoint paths and no uploaded private recordings; no public submission has been published.
+Final acceptance tests A–H and N require real video/model outputs and remain unrun. Tests I/J have synthetic/unit evidence only. K has sparse fit diagnostics, not calibrated uncertainty. L has clean CPU installation evidence. M has ignored private-data/checkpoint paths and no uploaded private recordings; the source repository is published on GitHub, while no completed research benchmark submission is claimed.
 
 ## Real evaluation procedure
 
@@ -41,3 +41,11 @@ The 53-test suite additionally covers viewpoint deduplication, identical-object 
 ## Dataset-only continuation
 
 Official ARKitScenes and 7-Scenes RGB-D subsets are now locally verified; Replica has a verified partial texture asset. The regression suite now passes 67 tests. Real before/after object-change ground truth remains unavailable, so prior accuracy limitations still apply. Native loaders and seven clearly synthetic geometric-region pairs were validated without changing models or starting training. See [dataset evidence](docs/DATASETS.md).
+
+## Current regression and publication status (2026-10-10)
+
+Both the development environment and independent clean CPU environment pass all 79 tests. The professional workspace and edge-case browser suites pass. The source repository is published, with recordings and model weights excluded. Historical test counts and runtimes above describe their original runs, not the current total. See [methodology review](docs/METHODOLOGY.md) for current scope.
+
+## Fresh full-pipeline prediction check (2026-10-10)
+
+Actual CPU inference with the consensus configuration and no geometry reuse completed in 182.9 seconds on one identical synthetic recording pair. It returned two estimated UNCHANGED regions, zero physical-change alarms and 2,102 finite points per recording. Registration passed with 48 inliers and 9/9 held-out inliers. Supporting image files were verified. This is a functional no-change control, not an accuracy benchmark. The reciprocal of this one run is approximately 0.33 pairs/minute, including initialization; sustained throughput and real-world accuracy remain unmeasured. Evidence: [prediction check](docs/prediction_check_20261010.json).

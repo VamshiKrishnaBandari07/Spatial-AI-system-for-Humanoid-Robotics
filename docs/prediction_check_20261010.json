@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-10",
+  "status": "passed",
+  "input_type": "identical synthetic textured-panel videos; one no-change control pair",
+  "workflow": "CPU vggt semantic consensus",
+  "fresh_inference": true,
+  "geometry_reused": false,
+  "device": "cpu",
+  "runtime_seconds": 182.92529155500233,
+  "single_run_equivalent_pairs_per_minute": 0.32800275724562167,
+  "throughput_note": "Arithmetic reciprocal of one end-to-end run, not sustained throughput or a latency guarantee; includes model initialization.",
+  "event_counts": {
+    "UNCHANGED": 2
+  },
+  "physical_change_alarms": 0,
+  "scene_points": {
+    "before": 2102,
+    "after": 2102
+  },
+  "finite_world_arrays": true,
+  "supporting_image_files": 16,
+  "registration": {
+    "valid": true,
+    "inliers": 48,
+    "heldout_inliers": 9,
+    "heldout_count": 9
+  },
+  "real_world_accuracy": null,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "reason_metrics_unavailable": "No independently annotated real before/after object-change benchmark. Detector semantic labels are estimated and confidence is not calibrated.",
+  "source_report": "/workspace/spatialmemory-prediction-check-20261010/report.json"
+}
