@@ -17,7 +17,7 @@
   "evidence_calibration": null,
   "semantics_enabled": true,
   "semantic_max_frames": 6,
-  "max_detections_per_frame": 8,
+  "max_detections_per_frame": 16,
   "detection_threshold": 0.35,
   "association_mode": "multiview",
   "association_search_radius": 1.0,
@@ -34,6 +34,6 @@
   "identity_cosine": 0.85,
   "viewpoint_degrees": 10.0,
   "min_object_views": 2,
-  "object_prompt": "chair. table. box. backpack. bottle. plant. cabinet. electronic device.",
+  "object_prompt": "chair. table. cabinet. box. bag. backpack. bottle. cup. mug. bowl. plate. pan. kettle. plant. laptop. monitor. phone. book. tissue box. toiletry bottle.",
   "registration_min_heldout": 4
 }

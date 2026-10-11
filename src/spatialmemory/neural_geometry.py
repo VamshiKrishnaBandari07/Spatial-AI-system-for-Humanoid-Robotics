@@ -110,6 +110,9 @@ def reconstruct_neural(frames, output, expert=None, predictions=None):
             "confidence": result["world_points_conf"][0, i],
             "intrinsics": result["intrinsics"][0, i],
             "depth_source": "VGGT prediction; not measured depth",
+            "depth_confidence": result["depth_conf"][0, i]
+            if "depth_conf" in result
+            else None,
         }
         for i, frame in enumerate(frames)
     }

@@ -30,6 +30,8 @@ The existing loaders use CPU even if a GPU runtime is selected. Free Colab memor
 
 No model is silently substituted after inference fails. Unreliable registration stops processing. Bounded movement abstains without validated depth/alignment error budgets. Ranking scores and predicted mask IoUs are not calibrated probabilities.
 
+Small-object evidence uses the original point-confidence filter plus confidence-filtered depth-head support when both geometry heads agree. Visibility follows the same support policy. These heads share a neural model; agreement is not independent verification. The broader indoor vocabulary covers cups and toiletries, but detection does not establish object identity or removal. See [evidence-processing review](reports/object_evidence_repair.json).
+
 Full MASt3R/COLMAP integration, SAM 2 video-memory tracking, dense TSDF fusion, grounded language-model explanations and validated robot navigation remain research extensions. See [architecture](ARCHITECTURE.md) and [methodology](docs/METHODOLOGY.md).
 
 ## Local installation

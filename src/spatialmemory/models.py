@@ -145,6 +145,7 @@ class VGGTExpert:
             "depth": predictions["depth"].cpu().numpy(),
             "world_points": predictions["world_points"].cpu().numpy(),
             "world_points_conf": predictions["world_points_conf"].cpu().numpy(),
+            "depth_conf": predictions["depth_conf"].cpu().numpy(),
             "scale_status": "unverified",
             "checkpoint": self.checkpoint,
         }

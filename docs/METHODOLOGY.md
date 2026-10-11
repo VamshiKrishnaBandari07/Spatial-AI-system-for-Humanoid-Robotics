@@ -38,3 +38,11 @@ The animated user-uploaded example produced 25 UNKNOWN decisions. Its 16/17-inli
 The Colab UI invokes the same core pipeline on CPU. Local wrapper/browser checks do not establish successful installation in a fresh Google runtime or public-relay availability. No training was restarted and no architecture/checkpoint was replaced.
 
 Model and dataset licences apply independently of project-code licensing. Commercial eligibility, production deployment and robot safety are not established.
+
+## Small-object evidence repair
+
+The generic indoor detector vocabulary now covers cups, mugs, bowls, bags and toiletries. The phone/app profile permits up to sixteen detections per frame at the existing score threshold. Compound labels remain model proposals; their instance identity is not verified.
+
+VGGT depth-head confidence is retained. Pixels rejected by the point-head median may contribute only when depth-head confidence passes its own frame median, depth is positive/finite, and depth backprojection through `T_camera_world` agrees with the world point map within the configured voxel tolerance. Localization and visibility share this support policy. Legacy surfaces without depth confidence retain their original filter.
+
+The heads share a model and training; this is a consistency check, not independent geometric validation, metric calibration or a calibrated uncertainty bound. Identity and viewpoint gates remain unchanged. Known-pair development still fails to verify the user-reported removals; an independent benchmark is required. See [review and tests](../reports/object_evidence_repair.json).

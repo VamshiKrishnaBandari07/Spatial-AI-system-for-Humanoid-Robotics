@@ -35,6 +35,7 @@ def upload_config(geometry_backend, semantics_enabled):
         neural_frame_selection="quality_diverse",
         registration_min_heldout=4,
         semantic_max_frames=6,
+        max_detections_per_frame=16,
         association_mode="multiview",
         movement_mode="bounded",
     )

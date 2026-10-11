@@ -54,7 +54,8 @@ class Config(BaseModel):
     viewpoint_degrees: float = Field(10, gt=0, le=180)
     min_object_views: int = Field(2, ge=1, le=10)
     object_prompt: str = (
-        "chair. table. box. backpack. bottle. plant. cabinet. electronic device."
+        "chair. table. cabinet. box. bag. backpack. bottle. cup. mug. bowl. plate. "
+        "pan. kettle. plant. laptop. monitor. phone. book. tissue box. toiletry bottle."
     )
 
 

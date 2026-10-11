@@ -1,0 +1,29 @@
+{
+  "scope": "Evidence-processing repair; no claim of accurate removal detection",
+  "changes": [
+    "General indoor vocabulary includes cups, mugs, bowls, bags and toiletries",
+    "Phone/app detection budget increased from 8 to 16; score threshold unchanged",
+    "VGGT depth-head confidence preserved",
+    "Additional localization requires depth-head confidence and point/depth geometric agreement",
+    "Visibility uses the same supported-pixel policy, preserving legacy depth-only behavior"
+  ],
+  "model_architecture_changed": false,
+  "identity_floor_relaxed": false,
+  "viewpoint_gate_relaxed": false,
+  "heads_independently_calibrated": false,
+  "tests": {
+    "passed": 162,
+    "failed": 0,
+    "warnings": 1,
+    "log": "object_evidence_repair_tests.txt"
+  },
+  "validation_scope": "Known-pair development; independent scene benchmark still required",
+  "remaining": [
+    "Cross-session identity and compound/ambiguous detector labels",
+    "Many small-object locations remain unsupported",
+    "Estimated independent viewpoint counts remain insufficient",
+    "No independently calibrated uncertainty",
+    "Neither user-reported removal verified by model"
+  ],
+  "private_outputs": "Kept outside Git; no recordings, imagery, predictions or clouds included in this commit"
+}

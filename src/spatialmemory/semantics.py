@@ -68,6 +68,49 @@ def independent_views(observations, position, minimum_degrees):
     return len(directions)
 
 
+def localized_surface_points(mask, surface, pose, tolerance, return_support=False):
+    """Keep the point-head gate; admit depth-head support only with geometric agreement."""
+    points = surface["points"]
+    confidence = surface["confidence"]
+    valid = mask & (confidence >= np.quantile(confidence, 0.5))
+    primary_count = int(valid.sum())
+    depth_confidence = surface.get("depth_confidence")
+    alternate_count = 0
+    if depth_confidence is not None:
+        depth = surface["depth"]
+        if depth_confidence.shape != mask.shape or depth.shape != mask.shape:
+            raise ValueError("Depth-head dimensions disagree with semantic mask")
+        y, x = np.indices(mask.shape)
+        pixels = np.stack([x, y, np.ones_like(x)], axis=-1)
+        camera_points = (
+            pixels @ np.linalg.inv(surface["intrinsics"]).T * depth[..., None]
+        )
+        # Poses are T_camera_world; convert camera depth points into this session's world.
+        depth_points = (camera_points - pose[:3, 3]) @ pose[:3, :3]
+        agreement = np.linalg.norm(depth_points - points, axis=-1)
+        supported = (
+            mask
+            & np.isfinite(depth)
+            & (depth > 0)
+            & np.isfinite(depth_points).all(axis=-1)
+            & (depth_confidence >= np.quantile(depth_confidence, 0.5))
+            & (agreement <= tolerance)
+        )
+        alternate_count = int((supported & ~valid).sum())
+        valid |= supported
+    selected = points[valid]
+    selected = selected[np.isfinite(selected).all(axis=1)]
+    audit = {
+        "point_head_supported_pixels": primary_count,
+        "additional_depth_head_agreement_pixels": alternate_count,
+        "depth_head_available": depth_confidence is not None,
+        "agreement_tolerance_reconstruction_units": tolerance,
+        "confidence_gate": "per-head frame median; raw scores are not calibrated",
+        "independent_geometry_validation": False,
+    }
+    return (selected, audit, valid) if return_support else (selected, audit)
+
+
 def observe_scene(reconstruction, frames, state, output, config, experts):
     """Store model outputs, masks, locations and model-proposed labels separately."""
     from PIL import Image
@@ -146,9 +189,9 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
             appearance = experts.appearance.infer(Image.fromarray(crop))
             surface = reconstruction.surfaces.get(fid)
             if surface is not None:
-                conf = surface["confidence"]
-                valid = mask & (conf >= np.quantile(conf, 0.5))
-                points = surface["points"][valid]
+                points, localization = localized_surface_points(
+                    mask, surface, reconstruction.poses[fid], config.voxel_size
+                )
             else:
                 ids = []
                 for (frame, key), pid in reconstruction.tracks.items():
@@ -158,6 +201,7 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
                     if 0 <= y < h and 0 <= x < w and mask[y, x]:
                         ids.append(pid)
                 points = reconstruction.points[ids]
+                localization = {"source": "sparse tracks; depth head unavailable"}
             points = points[np.isfinite(points).all(axis=1)]
             center = np.median(points, axis=0).tolist() if len(points) >= 8 else None
             extent = (
@@ -224,6 +268,7 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
                 "segmentation": segmentation,
                 "appearance": appearance["provenance"],
                 "location_point_count": len(points),
+                "localization": localization,
                 "extent": extent,
                 "camera_center": camera.tolist(),
                 "image_size": [w, h],
@@ -380,15 +425,34 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
         pose = reconstruction.poses[fid]
         K = surface["intrinsics"]
         depth = surface["depth"].copy()
-        # Raw confidence only filters unreliable predictions; it is not a likelihood.
-        depth[surface["confidence"] < np.quantile(surface["confidence"], 0.5)] = np.nan
+        # Use the same cross-head support policy for localization and visibility.
+        # Cache per tolerance; the session's surfaces/poses are immutable here.
+        tolerance = config.voxel_size / max(
+            registration.scale if registration else 1, 1e-9
+        )
+        support_cache = surface.setdefault("_visibility_support", {})
+        if tolerance not in support_cache:
+            if surface.get("depth_confidence") is None:
+                # Legacy depth-only surfaces retain their original confidence gate.
+                support = surface["confidence"] >= np.quantile(
+                    surface["confidence"], 0.5
+                )
+            else:
+                _, _, support = localized_surface_points(
+                    np.ones(depth.shape, bool),
+                    surface,
+                    pose,
+                    tolerance,
+                    return_support=True,
+                )
+            support_cache[tolerance] = support
+        depth[~support_cache[tolerance]] = np.nan
         states = visibility(
             points,
             depth,
             K,
             pose,
-            tolerance=config.voxel_size
-            / max(registration.scale if registration else 1, 1e-9),
+            tolerance=tolerance,
         )
         free = sum(x == "FREE" for x in states) / len(states)
         camera = -pose[:3, :3].T @ pose[:3, 3]
