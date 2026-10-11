@@ -8,7 +8,7 @@ Deadline: **16 October 2026, 23:59 BST** (22:59 UTC). This is a research prototy
 - Frame selection, actual VGGT reconstruction, segmentation/detection/appearance inference, registration gates, semantic evidence aggregation, JSON, PLY, supporting masks and a self-contained scene viewer are implemented.
 - The approved real RGB-D pair completes source-assisted alignment. This does not demonstrate autonomous RGB-only shared registration.
 - The semantic recovery repeat produces 28 UNKNOWN decisions and misses the supported native MOVED instance. No physical change was confirmed. The earlier twelve-view run produced 69 UNKNOWN decisions.
-- 120 regressions pass, retaining all original 103. Synthetic association and displacement tests establish contract behavior, not real-world matching accuracy.
+- 122 regressions pass, retaining all original 120. Synthetic association and displacement tests establish contract behavior, not real-world matching accuracy.
 - Matching accuracy, full detection metrics and calibrated uncertainty are unavailable. The bounded movement mode keeps UNKNOWN when declared depth/alignment error budgets are missing. Scores are ranking affinities, not probabilities.
 
 ## Installation

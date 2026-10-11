@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "source_job": "cccccccccccccccccccccccccccccccc",
+  "checks": [
+    "Neural profile default",
+    "Actual completed report and scene replay",
+    "Allowlisted PLY download",
+    "Video decoder error and recovery",
+    "Unknown decision wording",
+    "375px mobile layout",
+    "No page errors"
+  ],
+  "model_inference_started": false,
+  "source_experiment": "Chess seq-01 identical-recording control; no real change annotations"
+}

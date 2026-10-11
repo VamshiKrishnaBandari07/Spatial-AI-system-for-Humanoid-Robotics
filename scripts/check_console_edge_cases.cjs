@@ -40,6 +40,7 @@ const assert = require("node:assert/strict");
   await page.waitForFunction(
     () => document.getElementById("pointCount").textContent !== "—",
   );
+  await page.waitForFunction(() => !document.querySelector("input[name=before]").disabled);
   assert.equal(await page.locator("input[name=before]").inputValue(), "");
   assert.match(
     await page.locator("#beforeFile").innerText(),
@@ -118,6 +119,7 @@ const assert = require("node:assert/strict");
     true,
   );
   assert.match(await page.locator("#loadedTrial").innerText(), /vggt geometry/);
+  await page.waitForFunction(() => !document.querySelector("input[name=before]").disabled);
   await page
     .locator("input[name=before]")
     .setInputFiles("/workspace/spatialmemory-fixtures/before.mp4");
@@ -133,6 +135,7 @@ const assert = require("node:assert/strict");
       .evaluate((input) => input.validationMessage),
     "Please select a file.",
   );
+  await page.waitForFunction(() => !document.querySelector("input[name=before]").disabled);
   await page
     .locator("input[name=before]")
     .setInputFiles("/workspace/spatialmemory-fixtures/before.mp4");
@@ -251,7 +254,7 @@ const assert = require("node:assert/strict");
   assert.deepEqual(errors, []);
   const summary = {
     status: "passed",
-    mode: "UI regressions using an existing synthetic report; failure responses explicitly simulated",
+    mode: "UI regressions using an existing completed report; failure responses explicitly simulated",
     checks: [
       "wrong-shaped browser storage",
       "unsaved review drafts across selection and reload",

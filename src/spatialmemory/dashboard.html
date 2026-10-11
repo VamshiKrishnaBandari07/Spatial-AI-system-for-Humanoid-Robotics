@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>SpatialMemory-X Ultra · Scene comparison</title>
     <style>
+      [hidden] { display: none !important; }
+      #artifactLinks { margin: 16px 0; flex-wrap: wrap; }
+      #artifactLinks a { display: inline-block; padding: 8px 12px; border: 1px solid currentColor; border-radius: 8px; text-decoration: none; font-size: 12px; }
       :root {
         color-scheme: light;
         --bg: #f4f5f2;
@@ -1017,7 +1020,7 @@
                 type="file"
                 name="before"
                 accept=".mp4,.mov,.mkv,video/*"
-                required /><video controls id="bv"></video></label
+                required /><video controls preload="metadata" id="bv"></video><small id="beforePreview" role="status" hidden></small></label
             ><label class="upload"
               ><span class="upload-title"
                 ><span class="upload-icon">↗</span>After recording</span
@@ -1028,14 +1031,13 @@
                 type="file"
                 name="after"
                 accept=".mp4,.mov,.mkv,video/*"
-                required /><video controls id="av"></video
-            ></label>
+                required /><video controls preload="metadata" id="av"></video><small id="afterPreview" role="status" hidden></small></label>
           </div>
           <div class="controls">
             <label
               >Analysis mode<select name="geometry_backend">
-                <option value="sparse">Fast reconstruction</option>
-                <option value="vggt">Detailed reconstruction · research</option>
+                <option value="vggt">Neural reconstruction</option>
+                <option value="sparse">Geometry only</option>
               </select></label
             ><label
               ><input
@@ -1054,8 +1056,9 @@
             views. Your recordings stay on this server; analysis may take
             several minutes.
           </p>
+          <p class="muted form-note">Movement remains Unknown when the required error bounds are unavailable. Object labels are model predictions; review the supporting views before relying on a decision.</p>
           <p class="warning" id="profileNotice" hidden>
-            Detailed reconstruction uses a research model licensed for
+            Neural reconstruction uses a research model licensed for
             noncommercial use. Review the VGGT licence before using this mode
             for company work.
           </p>
@@ -1221,6 +1224,7 @@
           Reopen your recent comparisons or download your results and review
           notes.
         </p>
+        <div id="artifactLinks" class="export-group" hidden></div>
         <div id="recentRuns" class="empty">
           Your completed comparisons will appear here.
         </div>
@@ -1589,6 +1593,7 @@
             delete previews[name];
           }
           e.target.setCustomValidity("");
+          $(name + "Preview").hidden = true;
           if (e.target.files[0]) {
             const file = e.target.files[0];
             $(name + "File").textContent =
@@ -1611,6 +1616,13 @@
             $(id).style.display = "none";
           }
         };
+      for (const [name, id] of [["before", "bv"], ["after", "av"]]) {
+        $(id).addEventListener("error", () => {
+          $(name + "Preview").textContent = "Video preview is unavailable in this browser. Server decoding will validate the recording during analysis.";
+          $(name + "Preview").hidden = false;
+        });
+        $(id).addEventListener("loadedmetadata", () => { $(name + "Preview").hidden = true; });
+      }
       function projected(p) {
         let [x, y, z] = p.map((v, i) => (v - center[i]) / radius),
           X = x * Math.cos(yaw) + z * Math.sin(yaw),
@@ -2000,6 +2012,15 @@
           workflow(2);
           $("exportReport").disabled = false;
           $("exportReview").disabled = false;
+          $("artifactLinks").replaceChildren();
+          for (const [key, label] of [["before", "Before cloud"], ["after", "After cloud"], ["aligned", "Aligned scene"], ["changes", "Change decisions"], ["registration", "Alignment diagnostics"]]) {
+            const link = document.createElement("a");
+            link.href = `/jobs/${job}/artifacts/${key}`;
+            link.textContent = label;
+            link.setAttribute("download", "");
+            $("artifactLinks").append(link);
+          }
+          $("artifactLinks").hidden = false;
           selected = null;
           for (const id of ["reviewDecision", "reviewNotes", "saveReview"])
             $(id).disabled = true;

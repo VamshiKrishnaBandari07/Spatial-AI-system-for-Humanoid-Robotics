@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "mode": "UI regressions using an existing synthetic report; failure responses explicitly simulated",
+  "mode": "UI regressions using an existing completed report; failure responses explicitly simulated",
   "checks": [
     "wrong-shaped browser storage",
     "unsaved review drafts across selection and reload",

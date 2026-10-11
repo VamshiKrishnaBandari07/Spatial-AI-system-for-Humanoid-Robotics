@@ -26,6 +26,19 @@ MAX_UPLOAD = 512 * 1024 * 1024
 LOGGER = logging.getLogger(__name__)
 
 
+def upload_config(geometry_backend, semantics_enabled):
+    """Use the conservative phone workflow without implying calibrated uncertainty."""
+    return Config(
+        geometry_backend=geometry_backend,
+        semantics_enabled=semantics_enabled,
+        neural_frames_per_video=4,
+        neural_frame_selection="quality_diverse",
+        semantic_max_frames=6,
+        association_mode="multiview",
+        movement_mode="bounded",
+    )
+
+
 @app.get("/", response_class=HTMLResponse)
 def home():
     return (Path(__file__).parent / "dashboard.html").read_text()
@@ -150,10 +163,7 @@ async def submit(
                 folder / "before.mp4",
                 folder / "after.mp4",
                 folder / "output",
-                config=Config(
-                    geometry_backend=geometry_backend,
-                    semantics_enabled=semantics_enabled,
-                ),
+                config=upload_config(geometry_backend, semantics_enabled),
                 progress=lambda s: JOBS[jid].update(stage=s),
             )
             JOBS[jid].update(status="complete")
@@ -260,3 +270,22 @@ def video(jid: str, state: str):
     if not path.is_file():
         raise HTTPException(404)
     return FileResponse(path, media_type="video/mp4")
+
+
+@app.get("/jobs/{jid}/artifacts/{artifact}")
+def artifact(jid: str, artifact: str):
+    available = {
+        "before": "reconstruction/before.ply",
+        "after": "reconstruction/after.ply",
+        "aligned": "reconstruction/aligned_scene.ply",
+        "changes": "changes/changes.json",
+        "regions": "changes/changed_regions.ply",
+        "registration": "diagnostics/registration.json",
+    }
+    if artifact not in available:
+        raise HTTPException(404, "Unknown artifact")
+    output = (jobpath(jid) / "output").resolve()
+    path = (output / available[artifact]).resolve()
+    if not path.is_relative_to(output) or not path.is_file():
+        raise HTTPException(404, "Artifact unavailable")
+    return FileResponse(path, filename=path.name)
