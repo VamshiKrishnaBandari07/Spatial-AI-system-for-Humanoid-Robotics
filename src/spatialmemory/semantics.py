@@ -595,6 +595,12 @@ def consensus(before, after, b_reconstruction, a_reconstruction, registration, c
             if not gates:
                 gates.append("displacement_or_identity_evidence_inconclusive")
         evidence["decision_gates"] = gates
+        evidence["validation"] = {
+            "status": "failed" if gates else "rule_gates_passed",
+            "failures": gates,
+            "verified_physical_state": False,
+            "calibrated_state_confidence": None,
+        }
         explanation = f"Model-proposed {source.label}: {classification.value.lower()}. "
         if classification == Change.UNKNOWN:
             explanation += "Decision blocked by: " + ", ".join(gates) + "."

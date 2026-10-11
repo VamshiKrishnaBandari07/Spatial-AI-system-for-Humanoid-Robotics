@@ -41,6 +41,19 @@ Model and dataset licences apply independently of project-code licensing. Commer
 
 ## Small-object evidence repair
 
+### Strict visibility-state API
+
+`spatialmemory.object_state.evaluate_object_state` separates current-view PRESENT,
+HIDDEN, REMOVED and OUT_OF_VIEW states from cross-session change labels. It
+requires verified whole-object geometry, identity and position for presence,
+complete occlusion for hidden state, and at least two independent free-space
+views plus a verified prior object for removal. Missing or contradictory evidence
+raises `ValidationFailureError`; detector absence alone never establishes removal.
+Its confidence remains null because a validated state-specific calibrator is not
+available. This API does not certify existing predicted depth or automatically
+convert existing UNKNOWN change events into verified states. Pipeline events now
+also expose explicit validation failures and null calibrated state confidence.
+
 The generic indoor detector vocabulary now covers cups, mugs, bowls, bags and toiletries. The phone/app profile permits up to sixteen detections per frame at the existing score threshold. Compound labels remain model proposals; their instance identity is not verified.
 
 VGGT depth-head confidence is retained. Pixels rejected by the point-head median may contribute only when depth-head confidence passes its own frame median, depth is positive/finite, and depth backprojection through `T_camera_world` agrees with the world point map within the configured voxel tolerance. Localization and visibility share this support policy. Legacy surfaces without depth confidence retain their original filter.
