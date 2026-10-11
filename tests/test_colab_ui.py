@@ -89,3 +89,32 @@ def test_notebook_cells_compile_without_saved_secrets():
             compile("".join(cell["source"]), f"cell{index}", "exec")
             assert cell["outputs"] == []
             assert cell["execution_count"] is None
+
+
+def test_launch_checks_setup_before_requesting_password(monkeypatch):
+    import getpass
+
+    def forbidden_prompt(*args, **kwargs):
+        pytest.fail("Incomplete setup must not request a password")
+
+    monkeypatch.setattr(getpass, "getpass", forbidden_prompt)
+    monkeypatch.setattr(Path, "is_file", lambda self: False)
+    notebook = json.loads((ROOT / "notebooks/SpatialMemory_Colab.ipynb").read_text())
+    with pytest.raises(RuntimeError, match="Run Step 1"):
+        exec("".join(notebook["cells"][2]["source"]), {})
+
+
+def test_launch_restores_configuration_without_setup_globals(monkeypatch):
+    import subprocess
+
+    monkeypatch.setattr(Path, "is_file", lambda self: True)
+    monkeypatch.setattr(
+        subprocess, "run", lambda *a, **kw: subprocess.CompletedProcess(a, 0)
+    )
+    notebook = json.loads((ROOT / "notebooks/SpatialMemory_Colab.ipynb").read_text())
+    source = "".join(notebook["cells"][2]["source"])
+    namespace = {}
+    exec(source.split("password = getpass.getpass")[0], namespace)
+    assert namespace["PYTHON"] == "/content/spatialmemory-colab-venv/bin/python"
+    assert str(namespace["REPO"]) == "/content/Spatial-AI-system-for-Humanoid-Robotics"
+    assert "dict(ENV," not in source
