@@ -34,5 +34,6 @@
   "identity_cosine": 0.85,
   "viewpoint_degrees": 10.0,
   "min_object_views": 2,
-  "object_prompt": "chair. table. box. backpack. bottle. plant. cabinet. electronic device."
+  "object_prompt": "chair. table. box. backpack. bottle. plant. cabinet. electronic device.",
+  "registration_min_heldout": 4
 }

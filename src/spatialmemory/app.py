@@ -33,6 +33,7 @@ def upload_config(geometry_backend, semantics_enabled):
         semantics_enabled=semantics_enabled,
         neural_frames_per_video=4,
         neural_frame_selection="quality_diverse",
+        registration_min_heldout=4,
         semantic_max_frames=6,
         association_mode="multiview",
         movement_mode="bounded",

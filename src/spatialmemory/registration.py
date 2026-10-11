@@ -26,6 +26,18 @@ def transform(points, scale, R, t):
 def ransac(source, target, threshold=0.08, seed=7, iterations=500):
     source = np.asarray(source, dtype=np.float64)
     target = np.asarray(target, dtype=np.float64)
+    if (
+        source.ndim != 2
+        or source.shape[1] != 3
+        or source.shape != target.shape
+        or not np.isfinite(source).all()
+        or not np.isfinite(target).all()
+    ):
+        raise ValueError(
+            "Registration requires matching finite Nx3 correspondence arrays"
+        )
+    if not np.isfinite(threshold) or threshold <= 0:
+        raise ValueError("Registration threshold must be finite and positive")
     rng = np.random.default_rng(seed)
     best = np.zeros(len(source), bool)
     if len(source) >= 6:
@@ -135,5 +147,13 @@ def register(before, after, config, before_masks=None, after_masks=None):
             reg.reason = "Held-out registration validation failed"
     else:
         reg = ransac(source, target, config.registration_threshold, config.seed)[0]
+        if reg.valid:
+            reg.reason += "; held-out validation unavailable"
+    if reg.valid and reg.heldout_count < config.registration_min_heldout:
+        reg.valid = False
+        reg.reason = (
+            "Insufficient held-out registration correspondences: "
+            f"{reg.heldout_count} available, {config.registration_min_heldout} required"
+        )
     reg.foreground_matches_excluded = excluded
     return reg

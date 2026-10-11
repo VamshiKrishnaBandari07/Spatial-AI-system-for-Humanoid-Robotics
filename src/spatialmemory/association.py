@@ -11,14 +11,17 @@ from .memory import associate
 
 def unit_descriptor(value):
     vector = np.asarray(value, float)
-    if (
-        vector.ndim != 1
-        or not len(vector)
-        or not np.isfinite(vector).all()
-        or np.linalg.norm(vector) < 1e-12
-    ):
+    if vector.ndim != 1 or not len(vector) or not np.isfinite(vector).all():
         raise ValueError("Finite nonzero descriptor required")
-    return vector / np.linalg.norm(vector)
+    # Rescale first: squaring large finite coordinates can overflow the norm.
+    magnitude = float(np.max(np.abs(vector)))
+    if magnitude == 0:
+        raise ValueError("Finite nonzero descriptor required")
+    scaled = vector / magnitude
+    length = float(np.linalg.norm(scaled))
+    if magnitude < 1e-12 and magnitude * length < 1e-12:
+        raise ValueError("Finite nonzero descriptor required")
+    return scaled / length
 
 
 def semantic_label(label):
@@ -68,7 +71,9 @@ def pair_measurements(a, b):
         try:
             vector = np.asarray(obj.descriptor, float)
             unit_descriptor(vector)
-            result["descriptor_norms"][index] = float(np.linalg.norm(vector))
+            with np.errstate(over="ignore"):
+                norm = float(np.linalg.norm(vector))
+            result["descriptor_norms"][index] = norm if np.isfinite(norm) else None
         except (ValueError, TypeError):
             pass
         result["mask_quality"].append(

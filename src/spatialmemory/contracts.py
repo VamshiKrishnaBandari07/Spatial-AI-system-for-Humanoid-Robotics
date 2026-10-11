@@ -19,6 +19,7 @@ class Config(BaseModel):
     focal_px: float | None = Field(None, gt=0)
     reprojection_px: float = Field(2.0, gt=0)
     registration_threshold: float = Field(0.08, gt=0)
+    registration_min_heldout: int = Field(0, ge=0, le=1000)
     voxel_size: float = Field(0.08, gt=0)
     min_cluster: int = Field(5, ge=1)
     seed: int = 7
