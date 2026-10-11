@@ -79,28 +79,44 @@ class Segmenter:
         }
 
 
-def propagate_mask(previous, current, mask, tolerance=1.5):
+def propagate_mask(previous, current, mask, tolerance=1.5, flow_cache=None):
     """Dense backward warp, forward/backward flow check; invalid regions are unknown."""
     if previous.shape != current.shape or mask.shape != previous.shape[:2]:
         raise ValueError("Flow/mask dimensions must agree")
-    a = cv2.cvtColor(previous, cv2.COLOR_BGR2GRAY)
-    b = cv2.cvtColor(current, cv2.COLOR_BGR2GRAY)
-    params = (0.5, 3, 21, 4, 7, 1.5, 0)
-    forward = cv2.calcOpticalFlowFarneback(a, b, None, *params)
-    backward = cv2.calcOpticalFlowFarneback(b, a, None, *params)
-    y, x = np.mgrid[: a.shape[0], : a.shape[1]].astype(np.float32)
-    mx = x + backward[:, :, 0]
-    my = y + backward[:, :, 1]
-    warped = cv2.remap(mask.astype(np.uint8), mx, my, cv2.INTER_NEAREST).astype(bool)
-    reverse_at_source = cv2.remap(forward, mx, my, cv2.INTER_LINEAR)
-    error = np.linalg.norm(backward + reverse_at_source, axis=2)
-    valid = (
-        (error <= tolerance)
-        & (mx >= 0)
-        & (my >= 0)
-        & (mx < a.shape[1] - 1)
-        & (my < a.shape[0] - 1)
+    cached_frames = (
+        flow_cache.get("frames", (None, None))
+        if flow_cache is not None
+        else (None, None)
     )
+    if (
+        flow_cache is not None
+        and cached_frames[0] is previous
+        and cached_frames[1] is current
+        and flow_cache.get("tolerance") == tolerance
+    ):
+        mx, my, valid = flow_cache["maps"]
+    else:
+        a = cv2.cvtColor(previous, cv2.COLOR_BGR2GRAY)
+        b = cv2.cvtColor(current, cv2.COLOR_BGR2GRAY)
+        params = (0.5, 3, 21, 4, 7, 1.5, 0)
+        forward = cv2.calcOpticalFlowFarneback(a, b, None, *params)
+        backward = cv2.calcOpticalFlowFarneback(b, a, None, *params)
+        y, x = np.mgrid[: a.shape[0], : a.shape[1]].astype(np.float32)
+        mx, my = x + backward[:, :, 0], y + backward[:, :, 1]
+        reverse_at_source = cv2.remap(forward, mx, my, cv2.INTER_LINEAR)
+        error = np.linalg.norm(backward + reverse_at_source, axis=2)
+        valid = (
+            (error <= tolerance)
+            & (mx >= 0)
+            & (my >= 0)
+            & (mx < a.shape[1] - 1)
+            & (my < a.shape[0] - 1)
+        )
+        if flow_cache is not None:
+            flow_cache.update(
+                frames=(previous, current), tolerance=tolerance, maps=(mx, my, valid)
+            )
+    warped = cv2.remap(mask.astype(np.uint8), mx, my, cv2.INTER_NEAREST).astype(bool)
     supported = warped & valid
     ratio = float(supported.sum() / max(1, warped.sum()))
     return supported, {

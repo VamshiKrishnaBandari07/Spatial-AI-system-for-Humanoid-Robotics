@@ -2,6 +2,8 @@ import importlib.util
 import json
 from pathlib import Path
 import zipfile
+import ast
+import subprocess
 
 import pytest
 from spatialmemory import colab_ui
@@ -13,6 +15,51 @@ spec = importlib.util.spec_from_file_location(
 )
 fixture = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fixture)
+
+
+def test_notebook_refresh_fast_forwards_without_overwriting_local_files(tmp_path):
+    def git(*args):
+        return subprocess.run(
+            ["git", *map(str, args)], check=True, capture_output=True, text=True
+        )
+
+    origin, seed, checkout = [
+        tmp_path / name for name in ("origin", "seed", "checkout")
+    ]
+    git("init", "--bare", "--initial-branch=main", origin)
+    git("init", "--initial-branch=main", seed)
+    git("-C", seed, "config", "user.name", "Test")
+    git("-C", seed, "config", "user.email", "test@example.invalid")
+    (seed / "README.md").write_text("first")
+    git("-C", seed, "add", ".")
+    git("-C", seed, "commit", "-m", "first")
+    git("-C", seed, "remote", "add", "origin", origin)
+    git("-C", seed, "push", "origin", "main")
+    git("clone", origin, checkout)
+    (checkout / "local-recording.txt").write_text("preserve")
+    (seed / "README.md").write_text("second")
+    git("-C", seed, "commit", "-am", "second")
+    git("-C", seed, "push", "origin", "main")
+    notebook = json.loads((ROOT / "notebooks/SpatialMemory_Colab.ipynb").read_text())
+    tree = ast.parse("".join(notebook["cells"][1]["source"]))
+    node = next(
+        n
+        for n in tree.body
+        if isinstance(n, ast.If) and ast.unparse(n.test) == "not REPO.exists()"
+    )
+    code = compile(ast.Module(body=[node], type_ignores=[]), "setup-refresh", "exec")
+    namespace = {
+        "REPO": checkout,
+        "subprocess": subprocess,
+        "checked": lambda *args: subprocess.run(args, check=True, capture_output=True),
+    }
+    exec(code, namespace)
+    assert (checkout / "README.md").read_text() == "second"
+    assert (checkout / "local-recording.txt").read_text() == "preserve"
+    (checkout / "README.md").write_text("local change")
+    with pytest.raises(RuntimeError, match="preserved"):
+        exec(code, namespace)
+    assert (checkout / "README.md").read_text() == "local change"
 
 
 def test_colab_real_geometry_workflow(tmp_path):
@@ -50,6 +97,29 @@ def test_colab_archive_scope(tmp_path):
     (output / "before/external.json").symlink_to(secret)
     with zipfile.ZipFile(colab_ui.results_zip(output)) as archive:
         assert archive.namelist() == ["report.json"]
+
+
+def test_temporal_diagnostics_are_exported(tmp_path):
+    output = tmp_path / "output"
+    (output / "diagnostics").mkdir(parents=True)
+    (output / "diagnostics/before_temporal.jsonl").write_text('{"frame_index":0}\n')
+    with zipfile.ZipFile(colab_ui.results_zip(output)) as archive:
+        assert "diagnostics/before_temporal.jsonl" in archive.namelist()
+
+
+def test_distinct_cli_runs_do_not_overwrite_another_archive(tmp_path):
+    sentinel = tmp_path / "results.zip"
+    sentinel.write_bytes(b"existing")
+    archives = []
+    for name in ["scene_a", "scene_b"]:
+        output = tmp_path / name
+        output.mkdir()
+        (output / "report.json").write_text(json.dumps({"scene_id": name}))
+        archives.append(colab_ui.results_zip(output))
+    assert archives[0] != archives[1]
+    assert sentinel.read_bytes() == b"existing"
+    with zipfile.ZipFile(archives[0]) as archive:
+        assert json.loads(archive.read("report.json"))["scene_id"] == "scene_a"
 
 
 def test_colab_missing_input():

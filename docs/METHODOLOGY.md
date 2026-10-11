@@ -41,16 +41,33 @@ Model and dataset licences apply independently of project-code licensing. Commer
 
 ## Small-object evidence repair
 
+### Portrait input coverage
+
+VGGT's upstream default `crop` preprocessing center-crops tall inputs after
+resizing the width to 518 pixels. On a 464×832 recording it retains approximately
+original rows 183–649. Objects near the lower edge can be clipped even though they
+are visible in the original video. `neural_preprocessing: "pad"` instead preserves
+the full image using the upstream padded mode. Feature extraction and predicted
+camera parameters use the same processed image. Padding pixels are excluded from
+keypoint geometry, confidence quantiles, object localization and visibility support.
+Cached geometry cannot be reused across preprocessing modes. Padding reduces
+effective object resolution and is an experimental alternative, not a guarantee
+of improved reconstruction or labels.
+
 ### Every-frame temporal diagnostics
 
 Set `temporal_tracking_enabled` to true with semantic inference enabled to decode
 both complete videos again, preserving ingestion timestamps. Neural keyframe
 masks initialize independent 2D segments; forward/backward optical flow propagates
 them between anchors. Low flow support or a mask-area ratio outside 0.5–2 stops
-propagation and records `requires_redetection`. The next available neural anchor
-reinitializes segments. There is no new detector invocation on drift frames,
-no verified cross-anchor identity, and no occlusion or removal conclusion from
-flow loss. JSONL diagnostics record every decoded frame. This optional CPU stage
+propagation and records `requires_redetection`. A real Grounding DINO / SAM 2 / DINOv2 callback re-detects periodically
+and after drift (with a 0.5-second cooldown). Drift requests remain pending
+through the cooldown. Supported live tracks can link to new detections only
+with matching normalized labels, appearance cosine at least 0.85, mask IoU at
+least 0.2, and a 0.05 ranking margin against competing links on either side.
+Lost or ambiguous tracks begin independent segments. These are uncalibrated
+2D identity proposals; no occlusion or removal conclusion follows from flow loss. JSONL diagnostics record every decoded frame and neural provenance. Optical flow
+is computed once per frame pair and shared across object masks. This optional CPU stage
 can be expensive and does not replace or add independent 3D consensus evidence.
 
 Repeated detector words and the clear cup/mug synonym are normalized for

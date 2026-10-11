@@ -7,7 +7,7 @@
   "ablation_scope": "Saved-observation feasibility replay; all outputs UNKNOWN",
   "partial_native_ground_truth_metrics_computed": true,
   "partial_native_ground_truth_support": 1,
-  "core_tests_passed": 162,
+  "core_tests_passed": 205,
   "native_frames_checked": 401,
   "real_recording_control_completed": true,
   "real_changed_pair_inference_attempted": true,
@@ -35,11 +35,14 @@
     "reproducible_documentation": true,
     "challenge_completed": false
   },
-  "latest_test_log": "object_evidence_repair_tests.txt",
+  "latest_test_log": "reports/temporal_perception_tests.txt",
   "application_execution_verified": true,
   "latest_repository_review": "repository_review.json",
   "latest_pipeline_audit": "pipeline_audit.json",
   "latest_object_evidence_review": "object_evidence_repair.json",
   "user_reported_phone_pair_execution": true,
-  "phone_pair_change_detection_validated": false
+  "phone_pair_change_detection_validated": false,
+  "full_phone_recording_temporal_processing_completed": true,
+  "phone_pair_order_verified": false,
+  "latest_phone_review": "reports/temporal_perception_review.json"
 }

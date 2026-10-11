@@ -53,6 +53,13 @@ python -m uvicorn spatialmemory.app:app --host 127.0.0.1 --port 8000
 
 The local service processes one job at a time and accepts up to 512 MiB per video. It is not an authenticated multi-user deployment. The Colab wrapper adds temporary password-protected access. Human review notes remain separate from predictions and ground truth.
 
+Both UIs offer optional frame tracking with real neural re-detection. This is
+additional CPU work and produces uncalibrated 2D track proposals, per-frame
+diagnostics and observation crops; it does not establish physical removal.
+For portrait recordings, the experimental config option `neural_preprocessing:
+"pad"` preserves the whole image rather than center-cropping it. See
+[methodology](docs/METHODOLOGY.md) for coverage, padding and tracking limitations.
+
 ## Command-line processing
 
 ```bash

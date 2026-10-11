@@ -8,6 +8,33 @@ import numpy as np
 from .association import semantic_label
 
 
+def proposed_name(label):
+    name = semantic_label(label)
+    allowed = {
+        "chair",
+        "table",
+        "cabinet",
+        "box",
+        "bag",
+        "backpack",
+        "bottle",
+        "cup",
+        "bowl",
+        "plate",
+        "pan",
+        "kettle",
+        "plant",
+        "laptop",
+        "monitor",
+        "phone",
+        "book",
+        "tissue box",
+        "toiletry",
+        "toiletry bottle",
+    }
+    return name.title() if name in allowed else "Unidentified object"
+
+
 def create_object_review(output):
     output = Path(output)
     destination = output / "visualization" / "object_review"
@@ -29,41 +56,26 @@ def create_object_review(output):
                 evidence = (
                     output / "evidence" / "supporting_frames" / f"{observation}.png"
                 )
-                if not evidence.is_file():
-                    continue
-                image = cv2.imread(str(evidence))
+                processed = evidence.is_file()
+                source_image = evidence
+                if not processed:
+                    source_image = output / state / f"{state}_{int(frame):06d}.jpg"
+                    if not row.get("perception_size") or not source_image.is_file():
+                        continue
+                image = cv2.imread(str(source_image))
                 if image is None:
                     raise ValueError(f"Unreadable evidence: {observation}")
                 h, w = image.shape[:2]
+                if not processed and row["perception_size"] != [w, h]:
+                    raise ValueError(
+                        "Raw proposal coordinates disagree with source image"
+                    )
                 x0, y0, x1, y1 = np.rint(
                     np.clip(box, [0, 0, 0, 0], [w, h, w, h])
                 ).astype(int)
                 if x1 <= x0 or y1 <= y0:
                     continue
-                name = semantic_label(label)
-                clear = name in {
-                    "chair",
-                    "table",
-                    "cabinet",
-                    "box",
-                    "bag",
-                    "backpack",
-                    "bottle",
-                    "cup",
-                    "bowl",
-                    "plate",
-                    "pan",
-                    "kettle",
-                    "plant",
-                    "laptop",
-                    "monitor",
-                    "phone",
-                    "book",
-                    "tissue box",
-                    "toiletry",
-                    "toiletry bottle",
-                }
-                display = name.title() if clear else "Unidentified object"
+                display = proposed_name(label) if processed else "Unidentified object"
                 filename = f"{observation}.jpg"
                 if not cv2.imwrite(str(destination / filename), image[y0:y1, x0:x1]):
                     raise ValueError("Could not save object crop")
@@ -75,6 +87,9 @@ def create_object_review(output):
                     "raw_label": label,
                     "raw_detector_score": score,
                     "identity_verified": False,
+                    "processing_status": "segmented_observation"
+                    if processed
+                    else "unverified_proposal",
                     "crop": filename,
                 }
                 records.append(record)

@@ -23,6 +23,16 @@ def surface_and_mask():
     }, mask
 
 
+def test_padding_is_never_localization_support():
+    surface, mask = surface_and_mask()
+    surface["valid_pixels"] = np.zeros(mask.shape, bool)
+    surface["valid_pixels"][0] = True
+    points, audit = localized_surface_points(mask, surface, np.eye(4), 0.08)
+    assert len(points) == 0
+    assert audit["point_head_supported_pixels"] == 0
+    assert audit["additional_depth_head_agreement_pixels"] == 0
+
+
 def test_depth_head_agreement_localizes_low_point_confidence_region():
     surface, mask = surface_and_mask()
     points, audit = localized_surface_points(mask, surface, np.eye(4), 0.08)

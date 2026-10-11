@@ -129,11 +129,13 @@ class VGGTExpert:
             torch.load(checkpoint, map_location="cpu", weights_only=True)
         )
 
-    def infer(self, paths):
+    def infer(self, paths, preprocessing="crop"):
         from vggt.utils.load_fn import load_and_preprocess_images
         from vggt.utils.pose_enc import pose_encoding_to_extri_intri
 
-        images = load_and_preprocess_images([str(p) for p in paths]).to(self.device)
+        images = load_and_preprocess_images(
+            [str(p) for p in paths], mode=preprocessing
+        ).to(self.device)
         with self.torch.inference_mode():
             predictions = self.model(images)
         extrinsics, intrinsics = pose_encoding_to_extri_intri(

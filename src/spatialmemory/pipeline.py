@@ -105,10 +105,15 @@ def run(
                 output / "neural/before",
                 expert,
                 cached["before"] if cached else None,
+                config.neural_preprocessing,
             )
             stage("reconstruction_after")
             a = reconstruct_neural(
-                ak, output / "neural/after", expert, cached["after"] if cached else None
+                ak,
+                output / "neural/after",
+                expert,
+                cached["after"] if cached else None,
+                config.neural_preprocessing,
             )
             del expert
         else:
@@ -157,7 +162,8 @@ def run(
             a_observations, a_masks = observe_scene(
                 a, af, "after", output, config, semantic_experts
             )
-            del semantic_experts
+            if not config.temporal_tracking_enabled:
+                del semantic_experts
         stage("shared_registration")
         if config.metric_geometry_enabled:
             from .metric_alignment import metric_register
@@ -322,7 +328,7 @@ def run(
                 cameras.append(
                     {"frame_id": fid, "state": state, "position": center.tolist()}
                 )
-        stage("complete")
+        stage("exporting")
         report = {
             "scene_id": scene_id,
             "schema_version": "1.0",
@@ -402,12 +408,20 @@ def run(
             create_object_review(output)
             if config.temporal_tracking_enabled:
                 from .temporal_review import track_recording
+                from .temporal_neural import neural_redetector
+
+                stage("temporal_tracking")
+                redetect = neural_redetector(semantic_experts, config)
 
                 report["temporal_tracking"] = {
-                    "before": track_recording(before, output, "before"),
-                    "after": track_recording(after, output, "after"),
+                    "before": track_recording(
+                        before, output, "before", redetect=redetect
+                    ),
+                    "after": track_recording(after, output, "after", redetect=redetect),
                 }
         # A restart must never interpret a partially written report as a completed run.
+        stage("complete")
+        report["runtime_seconds"] = time.perf_counter() - started
         temporary_report = output / "report.json.tmp"
         temporary_report.write_text(json.dumps(report, indent=2))
         temporary_report.replace(output / "report.json")

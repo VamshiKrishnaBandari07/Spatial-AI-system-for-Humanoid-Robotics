@@ -10,7 +10,9 @@ SOURCE_COMMIT = "a288dd0f14786c93483e45524328726ab7b1b4ce"
 CHECKPOINT_REVISION = "860abec7937da0a4c03c41d3c269c366e82abdf9"
 
 
-def reconstruct_neural(frames, output, expert=None, predictions=None):
+def reconstruct_neural(
+    frames, output, expert=None, predictions=None, preprocessing="crop"
+):
     """Bounded selected frames; preserve neural raw predictions and lookup provenance."""
     import cv2
     from vggt.utils.load_fn import load_and_preprocess_images
@@ -20,7 +22,7 @@ def reconstruct_neural(frames, output, expert=None, predictions=None):
     if predictions is None:
         if expert is None:
             raise ValueError("Neural model or validated cached predictions required")
-        result = expert.infer([f.path for f in frames])
+        result = expert.infer([f.path for f in frames], preprocessing=preprocessing)
     else:
         result = predictions
     arrays = {k: v for k, v in result.items() if isinstance(v, np.ndarray)}
@@ -28,7 +30,7 @@ def reconstruct_neural(frames, output, expert=None, predictions=None):
         raise ValueError("Neural geometry contains nonfinite outputs")
     np.savez_compressed(output / "predictions.npz", **arrays)
     images = (
-        load_and_preprocess_images([f.path for f in frames])
+        load_and_preprocess_images([f.path for f in frames], mode=preprocessing)
         .numpy()
         .transpose(0, 2, 3, 1)
     )
@@ -54,10 +56,23 @@ def reconstruct_neural(frames, output, expert=None, predictions=None):
     tracks = {}
     poses = {}
     raw_conf = []
+    content_masks = []
     for i, frame in enumerate(frames):
         xyz = result["world_points"][0, i]
         conf = result["world_points_conf"][0, i]
-        threshold = float(np.quantile(conf, 0.5))
+        content = np.ones(conf.shape, bool)
+        if preprocessing == "pad":
+            original = cv2.imread(frame.path)
+            height, width = original.shape[:2]
+            if width >= height:
+                nw, nh = 518, round(height * (518 / width) / 14) * 14
+            else:
+                nh, nw = 518, round(width * (518 / height) / 14) * 14
+            top, left = (518 - nh) // 2, (518 - nw) // 2
+            content[:] = False
+            content[top : top + nh, left : left + nw] = True
+        content_masks.append(content)
+        threshold = float(np.quantile(conf[content], 0.5))
         coords = features[frame.id][0]
         pose = np.eye(4)
         pose[:3] = result["extrinsics"][0, i]
@@ -66,6 +81,7 @@ def reconstruct_neural(frames, output, expert=None, predictions=None):
             x, y = np.rint(uv).astype(int)
             if (
                 not (0 <= y < xyz.shape[0] and 0 <= x < xyz.shape[1])
+                or not content[y, x]
                 or conf[y, x] < threshold
             ):
                 continue
@@ -91,6 +107,8 @@ def reconstruct_neural(frames, output, expert=None, predictions=None):
             if predictions is not None
             else "pretrained inference in current run",
             "backend": "VGGT",
+            "preprocessing": preprocessing,
+            "padding_is_geometry_evidence": False,
             "points": len(points),
             "registered_frames": len(frames),
             "selected_frames": len(frames),
@@ -108,6 +126,7 @@ def reconstruct_neural(frames, output, expert=None, predictions=None):
             "points": result["world_points"][0, i],
             "depth": result["depth"][0, i, :, :, 0],
             "confidence": result["world_points_conf"][0, i],
+            "valid_pixels": content_masks[i],
             "intrinsics": result["intrinsics"][0, i],
             "depth_source": "VGGT prediction; not measured depth",
             "depth_confidence": result["depth_conf"][0, i]
@@ -158,6 +177,11 @@ def reusable_predictions(root, config, before_manifest, after_manifest):
 
     root = Path(root).resolve()
     report = json.loads((root / "report.json").read_text())
+    if (
+        report["config"].get("neural_preprocessing", "crop")
+        != config.neural_preprocessing
+    ):
+        raise ValueError("Cached geometry preprocessing differs")
     keys = [
         "geometry_backend",
         "neural_frames_per_video",

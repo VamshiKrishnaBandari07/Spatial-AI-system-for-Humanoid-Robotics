@@ -1,0 +1,74 @@
+{
+  "scope": "Real user recordings; original supplied order preserved pending confirmation. Known-pair development, not independent accuracy evaluation.",
+  "regression": {
+    "passed": 205,
+    "failed": 0,
+    "warning_count": 1,
+    "log": "reports/temporal_perception_tests.txt"
+  },
+  "tracking": {
+    "all_frames_validated": 7502,
+    "neural_redetection_calls": 52,
+    "supported_uncalibrated_temporal_links": 127,
+    "verified_cross_session_3d_identities": 0,
+    "before_frames": 3745,
+    "after_frames": 3757,
+    "core_plus_tracking_runtime_seconds": 2970.5438624869857,
+    "runtime_scope": "CPU execution overlapped with other experiments; not an isolated speed benchmark. Core runtime excludes tracking in this older loaded run; separately measured durations are summed.",
+    "physical_changes_confirmed": 0
+  },
+  "full_frame_geometry": {
+    "fresh_vggt": true,
+    "preprocessing": "pad",
+    "keyframes_per_video": 4,
+    "runtime_seconds": 765.7798481660138,
+    "registration_inliers": 11,
+    "heldout_inliers": 4,
+    "inconclusive_decisions": 92
+  },
+  "native_perception": {
+    "fresh_grounding_dino_sam2_dinov2": true,
+    "vggt_geometry_reused_from_verified_current_run": true,
+    "perception_size": [
+      464,
+      832
+    ],
+    "geometry_size": [
+      518,
+      518
+    ],
+    "runtime_seconds": 241.4648911539989,
+    "registration_inliers": 13,
+    "registration_correspondences": 13,
+    "heldout_inliers": 4,
+    "heldout_count": 4,
+    "registration_rmse_reconstruction_units": 0.006279594585590819,
+    "heldout_rmse_reconstruction_units": 0.0043400038662647,
+    "inconclusive_decisions": 100,
+    "confirmed_changes": 0,
+    "green_mug_detection_raw_score": 0.5973216891288757,
+    "perfume_region_raw_toiletry_score": 0.312,
+    "perfume_proposal_accepted": false,
+    "detection_threshold": 0.35
+  },
+  "input_order": {
+    "verification": "pending",
+    "finding": "Named after recording visibly contains the targets; named before recording shows their reference locations without them. Chronology requires user confirmation.",
+    "benchmark_direction_verified": false
+  },
+  "ui_verification": {
+    "authenticated_preview_upload_and_comparison": true,
+    "both_preview_videos_loaded_in_browser": true,
+    "invalid_tracking_profile_and_repeat_comparison": "Verified: failed request cleared previous results; a subsequent comparison used a fresh scene ID",
+    "fresh_colab_or_public_relay_tested": false
+  },
+  "accuracy_precision_recall_f1": null,
+  "remaining_blockers": [
+    "Recording chronology unconfirmed",
+    "Small-object depth confidence and geometry unsupported",
+    "No verified cross-session object identities",
+    "Estimated viewpoints below independence threshold",
+    "No independently annotated calibration/evaluation set"
+  ],
+  "restricted_or_user_media_committed": false
+}

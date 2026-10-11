@@ -72,7 +72,8 @@ def localized_surface_points(mask, surface, pose, tolerance, return_support=Fals
     """Keep the point-head gate; admit depth-head support only with geometric agreement."""
     points = surface["points"]
     confidence = surface["confidence"]
-    valid = mask & (confidence >= np.quantile(confidence, 0.5))
+    content = surface.get("valid_pixels", np.ones(mask.shape, bool))
+    valid = mask & content & (confidence >= np.quantile(confidence[content], 0.5))
     primary_count = int(valid.sum())
     depth_confidence = surface.get("depth_confidence")
     alternate_count = 0
@@ -90,10 +91,11 @@ def localized_surface_points(mask, surface, pose, tolerance, return_support=Fals
         agreement = np.linalg.norm(depth_points - points, axis=-1)
         supported = (
             mask
+            & content
             & np.isfinite(depth)
             & (depth > 0)
             & np.isfinite(depth_points).all(axis=-1)
-            & (depth_confidence >= np.quantile(depth_confidence, 0.5))
+            & (depth_confidence >= np.quantile(depth_confidence[content], 0.5))
             & (agreement <= tolerance)
         )
         alternate_count = int((supported & ~valid).sum())
@@ -143,11 +145,18 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
     previous_image = None
     previous_regions = []
     for fid in chosen:
-        image = reconstruction.features[fid][2]
+        geometry_image = reconstruction.features[fid][2]
+        image = geometry_image
+        if config.geometry_backend == "vggt" and not config.metric_geometry_enabled:
+            image = cv2.imread(frame_lookup[fid].path)
+            if image is None:
+                raise ValueError("Cannot read original perception frame")
         h, w = image.shape[:2]
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         detections = experts.detector.infer(Image.fromarray(rgb), config.object_prompt)
         record = {"frame_id": fid, "state": state, "detections": detections}
+        record["perception_size"] = [w, h]
+        record["geometry_size"] = list(geometry_image.shape[:2][::-1])
         raw.append(record)
         boxes = detections["boxes"]
         scores = detections["raw_scores"]
@@ -169,7 +178,7 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
             "score-ranked, same-category duplicate suppression at IoU 0.8"
         )
         experts.segmenter.set_image(rgb)
-        foreground[fid] = np.zeros((h, w), bool)
+        foreground[fid] = np.zeros(geometry_image.shape[:2], bool)
         for index in order:
             if scores[index] < config.detection_threshold:
                 continue
@@ -192,7 +201,14 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
             mask = mask & inside
             if mask.sum() < 16:
                 continue
-            foreground[fid] |= mask
+            geometry_mask = mask
+            if config.geometry_backend == "vggt" and not config.metric_geometry_enabled:
+                from .pixel_mapping import mask_to_geometry
+
+                geometry_mask = mask_to_geometry(
+                    mask, geometry_image.shape[:2], config.neural_preprocessing
+                )
+            foreground[fid] |= geometry_mask
             from .appearance import masked_crop
 
             crop = masked_crop(rgb, mask, [x0, y0, x1, y1])
@@ -200,7 +216,7 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
             surface = reconstruction.surfaces.get(fid)
             if surface is not None:
                 points, localization = localized_surface_points(
-                    mask, surface, reconstruction.poses[fid], config.voxel_size
+                    geometry_mask, surface, reconstruction.poses[fid], config.voxel_size
                 )
             else:
                 ids = []
@@ -444,8 +460,10 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
         if tolerance not in support_cache:
             if surface.get("depth_confidence") is None:
                 # Legacy depth-only surfaces retain their original confidence gate.
-                support = surface["confidence"] >= np.quantile(
-                    surface["confidence"], 0.5
+                content = surface.get("valid_pixels", np.ones(depth.shape, bool))
+                support = content & (
+                    surface["confidence"]
+                    >= np.quantile(surface["confidence"][content], 0.5)
                 )
             else:
                 _, _, support = localized_surface_points(

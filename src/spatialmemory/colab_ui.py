@@ -19,10 +19,19 @@ ACTIVE = Lock()
 def results_zip(output):
     """Export computed results only; exclude uploads, checkpoints and external links."""
     output = Path(output).resolve()
-    destination = output.parent / "results.zip"
+    destination = output.parent / (
+        "results.zip" if output.name == "output" else f"{output.name}-results.zip"
+    )
     files = [
         output / name
-        for name in ("report.json", "world.npz", "progress.json", "spatial_memory.json")
+        for name in (
+            "report.json",
+            "world.npz",
+            "progress.json",
+            "spatial_memory.json",
+            "before_model_outputs.json",
+            "after_model_outputs.json",
+        )
     ]
     for directory in (
         "reconstruction",
@@ -39,14 +48,15 @@ def results_zip(output):
         for path in files:
             if (
                 path.is_file()
-                and path.suffix in (".json", ".npz", ".ply", ".html", ".jpg", ".png")
+                and path.suffix
+                in (".json", ".jsonl", ".npz", ".ply", ".html", ".jpg", ".png")
                 and path.resolve().is_relative_to(output)
             ):
                 bundle.write(path, path.relative_to(output).as_posix())
     return str(destination)
 
 
-def analyze(before, after, profile, root, config_path):
+def analyze(before, after, profile, root, config_path, temporal_tracking=False):
     """Stream real stage updates; each comparison gets an immutable fresh directory."""
     for name, value in (("Before", before), ("After", after)):
         if not value:
@@ -69,6 +79,11 @@ def analyze(before, after, profile, root, config_path):
             )
         elif profile != "Neural + objects":
             raise ValueError("Unknown processing profile")
+        if temporal_tracking and not config.semantics_enabled:
+            raise ValueError("Frame tracking requires Neural + objects analysis")
+        config = config.model_copy(
+            update={"temporal_tracking_enabled": temporal_tracking}
+        )
         job = Path(root) / uuid4().hex
         inputs = job / "input"
         inputs.mkdir(parents=True)
@@ -109,12 +124,21 @@ def analyze(before, after, profile, root, config_path):
             "registration": report["registration"],
             "limitations": report["limitations"],
             "accuracy": "Unavailable without independent verified annotations",
+            "temporal_tracking": report.get("temporal_tracking"),
         }
         files = [
             str(output / "report.json"),
             results_zip(output),
             str(output / "visualization/index.html"),
         ]
+        files.extend(
+            str(path)
+            for path in (
+                output / "visualization/before_temporal.html",
+                output / "visualization/after_temporal.html",
+            )
+            if path.is_file()
+        )
         yield (
             "Processing completed. UNKNOWN means insufficient evidence. "
             "Download the ZIP before ending this Colab session.",
@@ -143,6 +167,18 @@ def build_demo(root, config_path):
             after = gr.File(
                 label="After recording", file_types=[".mp4", ".mov", ".mkv"]
             )
+        with gr.Row():
+            before_preview = gr.Video(
+                label="Before preview — verify recording order", interactive=False
+            )
+            after_preview = gr.Video(
+                label="After preview — verify recording order", interactive=False
+            )
+        before.change(lambda path: path, before, before_preview, queue=False)
+        after.change(lambda path: path, after, after_preview, queue=False)
+        gr.Markdown(
+            "Check that the Before preview shows the scene before your changes. Analysis uses the original uploaded files."
+        )
         profile = gr.Radio(
             ["Neural + objects", "Geometry diagnostic"],
             value="Neural + objects",
@@ -150,6 +186,11 @@ def build_demo(root, config_path):
             info="Geometry diagnostic does not run neural object models.",
         )
         start = gr.Button("Compare recordings", variant="primary")
+        temporal = gr.Checkbox(
+            label="Track every frame with neural re-detection",
+            value=False,
+            info="Additional CPU processing; temporal links are not verified change labels.",
+        )
         status = gr.Textbox(label="Processing status", interactive=False)
         summary = gr.JSON(label="Computed results")
         downloads = gr.File(
@@ -161,15 +202,16 @@ def build_demo(root, config_path):
             "Raw recordings are excluded from the ZIP."
         )
 
-        def submit(before, after, profile):
+        def submit(before, after, profile, temporal):
+            yield "Validating recordings and processing options…", None, None
             try:
-                yield from analyze(before, after, profile, root, config_path)
+                yield from analyze(before, after, profile, root, config_path, temporal)
             except (ValueError, RuntimeError) as error:
-                raise gr.Error(str(error)) from error
+                yield f"Cannot start comparison: {error}", None, None
 
         start.click(
             submit,
-            [before, after, profile],
+            [before, after, profile, temporal],
             [status, summary, downloads],
             concurrency_limit=1,
             concurrency_id="comparison",

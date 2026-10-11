@@ -8,7 +8,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
-from typing import Literal
+from typing import Literal, Annotated
 from .contracts import Config
 from .inputs import Annotations
 from fastapi.responses import HTMLResponse, FileResponse, StreamingResponse
@@ -26,11 +26,12 @@ MAX_UPLOAD = 512 * 1024 * 1024
 LOGGER = logging.getLogger(__name__)
 
 
-def upload_config(geometry_backend, semantics_enabled):
+def upload_config(geometry_backend, semantics_enabled, temporal_tracking_enabled=False):
     """Use the conservative phone workflow without implying calibrated uncertainty."""
     return Config(
         geometry_backend=geometry_backend,
         semantics_enabled=semantics_enabled,
+        temporal_tracking_enabled=temporal_tracking_enabled,
         neural_frames_per_video=4,
         neural_frame_selection="quality_diverse",
         registration_min_heldout=4,
@@ -120,8 +121,11 @@ async def submit(
     after: UploadFile = File(...),
     geometry_backend: Literal["sparse", "vggt"] = Form("sparse"),
     semantics_enabled: bool = Form(False),
+    temporal_tracking_enabled: Annotated[bool, Form()] = False,
 ):
     capabilities = neural_capabilities()
+    if temporal_tracking_enabled and not semantics_enabled:
+        raise HTTPException(422, "Frame tracking requires object analysis")
     if geometry_backend == "vggt" and not capabilities["vggt"]:
         raise HTTPException(
             503,
@@ -171,7 +175,9 @@ async def submit(
                 folder / "before.mp4",
                 folder / "after.mp4",
                 folder / "output",
-                config=upload_config(geometry_backend, semantics_enabled),
+                config=upload_config(geometry_backend, semantics_enabled).model_copy(
+                    update={"temporal_tracking_enabled": temporal_tracking_enabled}
+                ),
                 progress=lambda s: JOBS[jid].update(stage=s),
             )
             JOBS[jid].update(status="complete")
@@ -318,6 +324,8 @@ def results(jid: str):
                 "world.npz",
                 "progress.json",
                 "spatial_memory.json",
+                "before_model_outputs.json",
+                "after_model_outputs.json",
             ]
         ]
         for directory in [
@@ -335,6 +343,7 @@ def results(jid: str):
             for path in files:
                 if not path.is_file() or path.suffix not in [
                     ".json",
+                    ".jsonl",
                     ".npz",
                     ".ply",
                     ".html",
