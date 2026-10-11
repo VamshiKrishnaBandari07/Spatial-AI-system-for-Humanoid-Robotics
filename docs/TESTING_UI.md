@@ -48,3 +48,17 @@ node scripts/check_delivery_ui.cjs
 ```
 
 This is a local research evaluation workspace. Commercial model licensing, shared reviewer storage, authenticated multi-user hosting and robot deployment are separate requirements.
+
+## Integrated inference and export
+
+`scripts/check_application_e2e.cjs` performs an actual upload through the UI, selects neural reconstruction and object analysis, waits for fresh inference, verifies the report/registration, reads the matching diagnostics and downloads the result ZIP. It requires explicit before/after paths and writes private artifacts outside Git. An identical-recording control is labelled as such, not a real changed scene.
+
+```bash
+SPATIALMEMORY_URL=http://127.0.0.1:8000 \
+SPATIALMEMORY_BEFORE=/absolute/path/before.mp4 \
+SPATIALMEMORY_AFTER=/absolute/path/after.mp4 \
+SPATIALMEMORY_E2E_OUTPUT=/workspace/app-check \
+node scripts/check_application_e2e.cjs
+```
+
+Completed runs now include per-pair semantic, descriptor, geometry, extent, view and assignment diagnostics, plus object visibility records. Mask quality values are uncalibrated model-predicted IoUs. The downloadable archive includes computed outputs and supporting frames, excluding original videos and checkpoints. Unknown blocking checks are displayed with each result. Incomplete upload pairs are removed when saving fails; completed outputs and inference-failure evidence are retained.

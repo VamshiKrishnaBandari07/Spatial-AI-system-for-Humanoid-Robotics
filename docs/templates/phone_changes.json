@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "REPLACE_WITH_COMPARISON_SCENE_ID",
+  "coordinate_frame": "shared_world",
+  "position_unit": "unknown",
+  "scale_verified": false,
+  "changes": [],
+  "data_origin": "UNKNOWN",
+  "exhaustive_object_inventory": false,
+  "provenance": "Unfilled annotation template; no observations or changes asserted"
+}

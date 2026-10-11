@@ -1790,7 +1790,12 @@
           UNKNOWN:
             "More evidence is needed for this result. Check scene coverage, alignment and object identity before deciding what changed.",
         };
-        return summaries[event.change] || event.explanation;
+        const summary = summaries[event.change] || event.explanation;
+        if (event.change === "UNKNOWN" && event.evidence?.decision_gates?.length) {
+          const reasons = event.evidence.decision_gates.map(gate => gate.replaceAll("_", " ")).join("; ");
+          return summary + " Blocking checks: " + reasons + ".";
+        }
+        return summary;
       }
       function inspect(event) {
         selected = event.id;
@@ -2020,6 +2025,18 @@
             link.setAttribute("download", "");
             $("artifactLinks").append(link);
           }
+          if (report.association_diagnostics) {
+            const link = document.createElement("a");
+            link.href = `/jobs/${job}/artifacts/association`;
+            link.textContent = "Object matching diagnostics";
+            link.setAttribute("download", "");
+            $("artifactLinks").append(link);
+          }
+          const bundle = document.createElement("a");
+          bundle.href = `/jobs/${job}/results`;
+          bundle.textContent = "Download all results";
+          bundle.setAttribute("download", "");
+          $("artifactLinks").append(bundle);
           $("artifactLinks").hidden = false;
           selected = null;
           for (const id of ["reviewDecision", "reviewNotes", "saveReview"])
@@ -2131,7 +2148,11 @@
             let s = await get("/jobs/" + processingJob);
             $("status").textContent = processingMessage(s);
             if (["failed", "interrupted"].includes(s.status))
-              throw Error(s.error || "Processing interrupted");
+              throw Error((s.error || "Processing interrupted") + (
+                s.stage === "shared_registration" ? " Record overlapping views of static walls and furniture, then retry. An unreliable alignment is not accepted." :
+                String(s.stage).startsWith("ingestion") ? " Check that both files play, contain valid frames, and use a supported video codec." :
+                String(s.stage).includes("model_loading") ? " Check the installed model profile and checkpoint files on the server." : ""
+              ));
             if (s.status === "complete") break;
             await new Promise((r) => setTimeout(r, 1000));
           }

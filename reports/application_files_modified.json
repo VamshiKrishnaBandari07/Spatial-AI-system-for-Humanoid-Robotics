@@ -1,0 +1,32 @@
+{
+  "base_commit": "8d1b9f31a254e3042e922ee3e42d561ffa374364",
+  "files": [
+    "EVALUATION.md",
+    "PROGRESS.md",
+    "README.md",
+    "docs/HUMANOID_SUBMISSION.md",
+    "docs/METHODOLOGY.md",
+    "docs/PHONE_DEMO.md",
+    "docs/TESTING_UI.md",
+    "docs/templates/phone_changes.json",
+    "reports/APPLICATION_VERIFICATION.md",
+    "reports/application_busy_check.json",
+    "reports/application_files_modified.json",
+    "reports/application_negative_checks.json",
+    "reports/application_tests.txt",
+    "reports/application_ui_browser.json",
+    "reports/application_verification.json",
+    "reports/completion_status.json",
+    "reports/dataset_quality_report.md",
+    "scripts/build_dataset_quality_report.py",
+    "scripts/check_application_e2e.cjs",
+    "scripts/check_delivery_ui.cjs",
+    "src/spatialmemory/app.py",
+    "src/spatialmemory/association.py",
+    "src/spatialmemory/dashboard.html",
+    "src/spatialmemory/pipeline.py",
+    "src/spatialmemory/semantics.py",
+    "tests/test_association_audit.py",
+    "tests/test_delivery_workflow.py"
+  ]
+}

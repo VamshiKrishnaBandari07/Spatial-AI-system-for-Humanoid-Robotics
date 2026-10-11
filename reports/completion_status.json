@@ -7,7 +7,7 @@
   "ablation_scope": "Saved-observation feasibility replay; all outputs UNKNOWN",
   "partial_native_ground_truth_metrics_computed": true,
   "partial_native_ground_truth_support": 1,
-  "core_tests_passed": 120,
+  "core_tests_passed": 129,
   "native_frames_checked": 401,
   "real_recording_control_completed": true,
   "real_changed_pair_inference_attempted": true,
@@ -35,5 +35,6 @@
     "reproducible_documentation": true,
     "challenge_completed": false
   },
-  "latest_test_log": "semantic_recovery_tests.txt"
+  "latest_test_log": "application_tests.txt",
+  "application_execution_verified": true
 }

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Actual empty second upload returns 400 and incomplete pair removed",
+    "Actual corrupt-video job fails at ingestion",
+    "Failed job report and ZIP return 409",
+    "Successful neural report hash unchanged"
+  ],
+  "corrupt_job_status": {
+    "status": "failed",
+    "stage": "ingestion_before",
+    "error": "Command '['ffprobe', '-v', 'error', '-show_streams', '-show_format', '-of', 'json', '/workspace/spatialmemory-app-validation-20261011/9d90d26213c7428fa55775efcc45b529/before.mp4']' returned non-zero exit status 1."
+  }
+}

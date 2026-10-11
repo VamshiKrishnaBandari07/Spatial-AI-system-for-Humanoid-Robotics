@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "source_job": "fcc1be990cf04ca987c521fbe25dbfe5",
+  "checks": [
+    "Neural profile default",
+    "Actual completed report and scene replay",
+    "Allowlisted PLY download",
+    "Preview messaging via simulated media events",
+    "Unknown decision wording",
+    "375px mobile layout",
+    "No page errors"
+  ],
+  "model_inference_started": false
+}

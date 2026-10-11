@@ -39,10 +39,16 @@ def main():
         and execution["status"] == "complete"
         and execution["registration"]["valid"]
     )
-    latest_log = folder / "semantic_recovery_tests.txt"
-    test_log = (
-        latest_log if latest_log.exists() else folder / "regression_test_output.txt"
-    ).read_text()
+    latest_log = next(
+        path
+        for path in [
+            folder / "application_tests.txt",
+            folder / "semantic_recovery_tests.txt",
+            folder / "regression_test_output.txt",
+        ]
+        if path.exists()
+    )
+    test_log = latest_log.read_text()
     count = re.search(r"(\d+) passed", test_log)
     if not count:
         raise ValueError("No successful executed regression result found")
@@ -96,7 +102,7 @@ def main():
         "",
         "## Tests and reproduction",
         "",
-        f"Independent clean CPU suite: **{count.group(1)} passed**. The current output is `semantic_recovery_tests.txt` when present, otherwise `regression_test_output.txt`, including one dependency deprecation warning. The latest full-suite evidence is from the clean CPU environment. Annotation browser check: **{browser['status']}**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.",
+        f"Independent clean CPU suite: **{count.group(1)} passed**. The current output is `{latest_log.name}`, including one dependency deprecation warning. The latest full-suite evidence is from the clean CPU environment. Annotation browser check: **{browser['status']}**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.",
         "",
         "Executed commands (from the repository, with the installed environment activated):",
         "",
@@ -177,6 +183,17 @@ def main():
             "",
             "All 69 saved UNKNOWN decisions are audited: 50 appearance-gate rejections, 8 no exact-label candidates, 11 geometric differences without positive free space. DINOv2 replay reproduces stored descriptors; independent matching labels are absent, so the appearance floor is unchanged. Configurable multi-cue assignment and declared-error-budget movement tests pass. The real repeat retains identical alignment, all 28 decisions UNKNOWN and missed native MOVED support one. The standard export now includes a self-contained scene viewer. See semantic_recovery_delivery.json and ../docs/HUMANOID_SUBMISSION.md; genuine phone execution remains unrun.",
         ]
+    application_path = folder / "application_verification.json"
+    application = (
+        json.loads(application_path.read_text()) if application_path.exists() else None
+    )
+    if application:
+        rows += [
+            "",
+            "## Integrated application execution",
+            "",
+            "A fresh neural UI upload of an identical Chess recording completed. Per-candidate gates, source visibility and a complete result ZIP were inspected. All changes remain UNKNOWN; this control does not supply real change-detection accuracy. See APPLICATION_VERIFICATION.md and application_verification.json. Genuine phone validation and independent identity/calibration data remain unavailable.",
+        ]
     (folder / "dataset_quality_report.md").write_text("\n".join(rows) + "\n")
     status = {
         "completed": False,
@@ -222,7 +239,10 @@ def main():
     }
     if recovery_path.exists():
         status["semantic_recovery_acceptance"] = recovery["acceptance"]
-        status["latest_test_log"] = "semantic_recovery_tests.txt"
+    status["latest_test_log"] = latest_log.name
+    status["application_execution_verified"] = bool(
+        application and application["status"] == "passed_execution"
+    )
     (folder / "completion_status.json").write_text(json.dumps(status, indent=2) + "\n")
     print(json.dumps(status, indent=2))
 

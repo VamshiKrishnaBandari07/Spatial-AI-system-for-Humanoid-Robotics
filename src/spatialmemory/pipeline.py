@@ -249,6 +249,44 @@ def run(
             a_observations = common_frame(a_observations, registration)
             before_objects = group_objects(b_observations, "before", config)
             after_objects = group_objects(a_observations, "after", config)
+            from .association import match_objects
+            from .semantics import visibility_evidence
+            from collections import Counter
+
+            candidate_diagnostics = []
+            diagnostic_matches = match_objects(
+                before_objects, after_objects, config, diagnostics=candidate_diagnostics
+            )
+            association_audit = {
+                "schema_version": "1.0",
+                "method": config.association_mode,
+                "score_is_probability": False,
+                "matching_accuracy": None,
+                "ground_truth": "Independent correspondences unavailable",
+                "candidates": candidate_diagnostics,
+                "assignments": diagnostic_matches,
+                "gate_counts": dict(
+                    Counter(row["gate"] or "accepted" for row in candidate_diagnostics)
+                ),
+                "visibility": {
+                    "before": {
+                        obj.id: visibility_evidence(obj, a, config, registration)
+                        for obj in before_objects
+                    },
+                    "after": {
+                        obj.id: visibility_evidence(obj, b, config)
+                        for obj in after_objects
+                    },
+                },
+                "limitations": [
+                    "Raw mask IoU is a model prediction, not measured mask quality",
+                    "Observed extents are partial surfaces, not full object dimensions",
+                ],
+            }
+            (output / "diagnostics").mkdir(exist_ok=True)
+            (output / "diagnostics/association.json").write_text(
+                json.dumps(association_audit, indent=2)
+            )
             semantic_events, associations = consensus(
                 before_objects, after_objects, b, a, registration, config
             )
@@ -300,6 +338,9 @@ def run(
             "geometry": {"before": b.diagnostics, "after": a.diagnostics},
             "events": [e.model_dump(mode="json") for e in events],
             "spatial_memory": spatial_memory,
+            "association_diagnostics": "diagnostics/association.json"
+            if config.semantics_enabled
+            else None,
             "cameras": cameras,
             "stages": stages,
             "runtime_seconds": time.perf_counter() - started,

@@ -11,7 +11,7 @@ from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from typing import Literal
 from .contracts import Config
 from .inputs import Annotations
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import HTMLResponse, FileResponse, StreamingResponse
 from .pipeline import run
 
 app = FastAPI(title="SpatialMemory-X Ultra")
@@ -141,6 +141,12 @@ async def submit(
         await save_upload(before, folder / "before.mp4")
         await save_upload(after, folder / "after.mp4")
     except (Exception, asyncio.CancelledError) as error:
+        # No inference has started: discard only this incomplete upload pair.
+        for state in ["before", "after"]:
+            try:
+                (folder / f"{state}.mp4").unlink(missing_ok=True)
+            except OSError:
+                LOGGER.exception("Could not remove incomplete upload")
         JOBS[jid] = {
             "status": "failed",
             "stage": "uploading",
@@ -281,6 +287,7 @@ def artifact(jid: str, artifact: str):
         "changes": "changes/changes.json",
         "regions": "changes/changed_regions.ply",
         "registration": "diagnostics/registration.json",
+        "association": "diagnostics/association.json",
     }
     if artifact not in available:
         raise HTTPException(404, "Unknown artifact")
@@ -289,3 +296,69 @@ def artifact(jid: str, artifact: str):
     if not path.is_relative_to(output) or not path.is_file():
         raise HTTPException(404, "Artifact unavailable")
     return FileResponse(path, filename=path.name)
+
+
+@app.get("/jobs/{jid}/results")
+def results(jid: str):
+    """Export computed results, without raw recordings or neural checkpoints."""
+    import tempfile
+    import zipfile
+
+    output = (jobpath(jid) / "output").resolve()
+    if not (output / "report.json").is_file():
+        raise HTTPException(409, "Results not ready")
+    archive = tempfile.TemporaryFile()
+    try:
+        files = [
+            output / name
+            for name in [
+                "report.json",
+                "world.npz",
+                "progress.json",
+                "spatial_memory.json",
+            ]
+        ]
+        for directory in [
+            "reconstruction",
+            "changes",
+            "reports",
+            "diagnostics",
+            "evidence",
+            "visualization",
+            "before",
+            "after",
+        ]:
+            files.extend((output / directory).rglob("*"))
+        with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
+            for path in files:
+                if not path.is_file() or path.suffix not in [
+                    ".json",
+                    ".npz",
+                    ".ply",
+                    ".html",
+                    ".jpg",
+                    ".png",
+                ]:
+                    continue
+                if not path.resolve().is_relative_to(output):
+                    continue
+                bundle.write(path, path.relative_to(output).as_posix())
+        archive.seek(0)
+    except Exception:
+        archive.close()
+        raise
+
+    def chunks():
+        try:
+            while chunk := archive.read(1024 * 1024):
+                yield chunk
+        finally:
+            archive.close()
+
+    return StreamingResponse(
+        chunks(),
+        media_type="application/zip",
+        headers={
+            "Content-Disposition": f'attachment; filename="spatialmemory-{jid}.zip"'
+        },
+    )

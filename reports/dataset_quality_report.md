@@ -35,7 +35,7 @@ Shared identity alignment and finite arrays passed, but identical-input registra
 
 ## Tests and reproduction
 
-Independent clean CPU suite: **120 passed**. The current output is `semantic_recovery_tests.txt` when present, otherwise `regression_test_output.txt`, including one dependency deprecation warning. The latest full-suite evidence is from the clean CPU environment. Annotation browser check: **passed**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.
+Independent clean CPU suite: **129 passed**. The current output is `application_tests.txt`, including one dependency deprecation warning. The latest full-suite evidence is from the clean CPU environment. Annotation browser check: **passed**; evidence in `annotation_browser_check.json`. Existing edge-case UI replay also passed using the stored synthetic report.
 
 Executed commands (from the repository, with the installed environment activated):
 
@@ -97,3 +97,7 @@ Twelve keyframes per recording completed in 611.03 seconds. Decisions: {'UNKNOWN
 ## Semantic recovery audit
 
 All 69 saved UNKNOWN decisions are audited: 50 appearance-gate rejections, 8 no exact-label candidates, 11 geometric differences without positive free space. DINOv2 replay reproduces stored descriptors; independent matching labels are absent, so the appearance floor is unchanged. Configurable multi-cue assignment and declared-error-budget movement tests pass. The real repeat retains identical alignment, all 28 decisions UNKNOWN and missed native MOVED support one. The standard export now includes a self-contained scene viewer. See semantic_recovery_delivery.json and ../docs/HUMANOID_SUBMISSION.md; genuine phone execution remains unrun.
+
+## Integrated application execution
+
+A fresh neural UI upload of an identical Chess recording completed. Per-candidate gates, source visibility and a complete result ZIP were inspected. All changes remain UNKNOWN; this control does not supply real change-detection accuracy. See APPLICATION_VERIFICATION.md and application_verification.json. Genuine phone validation and independent identity/calibration data remain unavailable.

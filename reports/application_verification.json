@@ -1,0 +1,190 @@
+{
+  "job": "75b790772f4642e4a2bc66f728328811",
+  "runtime_seconds": 322.4099783220008,
+  "events": {
+    "UNKNOWN": 48
+  },
+  "candidate_pairs": 625,
+  "assignments": 2,
+  "accepted_unique_assignments": 2,
+  "gates": {
+    "insufficient_independent_views": 21,
+    "semantic_incompatible": 492,
+    "appearance_below_floor": 108,
+    "accepted": 2,
+    "missing_localization": 2
+  },
+  "zip_members": 132,
+  "cloud_shapes": {
+    "before": [
+      1677,
+      3
+    ],
+    "after": [
+      1677,
+      3
+    ],
+    "before_colors": [
+      1677,
+      3
+    ],
+    "after_colors": [
+      1677,
+      3
+    ]
+  },
+  "report_sha256": "2b8fbe64be60ffb28014207d1efc640eff0eecbfb9c7482f0d28d27b2ef20225",
+  "registration": {
+    "valid": true,
+    "scale": 0.9999999999999991,
+    "rotation": [
+      [
+        0.9999999999999999,
+        1.8855964952496094e-16,
+        -1.8481123788952696e-16
+      ],
+      [
+        -2.2626219055154596e-16,
+        1.0000000000000004,
+        -3.0214358520731887e-16
+      ],
+      [
+        1.4736846716490655e-16,
+        2.4870161003365895e-16,
+        1.0000000000000002
+      ]
+    ],
+    "translation": [
+      3.3306690738754696e-16,
+      2.498001805406602e-16,
+      6.661338147750939e-16
+    ],
+    "inliers": 1010,
+    "correspondences": 1010,
+    "rmse": 2.0721581693245607e-16,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed",
+    "heldout_count": 202,
+    "heldout_inliers": 202,
+    "heldout_rmse": 6.774316588312531e-16,
+    "foreground_matches_excluded": 1688,
+    "metric_diagnostics": null
+  },
+  "decision_gates": {
+    "unquantified_depth_or_registration_error_budget": 2,
+    "insufficient_independent_views": 46,
+    "unresolved_cross_recording_identity": 46,
+    "insufficient_positive_free_space": 46,
+    "missing_object_localization": 4
+  },
+  "calibration_metrics": null,
+  "change_detection_accuracy": null,
+  "status": "passed_execution",
+  "experiment": "Actual UI upload of identical Chess seq-01 recordings; no genuine change benchmark",
+  "application_e2e": {
+    "status": "passed",
+    "job": "75b790772f4642e4a2bc66f728328811",
+    "experiment": "Identical-recording neural UI control; no real change benchmark",
+    "elapsed_seconds": 326.124,
+    "runtime_seconds": 322.4099783220008,
+    "events": 48,
+    "registration": {
+      "valid": true,
+      "scale": 0.9999999999999991,
+      "rotation": [
+        [
+          0.9999999999999999,
+          1.8855964952496094e-16,
+          -1.8481123788952696e-16
+        ],
+        [
+          -2.2626219055154596e-16,
+          1.0000000000000004,
+          -3.0214358520731887e-16
+        ],
+        [
+          1.4736846716490655e-16,
+          2.4870161003365895e-16,
+          1.0000000000000002
+        ]
+      ],
+      "translation": [
+        3.3306690738754696e-16,
+        2.498001805406602e-16,
+        6.661338147750939e-16
+      ],
+      "inliers": 1010,
+      "correspondences": 1010,
+      "rmse": 2.0721581693245607e-16,
+      "threshold": 0.08,
+      "reason": "Validated sparse correspondence consensus; static background assumed",
+      "heldout_count": 202,
+      "heldout_inliers": 202,
+      "heldout_rmse": 6.774316588312531e-16,
+      "foreground_matches_excluded": 1688,
+      "metric_diagnostics": null
+    },
+    "model_geometry": {
+      "before": {
+        "reuse_provenance": null,
+        "predictions_origin": "pretrained inference in current run",
+        "backend": "VGGT",
+        "points": 1677,
+        "registered_frames": 4,
+        "selected_frames": 4,
+        "scale": "unverified monocular",
+        "confidence_filter": "per-frame median raw confidence; not calibrated",
+        "raw_confidence_range": [
+          1.807990550994873,
+          10.175002098083496
+        ],
+        "checkpoint_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+        "source_commit": "a288dd0f14786c93483e45524328726ab7b1b4ce",
+        "intrinsics_source": "VGGT prediction; accuracy unvalidated",
+        "predictions_file": "/workspace/spatialmemory-app-validation-20261011/75b790772f4642e4a2bc66f728328811/output/neural/before/predictions.npz"
+      },
+      "after": {
+        "reuse_provenance": null,
+        "predictions_origin": "pretrained inference in current run",
+        "backend": "VGGT",
+        "points": 1677,
+        "registered_frames": 4,
+        "selected_frames": 4,
+        "scale": "unverified monocular",
+        "confidence_filter": "per-frame median raw confidence; not calibrated",
+        "raw_confidence_range": [
+          1.807990550994873,
+          10.175002098083496
+        ],
+        "checkpoint_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+        "source_commit": "a288dd0f14786c93483e45524328726ab7b1b4ce",
+        "intrinsics_source": "VGGT prediction; accuracy unvalidated",
+        "predictions_file": "/workspace/spatialmemory-app-validation-20261011/75b790772f4642e4a2bc66f728328811/output/neural/after/predictions.npz"
+      }
+    },
+    "page_errors": []
+  },
+  "registration_replay": {
+    "valid": true,
+    "rmse_metres": 0.033463748697536995,
+    "heldout_rmse_metres": 0.039702395340164245,
+    "symmetric_overlap": 0.4861313136379596,
+    "heldout_overlap": 0.46094043887147335,
+    "rmse_delta_metres": 6.070535796265375e-09,
+    "scope": "Registration-only replay from saved real sensor clouds; after cloud restored by inverse previously estimated transform. No new reconstruction or semantic benchmark."
+  },
+  "peak_server_rss_mib": 9982.48046875,
+  "memory_method": "Linux /proc server VmHWM; server process only, excludes browser and children",
+  "tests": {
+    "passed": 129,
+    "failed": 0,
+    "warnings": 1
+  },
+  "remaining": [
+    "Independent identity correspondences unavailable",
+    "Depth/alignment error budgets and held-out calibration unavailable",
+    "Genuine phone before/after pair not supplied",
+    "GPU execution not tested; CPU-only environment",
+    "Selected candidate stack is not a fully benchmarked 12-stage research system"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "status": "passed",
+  "test": "Actual API refuses a second job while inference is active",
+  "http_status": 429
+}

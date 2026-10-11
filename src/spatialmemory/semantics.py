@@ -507,9 +507,33 @@ def consensus(before, after, b_reconstruction, a_reconstruction, registration, c
                 "all_signals_share_a_correlation_group": True,
                 "posterior_is_not_deployment_calibrated": True,
             }
+        gates = []
+        if classification == Change.UNKNOWN:
+            if any(g.position is None for g in [a, b] if g):
+                gates.append("missing_object_localization")
+            if any(g.distinct_views < config.min_object_views for g in [a, b] if g):
+                gates.append("insufficient_independent_views")
+            if evidence.get("association") and not evidence["association"].get(
+                "identity_verified"
+            ):
+                gates.append("ambiguous_identity_assignment")
+            if evidence.get("unresolved_identity_candidates"):
+                gates.append("unresolved_cross_recording_identity")
+            if (
+                "visibility" in evidence
+                and evidence["visibility"].get("supported_free_views", 0)
+                < config.min_object_views
+            ):
+                gates.append("insufficient_positive_free_space")
+            movement_gate = evidence.get("bounded_movement", {}).get("blocking_gate")
+            if movement_gate:
+                gates.append(movement_gate)
+            if not gates:
+                gates.append("displacement_or_identity_evidence_inconclusive")
+        evidence["decision_gates"] = gates
         explanation = f"Model-proposed {source.label}: {classification.value.lower()}. "
         if classification == Change.UNKNOWN:
-            explanation += "Distinct views, object identity, localization or positive free-space evidence are insufficient."
+            explanation += "Decision blocked by: " + ", ".join(gates) + "."
         elif classification == Change.MOVED:
             explanation += f"Unique appearance association and registered geometry suggest displacement of {movement:.3g} reconstruction units; absolute scale and model error are unverified."
         elif classification == Change.UNCHANGED:
