@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-11",
+  "scope": "Local verification of Colab notebook and authenticated Gradio wrapper; no fresh Colab runtime or public relay validation",
+  "python_tests": {
+    "passed": 134,
+    "failed": 0,
+    "warnings": 1,
+    "duration_seconds": 16.32
+  },
+  "gradio_version": "5.49.1",
+  "isolated_dependency_check": "passed",
+  "notebook_code_cells": "compile; no saved outputs or credentials",
+  "browser": {
+    "password_login": "passed",
+    "upload_fields": 2,
+    "javascript_errors": []
+  },
+  "functional_api": {
+    "authenticated_upload": "passed",
+    "anonymous_client": "rejected",
+    "pipeline_profile": "actual sparse geometry, synthetic control",
+    "status": "Processing completed. UNKNOWN means insufficient evidence. Download the ZIP before ending this Colab session.",
+    "files": 3,
+    "registration_valid": true
+  },
+  "export_tests": "raw recordings and external symlinks excluded; ZIP CRC passed",
+  "model_changes": false,
+  "neural_validation": "Existing pipeline invoked by same wrapper; local UI functional test uses explicitly selected sparse geometry with synthetic inputs. No new neural accuracy claim.",
+  "remaining": [
+    "First fresh Colab installation and public Gradio link must be executed in user Google account",
+    "Free CPU memory/session availability is not guaranteed",
+    "GPU acceleration is not enabled by these existing CPU model loaders",
+    "Real phone recordings and independently verified annotations remain necessary"
+  ]
+}

@@ -1,5 +1,9 @@
 # SpatialMemory-X Ultra
 
+[![Open upload workspace in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/VamshiKrishnaBandari07/Spatial-AI-system-for-Humanoid-Robotics/blob/main/notebooks/SpatialMemory_Colab.ipynb)
+
+For a temporary password-protected video upload link, run the [Colab notebook](notebooks/SpatialMemory_Colab.ipynb). It uses the existing CPU pipeline; free memory and session availability are not guaranteed. See [setup, licence and download instructions](docs/COLAB.md).
+
 **Multi-View Consensus and Uncertainty-Aware 4D Semantic World Modeling for Indoor Scene Change Detection**
 
 Compare two recordings of the same indoor space, inspect their aligned 3D reconstruction, and review object changes with supporting visual evidence. SpatialMemory-X Ultra provides an RGB-only baseline and an optional neural research profile, with a responsive desktop and mobile workspace.
