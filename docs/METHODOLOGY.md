@@ -41,6 +41,16 @@ Model and dataset licences apply independently of project-code licensing. Commer
 
 ## Small-object evidence repair
 
+Repeated detector words and the clear cup/mug synonym are normalized for
+association. Mixed category phrases remain ambiguous. Before segmentation,
+same-category proposals overlapping at IoU 0.8 or greater are suppressed in
+score order before applying the detection budget; nearby separate instances
+and conflicting categories remain separate. Raw detector outputs and selected
+indices are retained for audit. This improves proposal handling across rooms,
+but does not establish object identity or repair unsupported depth. A replay of
+the previous phone pair's detector outputs suppressed zero selected proposals;
+no improved removal accuracy is claimed from this change.
+
 ### Strict visibility-state API
 
 `spatialmemory.object_state.evaluate_object_state` separates current-view PRESENT,

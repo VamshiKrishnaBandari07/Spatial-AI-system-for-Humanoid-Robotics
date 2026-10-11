@@ -26,6 +26,12 @@ def unit_descriptor(value):
 
 def semantic_label(label):
     text = " ".join(str(label).lower().strip(" .").split())
+    # Grounded token spans can repeat words or include synonymous prompt terms.
+    # Collapse only clear equivalents; mixed categories retain their ambiguity.
+    words = list(dict.fromkeys(text.split()))
+    text = " ".join(words)
+    if words and set(words) <= {"cup", "mug"}:
+        return "cup"
     return {"trash": "trash can", "trashcan": "trash can"}.get(text, text)
 
 

@@ -155,9 +155,19 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
         if not len(boxes) == len(scores) == len(labels):
             raise ValueError("Detector output lengths disagree")
         current_regions = []
-        order = sorted(range(len(boxes)), key=lambda i: scores[i], reverse=True)[
-            : config.max_detections_per_frame
-        ]
+        from .detection_selection import select_detections
+
+        order = select_detections(
+            boxes,
+            scores,
+            labels,
+            config.detection_threshold,
+            config.max_detections_per_frame,
+        )
+        record["selected_detection_indices"] = order
+        record["selection_method"] = (
+            "score-ranked, same-category duplicate suppression at IoU 0.8"
+        )
         experts.segmenter.set_image(rgb)
         foreground[fid] = np.zeros((h, w), bool)
         for index in order:
