@@ -1,0 +1,18 @@
+{
+  "scope": "Registration partition repair; private recordings and inference outputs remain outside Git",
+  "problem": "Explicit phone hold-out requirement was incompatible with unconditional 20-pair partition trigger",
+  "fix": "Reserve the requested held-out set when at least six training correspondences remain. Preserve legacy default partition trigger and all fit/validation thresholds.",
+  "thresholds_relaxed": false,
+  "tests": {
+    "passed": 154,
+    "failed": 0,
+    "warnings": 1,
+    "log": "registration_partition_tests.txt"
+  },
+  "regressions": [
+    "Nine pairs fail explicit four-pair hold-out requirement",
+    "Sixteen pairs reserve four held-out pairs and fit on twelve",
+    "Invalid held-out alignment still rejected"
+  ],
+  "accuracy_claim": null
+}

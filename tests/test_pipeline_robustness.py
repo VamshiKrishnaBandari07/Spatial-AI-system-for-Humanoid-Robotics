@@ -34,7 +34,9 @@ def test_invalid_registration_inputs_fail_clearly(source, target):
         registration.ransac(source, target)
 
 
-@pytest.mark.parametrize("count,valid,heldout", [(17, False, 0), (25, True, 5)])
+@pytest.mark.parametrize(
+    "count,valid,heldout", [(9, False, 0), (16, True, 4), (25, True, 5)]
+)
 def test_phone_registration_requires_heldout_support(
     monkeypatch, count, valid, heldout
 ):
@@ -62,6 +64,32 @@ def test_phone_registration_requires_heldout_support(
 def test_nonfinite_configuration_rejected(field):
     with pytest.raises(ValueError):
         Config(**{field: float("inf")})
+
+
+def test_reserved_phone_holdout_still_rejects_bad_alignment(monkeypatch):
+    count = 16
+    source = np.random.default_rng(19).normal(size=(count, 3))
+    target = source.copy()
+    heldout = np.random.default_rng(7).permutation(count)[:4]
+    target[heldout] += 100
+
+    def scene(points):
+        return SimpleNamespace(
+            points=points,
+            features={"frame": (np.zeros((count, 2)), np.arange(count), None)},
+            tracks={("frame", i): i for i in range(count)},
+        )
+
+    monkeypatch.setattr(
+        registration, "match", lambda a, b: [(i, i) for i in range(count)]
+    )
+    result = registration.register(
+        scene(target), scene(source), Config(registration_min_heldout=4)
+    )
+    assert not result.valid
+    assert result.heldout_count == 4
+    assert result.heldout_inliers == 0
+    assert result.reason == "Held-out registration validation failed"
 
 
 @pytest.mark.parametrize("position", [[1, 2], [[1], [2, 3]], ["invalid", 0, 0]])

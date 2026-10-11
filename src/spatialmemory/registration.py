@@ -116,10 +116,13 @@ def register(before, after, config, before_masks=None, after_masks=None):
     source = np.array([after.points[b] for a, b in pairs]).reshape(-1, 3)
     # Random held-out correspondences check generalization of the fit.
     # This is not an independent scene-level accuracy or covariance estimate.
-    if len(source) >= 20:
+    # A configured hold-out requirement must reserve evidence whenever there
+    # are enough pairs for both the six-inlier fit gate and the validation set.
+    n = max(4, len(source) // 5, config.registration_min_heldout)
+    minimum_pairs = 10 if config.registration_min_heldout else 20
+    if len(source) >= minimum_pairs and len(source) - n >= 6:
         rng = np.random.default_rng(config.seed)
         order = rng.permutation(len(source))
-        n = max(4, len(source) // 5)
         test = order[:n]
         train = order[n:]
         candidate, _ = ransac(
