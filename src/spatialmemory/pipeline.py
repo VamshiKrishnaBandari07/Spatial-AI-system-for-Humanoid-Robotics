@@ -394,6 +394,10 @@ def run(
         from .exports import export_run
 
         export_run(output, report, b.points, aligned, b.colors, a.colors)
+        if config.semantics_enabled:
+            from .object_review import create_object_review
+
+            create_object_review(output)
         # A restart must never interpret a partially written report as a completed run.
         temporary_report = output / "report.json.tmp"
         temporary_report.write_text(json.dumps(report, indent=2))
