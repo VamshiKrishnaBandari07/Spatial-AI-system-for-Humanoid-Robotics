@@ -12,7 +12,7 @@ class Change(str, Enum):
 
 
 class Config(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
     max_frames: int = Field(80, ge=3, le=1000)
     max_width: int = Field(960, ge=64, le=4096)
     sample_seconds: float = Field(0.5, gt=0)

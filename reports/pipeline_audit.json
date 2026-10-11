@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-11",
+  "scope": "Pipeline code review, fresh CPU regression suite, checkpoint/source integrity checks and service health. No new neural inference or accuracy benchmark in this audit.",
+  "inference_execution_available": true,
+  "validated_accurate_change_detector": false,
+  "tests": {
+    "passed": 152,
+    "failed": 0,
+    "warnings": 1,
+    "runtime_seconds": 29.59,
+    "log": "pipeline_audit_tests.txt"
+  },
+  "integrity": {
+    "VGGT_checkpoint_sha256": "verified against pinned model registry checksum",
+    "SAM2_checkpoint_sha256": "verified against pinned model registry checksum",
+    "VGGT_source_revision": "verified",
+    "SAM2_source_revision": "verified"
+  },
+  "fixed": [
+    "Nonfinite numeric configuration values rejected",
+    "Malformed/ragged object localization rejected with auditable gate rather than diagnostic crash",
+    "Malformed or unrepresentable extent sizes rejected",
+    "Nonfinite computed diagnostic centroid distances exported as null"
+  ],
+  "pipeline_status": {
+    "input_validation": "tested",
+    "frame_processing": "tested; real capture coverage unverified",
+    "neural_geometry": "previous actual runs and current checkpoint integrity verified; geometry accuracy unverified",
+    "classical_cross_validation": "partial; full MASt3R/COLMAP not integrated",
+    "shared_registration": "gated; autonomous real phone alignment unverified",
+    "semantic_perception": "actual prior inference; semantic/mask accuracy unverified",
+    "object_identity": "partial; reliable cross-session matching unresolved",
+    "persistent_world": "observations and snapshots tested; full dynamic world incomplete",
+    "probabilistic_consensus": "conservative gates tested; deployment calibration missing",
+    "visibility_and_changes": "abstains without sufficient evidence and validated movement budgets",
+    "language_and_navigation": "computed summaries; grounded VLM and validated navigation incomplete",
+    "viewer_and_exports": "previous actual application verification; regression tests retained"
+  },
+  "flags": [
+    {
+      "severity": "BLOCKER_FOR_ACCURACY",
+      "issue": "No supplied genuine before/after phone pair with independently verified annotations"
+    },
+    {
+      "severity": "BLOCKER_FOR_RELIABLE_DETECTION",
+      "issue": "Cross-session identity matching remains unresolved"
+    },
+    {
+      "severity": "BLOCKER_FOR_CALIBRATED_MOVEMENT",
+      "issue": "Validated depth/alignment error budgets and held-out calibration absent"
+    },
+    {
+      "severity": "LIMITATION",
+      "issue": "Monocular scale unverified; distances are reconstruction units"
+    },
+    {
+      "severity": "LIMITATION",
+      "issue": "CPU model loaders; GPU availability alone does not accelerate them"
+    },
+    {
+      "severity": "RESEARCH_SCOPE",
+      "issue": "Full MASt3R/COLMAP, video-memory tracking, dense world model, grounded VLM and robot navigation remain incomplete"
+    },
+    {
+      "severity": "WARNING",
+      "issue": "Existing Starlette/httpx deprecation; tests pass"
+    },
+    {
+      "severity": "UNVERIFIED",
+      "issue": "Remote CI API unavailable from this workspace; local suite is verified"
+    }
+  ],
+  "training_restarted": false,
+  "thresholds_relaxed": false
+}

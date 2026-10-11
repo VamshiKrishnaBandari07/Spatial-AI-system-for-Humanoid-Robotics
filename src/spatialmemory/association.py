@@ -35,15 +35,19 @@ def extent_size(obj):
         extent = getattr(obj, "provenance", {}).get("extent")
     if extent is None:
         return None
-    extent = np.asarray(extent, float)
+    try:
+        extent = np.asarray(extent, float)
+    except (ValueError, TypeError):
+        return None
     if (
         extent.shape != (2, 3)
         or not np.isfinite(extent).all()
         or np.any(extent[1] < extent[0])
     ):
         return None
-    size = float(np.linalg.norm(extent[1] - extent[0]))
-    return size if size > 1e-9 else None
+    with np.errstate(over="ignore", invalid="ignore"):
+        size = float(np.linalg.norm(extent[1] - extent[0]))
+    return size if np.isfinite(size) and size > 1e-9 else None
 
 
 def pair_measurements(a, b):
@@ -98,11 +102,15 @@ def pair_measurements(a, b):
     except (ValueError, TypeError):
         pass
     if a.position is not None and b.position is not None:
-        points = np.asarray([a.position, b.position], float)
-        if points.shape == (2, 3) and np.isfinite(points).all():
-            result["registered_centroid_distance"] = float(
-                np.linalg.norm(points[0] - points[1])
-            )
+        try:
+            points = np.asarray([a.position, b.position], float)
+        except (ValueError, TypeError):
+            points = None
+        if points is not None and points.shape == (2, 3) and np.isfinite(points).all():
+            with np.errstate(over="ignore", invalid="ignore"):
+                distance = float(np.linalg.norm(points[0] - points[1]))
+            if np.isfinite(distance):
+                result["registered_centroid_distance"] = distance
     return result
 
 
@@ -153,8 +161,14 @@ def match_objects(before, after, config, within_recording=False, diagnostics=Non
                 row["gate"] = "missing_localization"
                 if a.position is None or b.position is None:
                     continue
-                pa, pb = np.asarray(a.position, float), np.asarray(b.position, float)
                 row["gate"] = "invalid_localization"
+                try:
+                    pa, pb = (
+                        np.asarray(a.position, float),
+                        np.asarray(b.position, float),
+                    )
+                except (ValueError, TypeError):
+                    continue
                 if (
                     pa.shape != (3,)
                     or pb.shape != (3,)

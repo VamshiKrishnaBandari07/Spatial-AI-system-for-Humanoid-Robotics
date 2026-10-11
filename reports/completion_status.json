@@ -7,7 +7,7 @@
   "ablation_scope": "Saved-observation feasibility replay; all outputs UNKNOWN",
   "partial_native_ground_truth_metrics_computed": true,
   "partial_native_ground_truth_support": 1,
-  "core_tests_passed": 145,
+  "core_tests_passed": 152,
   "native_frames_checked": 401,
   "real_recording_control_completed": true,
   "real_changed_pair_inference_attempted": true,
@@ -35,7 +35,8 @@
     "reproducible_documentation": true,
     "challenge_completed": false
   },
-  "latest_test_log": "repository_review_tests.txt",
+  "latest_test_log": "pipeline_audit_tests.txt",
   "application_execution_verified": true,
-  "latest_repository_review": "repository_review.json"
+  "latest_repository_review": "repository_review.json",
+  "latest_pipeline_audit": "pipeline_audit.json"
 }

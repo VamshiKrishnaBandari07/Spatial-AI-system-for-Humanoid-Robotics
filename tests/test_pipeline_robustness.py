@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from spatialmemory.association import unit_descriptor
+from spatialmemory.association import unit_descriptor, match_objects
 from spatialmemory.contracts import Config
 from spatialmemory import registration
 
@@ -54,3 +54,40 @@ def test_phone_registration_requires_heldout_support(
     assert result.heldout_count == heldout
     if not valid:
         assert "Insufficient held-out" in result.reason
+
+
+@pytest.mark.parametrize(
+    "field", ["sample_seconds", "focal_px", "registration_threshold", "voxel_size"]
+)
+def test_nonfinite_configuration_rejected(field):
+    with pytest.raises(ValueError):
+        Config(**{field: float("inf")})
+
+
+@pytest.mark.parametrize("position", [[1, 2], [[1], [2, 3]], ["invalid", 0, 0]])
+def test_invalid_localization_diagnostics_do_not_crash(position):
+    a = SimpleNamespace(
+        id="a",
+        label="chair",
+        descriptor=[1, 0],
+        position=position,
+        extent=None,
+        observations=[],
+        distinct_views=2,
+    )
+    b = SimpleNamespace(
+        id="b",
+        label="chair",
+        descriptor=[1, 0],
+        position=[0, 0, 0],
+        extent=None,
+        observations=[],
+        distinct_views=2,
+    )
+    audit = []
+    assert (
+        match_objects([a], [b], Config(association_mode="multiview"), diagnostics=audit)
+        == []
+    )
+    assert audit[0]["gate"] == "invalid_localization"
+    assert audit[0]["registered_centroid_distance"] is None
