@@ -41,6 +41,18 @@ Model and dataset licences apply independently of project-code licensing. Commer
 
 ## Small-object evidence repair
 
+### Every-frame temporal diagnostics
+
+Set `temporal_tracking_enabled` to true with semantic inference enabled to decode
+both complete videos again, preserving ingestion timestamps. Neural keyframe
+masks initialize independent 2D segments; forward/backward optical flow propagates
+them between anchors. Low flow support or a mask-area ratio outside 0.5–2 stops
+propagation and records `requires_redetection`. The next available neural anchor
+reinitializes segments. There is no new detector invocation on drift frames,
+no verified cross-anchor identity, and no occlusion or removal conclusion from
+flow loss. JSONL diagnostics record every decoded frame. This optional CPU stage
+can be expensive and does not replace or add independent 3D consensus evidence.
+
 Repeated detector words and the clear cup/mug synonym are normalized for
 association. Mixed category phrases remain ambiguous. Before segmentation,
 same-category proposals overlapping at IoU 0.8 or greater are suppressed in

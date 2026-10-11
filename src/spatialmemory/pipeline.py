@@ -20,6 +20,8 @@ def run(
     input_metadata=None,
 ):
     config = config or Config()
+    if config.temporal_tracking_enabled and not config.semantics_enabled:
+        raise ValueError("Temporal tracking requires neural semantic anchor masks")
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     if (output / "report.json").exists():
@@ -398,6 +400,13 @@ def run(
             from .object_review import create_object_review
 
             create_object_review(output)
+            if config.temporal_tracking_enabled:
+                from .temporal_review import track_recording
+
+                report["temporal_tracking"] = {
+                    "before": track_recording(before, output, "before"),
+                    "after": track_recording(after, output, "after"),
+                }
         # A restart must never interpret a partially written report as a completed run.
         temporary_report = output / "report.json.tmp"
         temporary_report.write_text(json.dumps(report, indent=2))

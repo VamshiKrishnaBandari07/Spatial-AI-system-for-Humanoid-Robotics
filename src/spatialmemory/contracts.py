@@ -31,6 +31,7 @@ class Config(BaseModel):
     registration_initial: str | None = None
     evidence_calibration: str | None = None
     semantics_enabled: bool = False
+    temporal_tracking_enabled: bool = False
     semantic_max_frames: int = Field(4, ge=2, le=24)
     max_detections_per_frame: int = Field(8, ge=1, le=50)
     detection_threshold: float = Field(0.35, ge=0, le=1)
