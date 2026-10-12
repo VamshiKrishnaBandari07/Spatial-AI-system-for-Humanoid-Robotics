@@ -95,6 +95,8 @@ Outputs include scene clouds, change records, supporting frames, exact associati
 
 ## Validation and measured limitations
 
+- Latest independent phone pair: fresh neural inference completed in 826.27 seconds and exported an aligned 3D scene, but all 53 decisions were inconclusive. No added, removed or moved objects were confirmed. [Run report](reports/room_submission_002.json) records the configuration, alignment measurements and blocking gates. This prototype does not yet satisfy reliable change-detection acceptance.
+
 - A fresh application control invoked VGGT, Grounding DINO, SAM 2 and DINOv2 on identical real-dataset RGB recordings. It completed in 322.41 seconds with 48 UNKNOWN decisions and no confirmed changes. This is execution evidence, not change-detection accuracy.
 - One approved 3RScan reference/rescan pair completed source-assisted metric alignment: RMSE approximately 0.03346 m, held-out RMSE 0.03970 m, symmetric overlap 0.4861. This does not establish autonomous phone-video alignment.
 - The partial native-source evaluation contains one supported MOVED instance, which was missed: restricted recall/F1 0; precision undefined. Full independently reviewed benchmark metrics remain unavailable.
