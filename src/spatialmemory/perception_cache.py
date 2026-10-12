@@ -14,6 +14,7 @@ from .memory import Observation
 from .ingestion import sha256
 from .pixel_mapping import mask_to_geometry
 from .association import unit_descriptor
+from .surface_evidence import sample_surface
 
 
 def cached_observations(
@@ -155,6 +156,7 @@ def cached_observations(
         for key in ["identity_gallery", "multiview_geometry", "geometric_view_support"]:
             provenance.pop(key, None)
         provenance.update(
+            observed_surface_samples=sample_surface(points),
             camera_center=(
                 -reconstruction.poses[fid][:3, :3].T @ reconstruction.poses[fid][:3, 3]
             ).tolist(),

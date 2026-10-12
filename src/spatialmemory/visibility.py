@@ -29,6 +29,43 @@ def visibility(points, depth, K, pose, tolerance=0.05):
     return result
 
 
+def visibility_details(
+    points: Sequence[Sequence[float]] | NDArray[np.float64],
+    depth: NDArray[np.float64], K: NDArray[np.float64],
+    pose: NDArray[np.float64], support: NDArray[np.bool_], tolerance: float = 0.05,
+) -> list[dict[str, Any]]:
+    """Explain missing ray evidence without converting it to free space.
+
+    points: Nx3 world coordinates; depth/support: HxW; K: 3x3;
+    pose: 4x4 T_camera_world. Raw depth values remain uncalibrated.
+    """
+    uv,z = project(np.asarray(points),K,pose)
+    records = []
+    for pixel,distance in zip(uv,z):
+        record = {"expected_camera_depth": float(distance) if np.isfinite(distance) else None}
+        reason = None
+        if not np.isfinite(pixel).all() or not np.isfinite(distance) or distance <= 0:
+            reason = "invalid_or_behind_camera"
+        else:
+            x,y = np.rint(pixel).astype(int)
+            record['pixel_xy'] = [int(x),int(y)]
+            if not 0 <= y < depth.shape[0] or not 0 <= x < depth.shape[1]:
+                reason = "outside_image"
+            else:
+                measured = float(depth[y,x])
+                record['raw_camera_depth'] = measured if np.isfinite(measured) else None
+                if not np.isfinite(measured) or measured <= 0:
+                    reason = "invalid_depth"
+                elif not support[y,x]:
+                    reason = "depth_support_gate_rejected"
+                else:
+                    record['state'] = "OCCLUDED" if measured < distance-tolerance else "FREE" if measured > distance+tolerance else "OCCUPIED"
+        if reason:
+            record.update(state="UNKNOWN",reason=reason)
+        records.append(record)
+    return records
+
+
 def crossview_free_surface(
     points: Sequence[Sequence[float]] | NDArray[np.float64],
     frame_id: str,

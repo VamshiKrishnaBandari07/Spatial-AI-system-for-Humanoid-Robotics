@@ -10,6 +10,7 @@ from .memory import Observation, Memory, associate, scene_graph
 from .contracts import Event, Change
 from .registration import transform
 from .visibility import visibility
+from .surface_evidence import sample_surface
 
 SAM_REVISION = "de431c4043854a71d8101e17995dfe596bf101a5"
 
@@ -331,6 +332,7 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
                 "segmentation": segmentation,
                 "appearance": appearance["provenance"],
                 "location_point_count": len(points),
+                "observed_surface_samples": sample_surface(points),
                 "localization": localization,
                 "extent": extent,
                 "camera_center": camera.tolist(),
@@ -444,6 +446,10 @@ def common_frame(observations, registration):
     result = []
     for o in observations:
         provenance = dict(o.provenance)
+        if provenance.get("observed_surface_samples"):
+            provenance["observed_surface_samples"] = transform(
+                np.asarray(provenance["observed_surface_samples"]), s, R, t
+            ).tolist()
         provenance["camera_center"] = transform(
             np.array([provenance["camera_center"]]), s, R, t
         )[0].tolist()
@@ -484,6 +490,15 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
                 for z in [lo[2], hi[2]]
             ]
         )
+    sample_source = "centroid and box corners"
+    if config.observed_surface_visibility_enabled:
+        from .surface_evidence import sample_surface
+        observed = [point for observation in obj.observations
+                    for point in observation.provenance.get("observed_surface_samples", [])]
+        if len(observed) < 4:
+            return {"supported_free_views": 0, "views": [], "source": "insufficient observed surface samples"}
+        samples = sample_surface(np.asarray(observed))
+        sample_source = "actual computed object-surface points; geometry uncertainty uncalibrated"
     points = np.asarray(samples)
     center = np.asarray(obj.position)
     views = []
@@ -529,6 +544,9 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
             pose,
             tolerance=tolerance,
         )
+        from .visibility import visibility_details
+        ray_diagnostics = visibility_details(points, surface["depth"], K, pose,
+                                              support_cache[tolerance], tolerance)
         free = sum(x == "FREE" for x in states) / len(states)
         crossview_support = None
         minimum_angle = config.viewpoint_degrees
@@ -561,6 +579,7 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
             {
                 "frame_id": fid,
                 "states": states,
+                "ray_diagnostics": ray_diagnostics,
                 "free_fraction": free,
                 "counts_as_distinct_free_view": supported,
                 "crossview_surface_validation": crossview_support,
@@ -569,6 +588,8 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
         )
     return {
         "supported_free_views": len(rays),
+        "sample_source": sample_source,
+        "sample_count": len(points),
         "views": views,
         "source": "Measured calibrated registered depth"
         if getattr(reconstruction, "diagnostics", {}).get("sensor_geometry_used")

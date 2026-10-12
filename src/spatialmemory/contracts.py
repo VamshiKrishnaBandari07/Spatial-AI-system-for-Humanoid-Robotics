@@ -51,6 +51,7 @@ class Config(BaseModel):
     detector_temperature_file: str | None = None
     multiview_geometry_enabled: bool = False
     geometry_supported_views_enabled: bool = False
+    observed_surface_visibility_enabled: bool = False
     triangulation_min_points: int = Field(4, ge=3, le=100)
     triangulation_min_degrees: float = Field(2.0, gt=0, le=45)
     triangulation_max_reprojection_px: float = Field(2.0, gt=0, le=10)

@@ -434,6 +434,8 @@ def recover_object_geometry(
         point_sets, rows = zip(*support[observation.id])
         points = np.concatenate(point_sets)
         provenance = dict(observation.provenance)
+        from .surface_evidence import sample_surface
+        provenance["observed_surface_samples"] = sample_surface(points)
         provenance["multiview_geometry"] = {
             "source": "Masked SIFT/checked optical flow + registered camera-ray triangulation with Huber refinement",
             "pose_calibration_verified": False,

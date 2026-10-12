@@ -52,6 +52,21 @@ temperature alone never authorizes a change or a deployment-calibration claim.
 
 ## Identity and absence
 
+Set `observed_surface_visibility_enabled: true` to test visibility using up to
+32 actual computed object-surface points retained in observation provenance.
+Samples are transformed with the observation into the shared frame; cache
+reuse recomputes them from current geometry. This avoids treating box corners
+on furniture or in empty space as observed object surfaces. Missing samples
+fail closed rather than falling back to a box. This option is experimental
+and does not relax depth support, distinct-view or patch-validation gates.
+
+The real cached-evidence test still confirmed no changes. For the mug's 32
+samples across six comparison views, 164 rays failed depth support and 28 were
+free; none were outside the image. The new ray diagnostics distinguish invalid
+depth, rejected depth support, out-of-image and behind-camera conditions.
+This isolates the remaining visibility failure without claiming model-depth
+accuracy or physical absence.
+
 The joint matcher combines normalized geometry, appearance and class costs,
 gated Hungarian assignment, competitor ambiguity rejection and EMA galleries
 with a temporal memory buffer. Nearby lookalikes retain strict appearance

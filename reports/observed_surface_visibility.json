@@ -1,0 +1,23 @@
+{
+  "mode": "verified cached neural evidence, fresh geometry and consensus",
+  "fresh_neural_inference": false,
+  "surface_point_rerun_seconds": 67.84329178900225,
+  "diagnostic_rerun_seconds": 65.37963047297671,
+  "confirmed_changes": 0,
+  "inconclusive_decisions": 145,
+  "mug": {
+    "linked_observations": 3,
+    "computed_surface_samples": 32,
+    "comparison_views": 6,
+    "free_projected_samples": 28,
+    "depth_support_rejected_samples": 164,
+    "outside_image_samples": 0,
+    "supported_free_views": 0,
+    "geometry_calibrated": false
+  },
+  "regression_tests_passed": 269,
+  "regression_tests_failed": 0,
+  "change_detection_accuracy": null,
+  "remaining_blocker": "Insufficient supported background depth at projected object-surface locations, plus unresolved competing cross-session identities",
+  "implementation_change": "Retain and transform actual computed object surface samples; use them for optional visibility checks instead of fabricated box corners"
+}
