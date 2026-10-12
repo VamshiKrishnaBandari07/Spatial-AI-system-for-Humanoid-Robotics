@@ -11,7 +11,7 @@ CHECKPOINT_REVISION = "860abec7937da0a4c03c41d3c269c366e82abdf9"
 
 
 def reconstruct_neural(
-    frames, output, expert=None, predictions=None, preprocessing="crop"
+    frames, output, expert=None, predictions=None, preprocessing="pad"
 ):
     """Bounded selected frames; preserve neural raw predictions and lookup provenance."""
     import cv2

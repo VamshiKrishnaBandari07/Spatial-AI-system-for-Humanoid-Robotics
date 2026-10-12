@@ -46,12 +46,13 @@ Model and dataset licences apply independently of project-code licensing. Commer
 VGGT's upstream default `crop` preprocessing center-crops tall inputs after
 resizing the width to 518 pixels. On a 464×832 recording it retains approximately
 original rows 183–649. Objects near the lower edge can be clipped even though they
-are visible in the original video. `neural_preprocessing: "pad"` instead preserves
+are visible in the original video. The project defaults to
+`neural_preprocessing: "pad"`, which preserves
 the full image using the upstream padded mode. Feature extraction and predicted
 camera parameters use the same processed image. Padding pixels are excluded from
 keypoint geometry, confidence quantiles, object localization and visibility support.
 Cached geometry cannot be reused across preprocessing modes. Padding reduces
-effective object resolution and is an experimental alternative, not a guarantee
+effective object resolution and is not a guarantee
 of improved reconstruction or labels.
 
 ### Every-frame temporal diagnostics

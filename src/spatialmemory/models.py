@@ -129,7 +129,7 @@ class VGGTExpert:
             torch.load(checkpoint, map_location="cpu", weights_only=True)
         )
 
-    def infer(self, paths, preprocessing="crop"):
+    def infer(self, paths, preprocessing="pad"):
         from vggt.utils.load_fn import load_and_preprocess_images
         from vggt.utils.pose_enc import pose_encoding_to_extri_intri
 

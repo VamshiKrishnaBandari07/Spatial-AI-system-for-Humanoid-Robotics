@@ -56,8 +56,9 @@ The local service processes one job at a time and accepts up to 512 MiB per vide
 Both UIs offer optional frame tracking with real neural re-detection. This is
 additional CPU work and produces uncalibrated 2D track proposals, per-frame
 diagnostics and observation crops; it does not establish physical removal.
-For portrait recordings, the experimental config option `neural_preprocessing:
-"pad"` preserves the whole image rather than center-cropping it. See
+Neural geometry now defaults to `neural_preprocessing: "pad"` to preserve the
+whole image, including objects near portrait-frame edges. Explicit `"crop"`
+remains available for reproducing older runs. See
 [methodology](docs/METHODOLOGY.md) for coverage, padding and tracking limitations.
 
 ## Command-line processing

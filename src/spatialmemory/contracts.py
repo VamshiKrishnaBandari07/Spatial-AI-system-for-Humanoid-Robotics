@@ -26,7 +26,7 @@ class Config(BaseModel):
     geometry_backend: Literal["sparse", "vggt"] = "sparse"
     neural_frames_per_video: int = Field(2, ge=2, le=6)
     neural_frame_selection: Literal["temporal", "quality_diverse"] = "temporal"
-    neural_preprocessing: Literal["crop", "pad"] = "crop"
+    neural_preprocessing: Literal["crop", "pad"] = "pad"
     geometry_reuse_from: str | None = None
     metric_geometry_enabled: bool = False
     registration_initial: str | None = None
