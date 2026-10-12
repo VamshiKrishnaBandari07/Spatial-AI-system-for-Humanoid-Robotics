@@ -37,7 +37,7 @@ class Config(BaseModel):
     max_detections_per_frame: int = Field(8, ge=1, le=50)
     detection_threshold: float = Field(0.35, ge=0, le=1)
     association_mode: Literal[
-        "legacy", "appearance", "semantic", "semantic_geometry", "multiview"
+        "legacy", "appearance", "semantic", "semantic_geometry", "multiview", "joint"
     ] = "legacy"
     association_search_radius: float = Field(1.0, gt=0, allow_inf_nan=False)
     association_min_score: float = Field(0.8, gt=0, lt=1, allow_inf_nan=False)
@@ -46,6 +46,14 @@ class Config(BaseModel):
     association_geometry_weight: float = Field(0.25, ge=0, allow_inf_nan=False)
     association_shape_weight: float = Field(0.15, ge=0, allow_inf_nan=False)
     association_view_weight: float = Field(0.1, ge=0, allow_inf_nan=False)
+    identity_proximity: float = Field(0.2, gt=0)
+    identity_proximity_boost: float = Field(0.08, ge=0, le=1)
+    identity_joint_max_cost: float = Field(0.3, gt=0, le=1)
+    identity_class_weight: float = Field(0.1, ge=0)
+    identity_iou_weight: float = Field(0.5, ge=0, le=1)
+    identity_ema_alpha: float = Field(0.2, gt=0, le=1)
+    identity_memory_batches: int = Field(30, ge=0)
+    identity_confirmation_hits: int = Field(2, ge=1)
     movement_mode: Literal["legacy", "bounded"] = "legacy"
     movement_depth_error_bound: float | None = Field(None, ge=0, allow_inf_nan=False)
     movement_registration_error_bound: float | None = Field(

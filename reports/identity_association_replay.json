@@ -1,0 +1,22 @@
+{
+  "scope": "Real saved neural-observation replay of identity stage; not fresh neural inference or a change-detection benchmark",
+  "input_observations": 112,
+  "groups": {
+    "before": 53,
+    "after": 53
+  },
+  "confirmed_local_tracks": {
+    "before": 2,
+    "after": 1
+  },
+  "cross_recording_matches": 0,
+  "gates": {
+    "unconfirmed_temporal_identity": 2807,
+    "insufficient_independent_views": 2
+  },
+  "runtime_seconds": 0.06717018599738367,
+  "accuracy": null,
+  "implementation": "joint 3D centroid/AABB IoU + ReID cosine + soft class costs; pre-assignment ambiguity gating; EMA temporal gallery",
+  "benchmark_accuracy": null,
+  "ground_truth": "Independent identity correspondence ground truth unavailable"
+}

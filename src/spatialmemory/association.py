@@ -122,6 +122,10 @@ def pair_measurements(a, b):
 
 def match_objects(before, after, config, within_recording=False, diagnostics=None):
     mode = config.association_mode
+    if mode == "joint":
+        from .identity import match_core_objects
+
+        return match_core_objects(before, after, config, within_recording, diagnostics)
     if mode == "legacy":
         return associate(before, after, max_cost=1 - config.identity_cosine)
     if not before or not after:

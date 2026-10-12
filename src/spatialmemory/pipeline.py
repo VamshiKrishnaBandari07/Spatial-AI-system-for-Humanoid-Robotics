@@ -255,8 +255,25 @@ def run(
 
             stage("semantic_consensus")
             a_observations = common_frame(a_observations, registration)
-            before_objects = group_objects(b_observations, "before", config)
-            after_objects = group_objects(a_observations, "after", config)
+            before_objects = group_objects(
+                b_observations,
+                "before",
+                config,
+                identity_checkpoint=output
+                / "diagnostics/before_identity_checkpoint.json",
+            )
+            after_objects = group_objects(
+                a_observations,
+                "after",
+                config,
+                identity_checkpoint=output
+                / "diagnostics/after_identity_checkpoint.json",
+            )
+            if config.association_mode == "joint":
+                from .identity_integration import save_identity_audit
+
+                save_identity_audit(output, before_objects, "before")
+                save_identity_audit(output, after_objects, "after")
             from .association import match_objects
             from .semantics import visibility_evidence
             from collections import Counter

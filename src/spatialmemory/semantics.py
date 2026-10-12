@@ -24,6 +24,7 @@ class ObjectState:
     extent: list[list[float]] | None
     distinct_views: int = 0
     position_spread: float | None = None
+    identity_confirmed: bool = True
 
 
 class SemanticExperts:
@@ -321,7 +322,11 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
     return observations, foreground
 
 
-def group_objects(observations, state, config):
+def group_objects(observations, state, config, identity_checkpoint=None):
+    if config.association_mode == "joint":
+        from .identity_integration import group_with_gallery
+
+        return group_with_gallery(observations, state, config, identity_checkpoint)
     groups = []
     # Per-frame assignment prevents two identical detections in a frame from merging.
     for frame in dict.fromkeys(o.frame_id for o in observations):

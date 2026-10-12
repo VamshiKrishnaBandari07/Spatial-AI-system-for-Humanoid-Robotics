@@ -63,6 +63,12 @@ remains available for reproducing older runs. See
 
 ## Command-line processing
 
+For the new gated 3D/ReID matcher and temporal EMA gallery, use
+`--config configs/phone_identity.json`. See
+[identity association](docs/IDENTITY_ASSOCIATION.md) for cost definitions,
+checkpoint APIs, ambiguity handling and validation limits. Existing UI defaults
+continue to use the previous association mode.
+
 ```bash
 python -m spatialmemory_x run --before before.mp4 --after after.mp4 --scene-id room_01 --output results/room_01
 python -m spatialmemory_x run --before before.mp4 --after after.mp4 --scene-id room_01 --config configs/phone_challenge.json --output results/room_01_neural
