@@ -8,6 +8,11 @@ Compare two recordings of the same indoor area, reconstruct a shared 3D scene, a
 
 **Status:** operational research prototype. Reliable cross-session object association, calibrated uncertainty and genuine smartphone change-detection accuracy remain unresolved. UNKNOWN means insufficient evidence, not an unchanged object. The screenshot shows a synthetic demonstration.
 
+Recent camera-adjustment and learned-correspondence trials preserved the
+strict geometry gates but did not confirm changes on the submitted phone pair.
+See [measured experiments](docs/CORRESPONDENCE_EXPERIMENTS.md) for model
+provenance, reproducible options and remaining failures.
+
 ## Try the upload workspace
 
 Open the Colab notebook above. Read the model licence notice, run Step 1 until installation finishes, then run Step 2. Choose a password and open the generated temporary link; sign in as `reviewer`. Upload separate before and after videos and select **Neural + objects**.

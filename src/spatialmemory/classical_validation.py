@@ -127,6 +127,10 @@ def validate_classical_cameras(
     )
     source = []
     target = []
+    if config.classical_bundle_adjustment_enabled:
+        from .camera_refinement import refine_cameras
+        classical = refine_cameras(classical, config.seed)
+        audit["joint_camera_refinement"] = classical.diagnostics.get("joint_camera_refinement")
     seen = set()
     for (fid, key), pid in classical.tracks.items():
         if fid != reference_id or pid in seen:

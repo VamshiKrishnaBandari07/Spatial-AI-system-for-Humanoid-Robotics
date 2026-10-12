@@ -1,0 +1,28 @@
+{
+  "camera_refinement": {
+    "runtime_seconds": 36.00499281601515,
+    "before_accepted": false,
+    "after_accepted": false,
+    "before_heldout_median_px": {"original": 0.4534894812865644, "candidate": 0.48768183734438575},
+    "after_heldout_median_px": {"original": 0.6117117433404736, "candidate": 0.636814666121249},
+    "confirmed_changes": 0
+  },
+  "learned_matching": {
+    "model": "kornia/loftr",
+    "revision": "0fb3b456cf176746709c38fa9cf80695a1c82dac",
+    "checkpoint_sha256": "be9ff88b323ec27889114719f668ae41aff7034b56a4c4acbd46b8b180b87ed3",
+    "actual_neural_matching": true,
+    "other_neural_perception": "verified cached observations",
+    "runtime_seconds": 43.44933589399443,
+    "pair_attempts": {"before": 8, "after": 8},
+    "masked_matches": {"before": 3, "after": 18},
+    "accepted_learned_points": 0,
+    "inconclusive_decisions": 107,
+    "confirmed_changes": 0
+  },
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "performance_improvement_demonstrated": false,
+  "remaining_issue": "Insufficient reliable small-object correspondences and explicit visibility evidence"
+}

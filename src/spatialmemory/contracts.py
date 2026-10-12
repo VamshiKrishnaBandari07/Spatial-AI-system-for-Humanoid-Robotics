@@ -30,6 +30,9 @@ class Config(BaseModel):
     geometry_reuse_from: str | None = None
     perception_reuse_from: str | None = None
     classical_pose_validation_enabled: bool = False
+    classical_bundle_adjustment_enabled: bool = False
+    learned_matching_checkpoint: str | None = None
+    learned_matching_max_pairs: int = Field(8, ge=1, le=32)
     metric_geometry_enabled: bool = False
     registration_initial: str | None = None
     evidence_calibration: str | None = None

@@ -250,6 +250,11 @@ def recover_object_geometry(
     audit: list[dict[str, Any]] = []
     candidates = []
     gray_cache: dict[str, NDArray[np.uint8]] = {}
+    learned_matcher = None
+    learned_pairs = 0
+    if config.learned_matching_checkpoint:
+        from .learned_matching import LearnedCropMatcher
+        learned_matcher = LearnedCropMatcher(Path(config.learned_matching_checkpoint))
     for i, a in enumerate(features):
         for j in range(i + 1, len(features)):
             b = features[j]
@@ -327,7 +332,7 @@ def recover_object_geometry(
                     continue
                 pixels_a = np.vstack([pixels_a, point_a])
                 pixels_b = np.vstack([pixels_b, point_b])
-            if len(pixels_a) < config.triangulation_min_points:
+            if len(pixels_a) < config.triangulation_min_points and learned_matcher is None:
                 row["gate"] = "insufficient_masked_correspondences"
                 continue
             result = triangulate_checked(
@@ -341,8 +346,24 @@ def recover_object_geometry(
                 config.triangulation_min_degrees,
             )
             count = int(result.valid.sum())
+            small = max(np.count_nonzero(a.mask)/a.mask.size,
+                        np.count_nonzero(b.mask)/b.mask.size) < .02
+            if (learned_matcher is not None and small and count < config.triangulation_min_points
+                    and learned_pairs < config.learned_matching_max_pairs):
+                learned_pairs += 1
+                la,lb = learned_matcher.match(a.gray,a.mask,b.gray,b.mask)
+                row['learned_matcher'] = {'model':'kornia/loftr indoor_ds_new',
+                    'actual_neural_inference':True,'raw_score_gate':.8,'masked_matches':len(la)}
+                if len(la) >= config.triangulation_min_points:
+                    proposal = triangulate_checked(la,lb,a.intrinsics,b.intrinsics,a.pose,b.pose,
+                        config.triangulation_max_reprojection_px,config.triangulation_min_degrees)
+                    support_count = int(proposal.valid.sum())
+                    row['learned_matcher']['supported_points'] = support_count
+                    if support_count > count and support_count/len(la) >= .5:
+                        result,pixels_a,pixels_b,count = proposal,la,lb,support_count
+                        row['learned_matcher']['selected'] = True
             row["supported_points"] = count
-            row["supported_fraction"] = count / len(pixels_a)
+            row["supported_fraction"] = count / max(1, len(pixels_a))
             row["reprojection_errors_px"] = [
                 [float(e) if np.isfinite(e) else None for e in pair]
                 for pair in result.reprojection_errors
