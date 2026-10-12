@@ -57,6 +57,13 @@ of improved reconstruction or labels.
 
 ### Every-frame temporal diagnostics
 
+Temporal neural re-detection uses the original decoded frame resolution. Its
+masks are mapped with nearest-neighbor interpolation to the reduced optical-flow
+resolution for association. Evidence crops retain original pixels, and each
+re-detection records both perception and tracking dimensions. A detection whose
+mask disappears at flow resolution cannot establish a temporal identity link.
+This preserves neural input detail without treating 2D tracking as 3D change proof.
+
 Set `temporal_tracking_enabled` to true with semantic inference enabled to decode
 both complete videos again, preserving ingestion timestamps. Neural keyframe
 masks initialize independent 2D segments; forward/backward optical flow propagates

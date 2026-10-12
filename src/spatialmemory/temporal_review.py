@@ -72,6 +72,7 @@ def track_recording(
                 if index >= len(timestamps):
                     raise ValueError("Tracking frames exceed recorded timestamps")
                 h, w = image.shape[:2]
+                native_image = image
                 image = cv2.resize(image, (width, max(1, round(h * width / w))))
                 states = []
                 flow_cache = {}
@@ -108,7 +109,24 @@ def track_recording(
                         and timestamps[index] - last_detection >= 0.5
                     )
                 ):
-                    proposals_now = redetect(image)
+                    native_proposals = redetect(native_image)
+                    proposals_now = []
+                    for proposal in native_proposals:
+                        native_mask = np.asarray(proposal["mask"], bool)
+                        if native_mask.shape != native_image.shape[:2]:
+                            raise ValueError(
+                                "Native re-detection mask dimensions disagree"
+                            )
+                        mapped = cv2.resize(
+                            native_mask.astype(np.uint8),
+                            (image.shape[1], image.shape[0]),
+                            interpolation=cv2.INTER_NEAREST,
+                        ).astype(bool)
+                        if not mapped.any():
+                            continue
+                        proposals_now.append(
+                            {**proposal, "mask": mapped, "native_mask": native_mask}
+                        )
                     old_active = active
                     active = {}
                     links = link_redetections(
@@ -129,13 +147,15 @@ def track_recording(
                         names[tid] = proposal["label"]
                         appearances[tid] = descriptor
                         identity_links += int(linked)
-                        yy, xx = np.nonzero(mask)
+                        yy, xx = np.nonzero(proposal["native_mask"])
                         if not len(xx):
                             raise ValueError("Re-detection returned an empty mask")
                         crop_path = crop_directory / f"{index}_{number}.jpg"
                         if not cv2.imwrite(
                             str(crop_path),
-                            image[yy.min() : yy.max() + 1, xx.min() : xx.max() + 1],
+                            native_image[
+                                yy.min() : yy.max() + 1, xx.min() : xx.max() + 1
+                            ],
                         ):
                             raise ValueError("Could not write temporal evidence crop")
                         crop_relative = crop_path.relative_to(output).as_posix()
@@ -149,6 +169,8 @@ def track_recording(
                                 "proposed_label": proposal["label"],
                                 "identity_link_supported": linked,
                                 "identity_is_calibrated": False,
+                                "perception_size": [w, h],
+                                "tracking_size": [image.shape[1], image.shape[0]],
                                 "crop_file": crop_relative,
                                 "raw_detector_score": proposal.get(
                                     "raw_detector_score"

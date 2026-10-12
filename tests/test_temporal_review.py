@@ -99,6 +99,39 @@ def test_ambiguous_and_wrong_category_links_rejected():
     )
 
 
+def test_neural_redetection_uses_native_pixels_with_reduced_flow_resolution(tmp_path):
+    test_all_frames_preserve_timestamps_and_anchor_provenance(tmp_path)
+    shapes = []
+
+    def detect(image):
+        shapes.append(image.shape)
+        mask = np.zeros(image.shape[:2], bool)
+        mask[20:40, 20:40] = True
+        return [{"mask": mask, "descriptor": [1, 0], "label": "cup"}]
+
+    result = track_recording(
+        tmp_path / "clip.avi",
+        tmp_path,
+        "before",
+        width=32,
+        redetect=detect,
+        redetect_seconds=0.2,
+    )
+    assert shapes and all(shape == (64, 64, 3) for shape in shapes)
+    rows = [json.loads(line) for line in open(result["diagnostics"])]
+    neural = [
+        track
+        for row in rows
+        for track in row["tracks"]
+        if track["status"] == "neural_redetection"
+    ]
+    assert all(track["perception_size"] == [64, 64] for track in neural)
+    assert all(track["tracking_size"] == [32, 32] for track in neural)
+    assert result["supported_temporal_identity_links"] >= 2
+    crop = cv2.imread(str(tmp_path / neural[0]["crop_file"]))
+    assert crop.shape[:2] == (20, 20)
+
+
 def test_drift_triggers_redetection_without_reusing_identity(tmp_path, monkeypatch):
     test_all_frames_preserve_timestamps_and_anchor_provenance(tmp_path)
     monkeypatch.setattr(
