@@ -57,6 +57,16 @@ changes. This rules out claiming that adding LoFTR solved this pair.
 
 ## Delivery boundary
 
+A fully fresh six-view run (`configs/phone_six_views.json`) completed in
+1356.28 seconds on CPU. Geometry recovery produced ten before and seventeen
+after localizations; joint association accepted five cross-recording pairs.
+The green mug acquired estimated positions in three observations. Its first
+position used fifteen depth-head agreement pixels, not independently validated
+triangulated keypoints. This is provisional localization, not a demonstrated
+2 px triangulation result or metric accuracy. All 145 decisions remained
+inconclusive, with no confirmed changes. Six views therefore remain an
+experimental, higher-cost option rather than the default UI configuration.
+
 The project exports shared point clouds, an interactive viewer, object crops,
 decision explanations and diagnostic failures. Reliable added/removed/moved
 classification on these phone videos remains unproven. Tests demonstrate

@@ -1,0 +1,74 @@
+{
+  "status": "completed_real_inference_no_confirmed_changes",
+  "fresh_vggt_and_semantic_inference": true,
+  "runtime_seconds": 1356.2819671839825,
+  "views_per_recording": 6,
+  "counts": {
+    "UNKNOWN": 145,
+    "confirmed_changes": 0,
+    "accepted_cross_recording_associations": 5
+  },
+  "recovered_geometry_localizations": {
+    "before": 10,
+    "after": 17
+  },
+  "registration": {
+    "valid": true,
+    "scale": 1.0965780668380911,
+    "rotation": [
+      [
+        0.9957453988856902,
+        0.05149026461312997,
+        0.07641893252360803
+      ],
+      [
+        -0.057332560481816654,
+        0.9954324263477179,
+        0.076336505579533
+      ],
+      [
+        -0.0721392965489459,
+        -0.08039301726869724,
+        0.9941493271475156
+      ]
+    ],
+    "translation": [
+      0.016396671618308323,
+      -0.20457529490006862,
+      -0.11232391305681078
+    ],
+    "inliers": 10,
+    "correspondences": 12,
+    "rmse": 0.03385726035350826,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed",
+    "heldout_count": 4,
+    "heldout_inliers": 3,
+    "heldout_rmse": 0.033119156609462366,
+    "foreground_matches_excluded": 2608,
+    "metric_diagnostics": null
+  },
+  "mug_evidence": {
+    "estimated_positions_available_in_three_observations": true,
+    "first_observation_depth_head_agreement_pixels": 15,
+    "independent_geometry_validation": false,
+    "triangulation_below_2px_verified_for_mug": false,
+    "physical_change_verified": false
+  },
+  "blocking_gates": {
+    "unquantified_depth_or_registration_error_budget": 5,
+    "unresolved_cross_recording_identity": 134,
+    "insufficient_positive_free_space": 140,
+    "missing_object_localization": 81,
+    "insufficient_independent_views": 134
+  },
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "limitations": [
+    "Additional views increase available evidence and runtime, not demonstrated accuracy",
+    "Inferred monocular scale is not metric",
+    "Some localized mug observations remain unresolved identities",
+    "No supervised change metric without independent valid annotations"
+  ]
+}
