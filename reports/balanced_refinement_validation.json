@@ -1,0 +1,23 @@
+{
+  "mode": "geometry_and_consensus_rerun_with_verified_cached_neural_evidence",
+  "fresh_neural_inference": false,
+  "runtime_seconds": 47.45680300198728,
+  "confirmed_changes": 0,
+  "inconclusive_decisions": 107,
+  "recovered_localizations": {"before": 6, "after": 8},
+  "mug_localized": false,
+  "mug_example_median_worst_per_point_error_px": {"before_polish": 9.072549694997925, "after_polish": 5.247331334664242},
+  "other_object_inspected": {
+    "observation_id": "after_0_10",
+    "neural_label": "bag",
+    "raw_detection_score": 0.493977427482605,
+    "estimated_position_reconstruction_units": [0.1410248494848209, 0.14539156907309, 0.7857133621296645],
+    "metric_scale_verified": false,
+    "change_state_verified": false
+  },
+  "change": "Compare symmetric least-squares polish with robust point fit; retain only lower worst pixel error and positive depth",
+  "safety_threshold_relaxed": false,
+  "observed_change_detection_improvement": false,
+  "accuracy": null,
+  "limitations": ["Correspondence/camera incompatibility still blocks mug localization", "Bag recognition/localization is not a verified scene change", "Median residual can increase while worst residual decreases"]
+}

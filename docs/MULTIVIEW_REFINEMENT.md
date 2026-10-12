@@ -17,6 +17,12 @@ pixel uncertainty. Uncertainty weights optimization but does not relax the
 strict final **less than 2 px in every supplied view** acceptance criterion.
 The current correspondence recovery calls it on two-view tracks; this is
 point-only bundle adjustment, not joint camera/intrinsics optimization.
+After robust fitting, a symmetric least-squares polish is compared using the
+worst unweighted pixel residual. It is retained only when that residual is
+lower and all depths are positive. On one saved mug pair, the median of the
+per-point worst-view error fell from 9.07 to 5.25 px, still above the 2 px gate.
+The cached-evidence rerun confirmed zero changes; this is an optimization
+improvement, not successful change detection.
 
 Optimizing an incorrect correspondence cannot guarantee acceptable geometry.
 Object centroids are summaries of accepted surface points: a centroid is not

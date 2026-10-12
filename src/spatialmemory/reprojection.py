@@ -63,6 +63,17 @@ def refine_point(
     initial_uv, _ = projection(initial)
     fit = least_squares(residual, initial, loss="huber", f_scale=1.0,
                         method="trf", max_nfev=60)
+    # Huber can favour one camera when a residual exceeds its robust scale.
+    # Once a point is fitted, compare a symmetric least-squares polish using
+    # the same measurements. Choose only a positive-depth solution with a
+    # smaller worst *unweighted* pixel error. Final acceptance is unchanged.
+    balanced = least_squares(residual, fit.x, loss="linear", method="trf", max_nfev=30)
+    robust_uv, _ = projection(fit.x)
+    balanced_uv, balanced_depth = projection(balanced.x)
+    if (balanced.success and np.all(balanced_depth > 0)
+            and np.linalg.norm(balanced_uv-pixels, axis=1).max()
+            < np.linalg.norm(robust_uv-pixels, axis=1).max()):
+        fit = balanced
     uv, depths = projection(fit.x)
     errors = np.linalg.norm(uv - pixels, axis=1)
     accepted = bool(fit.success and np.isfinite(fit.x).all()

@@ -37,6 +37,19 @@ def test_reprojection_alone_cannot_accept_zero_baseline():
     assert fit.covariance is None
 
 
+def test_symmetric_polish_does_not_sacrifice_one_camera():
+    k = np.array([[500.,0,320], [0,500.,240], [0,0,1]])
+    poses = np.repeat(np.eye(4)[None],2,axis=0)
+    poses[1,0,3] = -.4
+    truth = np.array([0.,0,3.])
+    pixels = np.array([project(truth[None],k,p)[0][0] for p in poses])
+    pixels[1,1] += 3.8
+    fit = refine_point(truth, pixels, np.repeat(k[None],2,axis=0), poses)
+    assert fit.accepted
+    assert np.all(fit.errors_px < 2.)
+    assert abs(fit.errors_px[0]-fit.errors_px[1]) < .01
+
+
 def test_temperature_requires_labels_and_detector_provenance():
     with pytest.raises(ValueError):
         DetectorTemperature.fit(np.ones(3), np.ones(3), "validation", "revision")
