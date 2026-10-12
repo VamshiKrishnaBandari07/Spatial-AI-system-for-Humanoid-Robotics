@@ -111,3 +111,7 @@ For a genuine benchmark, provide independent same-room recordings, verified obje
 Approved 3RScan data, ARKitScenes and 7-Scenes subsets have verified local files; raw data is not included in a clone. Ordinary RGB-D sequences are reconstruction/localization controls, not automatically changed-scene ground truth. Replica remains a partial appearance asset. See [dataset access](docs/DATASET_ACCESS.md) and [quality report](reports/dataset_quality_report.md).
 
 Project-authored code uses [MIT](LICENSE). Third-party models and datasets retain their own terms. The selected VGGT research checkpoint is noncommercial; company evaluation or deployment rights must be verified separately. No weights, restricted recordings or credentials are redistributed. See [model registry](MODEL_REGISTRY.md).
+
+## Optional visual-language comparison
+
+A separate [multi-view visual comparison stage](docs/VISUAL_COMPARISON.md) can submit sampled before/after frames to a vision-language API and save evidence-linked visual change proposals. It requires an API credential, is not yet connected to the upload UI, and does not certify 3D changes. Live model accuracy has not been validated.
