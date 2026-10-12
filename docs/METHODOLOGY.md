@@ -106,3 +106,20 @@ The generic indoor detector vocabulary now covers cups, mugs, bowls, bags and to
 VGGT depth-head confidence is retained. Pixels rejected by the point-head median may contribute only when depth-head confidence passes its own frame median, depth is positive/finite, and depth backprojection through `T_camera_world` agrees with the world point map within the configured voxel tolerance. Localization and visibility share this support policy. Legacy surfaces without depth confidence retain their original filter.
 
 The heads share a model and training; this is a consistency check, not independent geometric validation, metric calibration or a calibrated uncertainty bound. Identity and viewpoint gates remain unchanged. Known-pair development still fails to verify the user-reported removals; an independent benchmark is required. See [review and tests](../reports/object_evidence_repair.json).
+
+### Segmented opposite-recording comparison
+
+Run `python -m spatialmemory.frame_comparison BEFORE AFTER --output OUTPUT`
+for five-second segment identities and cross-recording viewpoint matching.
+The default samples frames every 0.5 seconds; `--interval 0` processes every
+decoded frame and compares it with every opposite-recording candidate, which is
+quadratic and expensive. `--segment-seconds` changes logical segment length;
+original videos are not rewritten. Timestamps come from the decoder.
+
+Mutual SIFT correspondences and RANSAC homography support candidate selection.
+Frames without sufficient support or a unique best candidate remain unmatched.
+Side-by-side evidence images and `comparison.json` record frame indices,
+timestamps, segment identities and transform direction. These are 2D viewpoint
+comparisons, not neural predictions or added/removed labels. Parallax, repeated
+texture and limited coverage can invalidate this approximation. This tool is
+currently a standalone diagnostic and does not feed the 3D consensus pipeline.
