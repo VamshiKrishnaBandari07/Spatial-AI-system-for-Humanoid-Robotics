@@ -115,3 +115,7 @@ Project-authored code uses [MIT](LICENSE). Third-party models and datasets retai
 ## Optional visual-language comparison
 
 A separate [multi-view visual comparison stage](docs/VISUAL_COMPARISON.md) can submit sampled before/after frames to a vision-language API and save evidence-linked visual change proposals. It requires an API credential, is not yet connected to the upload UI, and does not certify 3D changes. Live model accuracy has not been validated.
+
+## GitHub-hosted workspace
+
+The `site/` interface provides private browser video previews, local JSON report review, and a Colab analysis launcher. See [hosting instructions](docs/HOSTING.md) to enable GitHub Pages and run the deployment workflow. GitHub Pages does not host model inference; live publication has not been verified from this environment.

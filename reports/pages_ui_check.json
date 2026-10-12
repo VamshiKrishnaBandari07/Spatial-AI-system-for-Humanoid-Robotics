@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "checks": [
+    "native video metadata preview",
+    "53 real records displayed",
+    "malformed JSON rejected",
+    "visual proposal distinction",
+    "HTML injection rendered as text",
+    "desktop/mobile no horizontal overflow"
+  ],
+  "live_hosting_verified": false
+}
