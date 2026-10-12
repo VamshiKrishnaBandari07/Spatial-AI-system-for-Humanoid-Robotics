@@ -1,0 +1,55 @@
+{
+  "status": "complete",
+  "runtime_seconds": 303.40071327399346,
+  "classes": {
+    "UNKNOWN": 100
+  },
+  "decision_gates": {
+    "insufficient_independent_views": 100,
+    "unresolved_cross_recording_identity": 97,
+    "insufficient_positive_free_space": 100,
+    "missing_object_localization": 73
+  },
+  "registration": {
+    "valid": true,
+    "scale": 1.072012239157482,
+    "rotation": [
+      [
+        0.9758545128165731,
+        0.0704445997845153,
+        0.20674991699327958
+      ],
+      [
+        -0.0457068443955917,
+        0.9914671294425392,
+        -0.12208118450591336
+      ],
+      [
+        -0.21358570689754838,
+        0.10968358854527482,
+        0.9707474729366566
+      ]
+    ],
+    "translation": [
+      -0.11574896639420704,
+      0.02742354373033703,
+      -0.009410020595905899
+    ],
+    "inliers": 13,
+    "correspondences": 13,
+    "rmse": 0.006279594585590819,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed",
+    "heldout_count": 4,
+    "heldout_inliers": 4,
+    "heldout_rmse": 0.0043400038662647,
+    "foreground_matches_excluded": 1237,
+    "metric_diagnostics": null
+  },
+  "accuracy": null,
+  "accuracy_reason": "Complete independently verified change annotations are unavailable; user-provided labels remain separate from prediction evidence.",
+  "release_ready": false,
+  "geometry_source": "Validated cached VGGT padded geometry",
+  "neural_perception": "Fresh Grounding DINO, SAM 2, DINOv2 invocation",
+  "source_commit": "230fe42"
+}
