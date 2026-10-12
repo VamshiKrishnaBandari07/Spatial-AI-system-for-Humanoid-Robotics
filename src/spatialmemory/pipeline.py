@@ -152,16 +152,52 @@ def run(
         if config.semantics_enabled:
             from .semantics import SemanticExperts, observe_scene
 
-            stage("semantic_model_loading")
-            semantic_experts = SemanticExperts()
+            if config.classical_pose_validation_enabled:
+                from .classical_validation import validate_classical_cameras
+
+                stage("classical_camera_validation")
+                b = validate_classical_cameras(
+                    b, bf, output / "diagnostics/before_classical", config
+                )
+                a = validate_classical_cameras(
+                    a, af, output / "diagnostics/after_classical", config
+                )
+            semantic_experts = None
+            if not config.perception_reuse_from or config.temporal_tracking_enabled:
+                stage("semantic_model_loading")
+                semantic_experts = SemanticExperts(config)
             stage("semantic_before")
-            b_observations, b_masks = observe_scene(
-                b, bf, "before", output, config, semantic_experts
-            )
+            if config.perception_reuse_from:
+                from .perception_cache import cached_observations
+
+                b_observations, b_masks = cached_observations(
+                    Path(config.perception_reuse_from),
+                    "before",
+                    b,
+                    bf,
+                    output,
+                    config,
+                    bm["sha256"],
+                )
+            else:
+                b_observations, b_masks = observe_scene(
+                    b, bf, "before", output, config, semantic_experts
+                )
             stage("semantic_after")
-            a_observations, a_masks = observe_scene(
-                a, af, "after", output, config, semantic_experts
-            )
+            if config.perception_reuse_from:
+                a_observations, a_masks = cached_observations(
+                    Path(config.perception_reuse_from),
+                    "after",
+                    a,
+                    af,
+                    output,
+                    config,
+                    am["sha256"],
+                )
+            else:
+                a_observations, a_masks = observe_scene(
+                    a, af, "after", output, config, semantic_experts
+                )
             if not config.temporal_tracking_enabled:
                 del semantic_experts
         stage("shared_registration")

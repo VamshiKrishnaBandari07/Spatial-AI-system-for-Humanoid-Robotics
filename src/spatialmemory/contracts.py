@@ -28,6 +28,8 @@ class Config(BaseModel):
     neural_frame_selection: Literal["temporal", "quality_diverse"] = "temporal"
     neural_preprocessing: Literal["crop", "pad"] = "pad"
     geometry_reuse_from: str | None = None
+    perception_reuse_from: str | None = None
+    classical_pose_validation_enabled: bool = False
     metric_geometry_enabled: bool = False
     registration_initial: str | None = None
     evidence_calibration: str | None = None
@@ -36,6 +38,20 @@ class Config(BaseModel):
     semantic_max_frames: int = Field(4, ge=2, le=24)
     max_detections_per_frame: int = Field(8, ge=1, le=50)
     detection_threshold: float = Field(0.35, ge=0, le=1)
+    multiscale_detection_enabled: bool = False
+    detector_variant: Literal["tiny", "base"] = "tiny"
+    semantic_label_validation_enabled: bool = False
+    semantic_label_margin: float = Field(0.015, ge=0, le=1)
+    detection_tile_size: int = Field(512, ge=128, le=2048)
+    detection_max_tiles: int = Field(4, ge=1, le=16)
+    detection_max_refinements: int = Field(0, ge=0, le=16)
+    detector_temperature_file: str | None = None
+    multiview_geometry_enabled: bool = False
+    geometry_supported_views_enabled: bool = False
+    triangulation_min_points: int = Field(4, ge=3, le=100)
+    triangulation_min_degrees: float = Field(2.0, gt=0, le=45)
+    triangulation_max_reprojection_px: float = Field(2.0, gt=0, le=10)
+    temporal_geometry_trace_enabled: bool = False
     association_mode: Literal[
         "legacy", "appearance", "semantic", "semantic_geometry", "multiview", "joint"
     ] = "legacy"
@@ -54,6 +70,7 @@ class Config(BaseModel):
     identity_ema_alpha: float = Field(0.2, gt=0, le=1)
     identity_memory_batches: int = Field(30, ge=0)
     identity_confirmation_hits: int = Field(2, ge=1)
+    identity_crowding_thresholds: bool = False
     movement_mode: Literal["legacy", "bounded"] = "legacy"
     movement_depth_error_bound: float | None = Field(None, ge=0, allow_inf_nan=False)
     movement_registration_error_bound: float | None = Field(

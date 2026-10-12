@@ -56,6 +56,13 @@ class Recording(Strict):
     poses: str | None = None
     imu: str | None = None
     timestamps: str | None = None
+    recorded_at: datetime | None = None
+
+    @model_validator(mode="after")
+    def timezone_required(self):
+        if self.recorded_at is not None and self.recorded_at.utcoffset() is None:
+            raise ValueError("recorded_at requires an ISO-8601 timezone")
+        return self
 
 
 class Manifest(Strict):
@@ -68,6 +75,15 @@ class Manifest(Strict):
     annotations: str | None = None
     rgb_only: bool = True
     dataset: dict | None = None
+
+    @model_validator(mode="after")
+    def physical_chronology(self):
+        before, after = self.before.recorded_at, self.after.recorded_at
+        if (before is None) != (after is None):
+            raise ValueError("Provide recorded_at for both recordings or neither")
+        if before is not None and after <= before:
+            raise ValueError("After must be physically later than Before")
+        return self
 
 
 class AnnotationObservation(Strict):

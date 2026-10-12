@@ -63,6 +63,13 @@ remains available for reproducing older runs. See
 
 ## Command-line processing
 
+For experimental native crop refinement, checked camera recovery and robust
+object triangulation, use `--config configs/phone_multiview.json` or select
+**Multi-view object analysis** in the UI. See
+[multi-view refinement](docs/MULTIVIEW_REFINEMENT.md) for strict geometry gates,
+calibration requirements and current validation limits. This option does not
+guarantee detection of every object or change.
+
 For the new gated 3D/ReID matcher and temporal EMA gallery, use
 `--config configs/phone_identity.json`. See
 [identity association](docs/IDENTITY_ASSOCIATION.md) for cost definitions,

@@ -28,15 +28,26 @@ class ObjectState:
 
 
 class SemanticExperts:
-    def __init__(self):
+    def __init__(self, config=None):
+        variant = config.detector_variant if config is not None else "tiny"
+        detector_models = {
+            "tiny": ("IDEA-Research/grounding-dino-tiny", "a2bb814dd30d776dcf7e30523b00659f4f141c71"),
+            "base": ("IDEA-Research/grounding-dino-base", "12bdfa3120f3e7ec7b434d90674b3396eccf88eb"),
+        }
+        identifier, revision = detector_models[variant]
         self.detector = Expert(
             ModelSpec(
-                "IDEA-Research/grounding-dino-tiny",
-                "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+                identifier,
+                revision,
                 "detection",
             ),
             "/workspace/spatialmemory-models",
         ).load()
+        if config is not None and config.detector_temperature_file:
+            from .detector_calibration import DetectorTemperature
+            calibration = json.loads(Path(config.detector_temperature_file).read_text())
+            self.detector.temperature = DetectorTemperature(**calibration)
+            self.detector.temperature.probabilities(np.zeros(1), revision)
         self.appearance = Expert(
             ModelSpec(
                 "facebook/dinov2-small",
@@ -46,6 +57,11 @@ class SemanticExperts:
             "/workspace/spatialmemory-models",
         ).load()
         self.segmenter = Segmenter(SAM_REVISION)
+        self.labeler = None
+        if config is not None and config.semantic_label_validation_enabled:
+            from .semantic_labels import SemanticLabeler
+
+            self.labeler = SemanticLabeler("/workspace/spatialmemory-models")
 
 
 def independent_views(observations, position, minimum_degrees):
@@ -154,7 +170,16 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
                 raise ValueError("Cannot read original perception frame")
         h, w = image.shape[:2]
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        detections = experts.detector.infer(Image.fromarray(rgb), config.object_prompt)
+        if config.multiscale_detection_enabled:
+            from .multiscale_detection import multiscale_detect
+
+            detections = multiscale_detect(
+                experts.detector, Image.fromarray(rgb), config.object_prompt,
+                config.detection_tile_size, config.detection_max_tiles,
+                config.detection_max_refinements,
+            )
+        else:
+            detections = experts.detector.infer(Image.fromarray(rgb), config.object_prompt)
         record = {"frame_id": fid, "state": state, "detections": detections}
         record["perception_size"] = [w, h]
         record["geometry_size"] = list(geometry_image.shape[:2][::-1])
@@ -214,6 +239,13 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
 
             crop = masked_crop(rgb, mask, [x0, y0, x1, y1])
             appearance = experts.appearance.infer(Image.fromarray(crop))
+            effective_label = str(labels[index])
+            semantic_check = None
+            if config.semantic_label_validation_enabled:
+                semantic_check = experts.labeler.infer(
+                    Image.fromarray(rgb[y0:y1, x0:x1]), config.semantic_label_margin,
+                )
+                effective_label = semantic_check["label"]
             surface = reconstruction.surfaces.get(fid)
             if surface is not None:
                 points, localization = localized_surface_points(
@@ -247,7 +279,7 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
             cv2.rectangle(annotated, (x0, y0), (x1, y1), (255, 180, 30), 2)
             cv2.putText(
                 annotated,
-                str(labels[index]),
+                effective_label,
                 (x0, max(15, y0 - 6)),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.5,
@@ -287,6 +319,10 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
                 }
             current_regions.append({"label": str(labels[index]), "mask": mask})
             provenance = {
+                "raw_detector_label": str(labels[index]),
+                "detector_probability": (detections.get("calibrated_scores") or [None] * len(boxes))[index],
+                "detector_calibration_source": detections.get("calibration_source"),
+                "semantic_cross_check": semantic_check,
                 "tracking": tracking,
                 "state": state,
                 "box": [int(v) for v in [x0, y0, x1, y1]],
@@ -309,7 +345,7 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
                     id=oid,
                     frame_id=fid,
                     timestamp=frame_lookup[fid].timestamp,
-                    label=str(labels[index]),
+                    label=effective_label,
                     position=center,
                     descriptor=appearance["descriptor"],
                     viewpoint=fid,
@@ -319,6 +355,12 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
         previous_image = image
         previous_regions = current_regions
     (output / f"{state}_model_outputs.json").write_text(json.dumps(raw, indent=2))
+    if config.multiview_geometry_enabled:
+        from .object_geometry import recover_object_geometry
+
+        observations = recover_object_geometry(
+            observations, reconstruction, frames, output, config,
+        )
     return observations, foreground
 
 
@@ -488,14 +530,31 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
             tolerance=tolerance,
         )
         free = sum(x == "FREE" for x in states) / len(states)
+        crossview_support = None
+        minimum_angle = config.viewpoint_degrees
+        if getattr(config, "geometry_supported_views_enabled", False) and free >= 0.9:
+            from .visibility import crossview_free_surface
+
+            crossview_support = crossview_free_surface(
+                points, fid, reconstruction, tolerance, config.triangulation_min_degrees,
+            )
+            if crossview_support["supported_fraction"] >= 0.9:
+                minimum_angle = config.triangulation_min_degrees
         camera = -pose[:3, :3].T @ pose[:3, 3]
         ray = center - camera
         ray /= max(np.linalg.norm(ray), 1e-12)
         novel = all(
-            np.degrees(np.arccos(np.clip(ray @ r, -1, 1))) >= config.viewpoint_degrees
+            np.degrees(np.arccos(np.clip(ray @ r, -1, 1))) >= minimum_angle
             for r in rays
         )
-        supported = free >= 0.9 and novel
+        # A missing box is never occupancy evidence. For predicted geometry,
+        # require explicit multi-view textured background confirmation too.
+        patch_verified = (crossview_support is not None
+                          and crossview_support["supported_fraction"] >= 0.9)
+        supported = free >= 0.9 and novel and (
+            not getattr(config, "geometry_supported_views_enabled", False)
+            or patch_verified
+        )
         if supported:
             rays.append(ray)
         views.append(
@@ -504,6 +563,8 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
                 "states": states,
                 "free_fraction": free,
                 "counts_as_distinct_free_view": supported,
+                "crossview_surface_validation": crossview_support,
+                "minimum_view_angle_degrees": minimum_angle,
             }
         )
     return {
@@ -721,7 +782,7 @@ def consensus(before, after, b_reconstruction, a_reconstruction, registration, c
             )
             supported = (
                 obj.distinct_views >= config.min_object_views
-                and vis["supported_free_views"] >= config.min_object_views
+                and vis["supported_free_views"] >= max(2, config.min_object_views)
             )
             unresolved = []
             if config.association_mode != "legacy":

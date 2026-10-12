@@ -42,6 +42,7 @@ class IdentitySettings:
     ema_alpha: float = 0.2
     memory_batches: int = 30
     confirmation_hits: int = 2
+    crowding_thresholds: bool = False
 
     def __post_init__(self) -> None:
         values = [v for v in vars(self).values()]
@@ -86,9 +87,13 @@ class IdentityObservation:
     descriptor: Array
     position: Array | None
     extent: Array | None = None
+    correspondence_peers: frozenset[str] = frozenset()
+    member_ids: frozenset[str] = frozenset()
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "descriptor", unit_descriptor(self.descriptor))
+        if not self.member_ids:
+            object.__setattr__(self, "member_ids", frozenset({self.identifier}))
         for name, shape in (("position", (3,)), ("extent", (2, 3))):
             value = getattr(self, name)
             if value is not None:
@@ -163,18 +168,60 @@ def joint_assignment(
             cosine = float(np.clip(a.descriptor @ b.descriptor, -1, 1))
             distances[i, j], cosines[i, j] = distance, cosine
             same = semantic_label(a.label) == semantic_label(b.label)
+            traced_geometry = bool(
+                a.member_ids & b.correspondence_peers
+                or b.member_ids & a.correspondence_peers
+            )
+            proximity_distance = distance
+            if settings.crowding_thresholds:
+                proximity_distance = float("inf")
+                for collection, reference, reference_index in (
+                    (tracks, a, i),
+                    (detections, b, j),
+                ):
+                    for neighbor_index, neighbor in enumerate(collection):
+                        if (
+                            neighbor_index == reference_index
+                            or neighbor.position is None
+                            or reference.position is None
+                        ):
+                            continue
+                        if (
+                            neighbor.descriptor.shape == reference.descriptor.shape
+                            and float(neighbor.descriptor @ reference.descriptor)
+                            >= settings.appearance_floor
+                        ):
+                            proximity_distance = min(
+                                proximity_distance,
+                                float(
+                                    np.linalg.norm(
+                                        neighbor.position - reference.position
+                                    )
+                                ),
+                            )
             floor = min(
                 1.0,
                 settings.appearance_floor
-                + settings.proximity_boost * max(0, 1 - distance / settings.proximity),
+                + settings.proximity_boost
+                * max(0, 1 - proximity_distance / settings.proximity),
             )
             if not same:
                 floor = max(floor, settings.class_mismatch_floor)
+            if (
+                traced_geometry
+                and settings.crowding_thresholds
+                and not np.isfinite(proximity_distance)
+            ):
+                # An isolated accepted native-image trajectory can corroborate a
+                # viewpoint-sensitive neural embedding. Crowded lookalikes retain
+                # their stricter floor and every ambiguity gate below.
+                floor = 0.75
             row.update(
                 centroid_distance=distance,
                 appearance_cosine=cosine,
                 appearance_floor=floor,
                 semantic_compatible=same,
+                corroborated_native_trajectory=traced_geometry,
             )
             if distance > settings.radius:
                 row["gate"] = "outside_search_radius"
@@ -310,6 +357,8 @@ class IdentityGallery:
                     "hits": track.hits,
                     "missed": track.missed,
                     "observation_ids": track.observation_ids,
+                    "correspondence_peers": sorted(p.correspondence_peers),
+                    "member_ids": sorted(p.member_ids),
                 }
             )
         payload = {
@@ -372,6 +421,8 @@ class IdentityGallery:
                 row["descriptor"],
                 row["position"],
                 row["extent"],
+                frozenset(row.get("correspondence_peers", [])),
+                frozenset(row.get("member_ids", row["observation_ids"])),
             )
             gallery.tracks[identifier] = GalleryTrack(
                 identifier,
@@ -434,6 +485,8 @@ class IdentityGallery:
                 descriptor,
                 detection.position,
                 detection.extent,
+                track.prototype.correspondence_peers | detection.correspondence_peers,
+                track.prototype.member_ids | detection.member_ids,
             )
             track.hits += 1
             track.missed = 0
@@ -481,6 +534,7 @@ def settings_from_config(config: Config) -> IdentitySettings:
         ema_alpha=config.identity_ema_alpha,
         memory_batches=config.identity_memory_batches,
         confirmation_hits=config.identity_confirmation_hits,
+        crowding_thresholds=config.identity_crowding_thresholds,
     )
 
 
@@ -489,12 +543,26 @@ def observation_from_object(obj: IdentityObject) -> IdentityObservation:
     extent = getattr(obj, "extent", None)
     if extent is None:
         extent = getattr(obj, "provenance", {}).get("extent")
+    peers = set()
+    for pair in (
+        getattr(obj, "provenance", {})
+        .get("multiview_geometry", {})
+        .get("candidate_pairs", [])
+    ):
+        if (
+            pair.get("accepted")
+            and pair.get("gate") is None
+            and pair.get("temporal_trace_validated")
+        ):
+            peers.update([pair["before_id"], pair["after_id"]])
+    peers.discard(obj.id)
     return IdentityObservation(
         obj.id,
         obj.label,
         np.asarray(obj.descriptor, dtype=float),
         np.asarray(obj.position, dtype=float) if obj.position is not None else None,
         np.asarray(extent, dtype=float) if extent is not None else None,
+        frozenset(peers),
     )
 
 

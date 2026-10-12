@@ -77,6 +77,10 @@ def analyze(before, after, profile, root, config_path, temporal_tracking=False):
                     "semantics_enabled": False,
                 }
             )
+        elif profile == "Multi-view object analysis":
+            from .app import upload_config
+
+            config = upload_config("vggt", True, temporal_tracking, True)
         elif profile != "Neural + objects":
             raise ValueError("Unknown processing profile")
         if temporal_tracking and not config.semantics_enabled:
@@ -180,10 +184,10 @@ def build_demo(root, config_path):
             "Check that the Before preview shows the scene before your changes. Analysis uses the original uploaded files."
         )
         profile = gr.Radio(
-            ["Neural + objects", "Geometry diagnostic"],
+            ["Neural + objects", "Multi-view object analysis", "Geometry diagnostic"],
             value="Neural + objects",
             label="Analysis",
-            info="Geometry diagnostic does not run neural object models.",
+            info="Multi-view analysis adds crop detection, label checks and object geometry validation. Geometry diagnostic does not run neural object models.",
         )
         start = gr.Button("Compare recordings", variant="primary")
         temporal = gr.Checkbox(

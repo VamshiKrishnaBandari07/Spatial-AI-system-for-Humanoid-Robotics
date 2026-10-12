@@ -92,6 +92,15 @@ def group_with_gallery(
             else rows[0].provenance.get("extent"),
         )
         obj.distinct_views = independent_views(rows, position, config.viewpoint_degrees)
+        if getattr(config, "geometry_supported_views_enabled", False):
+            from .object_geometry import geometric_view_support
+
+            view_support = geometric_view_support(rows, position, config)
+            obj.distinct_views = max(
+                obj.distinct_views, view_support["supported_views"]
+            )
+            for row in rows:
+                row.provenance["geometric_view_support"] = view_support
         obj.identity_confirmed = bool(track and track.confirmed)
         if positions:
             obj.position_spread = float(

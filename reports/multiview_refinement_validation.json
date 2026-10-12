@@ -1,0 +1,65 @@
+{
+  "status": "implementation_verified_not_accuracy_validated",
+  "regression": {
+    "passed": 248,
+    "failed": 0,
+    "warnings": 1
+  },
+  "actual_neural_frame_check": {
+    "detector": "IDEA-Research/grounding-dino-tiny",
+    "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+    "detections": 13,
+    "candidate_refinement_passes": 1,
+    "runtime_seconds": 50.28792018600507,
+    "retained_query_logits_verified": true,
+    "calibrated": false
+  },
+  "geometry": {
+    "optimizer": "fixed-camera point bundle adjustment, Huber loss",
+    "final_rule": "every supplied view strictly below 2 native pixels, positive depth and sufficient parallax",
+    "joint_camera_bundle_adjustment": false,
+    "centroid_pixel_accuracy_verified": false
+  },
+  "removal": {
+    "minimum_distinct_free_views": 2,
+    "advanced_profile_requires_crossview_background_patches": true
+  },
+  "fresh_full_video_benchmark_after_refinement": true,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "remaining_requirements": [
+    "Independently labelled detector validation and held-out scenes for temperature assessment",
+    "Verified change annotations for quantitative change-detection evaluation",
+    "Dedicated UI rendering for detailed diagnostic fields",
+    "Validated object-centre observations if centroid reprojection error is required",
+    "Reliable cross-recording identity and positive free-space evidence remain unresolved on this pair"
+  ],
+  "full_video_run": {
+    "status": "complete",
+    "runtime_seconds": 579.9874522080063,
+    "geometry_reused": true,
+    "perception_inference": "fresh neural detector/SAM/DINOv2/SigLIP",
+    "confirmed_changes": 0,
+    "inconclusive_decisions": 107,
+    "registration": {
+      "inliers": 11,
+      "correspondences": 13,
+      "rmse_reconstruction_units": 0.018586568759496956,
+      "heldout_inliers": 3,
+      "heldout_count": 4,
+      "heldout_rmse_reconstruction_units": 0.02311920977320503
+    },
+    "recovered_localizations": {
+      "before": 6,
+      "after": 8
+    },
+    "blocking_gates": {
+      "unquantified_depth_or_registration_error_budget": 1,
+      "unresolved_cross_recording_identity": 101,
+      "insufficient_positive_free_space": 106,
+      "missing_object_localization": 65,
+      "insufficient_independent_views": 101
+    }
+  }
+}

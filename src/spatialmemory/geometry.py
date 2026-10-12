@@ -76,8 +76,16 @@ def reconstruct(frames, config, camera=None):
     poses = {}
     residuals = []
     rejected = []
+    recovered_anchors = []
     initialized = False
     for fa, fb in zip(frames, frames[1:]):
+        if initialized and fa.id not in poses:
+            # A failed/occluded frame must not invalidate all subsequent frames.
+            # Reacquisition still requires real matches and robust PnP below.
+            registered = [f for f in frames if f.index < fb.index and f.id in poses]
+            if registered:
+                fa = registered[-1]
+                recovered_anchors.append({"frame_id": fb.id, "anchor_frame_id": fa.id})
         a, da, _ = features[fa.id]
         b, db, image = features[fb.id]
         pairs = match(da, db)
@@ -197,6 +205,7 @@ def reconstruct(frames, config, camera=None):
             "selected_frames": len(frames),
             "reprojection_median_px": float(np.median(residuals)),
             "rejected_frames": rejected,
+            "recovery_anchor_attempts": recovered_anchors,
             "intrinsics_source": camera.source
             if camera is not None
             else (

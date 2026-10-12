@@ -20,6 +20,7 @@ class Expert:
         self.device = device
         self.processor = None
         self.model = None
+        self.temperature = None
 
     def load(self):
         import os
@@ -103,13 +104,25 @@ class Expert:
             text_threshold=0.25,
             target_sizes=[(image.height, image.width)],
         )[0]
+        # Grounding DINO's postprocessor retains queries whose maximum token
+        # sigmoid exceeds 0.3. Preserve those exact pre-sigmoid logits; never
+        # reconstruct logits from rounded scores or label similarity.
+        query_logits = result.logits[0].max(dim=-1).values
+        retained_logits = query_logits[query_logits.sigmoid() > 0.3].cpu().tolist()
+        if len(retained_logits) != len(detections["scores"]):
+            raise ValueError("Detector logits/postprocessing correspondence mismatch")
         return {
             "boxes": detections["boxes"].cpu().tolist(),
             "raw_scores": detections["scores"].cpu().tolist(),
+            "raw_logits": retained_logits,
+            "calibrated_scores": self.temperature.probabilities(
+                retained_logits, self.spec.revision
+            ).tolist() if self.temperature is not None else None,
+            "calibration_source": self.temperature.source if self.temperature is not None else None,
             "labels": detections.get("text_labels", [])
             if "text_labels" in detections
             else detections.get("labels", []),
-            "calibrated": False,
+            "calibrated": self.temperature is not None,
             "provenance": provenance,
         }
 

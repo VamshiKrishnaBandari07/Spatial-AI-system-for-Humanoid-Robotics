@@ -14,10 +14,12 @@ networkx==3.6.1
 omegaconf==2.3.1
 pillow==11.1.0
 portalocker==4.4.0
+protobuf==5.29.5
 pyyaml==6.0.3
 regex==2026.9.29
 requests==2.34.2
 safetensors==0.5.3
+sentencepiece==0.2.0
 sympy==1.13.1
 tokenizers==0.21.4
 torch==2.6.0+cpu

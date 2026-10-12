@@ -26,9 +26,14 @@ MAX_UPLOAD = 512 * 1024 * 1024
 LOGGER = logging.getLogger(__name__)
 
 
-def upload_config(geometry_backend, semantics_enabled, temporal_tracking_enabled=False):
+def upload_config(
+    geometry_backend,
+    semantics_enabled,
+    temporal_tracking_enabled=False,
+    multiview_object_analysis=False,
+):
     """Use the conservative phone workflow without implying calibrated uncertainty."""
-    return Config(
+    config = Config(
         geometry_backend=geometry_backend,
         semantics_enabled=semantics_enabled,
         temporal_tracking_enabled=temporal_tracking_enabled,
@@ -40,6 +45,26 @@ def upload_config(geometry_backend, semantics_enabled, temporal_tracking_enabled
         association_mode="multiview",
         movement_mode="bounded",
     )
+    if multiview_object_analysis:
+        if geometry_backend != "vggt" or not semantics_enabled:
+            raise ValueError(
+                "Multi-view object analysis requires neural reconstruction and object analysis"
+            )
+        config = config.model_copy(
+            update={
+                "association_mode": "joint",
+                "multiscale_detection_enabled": True,
+                "detection_max_tiles": 2,
+                "multiview_geometry_enabled": True,
+                "geometry_supported_views_enabled": True,
+                "semantic_label_validation_enabled": True,
+                "classical_pose_validation_enabled": True,
+                "temporal_geometry_trace_enabled": True,
+                "detection_max_refinements": 4,
+                "identity_crowding_thresholds": True,
+            }
+        )
+    return config
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -122,10 +147,18 @@ async def submit(
     geometry_backend: Literal["sparse", "vggt"] = Form("sparse"),
     semantics_enabled: bool = Form(False),
     temporal_tracking_enabled: Annotated[bool, Form()] = False,
+    multiview_object_analysis: Annotated[bool, Form()] = False,
 ):
     capabilities = neural_capabilities()
     if temporal_tracking_enabled and not semantics_enabled:
         raise HTTPException(422, "Frame tracking requires object analysis")
+    if multiview_object_analysis and (
+        geometry_backend != "vggt" or not semantics_enabled
+    ):
+        raise HTTPException(
+            422,
+            "Multi-view object analysis requires neural reconstruction and object analysis",
+        )
     if geometry_backend == "vggt" and not capabilities["vggt"]:
         raise HTTPException(
             503,
@@ -175,8 +208,11 @@ async def submit(
                 folder / "before.mp4",
                 folder / "after.mp4",
                 folder / "output",
-                config=upload_config(geometry_backend, semantics_enabled).model_copy(
-                    update={"temporal_tracking_enabled": temporal_tracking_enabled}
+                config=upload_config(
+                    geometry_backend,
+                    semantics_enabled,
+                    temporal_tracking_enabled,
+                    multiview_object_analysis,
                 ),
                 progress=lambda s: JOBS[jid].update(stage=s),
             )
