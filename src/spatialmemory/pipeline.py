@@ -475,6 +475,10 @@ def run(
         # A restart must never interpret a partially written report as a completed run.
         stage("complete")
         report["runtime_seconds"] = time.perf_counter() - started
+        if config.semantics_enabled:
+            from .tracing import export_run_trace
+            export_run_trace(output)
+            report["pipeline_trace"] = "diagnostics/tracer/trace.json"
         temporary_report = output / "report.json.tmp"
         temporary_report.write_text(json.dumps(report, indent=2))
         temporary_report.replace(output / "report.json")

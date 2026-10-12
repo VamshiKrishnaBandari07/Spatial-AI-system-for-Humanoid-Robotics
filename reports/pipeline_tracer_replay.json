@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "mode": "read_only_saved_evidence_replay",
+  "new_neural_inference": false,
+  "diagnostic_records": 492,
+  "native_crop_mask_overlays": 128,
+  "check_status_counts": {"PASS": 117, "WARN": 172, "FAIL": 108, "NOT_RUN": 95},
+  "physical_changes_verified": false,
+  "limitations": [
+    "Check counts are not object accuracy or change-detection metrics",
+    "Identity distances are not re-invented when absent from saved evidence",
+    "Missing accepted per-point reprojection residuals remain NOT_RUN",
+    "Images and detailed scene evidence remain outside Git"
+  ]
+}
