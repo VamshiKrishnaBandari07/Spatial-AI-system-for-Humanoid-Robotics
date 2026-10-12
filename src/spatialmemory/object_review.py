@@ -2,6 +2,7 @@
 
 import html
 import json
+import sqlite3
 from pathlib import Path
 import cv2
 import numpy as np
@@ -40,6 +41,17 @@ def create_object_review(output):
     destination = output / "visualization" / "object_review"
     destination.mkdir(parents=True, exist_ok=True)
     cards, records = [], []
+    # Final observation labels include semantic abstentions. Raw detector text
+    # must never override a rejected label in the review interface.
+    observations = {}
+    database = output / "spatial_memory.sqlite"
+    if database.is_file():
+        with sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True) as connection:
+            observations = {
+                row["id"]: row
+                for (data,) in connection.execute("SELECT data FROM observations")
+                for row in [json.loads(data)]
+            }
     for state in ("before", "after"):
         source = output / f"{state}_model_outputs.json"
         if not source.is_file():
@@ -75,7 +87,13 @@ def create_object_review(output):
                 ).astype(int)
                 if x1 <= x0 or y1 <= y0:
                     continue
-                display = proposed_name(label) if processed else "Unidentified object"
+                saved = observations.get(observation)
+                final_label = saved["label"] if saved is not None else None
+                display = (
+                    final_label.title()
+                    if processed and final_label
+                    else "Unidentified object"
+                )
                 filename = f"{observation}.jpg"
                 if not cv2.imwrite(str(destination / filename), image[y0:y1, x0:x1]):
                     raise ValueError("Could not save object crop")
@@ -85,6 +103,8 @@ def create_object_review(output):
                     "frame_id": row["frame_id"],
                     "display_name": display,
                     "raw_label": label,
+                    "final_label": final_label,
+                    "label_source": "stored_observation" if saved is not None else "unverified_proposal",
                     "raw_detector_score": score,
                     "identity_verified": False,
                     "processing_status": "segmented_observation"
