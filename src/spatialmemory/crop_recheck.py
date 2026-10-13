@@ -37,7 +37,7 @@ def match_candidate(scores, minimum=.85, margin=.05):
     return int(order[0])
 
 
-def run_recheck(run: Path, output: Path, max_objects: int | None = None, max_views: int = 2):
+def run_recheck(run: Path, output: Path, max_objects: int | None = None, max_views: int = 2, rotation_aware: bool = False):
     if (max_objects is not None and not 1<=max_objects<=128) or not 1<=max_views<=4:raise ValueError('Invalid recovery budget')
     run=run.resolve();output.mkdir(parents=True,exist_ok=False)
     report=json.loads((run/'report.json').read_text())
@@ -89,7 +89,19 @@ def run_recheck(run: Path, output: Path, max_objects: int | None = None, max_vie
             region=native_region(view['object_projection']['region_xyxy'],(image.height,image.width),shape,report['config']['neural_preprocessing'])
             if region is None:continue
             patch=image.crop(region);name=f'{obj["id"]}_{fid.replace(":","_")}.jpg';patch.save(output/name)
-            detected=detector.infer(patch,report['config']['object_prompt']);candidates=[]
+            orientation_audit = None
+            if rotation_aware:
+                from .oriented_detection import detect_orientations
+                orientation_audit = detect_orientations(
+                    detector, patch, report['config']['object_prompt'],
+                    report['config']['detection_threshold'])
+                rows = orientation_audit['detections']
+                detected = {'boxes': [r['box'] for r in rows],
+                            'raw_scores': [r['raw_score'] for r in rows],
+                            'labels': [r['label'] for r in rows]}
+            else:
+                detected=detector.infer(patch,report['config']['object_prompt'])
+            candidates=[]
             for local,score,label in zip(detected['boxes'],detected['raw_scores'],detected['labels']):
                 if score<report['config']['detection_threshold']:continue
                 b=np.asarray(local,float);b=np.clip(b,[0,0,0,0],[patch.width,patch.height,patch.width,patch.height])
@@ -99,7 +111,7 @@ def run_recheck(run: Path, output: Path, max_objects: int | None = None, max_vie
             best=match_candidate([c['appearance_cosine'] for c in candidates])
             views.append({'frame_id':fid,'crop':name,'native_region':region,'candidates':candidates,
                           'appearance_proposal_index':best,'identity_verified':False,
-                          'occupancy':view['raybox_diagnostics'],'absence_is_removal':False})
+                          'occupancy':view['raybox_diagnostics'],'absence_is_removal':False, 'orientation_audit':orientation_audit})
         results.append({'object_id':obj['id'],'source_frame':observation['frame_id'],'views':views})
         (output/'recheck.json').write_text(json.dumps({'status':'running','fresh_detection_and_embeddings':True,'objects':results,'source_geometry_reused':True,'confirmed_changes':[]},indent=2))
     (output/'recheck.json').write_text(json.dumps({'status':'complete_recovery_proposals',
@@ -110,4 +122,5 @@ def run_recheck(run: Path, output: Path, max_objects: int | None = None, max_vie
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--max-objects',type=int);p.add_argument('--max-views',type=int,default=2)
-    a=p.parse_args();run_recheck(a.run,a.output,a.max_objects,a.max_views)
+    p.add_argument('--rotation-aware',action='store_true')
+    a=p.parse_args();run_recheck(a.run,a.output,a.max_objects,a.max_views,a.rotation_aware)

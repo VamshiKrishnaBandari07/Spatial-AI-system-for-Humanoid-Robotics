@@ -1,0 +1,33 @@
+{
+  "scope": "Targeted crop recovery experiment; not end-to-end change evaluation",
+  "model": "IDEA-Research/grounding-dino-tiny",
+  "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+  "neural_calls": 8,
+  "runtime_seconds": 49.34189210199975,
+  "source_geometry_reused": true,
+  "original_after_crop_candidates": 0,
+  "rotation_after_candidates": 3,
+  "best_after_raw_score": 0.597046434879303,
+  "source_label_error": "Pink handled container incorrectly proposed as table; rotation does not solve recognition",
+  "context_views_tested": 45,
+  "context_views_accepted": 0,
+  "context_rejections": {
+    "too_few_matches": 29,
+    "too_few_inliers": 6,
+    "extrapolated_box": 4,
+    "heldout_reprojection_failed": 6
+  },
+  "confirmed_changes": [],
+  "tests": {
+    "passed": 325,
+    "failed": 0,
+    "warnings": 1
+  },
+  "limitations": [
+    "No verified corrected 3D location",
+    "Raw detector scores are not calibrated probabilities",
+    "Local planar mapping fails on this pair",
+    "Rotation produces false labels as well as recovered detections",
+    "Rotation recovery is opt-in; not enabled in full pipeline by default"
+  ]
+}
