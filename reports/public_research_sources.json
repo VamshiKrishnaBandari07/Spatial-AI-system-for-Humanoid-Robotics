@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-13",
+  "scope": "Official source text review; no downloaded dataset/model or new accuracy benchmark",
+  "source_urls": "See docs/PUBLIC_RESEARCH_REVIEW.md",
+  "snapshots": [
+    {
+      "snapshot": "conceptgraphs-readme.md",
+      "sha256": "96a3f679dc57042b41772d59c88ec569fc2226d6db253abf00fb273f41e83032",
+      "bytes": 20640
+    },
+    {
+      "snapshot": "research-dust3r.txt",
+      "sha256": "30b6eb07fb95e2419ca5024762fdfe34af34b58a0eebb1ef9babd7aed319c736",
+      "bytes": 24895
+    },
+    {
+      "snapshot": "research-3rscan.txt",
+      "sha256": "9eb4c2897a34e1fe46029f1095258795bcdffb660062641214c265d65242f3c7",
+      "bytes": 4932
+    },
+    {
+      "snapshot": "research-openmask-features.txt",
+      "sha256": "ef218853e872fed8308e2547704aefba7aa77b142cd7bcb3b5ef1fa33adbc017",
+      "bytes": 9744
+    },
+    {
+      "snapshot": "research-arkit.txt",
+      "sha256": "8c6899b46b5ca0b0216ad555b475031dca22c0fa4075fb849b83919c4d616046",
+      "bytes": 3810
+    },
+    {
+      "snapshot": "research-conceptgraphs-code.txt",
+      "sha256": "30be9f67f6237326240ffe8bd31c27a6ca431d6b35c5cf7d444c62fdb9d266ed",
+      "bytes": 3774
+    },
+    {
+      "snapshot": "research-openmask3d.txt",
+      "sha256": "6af674d7abaa2bdae355eddc9ebabd904ad0d0c0e81ef6e01dddf9af20d2e482",
+      "bytes": 11957
+    },
+    {
+      "snapshot": "research-cut3r-license.txt",
+      "sha256": "53d192987577d0e455a15ea2562195d0fce05b29fa0e4a7a347b1c2b4dc4cd52",
+      "bytes": 227
+    },
+    {
+      "snapshot": "research-dust3r-license.txt",
+      "sha256": "f06b394a6b4804e68c4f8ff4298aec5cc981fba8934fc56525c91cc64a7d1d58",
+      "bytes": 361
+    },
+    {
+      "snapshot": "research-openmask-license.txt",
+      "sha256": "787bc8e22dea778d2379c1335627b60ff8ceeef18a44fcba8cc04ef084949e05",
+      "bytes": 1067
+    },
+    {
+      "snapshot": "research-conceptgraphs-license.txt",
+      "sha256": "bbb50dd0e42f0180461db2088dc07e6374d3ad4fe6961167b07093000894a509",
+      "bytes": 1071
+    },
+    {
+      "snapshot": "research-cut3r.txt",
+      "sha256": "6187bed3427560508af4cb5909149da9b0ef0728f1a8d98e0e667ecdba0e34dc",
+      "bytes": 8118
+    }
+  ]
+}
