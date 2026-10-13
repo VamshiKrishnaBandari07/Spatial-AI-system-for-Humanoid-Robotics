@@ -1,0 +1,44 @@
+{
+  "model": "HuggingFaceTB/SmolVLM-500M-Instruct",
+  "revision": "a7da5b986cb59b408707209984f360a5f4ad7e47",
+  "checkpoint_sha256": "d05b567eeaf534e83d375551f068ed57b5f52d37c657197f644af5ef9db091a2",
+  "checkpoint_sha256_verified": true,
+  "backend": "CPU float32 local pretrained inference",
+  "api_key_required": false,
+  "tests_passed": 280,
+  "tests_failed": 0,
+  "browser_check": "Mock response rendered safely in separate unverified visual panel; not inference validation",
+  "runs": [
+    {
+      "run": "spatialmemory-local-visual-20261013",
+      "runtime_seconds": 123.147141524998,
+      "narrative": "Clean bathroom with blue and white towels. Before has soap and shampoo. After has lotion and soap.",
+      "truncated": false,
+      "frame_ids": [
+        "before:0",
+        "before:2761",
+        "after:0",
+        "after:2640"
+      ],
+      "assessment": "Missed visually observed red/pink handled container absence. Not a validated change prediction."
+    },
+    {
+      "run": "spatialmemory-local-visual-matched-20261013",
+      "runtime_seconds": 122.46225933503592,
+      "narrative": "Before: 2 bottles of face wash, 2 cups, 1 bottle of lotion, 1 tube of cream. After: 2 bottles of face wash, 2 cups, 1 tube of cream.",
+      "truncated": false,
+      "frame_ids": [
+        "before:0",
+        "after:180",
+        "before:2761",
+        "after:1740"
+      ],
+      "assessment": "Missed visually observed red/pink handled container absence. Not a validated change prediction."
+    }
+  ],
+  "ground_truth": "No independent complete annotations available; qualitative comparison only",
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "acceptance": "backend operational; change-detection reliability failed on this pair"
+}

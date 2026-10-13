@@ -1227,6 +1227,13 @@
           notes.
         </p>
         <div id="artifactLinks" class="export-group" hidden></div>
+        <section id="visualPanel" hidden>
+          <h3>Visual comparison</h3>
+          <p>Optional image-based proposals, separate from verified 3D changes. Runs locally on the analysis server; no vision API key is required.</p>
+          <button type="button" id="visualCompare" disabled>Run visual comparison</button>
+          <p id="visualStatus" role="status"></p>
+          <div id="visualResults"></div>
+        </section>
         <div id="recentRuns" class="empty">
           Your completed comparisons will appear here.
         </div>
@@ -1947,6 +1954,50 @@
         details.append(summary, pre);
         $("memory").append(details);
       }
+      let visualPoll;
+      async function refreshVisual(id) {
+        clearTimeout(visualPoll);
+        $("visualPanel").hidden = false;
+        $("visualCompare").disabled = true;
+        $("visualResults").replaceChildren();
+        try {
+          const data = await get(`/jobs/${id}/visual-comparison`);
+          if (job !== id) return;
+          $("visualStatus").textContent = data.message || data.error || `Visual comparison: ${data.status}`;
+          $("visualCompare").disabled = data.status !== "ready";
+          if (data.result) {
+            $("visualStatus").textContent = "Visual model proposals — not verified 3D changes or calibrated confidence.";
+            if (data.result.narrative) {
+              const narrative = document.createElement("p");
+              narrative.textContent = data.result.narrative;
+              $("visualResults").append(narrative);
+            }
+            for (const change of data.result.changes) {
+              const card = document.createElement("p");
+              card.textContent = `${change.label}: ${change.change}. ${change.observation} Visibility: ${change.visibility_evidence} Uncertainty: ${change.uncertainty} Before: ${change.before_frames.join(", ")}; After: ${change.after_frames.join(", ")}`;
+              $("visualResults").append(card);
+            }
+            const note = document.createElement("p");
+            note.textContent = data.result.limitations;
+            $("visualResults").append(note);
+          }
+          if (data.status === "running") visualPoll = setTimeout(() => refreshVisual(id), 2000);
+        } catch (error) {
+          if (job === id) $("visualStatus").textContent = error.message;
+        }
+      }
+      $("visualCompare").addEventListener("click", async () => {
+        const id = job;
+        $("visualCompare").disabled = true;
+        try {
+          const response = await fetch(`/jobs/${id}/visual-comparison`, {method: "POST"});
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.detail || "Visual request failed");
+          await refreshVisual(id);
+        } catch (error) {
+          if (job === id) $("visualStatus").textContent = error.message;
+        }
+      });
       async function loadRun(id) {
         const generation = ++loadGeneration;
         beginLoadingForm();
@@ -1965,6 +2016,7 @@
           }
           if (generation !== loadGeneration) return false;
           job = id;
+          refreshVisual(id);
           report = nextReport;
           cloud = nextCloud;
           const points = [...cloud.before, ...cloud.after];

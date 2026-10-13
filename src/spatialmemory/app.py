@@ -409,3 +409,65 @@ def results(jid: str):
             "Content-Disposition": f'attachment; filename="spatialmemory-{jid}.zip"'
         },
     )
+
+
+VISUAL_POOL = ThreadPoolExecutor(max_workers=1)
+VISUAL_LOCK = threading.Lock()
+VISUAL_JOBS: dict[str, dict] = {}
+
+
+def visual_output(jid: str) -> Path:
+    folder = jobpath(jid).resolve()
+    if not folder.is_relative_to(ROOT.resolve()):
+        raise HTTPException(404, "Unknown job")
+    output = folder / "output/reports/visual_comparison"
+    if not output.resolve().is_relative_to(folder):
+        raise HTTPException(404, "Invalid visual output path")
+    return output
+
+
+@app.get("/jobs/{jid}/visual-comparison")
+def visual_status(jid: str):
+    output = visual_output(jid)
+    result = output / "visual_changes.json"
+    if result.is_file():
+        return {"status": "complete", "result": json.loads(result.read_text())}
+    if jid in VISUAL_JOBS:
+        return VISUAL_JOBS[jid]
+    if output.exists():
+        return {"status": "failed", "error": "Previous visual request failed or was interrupted; inspect server diagnostics before retrying."}
+    configured = os.getenv("SPATIALMEMORY_VISUAL_BACKEND") == "local"
+    return {"status": "ready" if configured else "unavailable",
+            "message": "Local visual comparison processes sampled frames on this server." if configured else
+            "Enable SPATIALMEMORY_VISUAL_BACKEND=local after downloading the pinned model."}
+
+
+@app.post("/jobs/{jid}/visual-comparison", status_code=202)
+def start_visual_comparison(jid: str):
+    output = visual_output(jid)
+    if os.getenv("SPATIALMEMORY_VISUAL_BACKEND") != "local":
+        raise HTTPException(503, "Visual comparison is not configured on this server")
+    run_output = jobpath(jid) / "output"
+    source = run_output / "report.json"
+    if not source.is_file() or json.loads(source.read_text()).get("status") != "complete":
+        raise HTTPException(409, "Complete the video pipeline before visual comparison")
+    with VISUAL_LOCK:
+        if output.exists() or jid in VISUAL_JOBS:
+            raise HTTPException(409, "A visual request already exists for this run")
+        if any(row.get("status") == "running" for row in VISUAL_JOBS.values()):
+            raise HTTPException(409, "Another visual comparison is running")
+        VISUAL_JOBS[jid] = {"status": "running"}
+
+    def work():
+        from .local_visual import compare_local
+        try:
+            compare_local(run_output, output)
+            VISUAL_JOBS[jid] = {"status": "complete"}
+        except Exception:
+            VISUAL_JOBS[jid] = {"status": "failed", "error": "Visual comparison failed; inspect server diagnostics. No changes are confirmed."}
+    try:
+        VISUAL_POOL.submit(work)
+    except Exception:
+        VISUAL_JOBS[jid] = {"status": "failed", "error": "Visual worker could not start"}
+        raise HTTPException(503, "Visual worker could not start") from None
+    return {"status": "running"}

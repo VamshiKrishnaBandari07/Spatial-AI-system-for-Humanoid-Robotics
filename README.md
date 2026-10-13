@@ -119,3 +119,7 @@ A separate [multi-view visual comparison stage](docs/VISUAL_COMPARISON.md) can s
 ## GitHub-hosted workspace
 
 The `site/` interface provides private browser video previews, local JSON report review, and a Colab analysis launcher. See [hosting instructions](docs/HOSTING.md) to enable GitHub Pages and run the deployment workflow. GitHub Pages does not host model inference; live publication has not been verified from this environment.
+
+## Local visual-language backend
+
+A [local SmolVLM backend](docs/LOCAL_VISUAL.md) now provides optional multi-image descriptions in the FastAPI dashboard without an API key. Install its pinned checkpoint and enable `SPATIALMEMORY_VISUAL_BACKEND=local`. Generated descriptions are unverified observations, not confirmed 3D changes.

@@ -20,12 +20,16 @@ document.getElementById('report').addEventListener('change', async event => {
   try {
     if (file.size > 32 * 1024 * 1024) throw new Error('Report exceeds the 32 MB browser limit.');
     const data = JSON.parse(await file.text());
-    const visual = data.status === 'visual_proposals';
+    const visual = ['visual_proposals', 'visual_observations'].includes(data.status);
     const rows = visual ? data.changes : data.events;
     if (!Array.isArray(rows)) throw new Error('Choose changes.json or visual_changes.json.');
     const allowed = new Set(['ADDED','REMOVED','MOVED','UNCHANGED','UNKNOWN','INCONCLUSIVE','ROTATED','DEFORMED']);
     if (rows.some(row => !row || !allowed.has(row.change))) throw new Error('Report contains an unsupported change record.');
     status.textContent = `${rows.length} records loaded. ${visual ? 'Visual model proposals — not verified 3D changes.' : 'Pipeline decisions — inspect supporting evidence before relying on them.'}`;
+    if (visual && data.narrative) {
+      const text = document.createElement('p'); text.textContent = data.narrative;
+      results.append(text);
+    }
     for (const row of rows.slice(0, 1000)) {
       const card = document.createElement('article'); card.className = 'result';
       const heading = document.createElement('h3'); heading.textContent = `${row.semantic_label || row.label || 'Unnamed region'} — ${row.change}`;
