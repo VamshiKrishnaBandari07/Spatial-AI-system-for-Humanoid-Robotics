@@ -537,6 +537,9 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
                 )
             support_cache[tolerance] = support
         depth[~support_cache[tolerance]] = np.nan
+        from .raybox_integration import raybox_view
+        raybox_diagnostics = raybox_view(obj.extent, surface, pose,
+                                        support_cache[tolerance], registration)
         states = visibility(
             points,
             depth,
@@ -580,6 +583,7 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
                 "frame_id": fid,
                 "states": states,
                 "ray_diagnostics": ray_diagnostics,
+                "raybox_diagnostics": raybox_diagnostics,
                 "free_fraction": free,
                 "counts_as_distinct_free_view": supported,
                 "crossview_surface_validation": crossview_support,
