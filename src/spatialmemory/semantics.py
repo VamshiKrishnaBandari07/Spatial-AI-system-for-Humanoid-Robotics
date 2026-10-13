@@ -537,6 +537,9 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
                 )
             support_cache[tolerance] = support
         depth[~support_cache[tolerance]] = np.nan
+        from .object_view_selection import object_view_coverage
+        object_projection = object_view_coverage(points, K, pose, depth.shape,
+                                                surface.get("valid_pixels"))
         from .raybox_integration import raybox_view
         raybox_diagnostics = raybox_view(obj.extent, surface, pose,
                                         support_cache[tolerance], registration)
@@ -584,13 +587,16 @@ def visibility_evidence(obj, reconstruction, config, registration=None):
                 "states": states,
                 "ray_diagnostics": ray_diagnostics,
                 "raybox_diagnostics": raybox_diagnostics,
+                "object_projection": object_projection,
                 "free_fraction": free,
                 "counts_as_distinct_free_view": supported,
                 "crossview_surface_validation": crossview_support,
                 "minimum_view_angle_degrees": minimum_angle,
             }
         )
+    from .object_view_selection import rank_object_views
     return {
+        "ranked_object_view_ids": rank_object_views(views),
         "supported_free_views": len(rays),
         "sample_source": sample_source,
         "sample_count": len(points),

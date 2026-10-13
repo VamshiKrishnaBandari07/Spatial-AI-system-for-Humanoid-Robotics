@@ -1,0 +1,9 @@
+{
+  "source": "saved phone-pair object boxes and original VGGT camera predictions; diagnostic replay, not fresh inference",
+  "occupancy_or_changes_verified": false,
+  "objects_with_extent": 27,
+  "objects_with_candidate_views": 27,
+  "tests_passed": 319,
+  "tests_failed": 0,
+  "confirmed_changes": null
+}
