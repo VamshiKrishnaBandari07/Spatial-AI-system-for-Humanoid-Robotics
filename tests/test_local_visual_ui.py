@@ -70,7 +70,16 @@ def test_no_correspondences_preserves_explicit_fallback(tmp_path):
             cv2.imwrite(str(path), np.zeros((64, 64, 3), np.uint8))
             rows.append({'id': f'{role}:{index}', 'timestamp': index, 'path': str(path)})
         (folder / 'manifest.json').write_text(json.dumps({'frames': rows}))
-    evidence = matched_evidence(tmp_path, 2)
-    assert len(evidence) == 4
-    assert all(row['view_selection'] == 'uniform_fallback_no_supported_pair' for row in evidence)
-    assert all('view_match' not in row for row in evidence)
+    with pytest.raises(ValueError, match='Insufficient shared-view coverage'):
+        matched_evidence(tmp_path, 2)
+
+
+def test_overlap_rejects_offscreen_singular_and_projective_poles():
+    import numpy as np
+    from spatialmemory.local_visual import image_overlap
+    assert image_overlap(np.eye(3), (100, 100), (100, 100)) == 1.0
+    shift = np.eye(3); shift[0, 2] = 75
+    assert image_overlap(shift, (100, 100), (100, 100)) < 0.3
+    assert image_overlap(np.zeros((3, 3)), (100, 100), (100, 100)) == 0.0
+    pole = np.eye(3); pole[2] = [0.02, 0, -1]
+    assert image_overlap(pole, (100, 100), (100, 100)) == 0.0

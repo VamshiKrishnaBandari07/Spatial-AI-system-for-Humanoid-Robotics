@@ -36,10 +36,14 @@ OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 python -m spatialmemory.local_visual \
   --run results/room_01_neural --output results/room_01_visual_local
 ```
 
-The default input uses two before frames and selects after views using SIFT
-correspondences and RANSAC homography support from up to 16 candidates. This
-selects comparable image structure, not proof of object identity or empty space.
-If matching fails, uniform sampling is explicitly recorded as a fallback.
+The default input selects two pairs using SIFT correspondences and RANSAC
+homography support from up to 16 candidates per recording. Each map must cover
+at least 70% of a uniform image grid in both directions. This is a conservative
+view-selection setting, not a calibrated visibility threshold or proof of object
+identity/empty space. Singular maps and projective poles are rejected. If too few
+pairs pass, the stage records a view-selection failure and does not run the VLM.
+Full-frame homographies can reject useful nonplanar or partial object views;
+object-centric view retrieval remains necessary for robust cluttered scenes.
 Original timestamps, roles and image hashes are retained. Use
 `--frames-per-video 4` for more views at greater compute cost. Sampling is not
 exhaustive and can miss short observations. No known-change answer key is fed to
@@ -65,3 +69,8 @@ Two real CPU runs completed in about 123 seconds each. Both missed the visible
 handled-container removal; the matched-view run instead claimed a lotion bottle
 was absent. This checkpoint is not validated for reliable change detection.
 See [measured local results](../reports/local_visual_validation.json).
+
+The coverage-gated rerun rejected this phone pair before generation. The earlier
+matcher selected a frame cutting off the cabinet-top objects, with only 51.2%
+projected source coverage. This repairs misleading view selection; it does not
+establish successful object change detection.

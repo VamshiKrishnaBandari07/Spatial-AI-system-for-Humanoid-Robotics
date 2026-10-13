@@ -40,5 +40,18 @@
   "precision": null,
   "recall": null,
   "f1": null,
-  "acceptance": "backend operational; change-detection reliability failed on this pair"
+  "acceptance": "backend operational; change-detection reliability failed on this pair",
+  "coverage_selection_regression": {
+    "old_pair": [
+      "before:0",
+      "after:180"
+    ],
+    "source_grid_coverage": 0.5125,
+    "minimum_bidirectional_coverage": 0.7,
+    "rerun_status": "rejected_before_generation",
+    "failure_stage": "view_selection",
+    "tests_passed": 281,
+    "tests_failed": 0,
+    "limitation": "Image overlap is not physical visibility proof; full-image homographies cannot reliably cover every nonplanar or partial object view."
+  }
 }
