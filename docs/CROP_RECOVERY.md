@@ -8,9 +8,12 @@ Fresh DINOv2 crop embeddings compare the source observation with detected target
 crops. Both sides use unmasked crops in this recovery pass, so comparisons do not
 mix stored masked features with unmasked target features.
 
-The default budget is four small-object tracks, two target views each. Selection
-is deterministic by source crop area, not scene-specific labels or ground truth.
-`--max-objects` changes that budget. Saved native patches and recheck.json contain
+The default covers all eligible BEFORE tracks with two target views each.
+`--max-objects` optionally limits the track budget; `--max-views` limits views.
+Coverage metadata lists eligible, selected, deferred, and missing-view tracks.
+The largest stored source observation is used instead of a tiny first fragment.
+Repeated event records are deduplicated by track ID; physical tracks are not merged
+without identity evidence. Selection uses no scene-specific labels or ground truth. Saved native patches and recheck.json contain
 the actual detections, raw scores, similarities, and inherited occupancy diagnostics.
 A proposal requires cosine >= .85 and a .05 advantage over the next candidate;
 these thresholds are matching gates, not calibrated probabilities.

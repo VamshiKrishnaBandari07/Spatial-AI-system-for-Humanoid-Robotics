@@ -1,0 +1,21 @@
+{
+  "status": "complete_recovery_proposals",
+  "fresh_detection_and_embeddings": true,
+  "geometry_reused": true,
+  "eligible_tracks": 27,
+  "processed_tracks": 27,
+  "processed_crops": 27,
+  "missing_ranked_view_tracks": 5,
+  "detections": 25,
+  "appearance_proposals": 3,
+  "confirmed_changes": 0,
+  "qualitative_jug_check": "Source crop contains handled container; projected after crop centered largely on neighboring white pump bottle. Search-region accuracy insufficient; no removal claim.",
+  "limitations": [
+    "One candidate view per track in this coverage pass",
+    "Cross-recording identity not verified",
+    "Uncertainty bounds absent",
+    "Duplicate physical tracks are not resolved"
+  ],
+  "tests_passed": 321,
+  "tests_failed": 0
+}

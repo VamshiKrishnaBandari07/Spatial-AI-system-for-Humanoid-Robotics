@@ -37,8 +37,8 @@ def match_candidate(scores, minimum=.85, margin=.05):
     return int(order[0])
 
 
-def run_recheck(run: Path, output: Path, max_objects: int = 4, max_views: int = 2):
-    if not 1<=max_objects<=32 or not 1<=max_views<=4:raise ValueError('Invalid recovery budget')
+def run_recheck(run: Path, output: Path, max_objects: int | None = None, max_views: int = 2):
+    if (max_objects is not None and not 1<=max_objects<=128) or not 1<=max_views<=4:raise ValueError('Invalid recovery budget')
     run=run.resolve();output.mkdir(parents=True,exist_ok=False)
     report=json.loads((run/'report.json').read_text())
     if report['status']!='complete':raise ValueError('Completed source run required')
@@ -53,11 +53,23 @@ def run_recheck(run: Path, output: Path, max_objects: int = 4, max_views: int = 
     for event in events:
         obj=objects.get(event['object_id']);vis=event['evidence'].get('visibility',{})
         if obj and vis.get('ranked_object_view_ids'):
-            observation=observations[obj['observation_ids'][0]]
+            # Use the largest available native observation, not a tiny first fragment.
+            observation=max((observations[oid] for oid in obj['observation_ids']),
+                            key=lambda o: (o['provenance']['box'][2]-o['provenance']['box'][0]) *
+                                          (o['provenance']['box'][3]-o['provenance']['box'][1]))
             box=observation['provenance']['box']
             eligible.append(((box[2]-box[0])*(box[3]-box[1]),obj,observation,vis))
-    # Generic small-object priority, no known object names/locations/answer key.
-    eligible.sort(key=lambda r:(r[0],r[1]['id']))
+    # Deduplicate repeated event records only. Similar-looking physical tracks
+    # must remain separate until joint identity matching can justify a merge.
+    eligible=list({row[1]['id']:row for row in eligible}.values())
+    eligible.sort(key=lambda r:r[1]['id'])
+    selected=eligible if max_objects is None else eligible[:max_objects]
+    coverage={'eligible_ids':[r[1]['id'] for r in eligible],
+              'selected_ids':[r[1]['id'] for r in selected],
+              'excluded_no_ranked_view':[oid for oid in objects if oid not in {r[1]['id'] for r in eligible}],
+              'deferred_by_budget':[r[1]['id'] for r in eligible if r not in selected],
+              'max_views':max_views,'physical_tracks_merged':False}
+    (output/'coverage.json').write_text(json.dumps(coverage,indent=2))
     detector=Expert(ModelSpec('IDEA-Research/grounding-dino-tiny','a2bb814dd30d776dcf7e30523b00659f4f141c71','detection'),'/workspace/spatialmemory-models').load()
     appearance=Expert(ModelSpec('facebook/dinov2-small','ed25f3a31f01632728cabb09d1542f84ab7b0056','appearance'),'/workspace/spatialmemory-models').load()
     results=[]
@@ -65,7 +77,7 @@ def run_recheck(run: Path, output: Path, max_objects: int = 4, max_views: int = 
         path=Path(frames[fid]['path']).resolve()
         if not path.is_relative_to(run):raise ValueError('Evidence path escapes source run')
         return Image.open(path).convert('RGB')
-    for _,obj,observation,visibility in eligible[:max_objects]:
+    for _,obj,observation,visibility in selected:
         src=image_for(observation['frame_id']);box=observation['provenance']['box']
         source=src.crop(box);source.save(output/f'{obj["id"]}_before.jpg')
         descriptor=np.asarray(appearance.infer(source)['descriptor'])
@@ -89,10 +101,13 @@ def run_recheck(run: Path, output: Path, max_objects: int = 4, max_views: int = 
                           'appearance_proposal_index':best,'identity_verified':False,
                           'occupancy':view['raybox_diagnostics'],'absence_is_removal':False})
         results.append({'object_id':obj['id'],'source_frame':observation['frame_id'],'views':views})
-        (output/'recheck.json').write_text(json.dumps({'status':'recovery_proposals','fresh_detection_and_embeddings':True,'objects':results,'source_geometry_reused':True,'confirmed_changes':[]},indent=2))
+        (output/'recheck.json').write_text(json.dumps({'status':'running','fresh_detection_and_embeddings':True,'objects':results,'source_geometry_reused':True,'confirmed_changes':[]},indent=2))
+    (output/'recheck.json').write_text(json.dumps({'status':'complete_recovery_proposals',
+        'fresh_detection_and_embeddings':True,'objects':results,'coverage':coverage,
+        'source_geometry_reused':True,'confirmed_changes':[]},indent=2))
     return results
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--max-objects',type=int,default=4)
-    a=p.parse_args();run_recheck(a.run,a.output,a.max_objects)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--max-objects',type=int);p.add_argument('--max-views',type=int,default=2)
+    a=p.parse_args();run_recheck(a.run,a.output,a.max_objects,a.max_views)
