@@ -118,6 +118,25 @@ def localized_surface_points(mask, surface, pose, tolerance, return_support=Fals
         )
         alternate_count = int((supported & ~valid).sum())
         valid |= supported
+    # Neural confidence is not proof that a predicted world point belongs to
+    # its generating pixel. Validate on native pixels when the resize mapping
+    # is supplied; otherwise report the surface-grid coordinate convention.
+    yy, xx = np.indices(mask.shape)
+    camera_points = points @ pose[:3, :3].T + pose[:3, 3]
+    projected = camera_points @ surface["intrinsics"].T
+    with np.errstate(divide="ignore", invalid="ignore"):
+        residual = projected[..., :2] / projected[..., 2, None] - np.stack([xx, yy], axis=-1)
+    mapping = np.asarray(surface.get("native_to_geometry", np.eye(3)), float)
+    if mapping.shape != (3, 3) or not np.isfinite(mapping).all():
+        raise ValueError("Invalid native pixel mapping")
+    residual = residual @ np.linalg.inv(mapping)[:2, :2].T
+    error = np.linalg.norm(residual, axis=-1)
+    limit = float(surface.get("max_reprojection_px", 2.0))
+    if not np.isfinite(limit) or limit <= 0:
+        raise ValueError("Invalid reprojection limit")
+    geometric = (np.isfinite(error) & (camera_points[..., 2] > 0) & (error < limit))
+    rejected = int((valid & ~geometric).sum())
+    valid &= geometric
     selected = points[valid]
     selected = selected[np.isfinite(selected).all(axis=1)]
     audit = {
@@ -127,6 +146,10 @@ def localized_surface_points(mask, surface, pose, tolerance, return_support=Fals
         "agreement_tolerance_reconstruction_units": tolerance,
         "confidence_gate": "per-head frame median; raw scores are not calibrated",
         "independent_geometry_validation": False,
+        "self_reprojection_rejected_pixels": rejected,
+        "self_reprojection_limit_px": limit,
+        "self_reprojection_coordinate_grid": "native" if "native_to_geometry" in surface else "surface",
+        "self_reprojection_max_accepted_px": float(error[valid].max()) if valid.any() else None,
     }
     return (selected, audit, valid) if return_support else (selected, audit)
 
@@ -249,6 +272,11 @@ def observe_scene(reconstruction, frames, state, output, config, experts):
                 effective_label = semantic_check["label"]
             surface = reconstruction.surfaces.get(fid)
             if surface is not None:
+                from .pixel_mapping import native_to_geometry_matrix
+                surface["native_to_geometry"] = (np.eye(3) if mask.shape == surface["depth"].shape
+                    else native_to_geometry_matrix(
+                        mask.shape, surface["depth"].shape, config.neural_preprocessing))
+                surface["max_reprojection_px"] = config.triangulation_max_reprojection_px
                 points, localization = localized_surface_points(
                     geometry_mask, surface, reconstruction.poses[fid], config.voxel_size
                 )

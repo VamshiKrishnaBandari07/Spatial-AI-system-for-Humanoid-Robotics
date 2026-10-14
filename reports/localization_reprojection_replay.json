@@ -1,0 +1,99 @@
+{
+  "scope": "Full comparison replay with verified cached neural predictions and masks; no fresh neural inference",
+  "status": "complete",
+  "runtime_seconds": 21.155427190999035,
+  "decisions": {
+    "UNKNOWN": 53
+  },
+  "defect": "Point-head confidence previously bypassed generating-pixel reprojection validation",
+  "before": {
+    "source": "saved real VGGT prediction and SAM mask",
+    "frame": "before:120",
+    "selected_pixels": 2692,
+    "reprojection_median_px": 1.6272793075980858,
+    "reprojection_p95_px": 2.2705054497000954,
+    "within_2px": 2309,
+    "audit": {
+      "point_head_supported_pixels": 2058,
+      "additional_depth_head_agreement_pixels": 634,
+      "depth_head_available": true,
+      "agreement_tolerance_reconstruction_units": 0.08,
+      "confidence_gate": "per-head frame median; raw scores are not calibrated",
+      "independent_geometry_validation": false
+    }
+  },
+  "after": {
+    "source": "saved real VGGT prediction and SAM mask",
+    "frame": "before:120",
+    "selected_pixels": 708,
+    "reprojection_median_px": 1.031370794111527,
+    "reprojection_p95_px": 1.2289267740152605,
+    "within_2px": 708,
+    "audit": {
+      "point_head_supported_pixels": 2058,
+      "additional_depth_head_agreement_pixels": 634,
+      "depth_head_available": true,
+      "agreement_tolerance_reconstruction_units": 0.08,
+      "confidence_gate": "per-head frame median; raw scores are not calibrated",
+      "independent_geometry_validation": false,
+      "self_reprojection_rejected_pixels": 1984,
+      "self_reprojection_limit_px": 2.0,
+      "self_reprojection_coordinate_grid": "native",
+      "self_reprojection_max_accepted_px": 1.999562290790926
+    }
+  },
+  "registration": {
+    "valid": true,
+    "scale": 1.1489911092088836,
+    "rotation": [
+      [
+        0.9736389989920426,
+        -0.11213608161587081,
+        0.19862678279026744
+      ],
+      [
+        -0.02592318998701599,
+        0.8107665608183395,
+        0.584795324946856
+      ],
+      [
+        -0.22661660985609663,
+        -0.574528574623265,
+        0.7864870177432615
+      ]
+    ],
+    "translation": [
+      0.08677568345344261,
+      0.19237376759118588,
+      0.13448113927082084
+    ],
+    "inliers": 20,
+    "correspondences": 24,
+    "rmse": 0.024236994293365025,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed",
+    "heldout_count": 4,
+    "heldout_inliers": 3,
+    "heldout_rmse": 0.012554477326279392,
+    "foreground_matches_excluded": 232,
+    "metric_diagnostics": null
+  },
+  "corrected_target_crop_xyxy": [
+    208,
+    127,
+    438,
+    388
+  ],
+  "remaining_target_failure": "Projection still centers on neighboring bottle; identity and positive free-space evidence unresolved",
+  "tests": {
+    "passed": 327,
+    "failed": 0,
+    "warning": 1
+  },
+  "limitations": [
+    "Self-reprojection is necessary, not independent multi-view verification",
+    "No physical changes confirmed",
+    "No calibrated depth or registration uncertainty bound",
+    "Metric scale remains unverified"
+  ]
+}

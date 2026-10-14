@@ -121,8 +121,13 @@ def reconstruct_neural(
             "predictions_file": str(output / "predictions.npz"),
         },
     )
+    from .pixel_mapping import native_to_geometry_matrix
+
+    native_shapes = [cv2.imread(frame.path).shape[:2] for frame in frames]
     r.surfaces = {
         frame.id: {
+            "native_to_geometry": native_to_geometry_matrix(
+                native_shapes[i], result["depth"].shape[2:4], preprocessing),
             "points": result["world_points"][0, i],
             "depth": result["depth"][0, i, :, :, 0],
             "confidence": result["world_points_conf"][0, i],

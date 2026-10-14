@@ -94,3 +94,23 @@ def test_visibility_uses_same_geometry_agreement_gate(supported):
     result = visibility_evidence(obj, scene, Config(voxel_size=0.05))
     assert result["views"][0]["states"] == ["FREE" if supported else "UNKNOWN"]
     assert not result["metric"]
+
+
+def test_high_confidence_wrong_ray_is_rejected():
+    surface, mask = surface_and_mask()
+    surface['confidence'][:]=100
+    surface['points'][mask,0]+=3
+    points,audit=localized_surface_points(mask,surface,np.eye(4),.08)
+    assert len(points)==0
+    assert audit['self_reprojection_rejected_pixels']==3
+
+
+def test_reprojection_limit_is_in_native_pixels():
+    surface, mask = surface_and_mask()
+    surface['confidence'][:]=100
+    surface['points'][mask,0]+=1.5
+    assert len(localized_surface_points(mask,surface,np.eye(4),.08)[0])==3
+    surface['native_to_geometry']=np.diag([.5,.5,1])
+    points,audit=localized_surface_points(mask,surface,np.eye(4),.08)
+    assert len(points)==0
+    assert audit['self_reprojection_coordinate_grid']=='native'

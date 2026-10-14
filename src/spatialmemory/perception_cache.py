@@ -141,6 +141,7 @@ def cached_observations(
         )
         foreground.setdefault(fid, np.zeros(geometry_mask.shape, bool))
         foreground[fid] |= geometry_mask
+        reconstruction.surfaces[fid]["max_reprojection_px"] = config.triangulation_max_reprojection_px
         points, localization = localized_surface_points(
             geometry_mask,
             reconstruction.surfaces[fid],
