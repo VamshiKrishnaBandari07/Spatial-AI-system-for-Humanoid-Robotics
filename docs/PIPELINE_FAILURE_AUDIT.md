@@ -7,7 +7,7 @@ not a claim that every repository line or supported dataset has been validated.
 |---|---|---|
 | Crop recognition | Grounding DINO labels the tight container crop as table; four rotations do not fix it | Rotation recovery remains opt-in. Need broader context and validated semantic alternatives; raw maximum score is not an identity. |
 | Localization | High raw point confidence previously admitted points inconsistent with their generating pixel | Fixed: positive camera depth, finite projection, strict native-pixel error below configured limit. Applied to fresh and cached perception and visibility support. |
-| Shared registration | Sparse validation passes, but target projection remains displaced toward an adjacent bottle | Unresolved object-level correspondence. Registration RMSE alone cannot certify every object projection. |
+| Shared registration | Sparse validation passes; crop overlaps a bottle that was behind the target | Crop overlap alone does not prove a projection error: the bottle may be newly exposed background. Registration RMSE alone cannot certify every object projection. |
 | Tracking | Target lacks independent multi-view support and cross-recording identity | Unresolved. Do not merge lookalikes or treat missing matches as removal. |
 | Visibility | Zero supported free views; ray-box uncertainty bounds unavailable | Unresolved. Missing detections do not establish empty space. |
 | Reporting | All 53 replay decisions remain UNKNOWN | Report this failure, not detection accuracy. |
@@ -45,3 +45,20 @@ OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /workspace/spatialmemory-venv/bin/spatialmem
 
 Use a fresh output directory for another replay. Raw media, crops, masks, and
 model weights are not committed. Tests: 327 passed, one dependency warning.
+
+## Follow-up: distinguish exposed background from projection error
+
+Inspection of full frames shows the white pump bottle behind the pink container
+in BEFORE. Its appearance in AFTER is therefore not sufficient evidence that
+the projected crop is wrong. The earlier description of a definitely misplaced
+crop was too strong. Object-level alignment remains unverified.
+
+The measured visibility blocker is now isolated: of 64 in-frame sampled rays,
+62 fail depth support and two report FREE. Of those 64, 61 predicted point-map
+positions exceed the 2-native-pixel generating-ray consistency limit. Median
+residual is 14.5723 native pixels. Eight fail point confidence and eleven fail
+depth confidence (overlapping counts). This is an AFTER reconstruction
+consistency failure, not evidence that the object is present. See
+`reports/removal_depth_gate_audit.json`. No threshold was relaxed and no removal
+was promoted. Depth-head backprojection alone would satisfy its own generating
+ray by construction; it is not an independent validation of depth.

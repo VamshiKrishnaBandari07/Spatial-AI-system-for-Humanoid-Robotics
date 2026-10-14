@@ -84,7 +84,7 @@
     438,
     388
   ],
-  "remaining_target_failure": "Projection still centers on neighboring bottle; identity and positive free-space evidence unresolved",
+  "remaining_target_failure": "Object-level projection remains unverified; crop contains a pump bottle also visible behind target in BEFORE. Crop alone does not establish projection error. Depth consistency fails in AFTER.",
   "tests": {
     "passed": 327,
     "failed": 0,

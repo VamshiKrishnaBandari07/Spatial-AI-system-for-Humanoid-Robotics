@@ -1,0 +1,10 @@
+{
+  "object_id": "before_track_4",
+  "sampled_in_frame_rays": 64,
+  "reprojection_failures": 61,
+  "point_confidence_failures": 8,
+  "depth_confidence_failures": 11,
+  "median_native_reprojection_px": 14.572289281649649,
+  "confirmed_removal": false,
+  "note": "Diagnostic replay of saved model outputs, not new neural inference; counts overlap."
+}
