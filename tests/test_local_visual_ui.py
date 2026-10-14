@@ -83,3 +83,21 @@ def test_overlap_rejects_offscreen_singular_and_projective_poles():
     assert image_overlap(np.zeros((3, 3)), (100, 100), (100, 100)) == 0.0
     pole = np.eye(3); pole[2] = [0.02, 0, -1]
     assert image_overlap(pole, (100, 100), (100, 100)) == 0.0
+
+
+def test_manual_review_visible_when_model_unavailable(tmp_path, monkeypatch):
+    client,jid,path=setup(tmp_path,monkeypatch)
+    monkeypatch.delenv('SPATIALMEMORY_VISUAL_BACKEND',raising=False)
+    (path/'reports').mkdir()
+    review={'reviewer':'Manual reviewer','findings':[{'label':'Container',
+        'change':'REMOVED','observation':'Visible before; absent at former location after.',
+        'before_frames':['before:120'],'after_frames':['after:2040']}]}
+    (path/'reports/manual_visual_review.json').write_text(json.dumps(review))
+    data=client.get(f'/jobs/{jid}/visual-comparison').json()
+    assert data['status']=='unavailable'
+    assert not data['manual_review']['automated_prediction']
+    assert not data['manual_review']['geometry_verified']
+    assert 'result' not in data
+    review['automated_prediction']=True
+    (path/'reports/manual_visual_review.json').write_text(json.dumps(review))
+    assert client.get(f'/jobs/{jid}/visual-comparison').status_code==422

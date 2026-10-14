@@ -429,17 +429,24 @@ def visual_output(jid: str) -> Path:
 @app.get("/jobs/{jid}/visual-comparison")
 def visual_status(jid: str):
     output = visual_output(jid)
+    from .visual_review import read_review
+    try:
+        review = read_review(jobpath(jid) / "output")
+    except ValueError:
+        raise HTTPException(422, "Invalid saved visual review") from None
+    def response(payload):
+        return {**payload, "manual_review": review}
     result = output / "visual_changes.json"
     if result.is_file():
-        return {"status": "complete", "result": json.loads(result.read_text())}
+        return response({"status": "complete", "result": json.loads(result.read_text())})
     if jid in VISUAL_JOBS:
-        return VISUAL_JOBS[jid]
+        return response(VISUAL_JOBS[jid])
     if output.exists():
-        return {"status": "failed", "error": "Previous visual request failed or was interrupted; inspect server diagnostics before retrying."}
+        return response({"status": "failed", "error": "Previous visual request failed or was interrupted; inspect server diagnostics before retrying."})
     configured = os.getenv("SPATIALMEMORY_VISUAL_BACKEND") == "local"
-    return {"status": "ready" if configured else "unavailable",
+    return response({"status": "ready" if configured else "unavailable",
             "message": "Local visual comparison processes sampled frames on this server." if configured else
-            "Enable SPATIALMEMORY_VISUAL_BACKEND=local after downloading the pinned model."}
+            "Enable SPATIALMEMORY_VISUAL_BACKEND=local after downloading the pinned model."})
 
 
 @app.post("/jobs/{jid}/visual-comparison", status_code=202)

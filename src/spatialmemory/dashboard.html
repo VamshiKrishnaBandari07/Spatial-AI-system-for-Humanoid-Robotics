@@ -1228,8 +1228,8 @@
         </p>
         <div id="artifactLinks" class="export-group" hidden></div>
         <section id="visualPanel" hidden>
-          <h3>Visual comparison</h3>
-          <p>Optional image-based proposals, separate from verified 3D changes. Runs locally on the analysis server; no vision API key is required.</p>
+          <h3>Visual change findings</h3>
+          <p>Changes visible in the recordings appear here separately from 3D verification. Each finding identifies whether it comes from the model or a manual review.</p>
           <button type="button" id="visualCompare" disabled>Run visual comparison</button>
           <p id="visualStatus" role="status"></p>
           <div id="visualResults"></div>
@@ -1965,6 +1965,23 @@
           if (job !== id) return;
           $("visualStatus").textContent = data.message || data.error || `Visual comparison: ${data.status}`;
           $("visualCompare").disabled = data.status !== "ready";
+          if (data.manual_review) {
+            const heading = document.createElement("h4");
+            heading.textContent = "Manual visual review — 3D location not verified";
+            $("visualResults").append(heading);
+            for (const kind of ["REMOVED", "ADDED", "MOVED"]) {
+              const findings = data.manual_review.findings.filter(f => f.change === kind);
+              const title = document.createElement("p");
+              const label = {REMOVED: "Absent at previous location", ADDED: "Newly visible", MOVED: "Moved"}[kind];
+              title.textContent = `${label}: ${findings.length ? findings.map(f => f.label).join(", ") : "None verified in this review"}`;
+              $("visualResults").append(title);
+              for (const finding of findings) {
+                const detail = document.createElement("p");
+                detail.textContent = `${finding.observation} Before: ${finding.before_frames.join(", ")}. After: ${finding.after_frames.join(", ")}. Source: ${data.manual_review.reviewer}; not an automated prediction.`;
+                $("visualResults").append(detail);
+              }
+            }
+          }
           if (data.result) {
             $("visualStatus").textContent = "Visual model proposals — not verified 3D changes or calibrated confidence.";
             if (data.result.narrative) {
@@ -1972,7 +1989,7 @@
               narrative.textContent = data.result.narrative;
               $("visualResults").append(narrative);
             }
-            for (const change of data.result.changes) {
+            for (const change of (data.result.changes || [])) {
               const card = document.createElement("p");
               card.textContent = `${change.label}: ${change.change}. ${change.observation} Visibility: ${change.visibility_evidence} Uncertainty: ${change.uncertainty} Before: ${change.before_frames.join(", ")}; After: ${change.after_frames.join(", ")}`;
               $("visualResults").append(card);
