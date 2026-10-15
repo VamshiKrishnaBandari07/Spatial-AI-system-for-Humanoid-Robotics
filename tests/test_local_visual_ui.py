@@ -28,7 +28,8 @@ def test_local_worker_and_no_duplicate_request(tmp_path, monkeypatch):
     client, jid, _ = setup(tmp_path, monkeypatch)
     monkeypatch.setenv('SPATIALMEMORY_VISUAL_BACKEND', 'local')
     monkeypatch.delenv('OPENAI_API_KEY', raising=False)
-    def fake(run, output):
+    def fake(run, output, **kwargs):
+        assert kwargs["structured"] is True
         output.mkdir(parents=True)
         (output / 'visual_changes.json').write_text(json.dumps({'narrative': 'mock, not inference', 'changes': []}))
     class InlinePool:

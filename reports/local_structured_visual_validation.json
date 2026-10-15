@@ -1,0 +1,41 @@
+{
+  "scope": "Actual offline local neural inference on four sampled frames; no answer key supplied",
+  "runs": [
+    {
+      "model": "HuggingFaceTB/SmolVLM-500M-Instruct",
+      "revision": "a7da5b986cb59b408707209984f360a5f4ad7e47",
+      "attention_implementation": null,
+      "status": "invalid_structured_output",
+      "runtime_seconds": 130.9707427930116,
+      "changes": [],
+      "narrative": "BEFORE frame before:0:",
+      "truncated": false,
+      "physical_3d_verified": false
+    },
+    {
+      "model": "HuggingFaceTB/SmolVLM-Instruct",
+      "revision": "81cd9a775a4d644f2faf4e7becff4559b46b14c7",
+      "attention_implementation": {
+        "vision_config": "eager",
+        "text_config": "sdpa"
+      },
+      "status": "invalid_structured_output",
+      "runtime_seconds": 359.0454109170096,
+      "changes": [],
+      "narrative": "{\n    \"image_id\": \"1234567890\",\n    \"frame_id\": \"1234567890\",\n    \"frame_text\": \"BEFORE frame before:2761:\",\n    \"frame_text_answer\": \"BEFORE frame before:2761:\",\n    \"changes\": [\n        {\n            \"change\": \"ADDED\",\n            \"before_frame\": \"1234567890\",\n            \"before_text\": \"BEFORE frame before:2761:\",\n            \"after_frame\": \"1234567890\",\n            \"after_text\": \"BEFORE frame before:2761:\",\n            \"label\": \"ADDED\",\n            \"evidence\": \"BEFORE frame before:2761:\"\n        }\n    ]\n}",
+      "truncated": false,
+      "physical_3d_verified": false
+    }
+  ],
+  "accepted_change_findings": 0,
+  "known_target_removal_detected": false,
+  "tests": {
+    "passed": 331,
+    "warnings": 1
+  },
+  "other_attempts": [
+    "Larger eager-attention attempt interrupted after more than ten minutes without output",
+    "All-SDPA attempt failed because installed vision encoder does not support SDPA"
+  ],
+  "limitation": "Neither tested model produced usable structured visual findings. No detection accuracy established."
+}

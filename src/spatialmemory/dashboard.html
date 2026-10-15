@@ -1984,6 +1984,11 @@
           }
           if (data.result) {
             $("visualStatus").textContent = "Visual model proposals — not verified 3D changes or calibrated confidence.";
+            if (data.result.status === "invalid_structured_output") {
+              const warning = document.createElement("p");
+              warning.textContent = "The visual model did not return valid structured findings. No automated change was accepted. Raw model text follows for review.";
+              $("visualResults").append(warning);
+            }
             if (data.result.narrative) {
               const narrative = document.createElement("p");
               narrative.textContent = data.result.narrative;

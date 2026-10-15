@@ -468,7 +468,8 @@ def start_visual_comparison(jid: str):
     def work():
         from .local_visual import compare_local
         try:
-            compare_local(run_output, output)
+            compare_local(run_output, output, structured=True, max_new_tokens=512,
+                          model_profile=os.getenv("SPATIALMEMORY_VISUAL_MODEL_PROFILE", "500m"))
             VISUAL_JOBS[jid] = {"status": "complete"}
         except Exception:
             VISUAL_JOBS[jid] = {"status": "failed", "error": "Visual comparison failed; inspect server diagnostics. No changes are confirmed."}
