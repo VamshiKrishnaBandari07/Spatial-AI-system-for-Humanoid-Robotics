@@ -8,6 +8,8 @@ Compare two recordings of the same indoor area, reconstruct a shared 3D scene, a
 
 ![Comparison workspace — synthetic demonstration](docs/screenshots/testing-console-desktop.png)
 
+**Latest validation and submission:** [review the measured results and limitations](docs/SUBMISSION.md). Fresh phone-video inference completed in 16 min 33 sec; 53 decisions remained inconclusive, with zero confirmed changes. The dense 3D export contains 59,732 points in unverified units.
+
 **Status:** operational research prototype. Reliable cross-session object association, calibrated uncertainty and genuine smartphone change-detection accuracy remain unresolved. UNKNOWN means insufficient evidence, not an unchanged object. The screenshot shows a synthetic demonstration.
 
 Recent camera-adjustment and learned-correspondence trials preserved the

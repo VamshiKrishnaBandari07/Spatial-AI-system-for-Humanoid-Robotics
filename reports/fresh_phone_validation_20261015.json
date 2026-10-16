@@ -1,0 +1,87 @@
+{
+  "status": "pipeline completed; detection acceptance failed",
+  "runtime_seconds": 992.9046903470007,
+  "geometry_reused": false,
+  "perception_reused": false,
+  "geometry_origins": {
+    "before": "pretrained inference in current run",
+    "after": "pretrained inference in current run"
+  },
+  "decisions": {
+    "UNKNOWN": 53
+  },
+  "registration": {
+    "valid": true,
+    "scale": 1.1489911092088836,
+    "rotation": [
+      [
+        0.9736389989920426,
+        -0.11213608161587081,
+        0.19862678279026744
+      ],
+      [
+        -0.02592318998701599,
+        0.8107665608183395,
+        0.584795324946856
+      ],
+      [
+        -0.22661660985609663,
+        -0.574528574623265,
+        0.7864870177432615
+      ]
+    ],
+    "translation": [
+      0.08677568345344261,
+      0.19237376759118588,
+      0.13448113927082084
+    ],
+    "inliers": 20,
+    "correspondences": 24,
+    "rmse": 0.024236994293365025,
+    "threshold": 0.08,
+    "reason": "Validated sparse correspondence consensus; static background assumed",
+    "heldout_count": 4,
+    "heldout_inliers": 3,
+    "heldout_rmse": 0.012554477326279392,
+    "foreground_matches_excluded": 232,
+    "metric_diagnostics": null
+  },
+  "dense_points": {
+    "before": 37297,
+    "after": 22435
+  },
+  "dense_overlap": {
+    "before_to_after": {
+      "median_distance": 0.0781863591561274,
+      "p95_distance": 0.2391630193412373,
+      "fraction_within_registration_threshold": 0.5083250663592246
+    },
+    "after_to_before": {
+      "median_distance": 0.424109175977965,
+      "p95_distance": 0.6652935329259164,
+      "fraction_within_registration_threshold": 0.1750390015600624
+    }
+  },
+  "scale": "unverified reconstruction units",
+  "tests": {
+    "passed": 333,
+    "failed": 0,
+    "warning": 1
+  },
+  "viewer_browser_check": {
+    "errors": [],
+    "summary": "Computed geometry: 37,297 before points and 22,435 after points. Scale unverified. Change decisions are not shown in this geometry-only preview.",
+    "layer_toggle_tested": true
+  },
+  "hardware": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "limitations": [
+    "No confirmed added/removed/moved objects",
+    "Sparse registration validation does not validate the whole dense scene",
+    "No ground-truth benchmark accuracy reported",
+    "7B model not installed: CPU-only environment and insufficient free disk"
+  ],
+  "initial_launch_error": "A mistyped input path failed before ingestion; corrected for this completed run"
+}
