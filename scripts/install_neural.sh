@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /workspace/Spatial-AI-system-for-Humanoid-Robotics
-SPATIALMEMORY_VENV="${SPATIALMEMORY_VENV:-/workspace/spatialmemory-venv}"
-export HF_HOME=/workspace/spatialmemory-models/hf-home
-export HF_XET_CACHE=/workspace/spatialmemory-models/xet
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+if [ -z "${SPATIALMEMORY_WORKSPACE:-}" ]; then
+  if [ -d /workspace ] && [ -w /workspace ]; then SPATIALMEMORY_WORKSPACE=/workspace; else SPATIALMEMORY_WORKSPACE="$HOME/.spatialmemory"; fi
+fi
+mkdir -p "$SPATIALMEMORY_WORKSPACE"
+SPATIALMEMORY_MODELS="${SPATIALMEMORY_MODELS:-$SPATIALMEMORY_WORKSPACE/spatialmemory-models}"
+SPATIALMEMORY_THIRDPARTY="${SPATIALMEMORY_THIRDPARTY:-$SPATIALMEMORY_WORKSPACE/spatialmemory-thirdparty}"
+export SPATIALMEMORY_WORKSPACE SPATIALMEMORY_MODELS SPATIALMEMORY_THIRDPARTY
+SPATIALMEMORY_VENV="${SPATIALMEMORY_VENV:-$SPATIALMEMORY_WORKSPACE/spatialmemory-venv}"
+export HF_HOME="${HF_HOME:-$SPATIALMEMORY_MODELS/hf-home}"
+export HF_XET_CACHE="${HF_XET_CACHE:-$SPATIALMEMORY_MODELS/xet}"
 mkdir -p "$HF_HOME" "$HF_XET_CACHE"
 "$SPATIALMEMORY_VENV/bin/python" -m pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cpu
 "$SPATIALMEMORY_VENV/bin/python" -m pip install -r requirements/neural.lock.txt
-SPATIALMEMORY_VGGT_SOURCE=/workspace/spatialmemory-thirdparty/vggt
+SPATIALMEMORY_VGGT_SOURCE="$SPATIALMEMORY_THIRDPARTY/vggt"
 SPATIALMEMORY_VGGT_COMMIT=a288dd0f14786c93483e45524328726ab7b1b4ce
 if [ ! -e "$SPATIALMEMORY_VGGT_SOURCE" ]; then
   mkdir -p "$SPATIALMEMORY_VGGT_SOURCE"
@@ -17,7 +24,7 @@ if [ ! -e "$SPATIALMEMORY_VGGT_SOURCE" ]; then
   git -C "$SPATIALMEMORY_VGGT_SOURCE" checkout --detach FETCH_HEAD
 fi
 [ "$(git -C "$SPATIALMEMORY_VGGT_SOURCE" rev-parse HEAD)" = "$SPATIALMEMORY_VGGT_COMMIT" ] || { echo 'Existing VGGT source differs; preserve it and inspect before updating.' >&2; exit 1; }
-SPATIALMEMORY_SAM_SOURCE=/workspace/spatialmemory-thirdparty/sam2
+SPATIALMEMORY_SAM_SOURCE="$SPATIALMEMORY_THIRDPARTY/sam2"
 SPATIALMEMORY_SAM_COMMIT=2b90b9f5ceec907a1c18123530e92e794ad901a4
 if [ ! -e "$SPATIALMEMORY_SAM_SOURCE" ]; then
   mkdir -p "$SPATIALMEMORY_SAM_SOURCE"

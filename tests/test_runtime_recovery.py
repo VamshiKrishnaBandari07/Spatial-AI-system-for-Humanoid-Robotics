@@ -121,3 +121,25 @@ def test_evaluation_uses_ids_and_reports_unannotated_objects(tmp_path):
     data = json.loads(result.stdout)
     assert data["accuracy"] == 1.0 and data["sample_count"] == 1
     assert data["unannotated_object_predictions"] == ["local_2"]
+
+
+def test_unreadable_upload_fails_cleanly_without_leaking_server_paths(tmp_path, monkeypatch):
+    import time
+
+    monkeypatch.setattr(runtime, "ROOT", tmp_path)
+    monkeypatch.setattr(runtime, "JOBS", {})
+    client = TestClient(runtime.app)
+    response = client.post(
+        "/jobs",
+        files={"before": ("before.mp4", b"not a video"), "after": ("after.mp4", b"also not")},
+    )
+    assert response.status_code == 200
+    jid = response.json()["id"]
+    for _ in range(100):
+        state = client.get("/jobs/" + jid).json()
+        if state["status"] in ("complete", "failed"):
+            break
+        time.sleep(0.1)
+    assert state["status"] == "failed" and state["stage"] == "ingestion_before"
+    assert "Cannot read before.mp4" in state["error"]
+    assert str(tmp_path) not in state["error"] and "ffprobe" not in state["error"]

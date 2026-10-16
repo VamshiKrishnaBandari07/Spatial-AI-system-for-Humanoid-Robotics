@@ -31,14 +31,25 @@ def prepare_crop(gray: NDArray[np.uint8], mask: NDArray[np.uint8], size: int = 2
     return image[None,None],affine
 
 
+def _sha256_file(path: Path, chunk: int = 1 << 20) -> str:
+    """Stream the file so large checkpoints are not read into memory at once."""
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as handle:
+        for block in iter(lambda: handle.read(chunk), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 class LearnedCropMatcher:
     def __init__(self, checkpoint: Path) -> None:
+        checkpoint = Path(checkpoint)
+        # Verify integrity before importing or deserializing anything, so an
+        # unverified file is rejected without optional neural dependencies.
+        if _sha256_file(checkpoint) != CHECKPOINT_SHA256:
+            raise ValueError("LoFTR checkpoint checksum mismatch")
         import torch
         from kornia.feature import LoFTR
         from kornia.feature.loftr.loftr import default_cfg
-        checkpoint = Path(checkpoint)
-        if hashlib.sha256(checkpoint.read_bytes()).hexdigest() != CHECKPOINT_SHA256:
-            raise ValueError("LoFTR checkpoint checksum mismatch")
         config = deepcopy(default_cfg)
         config['coarse']['temp_bug_fix'] = True
         self.model = LoFTR(pretrained=None,config=config).eval()

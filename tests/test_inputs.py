@@ -1,3 +1,4 @@
+import sqlite3
 import json, struct, zlib
 import numpy as np, pytest, cv2
 from spatialmemory.inputs import (
@@ -170,7 +171,7 @@ def test_memory_and_identical_identity_ambiguity(tmp_path):
     memory.observe(before[0])
     memory.snapshot("before", {"objects": []})
     assert len(memory.observations()) == 1 and memory.world("before") == {"objects": []}
-    with pytest.raises(Exception):
+    with pytest.raises(sqlite3.IntegrityError):  # snapshots are immutable
         memory.snapshot("before", {})
     memory.close()
     assert scene_graph(before)["edges"][0]["relation"] == "NEAR"

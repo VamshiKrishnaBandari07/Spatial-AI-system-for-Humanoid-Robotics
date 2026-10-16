@@ -1,6 +1,6 @@
 """Read-only video ingestion; bounded selection with access to all original frames."""
 
-import hashlib, json, subprocess
+import hashlib, json, re, subprocess
 from pathlib import Path
 import cv2
 import numpy as np
@@ -15,47 +15,42 @@ def sha256(path):
     return h.hexdigest()
 
 
+def _ffprobe(path: Path, *arguments: str) -> dict:
+    """Run ffprobe and return its JSON. Failures name the file, never server paths."""
+    result = subprocess.run(
+        ["ffprobe", "-v", "error", *arguments, "-of", "json", str(path)],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        lines = (result.stderr or "").replace(str(path), path.name).strip().splitlines()
+        # Drop ffprobe's "[demuxer @ 0xADDRESS]" prefix: it is internal noise.
+        reason = re.sub(r"^\[[^\]]*\]\s*", "", lines[0]) if lines else ""
+        raise ValueError(
+            f"Cannot read {path.name} as a video file" + (f": {reason}" if reason else "")
+        )
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as error:
+        raise ValueError(f"Unreadable video metadata in {path.name}") from error
+
+
 def ingest(path: Path, output: Path, config: Config, prefix: str, timestamps=None):
     path = path.resolve()
     if not path.is_file():
         raise FileNotFoundError(path)
-    probe = subprocess.run(
-        [
-            "ffprobe",
-            "-v",
-            "error",
-            "-show_streams",
-            "-show_format",
-            "-of",
-            "json",
-            str(path),
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    metadata = json.loads(probe.stdout)
-    timing = subprocess.run(
-        [
-            "ffprobe",
-            "-v",
-            "error",
-            "-select_streams",
-            "v:0",
-            "-show_frames",
-            "-show_entries",
-            "frame=best_effort_timestamp_time",
-            "-of",
-            "json",
-            str(path),
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
+    metadata = _ffprobe(path, "-show_streams", "-show_format")
+    timing = _ffprobe(
+        path,
+        "-select_streams",
+        "v:0",
+        "-show_frames",
+        "-show_entries",
+        "frame=best_effort_timestamp_time",
     )
     original_times = [
         float(f["best_effort_timestamp_time"])
-        for f in json.loads(timing.stdout).get("frames", [])
+        for f in timing.get("frames", [])
         if "best_effort_timestamp_time" in f
     ]
     if timestamps is not None:

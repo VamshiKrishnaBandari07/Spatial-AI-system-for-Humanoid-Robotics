@@ -7,10 +7,11 @@ import time
 from pathlib import Path
 
 from .visual_comparison import prepare_request, validate_response, INSTRUCTIONS
+from .paths import models_dir
 
 MODEL_ID = "HuggingFaceTB/SmolVLM-500M-Instruct"
 MODEL_REVISION = "a7da5b986cb59b408707209984f360a5f4ad7e47"
-CACHE = "/workspace/spatialmemory-models"
+CACHE = str(models_dir())
 MODEL_PROFILES = {
     "500m": (MODEL_ID, MODEL_REVISION,
              "d05b567eeaf534e83d375551f068ed57b5f52d37c657197f644af5ef9db091a2"),
@@ -176,10 +177,23 @@ def validate_local_output(text: str, evidence: list[dict], truncated: bool) -> d
     if truncated:
         return {"status": "invalid_structured_output", "changes": [],
                 "validation_error": "Model output reached the token limit"}
+    from pydantic import ValidationError
+
     try:
         parsed = validate_response(text, evidence)
+    except ValidationError as exc:
+        details = exc.errors()
+        # Distinguish "never produced JSON" from "JSON with the wrong schema" so
+        # candidate models can be compared by *how* they fail, not just that they do.
+        category = ("not_json" if any(d["type"] == "json_invalid" for d in details)
+                    else "schema_violation")
+        return {"status": "invalid_structured_output", "changes": [],
+                "failure_category": category, "validation_error_count": len(details),
+                "validation_error_fields": sorted({str(d["loc"][0]) if d["loc"] else "" for d in details})[:10],
+                "validation_error": str(exc)}
     except ValueError as exc:
         return {"status": "invalid_structured_output", "changes": [],
+                "failure_category": "invented_frame_reference",
                 "validation_error": str(exc)}
     return {"status": "visual_proposals", **parsed.model_dump(),
             "physical_3d_verified": False, "calibrated": False}

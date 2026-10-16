@@ -40,7 +40,7 @@ def compare(before, after, registration, config, free_before=None, free_after=No
             config.min_cluster,
         ):
             center = group.mean(0).tolist()
-            observed_free = free is not None and bool(free(group))
+            observed_free = free is not None and _positive(free(group))
             change = Change(kind) if observed_free else Change.UNKNOWN
             events.append(
                 Event(
@@ -65,16 +65,49 @@ def compare(before, after, registration, config, free_before=None, free_after=No
     return events
 
 
+def _positive(flag) -> bool:
+    """Only a literal boolean True is positive evidence.
+
+    Dicts, strings, arrays or counts are truthy in Python; letting them promote
+    ADDED/REMOVED would let an audit record or a mislabeled value act as proof.
+    """
+    return isinstance(flag, (bool, np.bool_)) and bool(flag)
+
+
 def classify_object(
     before, after, identity_verified, visible_free, threshold, uncertainty
 ):
-    if before is None:
-        return Change.ADDED if visible_free else Change.UNKNOWN
-    if after is None:
-        return Change.REMOVED if visible_free else Change.UNKNOWN
-    if not identity_verified:
+    """Reference decision rule. Fails closed: invalid evidence yields UNKNOWN.
+
+    ``None`` means "no observation of the object in that recording"; a position
+    containing NaN/inf is an observation that cannot be used, which is UNKNOWN,
+    never UNCHANGED or MOVED. Absence alone never proves a change: ADDED/REMOVED
+    require positive free-space evidence (a literal True) at the other location.
+    Invalid thresholds are caller errors and raise.
+    """
+    if not (np.isfinite(threshold) and threshold > 0
+            and np.isfinite(uncertainty) and uncertainty >= 0):
+        raise ValueError(
+            "threshold must be finite and positive; uncertainty finite and nonnegative"
+        )
+    for position in (before, after):
+        if position is not None:
+            try:
+                coordinates = np.asarray(position, dtype=float)
+            except (ValueError, TypeError):
+                return Change.UNKNOWN
+            if coordinates.shape != (3,) or not np.isfinite(coordinates).all():
+                return Change.UNKNOWN
+    if before is None and after is None:
         return Change.UNKNOWN
-    displacement = np.linalg.norm(np.asarray(after) - before)
+    free = _positive(visible_free)
+    if before is None:
+        return Change.ADDED if free else Change.UNKNOWN
+    if after is None:
+        return Change.REMOVED if free else Change.UNKNOWN
+    if not _positive(identity_verified):
+        return Change.UNKNOWN
+    displacement = np.linalg.norm(np.asarray(after, float) - np.asarray(before, float))
     if abs(displacement - threshold) <= uncertainty:
         return Change.UNKNOWN
     return Change.MOVED if displacement > threshold else Change.UNCHANGED

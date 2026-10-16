@@ -1,5 +1,10 @@
 # Claude engineering handoff — 16 October 2026
 
+> **Update 16 October 2026 (hygiene pass).** Infrastructure defects were fixed and
+> the suite is now 344 tests; see `PROGRESS.md`. No row of the prioritized table
+> below was resolved: those items need the private recordings, checkpoints and/or a
+> GPU runtime. Treat the table as still fully open. For item 1, run `python -m spatialmemory.head_consistency --run <fresh run dir>` first; see `PROGRESS.md`.
+
 ## Objective and honest baseline
 
 Finish a system that automatically compares two phone recordings, produces a

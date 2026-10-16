@@ -26,8 +26,10 @@ def test_ingestion_integrity(tmp_path):
 def test_corrupt_video(tmp_path):
     path = tmp_path / "bad.mp4"
     path.write_bytes(b"not video")
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError, match=r"Cannot read bad\.mp4 as a video file") as caught:
         ingest(path, tmp_path / "frames", Config(), "before")
+    # Users see this message: it must not expose server paths or the command line.
+    assert str(tmp_path) not in str(caught.value) and "ffprobe" not in str(caught.value)
 
 
 def test_synthetic_video_pipeline(tmp_path):

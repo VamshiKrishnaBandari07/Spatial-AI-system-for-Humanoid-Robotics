@@ -13,11 +13,10 @@ from .contracts import Config
 from .inputs import Annotations
 from fastapi.responses import HTMLResponse, FileResponse, StreamingResponse
 from .pipeline import run
+from .paths import models_dir, runs_dir, thirdparty_dir
 
 app = FastAPI(title="SpatialMemory-X Ultra")
-ROOT = Path(
-    os.environ.get("SPATIALMEMORY_RUNS", "/workspace/spatialmemory-runs")
-).resolve()
+ROOT = runs_dir().resolve()
 ROOT.mkdir(parents=True, exist_ok=True)
 POOL = ThreadPoolExecutor(max_workers=1)
 LOCK = threading.Lock()
@@ -94,8 +93,8 @@ def validate_annotations(annotations: "Annotations"):
 
 def neural_capabilities():
     packages = all(find_spec(name) is not None for name in ["torch", "transformers"])
-    sources = Path("/workspace/spatialmemory-thirdparty")
-    cache = Path("/workspace/spatialmemory-models")
+    sources = thirdparty_dir()
+    cache = models_dir()
     geometry = (
         packages
         and (sources / "vggt/vggt").is_dir()

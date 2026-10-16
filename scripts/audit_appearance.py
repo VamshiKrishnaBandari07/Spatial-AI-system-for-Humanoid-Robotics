@@ -10,6 +10,7 @@ from PIL import Image
 from spatialmemory.benchmarking import sha256
 from spatialmemory.memory import Memory
 from spatialmemory.models import Expert, ModelSpec
+from spatialmemory.paths import models_dir
 
 
 def main():
@@ -24,7 +25,7 @@ def main():
             "ed25f3a31f01632728cabb09d1542f84ab7b0056",
             "appearance",
         ),
-        "/workspace/spatialmemory-models",
+        str(models_dir()),
     ).load()
     frames = {
         f["id"]: f["path"]
@@ -79,7 +80,7 @@ def main():
             }
         )
     snapshot = (
-        Path("/workspace/spatialmemory-models/models--facebook--dinov2-small/snapshots")
+        models_dir() / "models--facebook--dinov2-small" / "snapshots"
         / expert.spec.revision
     )
     weights = list(snapshot.glob("*.safetensors"))

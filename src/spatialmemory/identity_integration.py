@@ -35,11 +35,14 @@ def group_with_gallery(
     grouped: dict[str, list[Observation]] = defaultdict(list)
     for batch in sorted(batches.values(), key=lambda rows: rows[0].timestamp):
         converted = []
+        conversion_errors: dict[str, str] = {}
         for observation in batch:
             try:
                 converted.append(observation_from_object(observation))
-            except (ValueError, TypeError):
-                pass
+            except (ValueError, TypeError) as error:
+                # Fail closed, but keep the reason so the audit trail explains
+                # why this observation could not enter the identity gallery.
+                conversion_errors[observation.id] = f"{type(error).__name__}: {error}"
         assignments = gallery.update(
             converted,
             timestamp=batch[0].timestamp,
@@ -60,6 +63,10 @@ def group_with_gallery(
                     if converted[row["after"]].identifier == observation.id
                 ],
             }
+            if observation.id in conversion_errors:
+                provenance["identity_gallery"]["conversion_error"] = conversion_errors[
+                    observation.id
+                ]
             # The observation ID distinguishes unresolved same-frame lookalikes.
             key = identifier or f"{state}_unresolved_{observation.id}"
             grouped[key].append(

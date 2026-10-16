@@ -100,3 +100,53 @@ A repeated real-pair run with actual semantic expert invocation and validated VG
 ### Application verification — 11 October 2026
 
 Fresh UI uploads invoke actual neural models and complete reconstruction, registration, semantic processing, visualization and export. Per-candidate association diagnostics, exact Unknown blocking checks, result ZIP downloads and incomplete-upload cleanup are integrated. 129 tests and browser/API checks pass. The idle application backend was updated on port 8000; prior completed runs remain accessible. The real Chess identical-recording control returns 48 Unknown decisions, and independently verified identities/calibration remain unavailable. See `reports/APPLICATION_VERIFICATION.md` and `docs/PHONE_DEMO.md`; the original smartphone change-detection challenge is not complete.
+
+## 2026-10-16 — Engineering hygiene pass (no model or accuracy change)
+
+Verified in a clean sandbox (no GPU, no model weights, no private recordings): a fresh virtualenv built from `requirements/cpu.lock.txt` now passes all 344 tests with `torch` absent.
+
+Defects found and fixed:
+
+1. The documented clean-CPU install and CI failed at test collection: five modules and two tests import Pillow, which was only in the neural lock. Pillow is now pinned in `cpu.lock.txt` and the `test` extra; `kornia` (needed by the LoFTR matcher, already in `neural.lock.txt`) is now also in the `neural` extra.
+2. `LearnedCropMatcher` imported torch/kornia before verifying the checkpoint checksum, so an unverified file raised `ModuleNotFoundError` instead of the checksum error without neural extras. The hash is now streamed and checked first.
+3. Core loaders, scripts and installers hardcoded `/workspace/...`. All locations now resolve through `spatialmemory.paths` with environment overrides; defaults are unchanged. A test forbids new hardcoded paths in the package.
+4. A corrupt upload surfaced a raw `CalledProcessError` including the ffprobe command and server path. Ingestion now raises a clear `ValueError` naming only the file.
+5. `group_with_gallery` retained observations whose identity conversion failed but discarded the reason; it is now recorded as `conversion_error` in provenance.
+6. Two blind `pytest.raises(Exception)` assertions now name the expected exceptions; CI gained a lint step (undefined names, unused imports).
+
+Exercised for real with the synthetic fixture on the CPU sparse backend: upload, run, report, world, result ZIP, concurrent-job rejection (HTTP 429) and path-traversal rejection through the live FastAPI app. This is a functional check, not a measure of accuracy, and it does not verify the neural workflow or a hosted deployment.
+
+Not addressed: every P0/P1 item in `docs/CLAUDE_HANDOFF.md` needs the private phone recordings, model weights and/or a GPU, none of which were available. No detection, registration, identity or visibility behavior was changed, and no accuracy claim follows from this pass.
+
+### Follow-up (same day): investigation of the AFTER geometry failure (handoff item 1)
+
+Not resolved; the private run artifacts were unavailable. What was established without them:
+
+* `pixel_mapping.native_to_geometry_matrix` was checked against a torch-free re-implementation of the pinned upstream `load_and_preprocess_images` (commit a288dd0). It agrees to 0.025 model pixels for 10 phone/landscape/square shapes in `pad` and `crop` modes. Mutation checks (dropping the pixel-centre term, ignoring padding, flipping the crop sign) fail 19, 9 and 5 of 30 cases respectively. A native/model coordinate-mapping error is therefore unlikely to explain the failure.
+* The 2-native-pixel gate is a point-head versus camera-head self-consistency test in the same index convention upstream uses. Expressed in VGGT input pixels it is only about 0.54 px for 1080x1920 frames. The audited median of 14.57 native px corresponds to roughly 4 model px at that scale (assumes a 1080x1920 frame; the real frame size was not available). Whether that is a systematic shift, a focal disagreement or unstructured head disagreement is undetermined.
+* The threshold was not changed. Added `spatialmemory.head_consistency` to decide this from the saved run:
+  `python -m spatialmemory.head_consistency --run <run_dir> --output heads.json`
+  It reports per-view, per-role residuals with frame ids and decomposes them into shift, focal and unstructured parts. Validated only on synthetic predictions with injected errors.
+
+## 2026-10-16 — Reproduction audit against the handoff (no private artifacts available)
+
+All 14 private paths listed in `docs/CLAUDE_HANDOFF.md` were absent from the audit machine (1 CPU, ~3 GiB RAM, no GPU, Hugging Face unreachable), so nothing requiring recordings, weights or saved runs could be re-run. Reproduced from committed material only:
+
+| Handoff claim | Result |
+|---|---|
+| "333 passed" | Not reproducible on the documented clean CPU install at `fc66dc3`: pytest stops with 3 collection errors (Pillow missing). Fixed earlier; 416 tests now pass in a clean venv. The 333 figure held only in the private venv. |
+| Both local VLMs yield zero accepted proposals | Reproduced at the validation layer by replaying the raw outputs stored in `reports/local_structured_visual_validation.json` through the repo validator: 500M echoes a frame header (not JSON); ~2B returns JSON with forbidden keys and invented frame IDs (`"1234567890"`). Prompt recency was ruled out (the instruction already follows the images). Model quality, prompt wording and unconstrained decoding are not separable without weights. |
+| Removal not promoted without free-space evidence | Confirmed for the production path (`semantics.py`: needs multiple distinct views, at least 2 supported free views, and no same-label unmatched candidate in the other recording). `pipeline.py` calls `compare()` without a free-space callback, so it cannot promote. |
+| AFTER geometry inconsistent (61/64 rays, median 14.57 px) | Not reproducible without the saved run. Coordinate mapping ruled out as the cause (see above). |
+
+Defects found and fixed in the reference decision rule (`change.classify_object`, used by tests rather than the live pipeline): NaN positions returned UNCHANGED, infinite ones MOVED, a non-finite threshold UNCHANGED, any truthy non-boolean evidence (dict, string) promoted ADDED/REMOVED, and two absent observations with free-space evidence returned ADDED. It now fails closed (UNKNOWN) and rejects invalid configuration. `compare()` applies the same literal-True rule to its free-space callback. Local VLM failures now carry a `failure_category` (`not_json`, `schema_violation`, `invented_frame_reference`) so candidate models can be compared by failure mode.
+
+No detection, registration or identity behaviour changed. No accuracy claim follows.
+
+### Default storage location fixed for ordinary users (same day)
+
+Running the documented `uvicorn spatialmemory.app:app` command as a normal user crashed with `PermissionError: /workspace/spatialmemory-runs`, because the earlier path change still defaulted to `/workspace`. Defaults are now: an explicit environment variable, else `/workspace` when it exists and is writable (existing installs unchanged, including read-only preinstalled models), else `~/.spatialmemory`. `.env.example` no longer forces `/workspace`.
+
+## Uploaded ZIP integration review — 2026-10-16
+
+Integrated the submitted fixes and corrected residual scaling and invalid centroid validation. Added regression tests; 425 passed, zero failed, one deprecation warning. Shell syntax and diff whitespace checks passed. Diagnostic replay of existing real-video predictions still shows AFTER geometry inconsistency (after:2040 median 38.04 native pixels). This is not a new inference run and does not establish removal detection. See reports/claude_zip_integration_review.json.

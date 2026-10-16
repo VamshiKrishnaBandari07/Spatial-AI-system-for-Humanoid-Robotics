@@ -1,11 +1,11 @@
 """Bounded two-frame official VGGT CPU inference. Not a scene benchmark."""
 
-import os, sys, json, time, resource, argparse
+import sys, json, time, resource, argparse
 from pathlib import Path
 
-os.environ.setdefault("HF_HOME", "/workspace/spatialmemory-models/hf-home")
-os.environ.setdefault("HF_XET_CACHE", "/workspace/spatialmemory-models/xet")
-SOURCE = "/workspace/spatialmemory-thirdparty/vggt"
+from spatialmemory.paths import configure_hf_cache, models_dir, thirdparty_dir
+configure_hf_cache()
+SOURCE = str(thirdparty_dir() / "vggt")
 sys.path.insert(0, SOURCE)
 import torch, numpy as np
 from huggingface_hub import hf_hub_download, HfApi
@@ -24,7 +24,7 @@ def main():
         "facebook/VGGT-1B",
         "model.pt",
         revision=revision,
-        cache_dir="/workspace/spatialmemory-models",
+        cache_dir=str(models_dir()),
     )
     import hashlib
 

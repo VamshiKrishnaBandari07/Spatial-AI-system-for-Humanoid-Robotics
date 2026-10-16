@@ -56,7 +56,7 @@ python3 -m venv .venv
 .venv/bin/python -m pytest -q
 ```
 
-Activate the environment for subsequent commands. This prepares the baseline and regression suite; neural checkpoints are separate. In the original cloud checkout, `scripts/install_neural.sh` installs pinned CPU dependencies and verified source/checkpoints under `/workspace`. On Colab, use the notebook setup cell. Inspect these paths before using them on another machine.
+Activate the environment for subsequent commands. This prepares the baseline and regression suite; neural checkpoints are separate. `scripts/install_neural.sh` installs pinned CPU dependencies and verified source/checkpoints. By default these live under `/workspace` when it exists and is writable (the original cloud layout, and what the Colab notebook creates), otherwise under `~/.spatialmemory`; set `SPATIALMEMORY_WORKSPACE`, or individually `SPATIALMEMORY_MODELS`, `SPATIALMEMORY_THIRDPARTY` and `SPATIALMEMORY_RUNS`, to use other locations. Overrides change only where files are looked up; pinned commits and SHA-256 checks are unchanged. The shell installers have only been exercised with the default layout and should be inspected before use elsewhere.
 
 ```bash
 python -m uvicorn spatialmemory.app:app --host 127.0.0.1 --port 8000

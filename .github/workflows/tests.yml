@@ -16,5 +16,9 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install test dependencies
         run: python -m pip install -e '.[test]'
+      - name: Static checks (undefined names, unused imports)
+        run: |
+          python -m pip install ruff==0.17.1
+          ruff check src scripts tests --select F,E9
       - name: Run regression suite
         run: python -m pytest -q

@@ -1,12 +1,11 @@
 """Download pinned public research checkpoints via verified HTTPS; no remote code."""
 
-import os
 import argparse
 import hashlib
 from pathlib import Path
 
-os.environ.setdefault("HF_HOME", "/workspace/spatialmemory-models/hf-home")
-os.environ.setdefault("HF_XET_CACHE", "/workspace/spatialmemory-models/xet")
+from spatialmemory.paths import configure_hf_cache, models_dir
+configure_hf_cache()
 from huggingface_hub import snapshot_download, hf_hub_download
 from neural_smoke import SPECS
 
@@ -22,7 +21,7 @@ for identifier, revision, purpose in SPECS:
     snapshot_download(
         identifier,
         revision=revision,
-        cache_dir="/workspace/spatialmemory-models",
+        cache_dir=str(models_dir()),
         allow_patterns=["*.json", "*.safetensors", "*.txt", "*.model"],
         ignore_patterns=["pytorch_model.bin"],
     )
@@ -30,7 +29,7 @@ hf_hub_download(
     "facebook/VGGT-1B",
     "model.pt",
     revision="860abec7937da0a4c03c41d3c269c366e82abdf9",
-    cache_dir="/workspace/spatialmemory-models",
+    cache_dir=str(models_dir()),
 )
 
 if args.multiview:
@@ -43,7 +42,7 @@ if args.multiview:
     snapshot_download(
         MODEL_ID,
         revision=MODEL_REVISION,
-        cache_dir="/workspace/spatialmemory-models",
+        cache_dir=str(models_dir()),
         allow_patterns=["*.json", "*.safetensors", "*.model", "*.txt"],
     )
     checkpoint = Path(
@@ -51,7 +50,7 @@ if args.multiview:
             MODEL_ID,
             "model.safetensors",
             revision=MODEL_REVISION,
-            cache_dir="/workspace/spatialmemory-models",
+            cache_dir=str(models_dir()),
         )
     )
     expected = next(
@@ -74,5 +73,5 @@ hf_hub_download(
     "facebook/sam2.1-hiera-tiny",
     "sam2.1_hiera_tiny.pt",
     revision="de431c4043854a71d8101e17995dfe596bf101a5",
-    cache_dir="/workspace/spatialmemory-models",
+    cache_dir=str(models_dir()),
 )

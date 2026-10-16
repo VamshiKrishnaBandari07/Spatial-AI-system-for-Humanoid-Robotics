@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 from .geometry import Reconstruction, extract
 from .models import VGGTExpert
+from .paths import configure_hf_cache, models_dir, thirdparty_dir
 
 SOURCE_COMMIT = "a288dd0f14786c93483e45524328726ab7b1b4ce"
 CHECKPOINT_REVISION = "860abec7937da0a4c03c41d3c269c366e82abdf9"
@@ -144,12 +145,11 @@ def reconstruct_neural(
 
 
 def load_expert():
-    import os, subprocess, hashlib, torch
+    import subprocess, hashlib, torch
     from huggingface_hub import hf_hub_download, HfApi
 
-    os.environ.setdefault("HF_HOME", "/workspace/spatialmemory-models/hf-home")
-    os.environ.setdefault("HF_XET_CACHE", "/workspace/spatialmemory-models/xet")
-    source = Path("/workspace/spatialmemory-thirdparty/vggt")
+    configure_hf_cache()
+    source = thirdparty_dir() / "vggt"
     actual = subprocess.check_output(
         ["git", "-C", str(source), "rev-parse", "HEAD"], text=True
     ).strip()
@@ -161,7 +161,7 @@ def load_expert():
         "facebook/VGGT-1B",
         "model.pt",
         revision=CHECKPOINT_REVISION,
-        cache_dir="/workspace/spatialmemory-models",
+        cache_dir=str(models_dir()),
     )
     info = HfApi().model_info(
         "facebook/VGGT-1B", revision=CHECKPOINT_REVISION, files_metadata=True
@@ -201,7 +201,7 @@ def reusable_predictions(root, config, before_manifest, after_manifest):
         or report["inputs"][1]["sha256"] != after_manifest["sha256"]
     ):
         raise ValueError("Cached geometry belongs to different videos")
-    source = Path("/workspace/spatialmemory-thirdparty/vggt")
+    source = thirdparty_dir() / "vggt"
     if (
         subprocess.check_output(
             ["git", "-C", str(source), "rev-parse", "HEAD"], text=True

@@ -1,8 +1,8 @@
 """Pinned local SAM 2 image masks and audited optical-flow mask propagation."""
 
-from pathlib import Path
-import os, sys, subprocess, hashlib
+import sys, subprocess, hashlib
 import cv2, numpy as np
+from .paths import configure_hf_cache, models_dir, thirdparty_dir
 
 SOURCE_COMMIT = "2b90b9f5ceec907a1c18123530e92e794ad901a4"
 
@@ -12,9 +12,8 @@ class Segmenter:
         from huggingface_hub import HfApi, hf_hub_download
         import torch
 
-        os.environ.setdefault("HF_HOME", "/workspace/spatialmemory-models/hf-home")
-        os.environ.setdefault("HF_XET_CACHE", "/workspace/spatialmemory-models/xet")
-        source = Path("/workspace/spatialmemory-thirdparty/sam2")
+        configure_hf_cache()
+        source = thirdparty_dir() / "sam2"
         actual = subprocess.check_output(
             ["git", "-C", str(source), "rev-parse", "HEAD"], text=True
         ).strip()
@@ -32,7 +31,7 @@ class Segmenter:
             model,
             filename,
             revision=revision,
-            cache_dir="/workspace/spatialmemory-models",
+            cache_dir=str(models_dir()),
         )
         info = HfApi().model_info(model, revision=revision, files_metadata=True)
         expected = next(f.lfs.sha256 for f in info.siblings if f.rfilename == filename)

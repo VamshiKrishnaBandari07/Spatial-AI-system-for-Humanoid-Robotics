@@ -1,9 +1,8 @@
 """Real pretrained CPU inference on an explicitly synthetic image; no accuracy claims."""
 
-import os
 
-os.environ.setdefault("HF_HOME", "/workspace/spatialmemory-models/hf-home")
-os.environ.setdefault("HF_XET_CACHE", "/workspace/spatialmemory-models/xet")
+from spatialmemory.paths import configure_hf_cache, models_dir
+configure_hf_cache()
 from pathlib import Path
 import argparse, json, time
 import numpy as np
@@ -39,7 +38,7 @@ def main():
         try:
             expert = Expert(
                 ModelSpec(identifier, revision, purpose),
-                "/workspace/spatialmemory-models",
+                str(models_dir()),
             ).load()
             result = expert.infer(
                 image,

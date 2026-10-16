@@ -11,6 +11,7 @@ import numpy as np
 from PIL import Image
 from .pixel_mapping import native_to_geometry_matrix
 from .models import Expert, ModelSpec
+from .paths import models_dir
 
 
 def native_region(region, native_shape, geometry_shape, mode, context=1.5):
@@ -70,8 +71,8 @@ def run_recheck(run: Path, output: Path, max_objects: int | None = None, max_vie
               'deferred_by_budget':[r[1]['id'] for r in eligible if r not in selected],
               'max_views':max_views,'physical_tracks_merged':False}
     (output/'coverage.json').write_text(json.dumps(coverage,indent=2))
-    detector=Expert(ModelSpec('IDEA-Research/grounding-dino-tiny','a2bb814dd30d776dcf7e30523b00659f4f141c71','detection'),'/workspace/spatialmemory-models').load()
-    appearance=Expert(ModelSpec('facebook/dinov2-small','ed25f3a31f01632728cabb09d1542f84ab7b0056','appearance'),'/workspace/spatialmemory-models').load()
+    detector=Expert(ModelSpec('IDEA-Research/grounding-dino-tiny','a2bb814dd30d776dcf7e30523b00659f4f141c71','detection'),str(models_dir())).load()
+    appearance=Expert(ModelSpec('facebook/dinov2-small','ed25f3a31f01632728cabb09d1542f84ab7b0056','appearance'),str(models_dir())).load()
     results=[]
     def image_for(fid):
         path=Path(frames[fid]['path']).resolve()

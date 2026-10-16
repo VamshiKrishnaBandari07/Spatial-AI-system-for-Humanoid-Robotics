@@ -11,6 +11,7 @@ from .contracts import Event, Change
 from .registration import transform
 from .visibility import visibility
 from .surface_evidence import sample_surface
+from .paths import models_dir
 
 SAM_REVISION = "de431c4043854a71d8101e17995dfe596bf101a5"
 
@@ -42,7 +43,7 @@ class SemanticExperts:
                 revision,
                 "detection",
             ),
-            "/workspace/spatialmemory-models",
+            str(models_dir()),
         ).load()
         if config is not None and config.detector_temperature_file:
             from .detector_calibration import DetectorTemperature
@@ -55,14 +56,14 @@ class SemanticExperts:
                 "ed25f3a31f01632728cabb09d1542f84ab7b0056",
                 "appearance",
             ),
-            "/workspace/spatialmemory-models",
+            str(models_dir()),
         ).load()
         self.segmenter = Segmenter(SAM_REVISION)
         self.labeler = None
         if config is not None and config.semantic_label_validation_enabled:
             from .semantic_labels import SemanticLabeler
 
-            self.labeler = SemanticLabeler("/workspace/spatialmemory-models")
+            self.labeler = SemanticLabeler(str(models_dir()))
 
 
 def independent_views(observations, position, minimum_degrees):

@@ -1,0 +1,346 @@
+{
+  "preprocessing": "pad",
+  "views": [
+    {
+      "pixels_evaluated": 76146,
+      "residual_model_px": {
+        "median": 1.1362332040431482,
+        "p90": 2.0061932373674036,
+        "p99": 2.7270100818219203
+      },
+      "residual_native_px": {
+        "median": 1.8130308270727153,
+        "p90": 3.1859031368457997,
+        "p99": 4.328209410074767
+      },
+      "fraction_within_native_limit": 0.5886060988101804,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": -0.0004722024555580223,
+        "relative_focal_error_y": -0.002485068661584078,
+        "shift_x_model_px": -0.6115670210206638,
+        "shift_y_model_px": -0.7983223893219767,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.11401052629205444
+      },
+      "intrinsics": {
+        "fx": 480.66046142578125,
+        "fy": 481.29876708984375,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        -0.6802071950660638,
+        -0.5625211030137325
+      ],
+      "role": "before",
+      "frame_id": "before:120",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "unstructured head disagreement (not a shift or focal error)"
+    },
+    {
+      "pixels_evaluated": 76146,
+      "residual_model_px": {
+        "median": 1.2606238751598569,
+        "p90": 2.108627099571609,
+        "p99": 3.42000948698221
+      },
+      "residual_native_px": {
+        "median": 1.9982235925372505,
+        "p90": 3.366162168789351,
+        "p99": 5.482869948514875
+      },
+      "fraction_within_native_limit": 0.5009061539673785,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": -0.0008898606942962066,
+        "relative_focal_error_y": -0.003207308113075657,
+        "shift_x_model_px": 0.8917947634230411,
+        "shift_y_model_px": 0.2154211690773478,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.1778735284107733
+      },
+      "intrinsics": {
+        "fx": 481.8091125488281,
+        "fy": 482.30950927734375,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        0.9012803928923407,
+        0.6590630882294036
+      ],
+      "role": "before",
+      "frame_id": "before:1441",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "unstructured head disagreement (not a shift or focal error)"
+    },
+    {
+      "pixels_evaluated": 76146,
+      "residual_model_px": {
+        "median": 0.9948460851983522,
+        "p90": 2.298842434553044,
+        "p99": 3.6528304025641347
+      },
+      "residual_native_px": {
+        "median": 1.5879160882837104,
+        "p90": 3.6764403808315853,
+        "p99": 5.827312571810327
+      },
+      "fraction_within_native_limit": 0.6638825414335618,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": 0.0012637452199399499,
+        "relative_focal_error_y": -0.0008845468552310487,
+        "shift_x_model_px": -0.4767041923108393,
+        "shift_y_model_px": 0.6902447334616527,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.03046787794613881
+      },
+      "intrinsics": {
+        "fx": 478.3649597167969,
+        "fy": 478.5281677246094,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        -0.5226222730536453,
+        0.8760323658070187
+      ],
+      "role": "before",
+      "frame_id": "before:2161",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "unstructured head disagreement (not a shift or focal error)"
+    },
+    {
+      "pixels_evaluated": 76146,
+      "residual_model_px": {
+        "median": 3.079382541443789,
+        "p90": 5.126741781490127,
+        "p99": 7.491193769703417
+      },
+      "residual_native_px": {
+        "median": 4.871251375206255,
+        "p90": 8.15361908322063,
+        "p99": 11.900992805301824
+      },
+      "fraction_within_native_limit": 0.011083970267643737,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": 0.006672797209924714,
+        "relative_focal_error_y": 0.009066437941525169,
+        "shift_x_model_px": 2.6428769776655745,
+        "shift_y_model_px": -0.5220898849782365,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.5623456976040858
+      },
+      "intrinsics": {
+        "fx": 481.93438720703125,
+        "fy": 482.1002197265625,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        2.791028865876029,
+        -1.5303422477218334
+      ],
+      "role": "before",
+      "frame_id": "before:2761",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "dominated by a constant shift: check principal point / coordinate convention"
+    },
+    {
+      "pixels_evaluated": 76146,
+      "residual_model_px": {
+        "median": 0.7922683596268099,
+        "p90": 1.5811068016874397,
+        "p99": 2.762097378158227
+      },
+      "residual_native_px": {
+        "median": 1.2656210274650173,
+        "p90": 2.525409602210404,
+        "p99": 4.420786907251991
+      },
+      "fraction_within_native_limit": 0.8081974102382266,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": 0.0010799296330759956,
+        "relative_focal_error_y": 0.002401954296520579,
+        "shift_x_model_px": 0.2516234920495945,
+        "shift_y_model_px": -0.5476401054259105,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.24202501153794875
+      },
+      "intrinsics": {
+        "fx": 470.79852294921875,
+        "fy": 469.7392578125,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        0.2704156462759773,
+        -0.5785871293608622
+      ],
+      "role": "after",
+      "frame_id": "after:0",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "unstructured head disagreement (not a shift or focal error)"
+    },
+    {
+      "pixels_evaluated": 78100,
+      "residual_model_px": {
+        "median": 6.01376046785175,
+        "p90": 10.696948982300615,
+        "p99": 14.852337269903359
+      },
+      "residual_native_px": {
+        "median": 9.506242612166151,
+        "p90": 16.891191899121807,
+        "p99": 23.463079120464524
+      },
+      "fraction_within_native_limit": 0.024763124199743917,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": -0.04206877043159136,
+        "relative_focal_error_y": 0.004532249634827655,
+        "shift_x_model_px": -8.200007294465848,
+        "shift_y_model_px": 0.8289655946540948,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.5905300177976593
+      },
+      "intrinsics": {
+        "fx": 451.63323974609375,
+        "fy": 453.953369140625,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        -5.964060589427679,
+        0.7365882680862237
+      ],
+      "role": "after",
+      "frame_id": "after:1020",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "dominated by radial scale: check focal length agreement between heads"
+    },
+    {
+      "pixels_evaluated": 152292,
+      "residual_model_px": {
+        "median": 23.730839950285404,
+        "p90": 55.01910336198426,
+        "p99": 64.04428730897182
+      },
+      "residual_native_px": {
+        "median": 38.042454146681436,
+        "p90": 88.310694588793,
+        "p99": 102.58246420463823
+      },
+      "fraction_within_native_limit": 0.0,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": -0.055723940683258893,
+        "relative_focal_error_y": -0.10643716107346402,
+        "shift_x_model_px": 3.12166144074175,
+        "shift_y_model_px": -26.257964154994575,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.7726704599500437
+      },
+      "intrinsics": {
+        "fx": 458.4703674316406,
+        "fy": 456.10528564453125,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        3.657458041722657,
+        -26.649238900982752
+      ],
+      "role": "after",
+      "frame_id": "after:2040",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "dominated by radial scale: check focal length agreement between heads"
+    },
+    {
+      "pixels_evaluated": 76146,
+      "residual_model_px": {
+        "median": 2.3359488991519113,
+        "p90": 5.146244936238656,
+        "p99": 7.4678700575017665
+      },
+      "residual_native_px": {
+        "median": 3.7225112084044434,
+        "p90": 8.256522549684195,
+        "p99": 11.994306375034338
+      },
+      "fraction_within_native_limit": 0.20353006067291782,
+      "native_limit_px": 2.0,
+      "native_limit_in_model_px": 1.2451923076923082,
+      "model_limit_definition": "conservative inscribed radius; classification uses full native residual",
+      "fit": {
+        "relative_focal_error_x": -0.0017544167821836193,
+        "relative_focal_error_y": -0.004081577995849391,
+        "shift_x_model_px": 0.7754603950246035,
+        "shift_y_model_px": 1.7725049326336253,
+        "fraction_of_variance_explained_by_shift_and_focal": 0.09233259117734849
+      },
+      "intrinsics": {
+        "fx": 457.6452331542969,
+        "fy": 458.4472351074219,
+        "cx": 259.0,
+        "cy": 259.0
+      },
+      "mean_residual_vector_model_px": [
+        0.7144431286355619,
+        2.2523227938588737
+      ],
+      "role": "after",
+      "frame_id": "after:2640",
+      "native_shape": [
+        832,
+        464
+      ],
+      "reading": "unstructured head disagreement (not a shift or focal error)"
+    }
+  ],
+  "validation_scope": "Diagnostic replay on existing fresh-run predictions; no new neural inference or change-detection success claimed.",
+  "tests": {
+    "passed": 425,
+    "failed": 0,
+    "warnings": 1,
+    "runtime_seconds": 25.84
+  },
+  "integration_notes": [
+    "Integrated uploaded source fixes without deleting existing repository files.",
+    "Corrected anisotropic native reprojection residuals using full inverse affine linear transform.",
+    "Reject malformed position shapes before change classification.",
+    "Aligned neural installer fallback root with CPU installer."
+  ]
+}
