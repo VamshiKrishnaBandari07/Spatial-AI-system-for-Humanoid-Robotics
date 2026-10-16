@@ -2,6 +2,8 @@
 
 [References and related work](docs/REFERENCES_AND_RELATED_WORK.md)
 
+[Engineering handoff and prioritized unfinished work](docs/CLAUDE_HANDOFF.md)
+
 Compare two recordings of the same indoor area, reconstruct a shared 3D scene, and inspect model-proposed changes with supporting frames and uncertainty.
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/VamshiKrishnaBandari07/Spatial-AI-system-for-Humanoid-Robotics/blob/main/notebooks/SpatialMemory_Colab.ipynb)
