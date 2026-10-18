@@ -1,0 +1,43 @@
+{
+  "scope": "actual LoFTR inference on saved native frames; pairwise proposals only, no geometry or change verification",
+  "runtime_seconds": 5.403109791001043,
+  "pairs": [
+    {
+      "frames": [
+        1020,
+        2040
+      ],
+      "accepted_learned_matches": 0,
+      "score_threshold": 0.8,
+      "calibrated": false
+    },
+    {
+      "frames": [
+        1020,
+        1440
+      ],
+      "accepted_learned_matches": 0,
+      "score_threshold": 0.8,
+      "calibrated": false
+    },
+    {
+      "frames": [
+        1440,
+        2040
+      ],
+      "accepted_learned_matches": 0,
+      "score_threshold": 0.8,
+      "calibrated": false
+    },
+    {
+      "frames": [
+        2040,
+        2640
+      ],
+      "accepted_learned_matches": 0,
+      "score_threshold": 0.8,
+      "calibrated": false
+    }
+  ],
+  "input_long_edge_pixels": 256
+}
