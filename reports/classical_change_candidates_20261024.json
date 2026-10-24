@@ -1,0 +1,20 @@
+{
+  "scope": "classical visual candidates; no neural inference or 3D change verification",
+  "frames_per_role": 24,
+  "anchor_groups": 6,
+  "aligned_pairs": 7,
+  "candidate_regions_including_duplicates": 42,
+  "tests_passed": 441,
+  "test_warnings": 1,
+  "example": {
+    "before_frame": "before:241",
+    "after_frame": "after:2640",
+    "bbox_xyxy": [
+      243,
+      260,
+      370,
+      398
+    ],
+    "human_review": "Exported candidate crop covers pink container before and background bottle afterward; label is human observation, not algorithm output."
+  }
+}
