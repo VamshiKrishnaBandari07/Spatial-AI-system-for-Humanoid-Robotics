@@ -147,6 +147,7 @@ async def submit(
     semantics_enabled: bool = Form(False),
     temporal_tracking_enabled: Annotated[bool, Form()] = False,
     multiview_object_analysis: Annotated[bool, Form()] = False,
+    comparison_mode: Annotated[Literal["spatial", "classical"], Form()] = "spatial",
 ):
     capabilities = neural_capabilities()
     if temporal_tracking_enabled and not semantics_enabled:
@@ -203,18 +204,29 @@ async def submit(
     def execute():
         JOBS[jid] = {"status": "running", "stage": "starting"}
         try:
-            run(
-                folder / "before.mp4",
-                folder / "after.mp4",
-                folder / "output",
-                config=upload_config(
-                    geometry_backend,
-                    semantics_enabled,
-                    temporal_tracking_enabled,
-                    multiview_object_analysis,
-                ),
-                progress=lambda s: JOBS[jid].update(stage=s),
-            )
+            if comparison_mode == "classical":
+                from .ingestion import ingest
+                from .classical_changes import run as compare_frames
+                for role in ("before", "after"):
+                    JOBS[jid].update(stage=f"Reading {role} video")
+                    ingest(folder / f"{role}.mp4", folder / "frames" / role, Config(), role)
+                JOBS[jid].update(stage="Aligning viewpoints and extracting visual candidates")
+                compare_frames(folder / "frames", folder / "classical", max_frames=24)
+                import shutil
+                shutil.make_archive(str(folder / "classical-evidence"), "zip", folder / "classical")
+            else:
+                run(
+                    folder / "before.mp4",
+                    folder / "after.mp4",
+                    folder / "output",
+                    config=upload_config(
+                        geometry_backend,
+                        semantics_enabled,
+                        temporal_tracking_enabled,
+                        multiview_object_analysis,
+                    ),
+                    progress=lambda s: JOBS[jid].update(stage=s),
+                )
             JOBS[jid].update(status="complete")
         except Exception as e:
             JOBS[jid].update(status="failed", error=str(e))
@@ -249,6 +261,8 @@ def status(jid: str):
     folder = jobpath(jid)
     if jid in JOBS:
         return JOBS[jid]
+    if (folder / "classical/report.json").exists():
+        return {"status": "complete", "stage": "Visual comparison ready"}
     if (folder / "output/report.json").exists():
         return {"status": "complete", "stage": "restored run"}
     saved = folder / "job.json"
@@ -478,3 +492,25 @@ def start_visual_comparison(jid: str):
         VISUAL_JOBS[jid] = {"status": "failed", "error": "Visual worker could not start"}
         raise HTTPException(503, "Visual worker could not start") from None
     return {"status": "running"}
+
+
+@app.get("/classical", response_class=HTMLResponse)
+def classical_page():
+    return (Path(__file__).parent / "classical.html").read_text()
+
+
+@app.get("/jobs/{jid}/classical/{asset:path}")
+def classical_asset(jid: str, asset: str):
+    root = (jobpath(jid) / "classical").resolve()
+    path = (root / asset).resolve()
+    if not path.is_relative_to(root) or not path.is_file() or path.suffix not in {".html", ".json", ".jpg", ".png"}:
+        raise HTTPException(404, "Unknown comparison artifact")
+    return FileResponse(path)
+
+
+@app.get("/jobs/{jid}/classical-download")
+def classical_download(jid: str):
+    path = jobpath(jid) / "classical-evidence.zip"
+    if not path.is_file():
+        raise HTTPException(404, "Comparison archive not ready")
+    return FileResponse(path, filename="visual-change-evidence.zip", media_type="application/zip")

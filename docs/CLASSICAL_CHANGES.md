@@ -39,3 +39,23 @@ Shadows, mirrors, parallax, and alignment differences also generate candidates.
 There is no measured precision/recall or guarantee that every change is captured.
 The current HTML is a standalone evidence gallery, not integration into the main
 upload UI. Private images are kept outside Git.
+
+## Upload UI
+
+Start the existing app locally:
+
+```bash
+python -m uvicorn spatialmemory.app:app --host 127.0.0.1 --port 8000
+```
+
+Open `/classical` on that server, or choose **Compare visual changes without neural
+models** from the main dashboard. Upload before and after videos. Processing uses
+existing timestamp-preserving ingestion, then classical matching only. It needs
+OpenCV and FFmpeg, not model weights. The page reconnects to its last job on reload.
+Results include original and aligned images, masks, candidate crops, and a ZIP.
+
+Validation on the supplied real videos completed in 7.06 seconds via the upload
+API and reproduced six groups/seven pairs/42 candidate regions. Artifact access
+and traversal rejection passed. The full suite passed 442 tests with one warning.
+This supersedes the earlier standalone-only UI limitation. Public hosting is not
+configured by this change; GitHub itself does not run the inference server.

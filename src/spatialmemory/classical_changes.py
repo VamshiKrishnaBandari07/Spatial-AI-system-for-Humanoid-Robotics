@@ -119,6 +119,9 @@ def run(root:Path,output:Path,max_frames:int=32):
     for g in groups:
         for p in g['pairs']:
             cards.append(f'<h3>{g["before_id"]} → {p["after_id"]}: {len(p["regions"])} candidate regions</h3><img width="900" src="{p["folder"]}/comparison.jpg">')
+            cards.append(f'<p>Held-out alignment median: {p["alignment"]["heldout_median_px"]:.2f} pixels. <a href="{p["folder"]}/mask.png">Difference mask</a> · <a href="{p["folder"]}/after_native.jpg">Original after frame</a></p>')
+            for k,region in enumerate(p['regions']):
+                cards.append(f'<a href="{p["folder"]}/candidate_{k:03}.jpg"><img alt="Candidate {k}, before left and aligned after right" width="240" src="{p["folder"]}/candidate_{k:03}.jpg"></a>')
     (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Visual change candidates</title><h1>Model-free visual change candidates</h1><p>'+report['limitations']+'</p>'+''.join(cards))
     print(json.dumps({'groups':len(groups),'pairs':sum(len(g['pairs']) for g in groups),'regions':sum(len(p['regions']) for g in groups for p in g['pairs']),'output':str(output)}))
 

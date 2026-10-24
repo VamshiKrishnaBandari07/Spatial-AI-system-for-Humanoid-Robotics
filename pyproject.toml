@@ -23,4 +23,4 @@ where = ["src"]
 testpaths = ["tests"]
 
 [tool.setuptools.package-data]
-spatialmemory = ["dashboard.html", "annotation.html"]
+spatialmemory = ["dashboard.html", "annotation.html", "classical.html"]

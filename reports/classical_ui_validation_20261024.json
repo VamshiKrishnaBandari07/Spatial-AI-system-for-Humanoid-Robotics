@@ -1,0 +1,18 @@
+{
+  "job": "fb4bbbbe5b114044961f32ce5617745a",
+  "status": {
+    "status": "complete",
+    "stage": "Aligning viewpoints and extracting visual candidates"
+  },
+  "runtime_seconds": 7.056331193000005,
+  "groups": 6,
+  "image_route_passed": true,
+  "traversal_rejected": true,
+  "tests_passed": 442,
+  "browser": {
+    "all_gallery_images_loaded": true,
+    "javascript_errors": 0,
+    "zip_download_status": 200
+  },
+  "scope": "actual video upload API plus Chromium resume/gallery/download; not semantic or 3D change validation"
+}
