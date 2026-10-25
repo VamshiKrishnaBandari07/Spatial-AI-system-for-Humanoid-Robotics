@@ -121,7 +121,11 @@ def build_dense_clouds(run: Path, stride: int = 2) -> tuple[dict, dict, list, di
 
 
 def write_dense_world(run: Path, stride: int = 3) -> dict:
-    """Write world_dense.npz beside world.npz for the interactive room viewer."""
+    """Write world_dense.npz beside world.npz for the interactive room viewer.
+
+    Requires ``run/report.json`` already written with ``status: complete``.
+    Call this only after the pipeline atomically publishes the report.
+    """
     clouds, colors, audits, report = build_dense_clouds(run, stride=stride)
     path = run / "world_dense.npz"
     np.savez_compressed(

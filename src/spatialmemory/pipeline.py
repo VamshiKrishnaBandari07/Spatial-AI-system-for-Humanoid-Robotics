@@ -369,16 +369,6 @@ def run(
             before_colors=b.colors,
             after_colors=a.colors,
         )
-        # Dense colored room for the dashboard (visualization only; not for decisions).
-        if config.geometry_backend == "vggt":
-            try:
-                stage("dense_room_visualization")
-                from .dense_export import write_dense_world
-
-                write_dense_world(output, stride=3)
-            except Exception:
-                # Sparse world.npz remains available; dense preview is best-effort.
-                LOGGER.exception("Dense room visualization export failed")
         cameras = []
         for state, r in [("before", b), ("after", a)]:
             for fid, pose in r.poses.items():
@@ -494,6 +484,16 @@ def run(
         temporary_report = output / "report.json.tmp"
         temporary_report.write_text(json.dumps(report, indent=2))
         temporary_report.replace(output / "report.json")
+        # Dense room export reads report.json (status=complete); must run after it exists.
+        if config.geometry_backend == "vggt":
+            try:
+                stage("dense_room_visualization")
+                from .dense_export import write_dense_world
+
+                write_dense_world(output, stride=3)
+            except Exception:
+                # Sparse world.npz remains available; dense preview is best-effort.
+                LOGGER.exception("Dense room visualization export failed")
         return report
     except Exception as e:
         (output / "failure.json").write_text(

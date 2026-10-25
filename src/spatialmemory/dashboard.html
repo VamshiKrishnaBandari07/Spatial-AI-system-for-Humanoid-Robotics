@@ -1711,7 +1711,8 @@
           );
         room
           .map((entry) => ({ ...entry, depth: projected(entry.p)[2] }))
-          .sort((a, b) => a.depth - b.depth)
+          // Painter's algorithm: far first so nearer points stay visible on top.
+          .sort((a, b) => b.depth - a.depth)
           .forEach((entry) => {
             const size = Math.max(
               1.6,
@@ -2001,7 +2002,11 @@
         panel.hidden = true;
         panel.replaceChildren();
         try {
-          const data = await get(`/jobs/${id}/visual-candidates`);
+          const response = await fetch(`/jobs/${id}/visual-candidates`);
+          // Missing classical gallery is normal until that step finishes — stay quiet.
+          if (response.status === 404) return;
+          if (!response.ok) throw Error(await responseError(response));
+          const data = await response.json();
           if (job !== id) return;
           if (!data.total_candidates) {
             panel.hidden = false;
@@ -2088,7 +2093,7 @@
           link.textContent = "Open full visual gallery";
           panel.append(link);
         } catch (error) {
-          if (job === id && error.message && !/404/.test(error.message)) {
+          if (job === id) {
             panel.hidden = false;
             panel.textContent =
               "Visual candidates unavailable: " + error.message;

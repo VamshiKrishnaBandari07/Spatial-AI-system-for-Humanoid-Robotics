@@ -1,8 +1,8 @@
 """Dashboard visual-candidate and dense-world helpers."""
 
-from pathlib import Path
 import json
 import numpy as np
+import pytest
 from fastapi.testclient import TestClient
 
 
@@ -74,3 +74,19 @@ def test_visual_candidates_lists_regions(tmp_path, monkeypatch):
     assert data["total_candidates"] == 1
     assert data["candidates"][0]["crop"].endswith("candidate_000.jpg")
     assert data["physical_change_verified"] is False
+
+
+def test_visual_candidates_404_when_missing(tmp_path, monkeypatch):
+    from spatialmemory import app as app_module
+
+    monkeypatch.setattr(app_module, "ROOT", tmp_path)
+    client = TestClient(app_module.app)
+    response = client.get(f"/jobs/{'c' * 32}/visual-candidates")
+    assert response.status_code == 404
+
+
+def test_write_dense_world_requires_report_json(tmp_path):
+    from spatialmemory.dense_export import write_dense_world
+
+    with pytest.raises(FileNotFoundError):
+        write_dense_world(tmp_path)
