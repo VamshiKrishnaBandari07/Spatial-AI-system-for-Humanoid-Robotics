@@ -103,3 +103,15 @@ python -m uvicorn spatialmemory.app:app --host 127.0.0.1 --port 8000
 2. Reproduce Phase 3 LoFTR diagnostics with measured score histograms.
 3. Drive Phase 5–11 on real evidence without relaxing gates; record
    `/cursor/stores/self/media/upload-to-results-demo.mp4` after a real UI session.
+
+## Demo readiness (local)
+
+Verified end-to-end on job `ca1d5ee682874564ab27c6a18c73ce17` (synthetic room fixture, not phone data):
+
+- Interactive 3D: **6,095** points, orbit/zoom working via `/?job=<id>`
+- Videos: H.264 before/after play in the dashboard
+- Identification: Grounding DINO found objects; consensus produced **2 UNKNOWN (monitor)** decisions (fail-closed / unobservable)
+- Artifacts: `/opt/cursor/artifacts/demo_3d_videos_identification.mp4` and `demo_full_*.webp`
+
+Still required for real acceptance: private smartphone before/after videos.
+
