@@ -20,6 +20,8 @@ from .learned_matching import CHECKPOINT_SHA256, MODEL_REVISION, prepare_crop
 
 
 PRODUCTION_SCORE_THRESHOLD = 0.8
+# Same cap as LearnedCropMatcher.match (top scores after filters).
+PRODUCTION_MATCH_RETURN_CAP = 100
 
 
 def score_histogram(scores: NDArray[np.floating], edges: list[float] | None = None) -> dict[str, int]:
@@ -59,9 +61,11 @@ def filter_stages(
         "accepted": 0,
     }
     if not len(scores):
+        stages["accepted_returned"] = 0
         return {
             "score_threshold": score_threshold,
             "score_threshold_is_calibrated_probability": False,
+            "return_cap": PRODUCTION_MATCH_RETURN_CAP,
             "stages": stages,
             "score_histogram": score_histogram(scores),
             "accepted_native_a": [],
@@ -93,12 +97,15 @@ def filter_stages(
     in_b = in_a & inside(pb, mask_b)
     stages["inside_mask_a"] = int(in_a.sum())
     stages["inside_mask_b"] = int(in_b.sum())
+    # Uncapped count of filter survivors (before production return cap).
     stages["accepted"] = int(in_b.sum())
     ids = np.where(in_b)[0]
-    ids = ids[np.argsort(scores[ids])[::-1]][:100]
+    ids = ids[np.argsort(scores[ids])[::-1]][:PRODUCTION_MATCH_RETURN_CAP]
+    stages["accepted_returned"] = int(len(ids))
     return {
         "score_threshold": score_threshold,
         "score_threshold_is_calibrated_probability": False,
+        "return_cap": PRODUCTION_MATCH_RETURN_CAP,
         "stages": stages,
         "score_histogram": score_histogram(scores),
         "accepted_native_a": pa[ids].tolist(),
@@ -184,9 +191,10 @@ def diagnose_pair(
     # Production path still uses LearnedCropMatcher.match; record its accepted count.
     accepted_a, accepted_b = matcher.match(gray_a, mask_a, gray_b, mask_b)
     report["production_match_accepted"] = int(len(accepted_a))
+    # Compare against the capped return count (production truncates to top 100).
     report["production_match_agrees_with_filter_replay"] = len(accepted_a) == report[
         "filter_replay"
-    ]["stages"]["accepted"]
+    ]["stages"]["accepted_returned"]
     return report
 
 
@@ -198,10 +206,40 @@ DEFAULT_AFTER_PAIRS = (
 )
 
 
+def _frame_id_matches(row: dict, frame_id: int) -> bool:
+    identifier = str(row.get("id", ""))
+    return (
+        identifier in {f"after:{frame_id}", str(frame_id)}
+        or identifier.endswith(f":{frame_id}")
+        or row.get("index") == frame_id
+    )
+
+
+def _resolve_under_after(after: Path, raw: Path) -> Path | None:
+    """Resolve a manifest path under the run's after/ directory (not cwd)."""
+    after = after.resolve()
+    options = []
+    if raw.is_absolute():
+        options.append(raw)
+    else:
+        options.append((after / raw).resolve())
+        options.append((after / raw.name).resolve())
+    for path in options:
+        try:
+            resolved = path.resolve()
+        except OSError:
+            continue
+        if resolved.is_file() and resolved.is_relative_to(after):
+            return resolved
+    return None
+
+
 def resolve_after_frame(run_dir: Path, frame_id: int) -> Path:
-    """Locate after:<id> under a completed run's after frames."""
-    after = run_dir / "after"
+    """Locate an AFTER frame under a completed run (ingestion or neural naming)."""
+    after = (Path(run_dir) / "after").resolve()
+    # Ingestion writes ``{prefix}_{index:06d}.jpg`` with prefix "after".
     candidates = [
+        after / f"after_{frame_id:06d}.jpg",
         after / f"after:{frame_id}.jpg",
         after / f"{frame_id}.jpg",
         after / f"frame_{frame_id:06d}.jpg",
@@ -209,17 +247,15 @@ def resolve_after_frame(run_dir: Path, frame_id: int) -> Path:
     for path in candidates:
         if path.is_file():
             return path
-    # Fall back to manifest lookup by id / timestamp index.
     manifest = after / "manifest.json"
     if manifest.is_file():
         frames = json.loads(manifest.read_text())["frames"]
         for row in frames:
-            if row.get("id") in {f"after:{frame_id}", str(frame_id)} or row.get(
-                "index"
-            ) == frame_id:
-                path = Path(row["path"])
-                if path.is_file():
-                    return path
+            if not _frame_id_matches(row, frame_id):
+                continue
+            found = _resolve_under_after(after, Path(row["path"]))
+            if found is not None:
+                return found
     raise FileNotFoundError(
         f"AFTER frame {frame_id} not found under {after} "
         f"(tried {[c.name for c in candidates]})"
