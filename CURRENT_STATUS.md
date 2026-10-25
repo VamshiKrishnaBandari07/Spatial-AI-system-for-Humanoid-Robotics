@@ -46,7 +46,10 @@ dated evidence, not automatically “current truth.”
 - LoFTR diagnostic module `spatialmemory.matching_diagnostics` (gates unchanged at 0.8).
 - App: client error redaction + bounded in-memory job map prune.
 - Docs: `docs/ARBITRARY_VIDEO.md` for anytime upload/CLI testing.
-- Regression: **450 passed**, 1 Starlette/httpx warning (CPU `.venv`).
+- Regression: **454 passed**, 1 Starlette/httpx warning (CPU `.venv`) after Bugbot fixes.
+- Bugbot on head `160b22a`: **pass** (ingest lookup + match-cap agreement fixed).
+- Smokes (synthetic, not acceptance): sparse pipeline OK; VGGT 2-frame OK (~52 s);
+  classical OK; live LoFTR diagnose OK (`accepted_returned` agrees with production).
 
 ## Exact missing private videos (blocker for Phase 3 / 11)
 
