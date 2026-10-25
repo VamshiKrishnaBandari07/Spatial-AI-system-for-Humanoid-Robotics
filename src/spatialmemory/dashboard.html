@@ -1865,8 +1865,9 @@
         if (!filtered.length) {
           const p = document.createElement("p");
           p.className = "empty";
-          p.textContent =
-            "No results match this filter. Review scene coverage before concluding that nothing changed.";
+          p.textContent = report.events.length
+            ? "No results match this filter. Review scene coverage before concluding that nothing changed."
+            : "3D scene is loaded, but no object change decisions were produced. Orbit the point cloud above; Unknown/added/removed appear here when object analysis finds candidates.";
           $("events").append(p);
         }
         for (let event of filtered) {
@@ -2087,8 +2088,15 @@
           showMemory();
           draw();
           rememberLast(job);
+          const pointTotal =
+            (report.geometry?.before?.points || 0) +
+            (report.geometry?.after?.points || 0);
           $("status").textContent =
-            "Loaded your comparison · select a result to review.";
+            "Loaded 3D scene (" +
+            pointTotal.toLocaleString() +
+            " points) · videos attached · " +
+            report.events.length +
+            " decisions · orbit the canvas to inspect.";
           $("sceneEmpty").hidden = true;
           $("sceneEmpty").style.display = "none";
           workflow(2);
@@ -2296,15 +2304,19 @@
         });
       const last = lastRun();
       const startupGeneration = loadGeneration;
-      if (last && /^[a-f0-9]{32}$/.test(last))
-        get("/jobs/" + last)
+      // Deep-link: /?job=<32-hex> opens a completed comparison (3D + videos).
+      const linkedJob = new URLSearchParams(location.search).get("job");
+      const startupJob =
+        linkedJob && /^[a-f0-9]{32}$/.test(linkedJob) ? linkedJob : last;
+      if (startupJob && /^[a-f0-9]{32}$/.test(startupJob))
+        get("/jobs/" + startupJob)
           .then((s) => {
             if (
               s.status === "complete" &&
               startupGeneration === loadGeneration &&
               !busy
             )
-              return loadRun(last);
+              return loadRun(startupJob);
           })
           .catch((error) => {
             if (!busy && !report)
