@@ -61,7 +61,7 @@ def upload_config(
         geometry_backend=geometry_backend,
         semantics_enabled=semantics_enabled,
         temporal_tracking_enabled=temporal_tracking_enabled,
-        neural_frames_per_video=4,
+        neural_frames_per_video=6,
         neural_frame_selection="quality_diverse",
         registration_min_heldout=4,
         semantic_max_frames=6,
@@ -258,6 +258,29 @@ async def submit(
                     ),
                     progress=lambda s: JOBS[jid].update(stage=s),
                 )
+                # Visual change gallery for the same upload (aligned 2D candidates).
+                try:
+                    from .classical_changes import run as compare_frames
+
+                    JOBS[jid].update(
+                        stage="Extracting visual change candidates from aligned views"
+                    )
+                    if (folder / "classical").exists():
+                        import shutil
+
+                        shutil.rmtree(folder / "classical")
+                    compare_frames(
+                        folder / "output", folder / "classical", max_frames=12
+                    )
+                    import shutil
+
+                    shutil.make_archive(
+                        str(folder / "classical-evidence"), "zip", folder / "classical"
+                    )
+                except Exception:
+                    LOGGER.exception(
+                        "Classical visual candidates failed; 3D results still available"
+                    )
             JOBS[jid].update(status="complete")
         except Exception as e:
             JOBS[jid].update(status="failed", error=client_error(e))
@@ -326,14 +349,61 @@ def report(jid: str):
 
 @app.get("/jobs/{jid}/world")
 def world(jid: str):
-    path = jobpath(jid) / "output/world.npz"
+    folder = jobpath(jid) / "output"
+    # Prefer dense colored room cloud for the interactive viewer when available.
+    path = folder / "world_dense.npz"
+    if not path.exists():
+        path = folder / "world.npz"
     if not path.exists():
         raise HTTPException(409, "World not ready")
+    # Cap transferred points so the browser stays responsive on large rooms.
+    max_points = 40000
     with np.load(path) as data:
         return {
-            k: data[k][:: max(1, (len(data[k]) + 14999) // 15000)].tolist()
+            k: data[k][:: max(1, (len(data[k]) + max_points - 1) // max_points)].tolist()
             for k in data.files
         }
+
+
+@app.get("/jobs/{jid}/visual-candidates")
+def visual_candidates(jid: str):
+    """Classical visual change candidates for the main dashboard (not verified 3D changes)."""
+    report_path = jobpath(jid) / "classical/report.json"
+    if not report_path.is_file():
+        raise HTTPException(404, "Visual candidates not ready")
+    report = json.loads(report_path.read_text())
+    candidates = []
+    for group in report.get("groups", []):
+        for pair in group.get("pairs", []):
+            folder = pair.get("folder")
+            for index, region in enumerate(pair.get("regions") or []):
+                candidates.append(
+                    {
+                        "id": f"{folder}:{index}",
+                        "folder": folder,
+                        "change": "VISUAL_CANDIDATE",
+                        "classification": region.get(
+                            "classification", "VISUAL_CHANGE_CANDIDATE"
+                        ),
+                        "bbox_xyxy": region.get("bbox_xyxy"),
+                        "area_pixels": region.get("area_pixels"),
+                        "before_timestamp": group.get("before_timestamp"),
+                        "after_id": pair.get("after_id"),
+                        "overlay": f"/jobs/{jid}/classical/{folder}/comparison.jpg",
+                        "crop": f"/jobs/{jid}/classical/{folder}/candidate_{index:03d}.jpg",
+                        "before": f"/jobs/{jid}/classical/{folder}/before.jpg",
+                        "after_aligned": f"/jobs/{jid}/classical/{folder}/after_aligned.jpg",
+                        "physical_change_verified": False,
+                        "note": "Visual difference after image alignment — not a verified 3D object add/remove/move",
+                    }
+                )
+    return {
+        "summary": report.get("summary", {}),
+        "limitations": report.get("limitations"),
+        "physical_change_verified": report.get("physical_change_verified", False),
+        "candidates": candidates[:48],
+        "total_candidates": len(candidates),
+    }
 
 
 @app.get("/jobs/{jid}/frames/{state}/{filename}")

@@ -1163,6 +1163,7 @@
           <div id="events" class="empty">
             Analyze your recordings to see results.
           </div>
+          <div id="visualCandidates" class="empty" hidden></div>
         </section>
       </div>
       <div class="grid">
@@ -1637,7 +1638,8 @@
         let [x, y, z] = p.map((v, i) => (v - center[i]) / radius),
           X = x * Math.cos(yaw) + z * Math.sin(yaw),
           Z = -x * Math.sin(yaw) + z * Math.cos(yaw),
-          Y = y * Math.cos(pitch) - Z * Math.sin(pitch);
+          Y = y * Math.cos(pitch) - Z * Math.sin(pitch),
+          depth = Z * Math.cos(pitch) + y * Math.sin(pitch);
         return [
           canvas.width / 2 +
             pan[0] +
@@ -1645,12 +1647,20 @@
           canvas.height / 2 +
             pan[1] +
             Y * Math.min(canvas.width, canvas.height) * 0.42 * zoom,
+          depth,
         ];
+      }
+      function rgbColor(c, fallback) {
+        if (!c || c.length < 3) return fallback;
+        const r = Math.max(0, Math.min(255, Math.round(c[0] * 255)));
+        const g = Math.max(0, Math.min(255, Math.round(c[1] * 255)));
+        const b = Math.max(0, Math.min(255, Math.round(c[2] * 255)));
+        return `rgb(${r},${g},${b})`;
       }
       function dot(p, color, size = 2) {
         const [x, y] = projected(p);
         ctx.fillStyle = color;
-        ctx.fillRect(x, y, size, size);
+        ctx.fillRect(x - size / 2, y - size / 2, size, size);
       }
       function line(a, b, color) {
         const [x, y] = projected(a),
@@ -1675,12 +1685,42 @@
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (!cloud) return;
+        // Depth-sorted RGB room points so the reconstruction reads as a space, not gray dots.
+        const room = [];
         if ($("beforeLayer").checked)
-          cloud.before.forEach((p) => dot(p, "#687a94"));
+          (cloud.before || []).forEach((p, i) =>
+            room.push({
+              p,
+              color: rgbColor(
+                (cloud.before_colors || [])[i],
+                "#8a9bb3",
+              ),
+              size: 2.4,
+            }),
+          );
         if ($("afterLayer").checked)
-          cloud.after.forEach((p) => dot(p, "#6ac2df"));
+          (cloud.after || []).forEach((p, i) =>
+            room.push({
+              p,
+              color: rgbColor(
+                (cloud.after_colors || [])[i],
+                "#6ac2df",
+              ),
+              size: 2.4,
+            }),
+          );
+        room
+          .map((entry) => ({ ...entry, depth: projected(entry.p)[2] }))
+          .sort((a, b) => a.depth - b.depth)
+          .forEach((entry) => {
+            const size = Math.max(
+              1.6,
+              Math.min(5.5, entry.size * (1.15 - entry.depth * 0.35) * zoom),
+            );
+            dot(entry.p, entry.color, size);
+          });
         if ($("cameraLayer").checked && report)
-          report.cameras.forEach((c) => dot(c.position, "#ecc16b", 4));
+          report.cameras.forEach((c) => dot(c.position, "#ecc16b", 5));
         if (!report) return;
         for (let e of report.events) {
           let color = colors[e.change] || colors.UNKNOWN;
@@ -1690,8 +1730,8 @@
             extent(e.evidence.after_extent, color);
           }
           if ($("changeLayer").checked) {
-            if (e.before_position) dot(e.before_position, color, 6);
-            if (e.after_position) dot(e.after_position, color, 6);
+            if (e.before_position) dot(e.before_position, color, 7);
+            if (e.after_position) dot(e.after_position, color, 7);
             if (e.before_position && e.after_position && e.change === "MOVED")
               line(e.before_position, e.after_position, color);
           }
@@ -1956,6 +1996,105 @@
         details.append(summary, pre);
         $("memory").append(details);
       }
+      async function showVisualCandidates(id) {
+        const panel = $("visualCandidates");
+        panel.hidden = true;
+        panel.replaceChildren();
+        try {
+          const data = await get(`/jobs/${id}/visual-candidates`);
+          if (job !== id) return;
+          if (!data.total_candidates) {
+            panel.hidden = false;
+            const empty = document.createElement("p");
+            empty.className = "empty";
+            empty.textContent =
+              "No aligned visual difference regions were found between the recordings.";
+            panel.append(empty);
+            return;
+          }
+          panel.hidden = false;
+          const heading = document.createElement("h3");
+          heading.textContent =
+            "Visual change regions (" +
+            data.total_candidates +
+            ") — aligned image differences";
+          const note = document.createElement("p");
+          note.className = "muted";
+          note.textContent =
+            "These highlight where before and after disagree after viewpoint alignment. They are visual candidates, not verified 3D object adds/removes.";
+          panel.append(heading, note);
+          const shown = data.candidates.slice(0, 12);
+          for (const candidate of shown) {
+            const card = document.createElement("button");
+            card.className = "event";
+            card.type = "button";
+            const tag = document.createElement("span");
+            tag.className = "chip";
+            tag.style.color = "#836216";
+            tag.textContent = "Visual region";
+            const label = document.createElement("span");
+            label.textContent =
+              "Difference · " +
+              (candidate.area_pixels || 0).toLocaleString() +
+              " px";
+            const detail = document.createElement("small");
+            detail.textContent = candidate.note;
+            const imgs = document.createElement("div");
+            imgs.style.display = "grid";
+            imgs.style.gridTemplateColumns = "1fr 1fr";
+            imgs.style.gap = "6px";
+            imgs.style.marginTop = "8px";
+            for (const [src, caption] of [
+              [candidate.crop || candidate.before, "Changed region"],
+              [candidate.overlay, "Aligned comparison"],
+            ]) {
+              const wrap = document.createElement("figure");
+              wrap.style.margin = "0";
+              const img = document.createElement("img");
+              img.src = src;
+              img.alt = caption;
+              img.style.width = "100%";
+              img.style.borderRadius = "6px";
+              const fig = document.createElement("figcaption");
+              fig.className = "muted";
+              fig.textContent = caption;
+              wrap.append(img, fig);
+              imgs.append(wrap);
+            }
+            card.append(tag, label, detail, imgs);
+            card.onclick = () => {
+              $("explanation").textContent = candidate.note;
+              $("frames").replaceChildren(imgs.cloneNode(true));
+              $("evidence").textContent = JSON.stringify(candidate, null, 2);
+              $("evidence-panel").scrollIntoView({ behavior: "smooth" });
+            };
+            panel.append(card);
+          }
+          if (data.total_candidates > shown.length) {
+            const more = document.createElement("p");
+            more.className = "muted";
+            more.textContent =
+              "Showing " +
+              shown.length +
+              " of " +
+              data.total_candidates +
+              " regions. Download classical evidence for the full gallery.";
+            panel.append(more);
+          }
+          const link = document.createElement("a");
+          link.href = `/jobs/${id}/classical/index.html`;
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.textContent = "Open full visual gallery";
+          panel.append(link);
+        } catch (error) {
+          if (job === id && error.message && !/404/.test(error.message)) {
+            panel.hidden = false;
+            panel.textContent =
+              "Visual candidates unavailable: " + error.message;
+          }
+        }
+      }
       let visualPoll;
       async function refreshVisual(id) {
         clearTimeout(visualPoll);
@@ -2054,9 +2193,9 @@
               radius,
               Math.hypot(...p.map((v, i) => v - center[i])),
             );
-          $("pointCount").textContent = (
-            report.geometry.before.points + report.geometry.after.points
-          ).toLocaleString();
+          const cloudPoints =
+            (cloud.before?.length || 0) + (cloud.after?.length || 0);
+          $("pointCount").textContent = cloudPoints.toLocaleString();
           $("eventCount").textContent = report.events.filter((e) =>
             ["ADDED", "REMOVED", "MOVED"].includes(e.change),
           ).length;
@@ -2089,17 +2228,17 @@
           draw();
           rememberLast(job);
           const pointTotal =
-            (report.geometry?.before?.points || 0) +
-            (report.geometry?.after?.points || 0);
+            (cloud.before?.length || 0) + (cloud.after?.length || 0);
           $("status").textContent =
-            "Loaded 3D scene (" +
+            "Loaded colored 3D room (" +
             pointTotal.toLocaleString() +
             " points) · videos attached · " +
             report.events.length +
-            " decisions · orbit the canvas to inspect.";
+            " object decisions · visual change regions load below · orbit the canvas.";
           $("sceneEmpty").hidden = true;
           $("sceneEmpty").style.display = "none";
           workflow(2);
+          showVisualCandidates(id);
           $("exportReport").disabled = false;
           $("exportReview").disabled = false;
           $("artifactLinks").replaceChildren();

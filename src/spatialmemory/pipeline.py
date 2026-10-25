@@ -1,4 +1,4 @@
-import json, time, platform, importlib.metadata
+import json, logging, time, platform, importlib.metadata
 from pathlib import Path
 import numpy as np
 from .contracts import Config
@@ -7,6 +7,8 @@ from .geometry import reconstruct, bundle_adjust
 from .registration import register, transform
 from .change import compare
 from .execution import locked_run
+
+LOGGER = logging.getLogger(__name__)
 
 
 @locked_run
@@ -367,6 +369,16 @@ def run(
             before_colors=b.colors,
             after_colors=a.colors,
         )
+        # Dense colored room for the dashboard (visualization only; not for decisions).
+        if config.geometry_backend == "vggt":
+            try:
+                stage("dense_room_visualization")
+                from .dense_export import write_dense_world
+
+                write_dense_world(output, stride=3)
+            except Exception:
+                # Sparse world.npz remains available; dense preview is best-effort.
+                LOGGER.exception("Dense room visualization export failed")
         cameras = []
         for state, r in [("before", b), ("after", a)]:
             for fid, pose in r.poses.items():
