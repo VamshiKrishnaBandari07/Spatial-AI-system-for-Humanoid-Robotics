@@ -242,6 +242,33 @@ def test_confirmation_gate_prevents_premature_global_link():
     assert audit[0]["gate"] == "unconfirmed_temporal_identity"
 
 
+def test_object_state_identity_confirmed_defaults_false():
+    """Missing or default confirmation must not pass joint cross-recording gates."""
+    from types import SimpleNamespace
+    from spatialmemory.semantics import ObjectState
+
+    assert (
+        ObjectState("x", "cup", [0, 0, 1], [1.0, 0.0], [], None).identity_confirmed
+        is False
+    )
+    config = Config(association_mode="joint", min_object_views=1)
+    # Attribute absent entirely (legacy / incomplete objects).
+    bare = SimpleNamespace(
+        id="bare",
+        label="cup",
+        descriptor=[1.0, 0.0],
+        position=[0.0, 0.0, 1.0],
+        distinct_views=2,
+        extent=[[-0.05, -0.05, 0.95], [0.05, 0.05, 1.05]],
+    )
+    audit = []
+    assert not match_objects([bare], [bare], config, diagnostics=audit)
+    assert audit[0]["gate"] == "unconfirmed_temporal_identity"
+    # Explicit True still links when views suffice.
+    confirmed = SimpleNamespace(**{**bare.__dict__, "identity_confirmed": True})
+    assert match_objects([confirmed], [confirmed], config)
+
+
 def test_joint_consensus_persists_same_identity_across_recordings(tmp_path):
     from types import SimpleNamespace
     from spatialmemory.contracts import Registration, Change

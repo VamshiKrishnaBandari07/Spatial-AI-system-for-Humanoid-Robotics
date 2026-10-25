@@ -580,7 +580,8 @@ def match_core_objects(
     ) -> tuple[list[int], list[IdentityObservation]]:
         indices, converted = [], []
         for index, obj in enumerate(objects):
-            if not within_recording and not getattr(obj, "identity_confirmed", True):
+            # Missing attribute must not imply confirmed (legacy objects / namespaces).
+            if not within_recording and not getattr(obj, "identity_confirmed", False):
                 continue
             if (
                 not within_recording
@@ -619,7 +620,7 @@ def match_core_objects(
                         "assignment_status": "rejected",
                     }
                     if not within_recording and not all(
-                        getattr(o, "identity_confirmed", True) for o in (left, right)
+                        getattr(o, "identity_confirmed", False) for o in (left, right)
                     ):
                         row["gate"] = "unconfirmed_temporal_identity"
                 diagnostics.append(

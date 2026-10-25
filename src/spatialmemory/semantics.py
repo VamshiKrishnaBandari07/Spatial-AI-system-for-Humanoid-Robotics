@@ -26,7 +26,9 @@ class ObjectState:
     extent: list[list[float]] | None
     distinct_views: int = 0
     position_spread: float | None = None
-    identity_confirmed: bool = True
+    # Fail closed: only the joint gallery may set True after confirmation hits.
+    # Non-joint grouping never establishes cross-recording identity confirmation.
+    identity_confirmed: bool = False
 
 
 class SemanticExperts:
