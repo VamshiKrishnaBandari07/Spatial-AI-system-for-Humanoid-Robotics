@@ -5,10 +5,29 @@ anchors a viewpoint group; after frames join only after held-out homography chec
 """
 from __future__ import annotations
 import argparse
+import html
 import json
 from pathlib import Path
 import cv2
 import numpy as np
+
+
+def _escape(value: object) -> str:
+    """Escape text interpolated into classical index.html."""
+    return html.escape(str(value), quote=True)
+
+
+def _border_fraction(bbox, shape, margin: int = 8) -> float:
+    """Fraction of bbox area that lies within ``margin`` px of the image border."""
+    h, w = shape[:2]
+    x0, y0, x1, y1 = bbox
+    area = max(1, (x1 - x0) * (y1 - y0))
+    inner_x0, inner_y0 = margin, margin
+    inner_x1, inner_y1 = max(margin, w - margin), max(margin, h - margin)
+    ix0, iy0 = max(x0, inner_x0), max(y0, inner_y0)
+    ix1, iy1 = min(x1, inner_x1), min(y1, inner_y1)
+    inner = max(0, ix1 - ix0) * max(0, iy1 - iy0)
+    return 1.0 - inner / area
 
 
 def features(image):
@@ -46,7 +65,8 @@ def difference(before, after, H):
     warped=cv2.warpPerspective(after,H,(w,h))
     valid=cv2.warpPerspective(np.ones(after.shape[:2],np.uint8),H,(w,h),flags=cv2.INTER_NEAREST)>0
     valid=cv2.erode(valid.astype('uint8'),np.ones((15,15),np.uint8)).astype(bool)
-    if valid.sum()<100:return warped,np.zeros((h,w),np.uint8),[]
+    if valid.sum()<100:
+        return warped,np.zeros((h,w),np.uint8),[],{'rejected_border_regions':0}
     a=cv2.cvtColor(before,cv2.COLOR_BGR2LAB).astype(float)
     b=cv2.cvtColor(warped,cv2.COLOR_BGR2LAB).astype(float)
     # Robust channel offset mitigates global illumination shifts, not local shadows.
@@ -61,11 +81,25 @@ def difference(before, after, H):
     mask[~valid]=0
     n,labels,stats,_=cv2.connectedComponentsWithStats(mask)
     regions=[]
+    rejected_border=0
     for i in range(1,n):
         x,y,bw,bh,area=stats[i]
-        if area>=max(100,.001*h*w) and area<.3*h*w:
-            regions.append({'bbox_xyxy':[int(x),int(y),int(x+bw),int(y+bh)],'area_pixels':int(area),'difference_threshold':threshold})
-    return warped,mask,regions
+        if area<max(100,.001*h*w) or area>=.3*h*w:
+            continue
+        bbox=[int(x),int(y),int(x+bw),int(y+bh)]
+        # Warped-border / parallax strips hug the invalid margin after erosion.
+        if _border_fraction(bbox, before.shape) >= 0.45:
+            rejected_border += 1
+            continue
+        regions.append({
+            'bbox_xyxy':bbox,
+            'area_pixels':int(area),
+            'difference_threshold':threshold,
+            'border_fraction':round(_border_fraction(bbox, before.shape), 4),
+            'physical_change_class':None,
+            'classification':'VISUAL_CHANGE_CANDIDATE',
+        })
+    return warped,mask,regions,{'rejected_border_regions':rejected_border}
 
 
 def run(root:Path,output:Path,max_frames:int=32):
@@ -94,8 +128,10 @@ def run(root:Path,output:Path,max_frames:int=32):
         candidates.sort(key=lambda r:r[2]['fit_inliers'],reverse=True)
         if not candidates:continue
         group={'before_id':rows['before'][i]['id'],'before_timestamp':rows['before'][i]['timestamp'],'pairs':[]}
+        border_rejects=0
         for j,H,metrics in candidates[:3]:
-            after=images['after'][j]; warped,mask,regions=difference(before,after,H)
+            after=images['after'][j]; warped,mask,regions,diff_stats=difference(before,after,H)
+            border_rejects+=diff_stats['rejected_border_regions']
             name=f'b{i:03}_a{j:03}';folder=output/name;folder.mkdir()
             cv2.imwrite(str(folder/'before.jpg'),before);cv2.imwrite(str(folder/'after_native.jpg'),after)
             cv2.imwrite(str(folder/'after_aligned.jpg'),warped);cv2.imwrite(str(folder/'mask.png'),mask)
@@ -104,7 +140,7 @@ def run(root:Path,output:Path,max_frames:int=32):
                 x,y,x2,y2=region['bbox_xyxy'];cv2.rectangle(overlay,(x,y),(x2,y2),(0,0,255),2)
                 cv2.imwrite(str(folder/f'candidate_{k:03}.jpg'),np.concatenate([before[y:y2,x:x2],warped[y:y2,x:x2]],axis=1))
             cv2.imwrite(str(folder/'comparison.jpg'),np.concatenate([overlay,warped],axis=1))
-            group['pairs'].append({'after_id':rows['after'][j]['id'],'after_timestamp':rows['after'][j]['timestamp'],'folder':name,'alignment':metrics,'homography_after_to_before':H.tolist(),'regions':regions})
+            group['pairs'].append({'after_id':rows['after'][j]['id'],'after_timestamp':rows['after'][j]['timestamp'],'folder':name,'alignment':metrics,'homography_after_to_before':H.tolist(),'regions':regions,'rejected_border_regions':diff_stats['rejected_border_regions']})
         # Agreement in one anchor grid is supporting evidence, not independent 3D views.
         for pair in group['pairs']:
             for region in pair['regions']:
@@ -112,18 +148,56 @@ def run(root:Path,output:Path,max_frames:int=32):
                 for other in group['pairs']:
                     if any(min(x2,r['bbox_xyxy'][2])>max(x,r['bbox_xyxy'][0]) and min(y2,r['bbox_xyxy'][3])>max(y,r['bbox_xyxy'][1]) for r in other['regions']):support+=1
                 region['supporting_pair_count']=support
+        group['rejected_border_regions']=border_rejects
         groups.append(group)
-    report={'method':'SIFT + held-out RANSAC homography + robust Lab difference','classification':'VISUAL_CHANGE_CANDIDATE','limitations':'Planar alignment only; parallax, shadows, reflections and occlusion can cause false positives. No semantic labels, calibrated confidence, physical change class or 3D verification. Groups are overlapping anchor views, not unique objects.','frames_per_role':{k:len(v) for k,v in rows.items()},'groups':groups}
+    region_instances=sum(len(p['regions']) for g in groups for p in g['pairs'])
+    report={
+        'method':'SIFT + held-out RANSAC homography + robust Lab difference',
+        'classification':'VISUAL_CHANGE_CANDIDATE',
+        'physical_change_verified':False,
+        'region_count_is_not_object_count':True,
+        'limitations':'Planar alignment only; parallax, shadows, reflections and occlusion can cause false positives. No semantic labels, calibrated confidence, physical change class or 3D verification. Groups are overlapping anchor views, not unique objects. Region totals are instance boxes, not distinct objects.',
+        'frames_per_role':{k:len(v) for k,v in rows.items()},
+        'summary':{
+            'viewpoint_groups':len(groups),
+            'aligned_pairs':sum(len(g['pairs']) for g in groups),
+            'candidate_region_instances':region_instances,
+            'note':'candidate_region_instances must not be reported as object or removal counts',
+        },
+        'groups':groups,
+    }
     (output/'report.json').write_text(json.dumps(report,indent=2,allow_nan=False))
     cards=[]
     for g in groups:
         for p in g['pairs']:
-            cards.append(f'<h3>{g["before_id"]} → {p["after_id"]}: {len(p["regions"])} candidate regions</h3><img width="900" src="{p["folder"]}/comparison.jpg">')
-            cards.append(f'<p>Held-out alignment median: {p["alignment"]["heldout_median_px"]:.2f} pixels. <a href="{p["folder"]}/mask.png">Difference mask</a> · <a href="{p["folder"]}/after_native.jpg">Original after frame</a></p>')
+            cards.append(
+                f'<h3>{_escape(g["before_id"])} → {_escape(p["after_id"])}: '
+                f'{len(p["regions"])} candidate regions (not object count)</h3>'
+                f'<img width="900" src="{_escape(p["folder"])}/comparison.jpg">'
+            )
+            cards.append(
+                f'<p>Held-out alignment median: {p["alignment"]["heldout_median_px"]:.2f} pixels. '
+                f'<a href="{_escape(p["folder"])}/mask.png">Difference mask</a> · '
+                f'<a href="{_escape(p["folder"])}/after_native.jpg">Original after frame</a></p>'
+            )
             for k,region in enumerate(p['regions']):
-                cards.append(f'<a href="{p["folder"]}/candidate_{k:03}.jpg"><img alt="Candidate {k}, before left and aligned after right" width="240" src="{p["folder"]}/candidate_{k:03}.jpg"></a>')
-    (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Visual change candidates</title><h1>Model-free visual change candidates</h1><p>'+report['limitations']+'</p>'+''.join(cards))
-    print(json.dumps({'groups':len(groups),'pairs':sum(len(g['pairs']) for g in groups),'regions':sum(len(p['regions']) for g in groups for p in g['pairs']),'output':str(output)}))
+                cards.append(
+                    f'<a href="{_escape(p["folder"])}/candidate_{k:03}.jpg">'
+                    f'<img alt="Candidate {k}, before left and aligned after right" width="240" '
+                    f'src="{_escape(p["folder"])}/candidate_{k:03}.jpg"></a>'
+                )
+    disclaimer=_escape(report['limitations'])
+    (output/'index.html').write_text(
+        '<!doctype html><meta charset="utf-8"><title>Visual change candidates</title>'
+        '<h1>Model-free visual change candidates</h1><p>'+disclaimer+'</p>'+''.join(cards)
+    )
+    print(json.dumps({
+        'groups':len(groups),
+        'pairs':sum(len(g['pairs']) for g in groups),
+        'regions':region_instances,
+        'region_count_is_not_object_count':True,
+        'output':str(output),
+    }))
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--max-frames',type=int,default=32)

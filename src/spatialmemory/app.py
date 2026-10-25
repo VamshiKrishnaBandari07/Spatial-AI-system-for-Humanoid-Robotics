@@ -22,7 +22,32 @@ POOL = ThreadPoolExecutor(max_workers=1)
 LOCK = threading.Lock()
 JOBS = {}
 MAX_UPLOAD = 512 * 1024 * 1024
+MAX_JOB_MAP = 64
 LOGGER = logging.getLogger(__name__)
+
+
+def client_error(exc: BaseException) -> str:
+    """Stable client-facing failure text; details stay in server logs."""
+    if isinstance(exc, HTTPException):
+        detail = exc.detail
+        return detail if isinstance(detail, str) else "Request failed"
+    if isinstance(exc, (ValueError, FileNotFoundError, FileExistsError, OSError)):
+        text = str(exc).strip() or type(exc).__name__
+        return text[:300]
+    LOGGER.exception("Pipeline failure")
+    return "Processing failed; see server logs"
+
+
+def prune_job_map(mapping: dict) -> None:
+    """Bound in-memory job maps; completed/failed disk state remains authoritative."""
+    if len(mapping) <= MAX_JOB_MAP:
+        return
+    for key in list(mapping):
+        if len(mapping) <= MAX_JOB_MAP:
+            break
+        status = mapping.get(key, {}).get("status")
+        if status in {"complete", "failed", "interrupted"}:
+            mapping.pop(key, None)
 
 
 def upload_config(
@@ -170,6 +195,7 @@ async def submit(
             "Semantic dependencies/checkpoints are not installed; disable object masks or install the neural profile",
         )
     with LOCK:
+        prune_job_map(JOBS)
         if any(j["status"] in ["queued", "running"] for j in JOBS.values()):
             raise HTTPException(429, "A job is already active")
         jid = uuid.uuid4().hex
@@ -186,10 +212,15 @@ async def submit(
                 (folder / f"{state}.mp4").unlink(missing_ok=True)
             except OSError:
                 LOGGER.exception("Could not remove incomplete upload")
+        message = (
+            "Upload interrupted"
+            if isinstance(error, asyncio.CancelledError)
+            else client_error(error)
+        )
         JOBS[jid] = {
             "status": "failed",
             "stage": "uploading",
-            "error": str(error) or "Upload interrupted",
+            "error": message,
         }
         try:
             persist_status(folder, JOBS[jid])
@@ -229,14 +260,20 @@ async def submit(
                 )
             JOBS[jid].update(status="complete")
         except Exception as e:
-            JOBS[jid].update(status="failed", error=str(e))
+            JOBS[jid].update(status="failed", error=client_error(e))
         finally:
             persist_status(folder, JOBS[jid])
+            with LOCK:
+                prune_job_map(JOBS)
 
     try:
         POOL.submit(execute)
     except Exception as error:
-        JOBS[jid] = {"status": "failed", "stage": "starting", "error": str(error)}
+        JOBS[jid] = {
+            "status": "failed",
+            "stage": "starting",
+            "error": client_error(error),
+        }
         try:
             persist_status(folder, JOBS[jid])
         except OSError:
