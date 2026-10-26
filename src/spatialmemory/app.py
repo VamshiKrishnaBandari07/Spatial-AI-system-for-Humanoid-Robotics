@@ -22,7 +22,32 @@ POOL = ThreadPoolExecutor(max_workers=1)
 LOCK = threading.Lock()
 JOBS = {}
 MAX_UPLOAD = 512 * 1024 * 1024
+MAX_JOB_MAP = 64
 LOGGER = logging.getLogger(__name__)
+
+
+def client_error(exc: BaseException) -> str:
+    """Stable client-facing failure text; details stay in server logs."""
+    if isinstance(exc, HTTPException):
+        detail = exc.detail
+        return detail if isinstance(detail, str) else "Request failed"
+    if isinstance(exc, (ValueError, FileNotFoundError, FileExistsError, OSError)):
+        text = str(exc).strip() or type(exc).__name__
+        return text[:300]
+    LOGGER.exception("Pipeline failure")
+    return "Processing failed; see server logs"
+
+
+def prune_job_map(mapping: dict) -> None:
+    """Bound in-memory job maps; completed/failed disk state remains authoritative."""
+    if len(mapping) <= MAX_JOB_MAP:
+        return
+    for key in list(mapping):
+        if len(mapping) <= MAX_JOB_MAP:
+            break
+        status = mapping.get(key, {}).get("status")
+        if status in {"complete", "failed", "interrupted"}:
+            mapping.pop(key, None)
 
 
 def upload_config(
@@ -170,6 +195,7 @@ async def submit(
             "Semantic dependencies/checkpoints are not installed; disable object masks or install the neural profile",
         )
     with LOCK:
+        prune_job_map(JOBS)
         if any(j["status"] in ["queued", "running"] for j in JOBS.values()):
             raise HTTPException(429, "A job is already active")
         jid = uuid.uuid4().hex
@@ -186,10 +212,15 @@ async def submit(
                 (folder / f"{state}.mp4").unlink(missing_ok=True)
             except OSError:
                 LOGGER.exception("Could not remove incomplete upload")
+        message = (
+            "Upload interrupted"
+            if isinstance(error, asyncio.CancelledError)
+            else client_error(error)
+        )
         JOBS[jid] = {
             "status": "failed",
             "stage": "uploading",
-            "error": str(error) or "Upload interrupted",
+            "error": message,
         }
         try:
             persist_status(folder, JOBS[jid])
@@ -227,16 +258,45 @@ async def submit(
                     ),
                     progress=lambda s: JOBS[jid].update(stage=s),
                 )
+                # Visual change gallery for the same upload (aligned 2D candidates).
+                try:
+                    from .classical_changes import run as compare_frames
+
+                    JOBS[jid].update(
+                        stage="Extracting visual change candidates from aligned views"
+                    )
+                    if (folder / "classical").exists():
+                        import shutil
+
+                        shutil.rmtree(folder / "classical")
+                    compare_frames(
+                        folder / "output", folder / "classical", max_frames=12
+                    )
+                    import shutil
+
+                    shutil.make_archive(
+                        str(folder / "classical-evidence"), "zip", folder / "classical"
+                    )
+                except Exception:
+                    LOGGER.exception(
+                        "Classical visual candidates failed; 3D results still available"
+                    )
             JOBS[jid].update(status="complete")
         except Exception as e:
-            JOBS[jid].update(status="failed", error=str(e))
+            JOBS[jid].update(status="failed", error=client_error(e))
         finally:
             persist_status(folder, JOBS[jid])
+            with LOCK:
+                prune_job_map(JOBS)
 
     try:
         POOL.submit(execute)
     except Exception as error:
-        JOBS[jid] = {"status": "failed", "stage": "starting", "error": str(error)}
+        JOBS[jid] = {
+            "status": "failed",
+            "stage": "starting",
+            "error": client_error(error),
+        }
         try:
             persist_status(folder, JOBS[jid])
         except OSError:
@@ -289,14 +349,61 @@ def report(jid: str):
 
 @app.get("/jobs/{jid}/world")
 def world(jid: str):
-    path = jobpath(jid) / "output/world.npz"
+    folder = jobpath(jid) / "output"
+    # Prefer dense colored room cloud for the interactive viewer when available.
+    path = folder / "world_dense.npz"
+    if not path.exists():
+        path = folder / "world.npz"
     if not path.exists():
         raise HTTPException(409, "World not ready")
+    # Cap transferred points so the browser stays responsive on large rooms.
+    max_points = 15000
     with np.load(path) as data:
         return {
-            k: data[k][:: max(1, (len(data[k]) + 14999) // 15000)].tolist()
+            k: data[k][:: max(1, (len(data[k]) + max_points - 1) // max_points)].tolist()
             for k in data.files
         }
+
+
+@app.get("/jobs/{jid}/visual-candidates")
+def visual_candidates(jid: str):
+    """Classical visual change candidates for the main dashboard (not verified 3D changes)."""
+    report_path = jobpath(jid) / "classical/report.json"
+    if not report_path.is_file():
+        raise HTTPException(404, "Visual candidates not ready")
+    report = json.loads(report_path.read_text())
+    candidates = []
+    for group in report.get("groups", []):
+        for pair in group.get("pairs", []):
+            folder = pair.get("folder")
+            for index, region in enumerate(pair.get("regions") or []):
+                candidates.append(
+                    {
+                        "id": f"{folder}:{index}",
+                        "folder": folder,
+                        "change": "VISUAL_CANDIDATE",
+                        "classification": region.get(
+                            "classification", "VISUAL_CHANGE_CANDIDATE"
+                        ),
+                        "bbox_xyxy": region.get("bbox_xyxy"),
+                        "area_pixels": region.get("area_pixels"),
+                        "before_timestamp": group.get("before_timestamp"),
+                        "after_id": pair.get("after_id"),
+                        "overlay": f"/jobs/{jid}/classical/{folder}/comparison.jpg",
+                        "crop": f"/jobs/{jid}/classical/{folder}/candidate_{index:03d}.jpg",
+                        "before": f"/jobs/{jid}/classical/{folder}/before.jpg",
+                        "after_aligned": f"/jobs/{jid}/classical/{folder}/after_aligned.jpg",
+                        "physical_change_verified": False,
+                        "note": "Visual difference after image alignment — not a verified 3D object add/remove/move",
+                    }
+                )
+    return {
+        "summary": report.get("summary", {}),
+        "limitations": report.get("limitations"),
+        "physical_change_verified": report.get("physical_change_verified", False),
+        "candidates": candidates[:48],
+        "total_candidates": len(candidates),
+    }
 
 
 @app.get("/jobs/{jid}/frames/{state}/{filename}")
