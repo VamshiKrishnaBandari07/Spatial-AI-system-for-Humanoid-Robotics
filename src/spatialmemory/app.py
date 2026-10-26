@@ -61,7 +61,7 @@ def upload_config(
         geometry_backend=geometry_backend,
         semantics_enabled=semantics_enabled,
         temporal_tracking_enabled=temporal_tracking_enabled,
-        neural_frames_per_video=6,
+        neural_frames_per_video=4,
         neural_frame_selection="quality_diverse",
         registration_min_heldout=4,
         semantic_max_frames=6,
@@ -357,7 +357,7 @@ def world(jid: str):
     if not path.exists():
         raise HTTPException(409, "World not ready")
     # Cap transferred points so the browser stays responsive on large rooms.
-    max_points = 40000
+    max_points = 15000
     with np.load(path) as data:
         return {
             k: data[k][:: max(1, (len(data[k]) + max_points - 1) // max_points)].tolist()
